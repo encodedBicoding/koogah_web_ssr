@@ -4,15 +4,15 @@ const ejs = require('ejs');
 const indexRoutes = express.Router();
 const view_path = 'views';
 
-indexRoutes.get('/', (req, res) => {
-  ejs.renderFile(`${view_path}/index.ejs`, {
-    message: 'Hello World'
+indexRoutes.get('/', function(req, res, next) {
+  ejs.renderFile('views/index.ejs', {
+    message: 'Hello Worldsss'
   },
     {}, function (err, template) {
       if (err) throw err;
       res.end(template);
     }
-  )
+  );
 });
 
 
