@@ -1,0 +1,51 @@
+@import url(https://fonts.googleapis.com/css?family=PTSansPro);
+
+* {
+  margin: 0;
+  padding: 0;
+  font-family: 'PT Sans';
+  box-sizing: content-box;
+}
+.comp {
+  display: block;
+}
+.mobile {
+  display: none;
+}
+
+.row-space-between {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+.link {
+  text-decoration: none;
+  color: #000;
+  letter-spacing: .8px;
+  cursor: pointer;
+}
+.no_decoration {
+  text-decoration: none;
+}
+.hero {
+  width: 100%;
+  height: calc(100vh - 8vh);
+  border: 1px solid red;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+/* 
+  RESPONSIVE DESIGNS
+*/
+@media screen and (max-width: 600px) and (max-height: 800px){
+ .comp {
+   display: none;
+ }
+ .mobile {
+   display: block;
+ }
+}
