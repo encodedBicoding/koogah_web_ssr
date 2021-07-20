@@ -5,8 +5,12 @@
         <img src="images/logo.png" alt="Koogah Delivery Logo" width="120" height="auto"/>
       </a>
       <div class="row-space-between">
-        <a href="/" class="link">
-          <p>FAQ</p>
+        <a href="/faq" class="link">
+          <% if(page === 'faq') {%>
+            <p class="font-small font-bold nav-active">FAQ</p>
+            <%} else {%>
+              <p class="font-small font-bold nav-inactive">FAQ</p>
+          <%}%>
         </a>
         <a href="/" class="no_decoration cta">
           <p>Contact Us</p>
