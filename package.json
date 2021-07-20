@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start:dev": "nodemon --watch app.js",
     "clean": "rm -rf build && mkdir build",
-    "start": "export NODE_ENV=production && node ./build/app.js",
+    "start": "export NODE_ENV=production && node app.js",
     "build": "npm run clean && babel -d ./build app.js"
   },
   "keywords": [],

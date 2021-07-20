@@ -29,13 +29,13 @@
   text-decoration: none;
 }
 .hero {
+  background-image: url('../images/MaskGroup.svg');
   width: 100%;
   height: calc(100vh - 8vh);
-  border: 1px solid red;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  align-items: center;
+  /* align-items: center; */
 }
 
 /* 
