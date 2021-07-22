@@ -54,6 +54,9 @@
   letter-spacing: .8px;
   cursor: pointer;
 }
+.bg-btn-brand {
+  background-color: #F29B38;
+}
 .no_decoration {
   text-decoration: none;
 }
@@ -138,6 +141,12 @@
 }
 .mtop-50px{
   margin-top: 50px;
+}
+.m-all-2 {
+  margin: 12px;
+}
+.sp-cont {
+  width: 8rem;
 }
 .info-card{
   display: flex;
