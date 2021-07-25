@@ -2,11 +2,11 @@
   "name": "koogah_ssr_web",
   "version": "1.0.0",
   "description": "",
-  "main": "app.js",
+  "main": "socket.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start:dev": "nodemon --watch app.js",
-    "start": "export NODE_ENV=production && node app.js"
+    "start:dev": "nodemon --watch socket.js",
+    "start": "export NODE_ENV=production && node socket.js"
   },
   "keywords": [],
   "author": "",
@@ -22,7 +22,9 @@
     "ejs": "^3.1.6",
     "express": "^4.17.1",
     "http-errors": "^1.8.0",
-    "morgan": "^1.10.0"
+    "morgan": "^1.10.0",
+    "node-geocoder": "^3.27.0",
+    "ws": "^7.5.3"
   },
   "devDependencies": {
     "@babel/cli": "^7.14.5",
