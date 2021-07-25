@@ -1,10 +1,17 @@
 const express = require('express');
 const ejs = require('ejs');
+const RouterWares = require('../middlewares/locale');
 
 const indexRoutes = express.Router();
 const view_path = 'views';
 
-indexRoutes.get('/', function(req, res, next) {
+const {
+  checkLocation,
+} = RouterWares;
+
+indexRoutes.get(
+  '/',
+  function (req, res, next) {
   ejs.renderFile(`${view_path}/index.ejs`, {
     page: 'index'
   },
@@ -14,7 +21,9 @@ indexRoutes.get('/', function(req, res, next) {
     }
   );
 });
-indexRoutes.get('/faq', function (req, res, next) {
+indexRoutes.get(
+  '/faq',
+  function (req, res, next) {
   ejs.renderFile(`${view_path}/faq.ejs`, {
     page: 'faq'
   }, {}, function (err, template) {
