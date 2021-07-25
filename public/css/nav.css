@@ -3,6 +3,7 @@
   position: sticky;
   top: 0px;
   background-color: #fff;
+  z-index: 99999999;
 }
 .cta p{
   color: #fff;
