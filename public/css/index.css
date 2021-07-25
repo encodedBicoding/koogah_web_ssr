@@ -155,15 +155,6 @@
 /* 
   RESPONSIVE DESIGNS
 */
-@media screen and (max-width: 600px) and (max-height: 800px){
- /* .comp {
-   display: none;
- }
- .mobile {
-   display: block;
- } */
- 
-}
 
 @media screen and (max-width: 600px) {
   .info-card  {

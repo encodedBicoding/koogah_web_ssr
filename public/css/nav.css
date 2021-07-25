@@ -1,22 +1,12 @@
-.main_nav{
-  padding: .8rem 8% .8rem 8%;
-  position: sticky;
-  top: 0px;
-  background-color: #fff;
-}
-.cta p{
-  color: #fff;
-  font-weight: 900;
-}
 .cta {
   background-color: #F29B38;
-  margin-left: 60px;
+  /* margin-left: 60px;
   width: 142px;
-  height: 43px;
-  display: flex;
-  align-items: center;
+  height: 43px; */
+  /* display: flex; */
+  /* align-items: center;
   justify-items: center;
-  justify-content: center;
+  justify-content: center; */
   border-radius: 1.4rem;
 }
 
@@ -24,8 +14,4 @@
   border-bottom: 2px solid #F29B38;
   color: #000000;
   line-height: 2rem; 
-  /* width: 50px;
-  display: flex;
-  align-items: center;
-  justify-content: center; */
 }
