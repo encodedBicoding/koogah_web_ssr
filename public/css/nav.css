@@ -22,16 +22,10 @@
 
 .nav-active {
   border-bottom: 2px solid #F29B38;
-  line-height: 2rem;
-  width: 50px;
+  color: #000000;
+  line-height: 2rem; 
+  /* width: 50px;
   display: flex;
   align-items: center;
-  justify-content: center;
-}
-.nav-inactive {
-  line-height: 2rem;
-  width: 50px;
-  display: flex;
-  align-items: center;
-  justify-content: center
+  justify-content: center; */
 }
