@@ -6,13 +6,13 @@ const morgan = require('morgan');
 const cookieParser = require("cookie-parser");
 require("dotenv").config();
 
-
 const app = express();
 
 const indexRoutes = require('./routes/indexRoutes');
 
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
+app.set('trust proxy', true)
 
 app.use(morgan('tiny'));
 app.use(cors());
@@ -40,11 +40,5 @@ app.use(function(err, req, res, next) {
 });
 
 
-
-
-const port = process.env.PORT || 8080;
-app.listen(port, () => {
-  console.log(`listening on ${port}`);
-});
 
 module.exports = app;
