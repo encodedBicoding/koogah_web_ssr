@@ -1,6 +1,7 @@
 body {
   margin: 0;
   padding: 0;
+  font-family: 'PT Sans';
 }
 * {
   margin: 0;
@@ -79,12 +80,103 @@ body {
   height: calc(100vh - 8vh);
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
   background-image: url('../images/bg.png');
   background-repeat: no-repeat;
   background-size: contain;
 }
+.h_bg_two{
+  position: absolute;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.h_bg_two_sub{
+  position: relative;
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: .9em;
+}
+.h_bg_two_sub h1{
+  font-size: 3rem;
+  text-align: center;
+}
+.h-bg_one{
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.hero_bg_holder {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 4rem 0 4rem;
+  z-index: -99;
+}
+.hero_download_now {
+  margin-top: 2em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 0;
+}
+.hero_download_btns {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+
+}
+.hero_download_now .dn {
+  font-size: .83em;
+  margin: .6rem;
+}
+.hero_bg_holder img{
+  width: 85%;
+  height: 100%;
+}
+.copy_slogan {
+  margin-top: .9rem;
+}
+.copy_slogan span {
+  position: relative;
+  margin: .2rem;
+  font-weight: 300;
+  font-size: 1rem;
+}
+.store_btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.store_btn img {
+  width: 7em;
+  height: auto;
+  margin: .5rem;
+  cursor: pointer;
+}
+/* .hero_bg {
+  width: 100%;
+  height: calc(100vh - 8vh);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-image: url('../images/hero_bg.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+} */
 .font-small {
   font-size: .8rem;
 }
@@ -227,6 +319,15 @@ body {
   .mtop-50px{
     margin-top: 30px;
   }
+  .h_bg_two{
+    position: absolute;
+    top: 15%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
 }
 @media screen and (max-width: 850px){
  .comp {
@@ -271,6 +372,36 @@ body {
 .info-card {
   width: 100%;
 }
+.h_bg_two_sub{
+  position: relative;
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: .9em;
+}
+.h_bg_two_sub h1{
+  font-size: 2.5rem;
+  text-align: center;
+}
+.hero_bg_holder {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 1rem 0 1rem;
+  z-index: -99;
+}
+.h_bg_two{
+  position: absolute;
+  top: 15%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
 }
 
 @media screen and (max-width: 500px) {
@@ -283,5 +414,30 @@ body {
   }
   .info-card {
     width: 100%;
+  }
+  .hero_bg_holder img{
+    width: 100%;
+    height: 100%;
+  }
+  .hero_bg_holder {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 1rem 0 1rem;
+    z-index: -99;
+  }
+  .h_bg_two_sub{
+    position: relative;
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: .9em;
+  }
+  .h_bg_two_sub h1{
+    font-size: 2rem;
+    text-align: center;
   }
 }

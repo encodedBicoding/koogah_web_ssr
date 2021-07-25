@@ -13,8 +13,16 @@ window.onload = function () {
       const host = window.location.host.trim();
       const path = window.location.pathname.trim();
       const search = window.location.search.trim();
+      const redirect_host = [
+        'koogah.com',
+        'www.koogah.com',
+        'https://koogah.com',
+        'https://www.koogah.com',
+        'http://koogah.com',
+        'http://www.koogah.com'
+      ];
       if (country == 'nigeria') {
-        if (host === 'koogah.com') {
+        if (redirect_host.includes(host)) {
           window.location.href = `https://www.koogah.com.ng${path}${search}`;
         }
       }
