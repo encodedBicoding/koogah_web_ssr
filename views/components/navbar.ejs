@@ -19,6 +19,39 @@
     </div>
   </nav>
   <nav class="mobile">
-
+    <div class="row-space-between">
+      <div>
+        <a href="/">
+          <img src="images/logo.png" alt="Koogah Delivery Logo" width="120" height="auto"/>
+        </a>
+      </div>
+      <div class="mobile_nav_container">
+        <div class="nav_items_container inactive">
+          <div class="col-end">
+            <a href="/" class="link">
+              <%if(page == 'index') {%>
+                <p class="font-small font-bold nav-active">Home</p>
+                <%} else {%>
+                  <p class="font-small font-bold nav-inactive">Home</p>
+                  <%}%>
+            </a>
+            <a href="/faq" class="link">
+              <% if(page === 'faq') {%>
+                <p class="font-small font-bold nav-active">FAQ</p>
+                <%} else {%>
+                  <p class="font-small font-bold nav-inactive">FAQ</p>
+              <%}%>
+            </a>
+            <br/>
+            <a href="/" class="no_decoration cta">
+              <p>Contact Us</p>
+            </a>
+          </div>
+        </div>
+        <div class="nav_btn">
+          <div class="nav_icon_btn"></div>
+        </div>
+      </div>
+    </div>
   </nav>
 </nav>
