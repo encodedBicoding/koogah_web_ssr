@@ -1,4 +1,4 @@
-const HOST = `ws://${window.location.host.trim()}`;
+const HOST = `wss://${window.location.host.trim()}`;
 
 const socket = new WebSocket(HOST);
 
