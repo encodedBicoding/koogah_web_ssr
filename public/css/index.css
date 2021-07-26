@@ -696,6 +696,21 @@ body {
 .footer_logo {
   width: 50%;
 }
+.more_questions .brand {
+  font-size: 1.4rem;
+}
+.question_container{
+  width: 100%;
+  margin-top: 2rem;
+  padding: .5rem;
+}
+.more_questions_container{
+  padding: .7rem;
+
+}
+.faq_question_head h4{
+  font-size: .9rem;
+}
 }
 
 @media screen and (max-width: 500px) {
