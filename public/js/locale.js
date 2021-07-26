@@ -1,7 +1,6 @@
-const localhost = 'ws://localhost:8080';
-const mainhost = 'wss://www.koogah.com'
+const HOST = `wss://${window.location.host.trim()}`;
 
-const socket = new WebSocket(localhost);
+const socket = new WebSocket(HOST);
 
 window.onload = function () {
   if (window.navigator.geolocation) {
@@ -21,6 +20,7 @@ window.onload = function () {
         'http://koogah.com',
         'http://www.koogah.com'
       ];
+      console.log(host);
       if (country == 'nigeria') {
         if (redirect_host.includes(host)) {
           window.location.href = `https://www.koogah.com.ng${path}${search}`;
