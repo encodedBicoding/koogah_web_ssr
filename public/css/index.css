@@ -42,6 +42,9 @@ body {
   color: #25C0F1;
   background-color: #25C0F1;
 }
+.color_grey {
+  color: rgb(155, 155, 155);
+}
 .comp {
   display: block;
 }
@@ -62,6 +65,12 @@ body {
 }
 .wd-210px {
   width: 210px;
+}
+.row-start{
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
 }
 .row-center {
   display: flex;
@@ -140,7 +149,7 @@ body {
   padding: .9em;
 }
 .h_bg_two_sub h1{
-  font-size: 3rem;
+  font-size: 3.5rem;
   text-align: center;
 }
 .h-bg_one{
@@ -174,7 +183,7 @@ body {
 
 }
 .hero_download_now .dn {
-  font-size: .83em;
+  font-size: .86em;
   margin: .6rem;
 }
 .hero_bg_holder img{
@@ -197,9 +206,10 @@ body {
   justify-content: center;
 }
 .store_btn img {
-  width: 7em;
+  width: 8.2em;
   height: auto;
-  margin: .5rem;
+  margin-right: .5rem;
+  margin-top: .5rem;
   cursor: pointer;
 }
 .font-small {
@@ -249,7 +259,8 @@ body {
   color: #F29B38;
 }
 .sub_header{
-  margin-bottom: .8rem;
+  margin-bottom: .3rem;
+  margin-top: .8rem;
   width: 100%;
   display: flex;
   flex-direction: row;
@@ -329,7 +340,156 @@ body {
   font-size: 2.3rem;
 }
 .header_sub_font {
-  font-size: 1.5rem;
+  font-size: 1.2rem;
+}
+.main_d_n{
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+
+}
+.download_rel{
+  position: relative;
+  width: 100%;
+  margin-top: 10rem;
+  height: 23rem;
+}
+.download_container_first{
+  width: 100%;
+  background-image: url('../images/d_bg.png');
+  background-color: rgba(223, 221, 221, 0.288);
+  background-clip: content-box;
+  background-size: contain;
+  background-repeat: repeat-x;
+  height: 23rem;
+  top: 10%;
+  border-radius: .9rem;
+}
+.d_c_f_main{
+  width: inherit;
+  height: inherit;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+.download_container_second{
+  position: absolute;
+  width: fit-content;
+  top: -73%;
+  left: 30%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: flex-end;
+}
+.download_bg {
+  background-image: url('../images/d_bg.png');
+  background-color: rgba(252, 252, 252, 0.589);
+  background-size: contain;
+  background-repeat: repeat-x;
+  border: 1px solid red;
+  width: 100%;
+  height: 19rem;
+  padding: 2.4rem;
+  overflow: visible;
+  display: flex;
+  align-items: center;
+}
+.download_mobile{
+  width: 98%;
+}
+.download_mobile img{
+  width: 100%;
+  height:100%;
+}
+.app_icon_logo {
+  width: 16%;
+}
+.app_icon_logo img {
+  width: 100%;
+  height:auto;
+}
+.app_footer {
+  background-color: #000;
+  width: 100%;
+  height: 19rem;
+  padding: 2rem 5rem 3rem 5rem;
+  color: #fff;
+  display: grid;
+  grid-template-areas: "logoArea contactArea";
+  grid-template-columns: 35% 1%;
+  grid-template-rows: auto;
+
+}
+.footer_logo img {
+  width: 100%;
+  height: auto;
+}
+.footer_logo p {
+  font-size: .6rem;
+  text-align: right;
+}
+.footer_logo {
+  width: 25%;
+}
+.logo_area {
+  grid-area: logoArea;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.contact_area {
+  grid-area: contactArea / last-line;
+  border: 1px solid red;
+  width: 100%;
+}
+.term_address Address {
+  font-size: .8rem;
+  color: #cacaca;
+}
+.terms a,
+.terms span{
+   color: #cacaca;;
+}
+.footer_link {
+  color: #FCFBFB;
+  font-size: .7rem;
+  text-decoration: none;
+}
+.contact_area {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.contact_area .hello {
+  border: 1px solid red;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+.contact_area .nav{
+  border: 1px solid red;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+} 
+.contact_area .contact_details p{
+  color: #cacaca;
+  font-size: .9rem;
+  margin: .3rem 0 .3rem 0;
+}
+.footer_social p {
+  color: #F29B38;
+  font-size: .7rem;
 }
 /* 
   RESPONSIVE DESIGNS
@@ -414,10 +574,6 @@ body {
   justify-content: center;
   padding: .9em;
 }
-.h_bg_two_sub h1{
-  font-size: 2.5rem;
-  text-align: center;
-}
 .hero_bg_holder {
   position: relative;
   display: flex;
@@ -434,6 +590,12 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+}
+.store_btn img {
+  width: 7em;
+  height: auto;
+  margin: .5rem;
+  cursor: pointer;
 }
 }
 
