@@ -47,15 +47,80 @@
 <body id="roots">
   <script src="../js/locale.js"></script>
   <%- include('components/navbar.ejs') %>
-  <section class="hero">
+  <section class="hero_half">
     <div class="col-center wd-100 ht-100">
       <h1 class="large-h1">FAQ</h1>
     </div>
+  </section>
+  <section name="more_question_asked" class="more_questions_container">
+    <div class="more_questions"> 
+      <h1 class="brand">Most Asked Questions</h1>
+      <div class="question_container">
+        <div>
+          <%- include('components/faq_question.ejs', 
+          {
+            name: "mobile_verification_text",
+            head: "Why does it take so long to get a text for mobile verification?",
+            content: "Ideally, it takes less than 10 seconds to get a Verification code to the preferred mobile number registered. If it takes longer be sure to be patient as it is perhaps a network providers' mishap. If it persists, give us a call or send a WhatsApp message +234 814 933 2331"
+          }
+          ) %>
+        </div>
+        <div>
+          <%- include('components/faq_question.ejs', 
+          {
+            name: "dispatcher_bvn_important",
+            head: "As a dispatcher, is my BVN really important?",
+            content: "The Koogah Dispatcher application allows you to withdraw money straight from your Koogah wallet to your bank account. Your BVN is only used to verify the authenticity of a user account. We do not see any other information."
+          }
+          ) %>
+        </div>
+        <div>
+          <%- include('components/faq_question.ejs', 
+          {
+            name: 'how_dispatcher_get_paid',
+            head: 'How do I get paid as a dispatcher?',
+            content: "Koogah uses a delivery key system. Delivery keys are owned by the owner of the package. Once the delivery key has been imputed, the package is marked as delivered, and the funds are transferred to your Koogah Wallet. You can then withdraw instantly to your bank account."
+          }
+          ) %>
+        </div>
+        <div>
+          <%- include('components/faq_question.ejs', 
+          {
+            name: 'percentage_koogah_charges',
+            head: 'What percentage does Koogah charge per delivery?',
+            content: "Koogah collects only 5% on every delivery."
+          }
+          ) %>
+        </div>
+        <div>
+          <%- include('components/faq_question.ejs', 
+          {
+            name: 'user_no_bvn',
+            head: 'I want to be a dispatcher, but I do not have BVN?',
+            content: "We require every Dispatcher to have a BVN. Go to your nearest bank branch and request for one or Dial*566*1# to get your BVN."
+          }
+          ) %>
+        </div>
+        <div>
+          <%- include('components/faq_question.ejs', 
+          {
+            name: 'time_of_approval',
+            head: 'When would I be approved to start picking up packages to deliver?',
+            content: "It takes up to five(5) working days to get verified from the day of registration."
+          }
+          ) %>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section name="download_now" class="container">
+    <%- include('components/download_now.ejs') %>
   </section>
   <section name="footer">
     <%- include('components/footer.ejs') %>
   </section>
   <script src='../js/mobile_nav.js'></script>
+  <script src='../js/faq_func.js'></script>
 </body>
   
 </html>

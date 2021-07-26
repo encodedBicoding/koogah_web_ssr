@@ -128,7 +128,18 @@ body {
   justify-content: center;
   align-items: center;
   background-image: url('../images/bg.png');
-  background-repeat: no-repeat;
+  background-repeat: repeat-x;
+  background-size: contain;
+}
+.hero_half {
+  width: 100%;
+  height: calc(100vh - 45vh);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-image: url('../images/bg.png');
+  background-repeat: repeat-x;
   background-size: contain;
 }
 .h_bg_two{
@@ -424,7 +435,6 @@ body {
   grid-template-areas: "logoArea contactArea";
   grid-template-columns: 35% 1%;
   grid-template-rows: auto;
-
 }
 .footer_logo img {
   width: 100%;
@@ -516,6 +526,64 @@ body {
   font-size: .9em;
   color: #cacaca;
 }
+.more_questions {
+  background-image: url('../images/more_bg.png');
+  background-size: contain;
+  background-position: right;
+  background-repeat: no-repeat;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.more_questions_container{
+  padding: 3rem;
+  width: 100%;
+  background-color: #FCFBFB
+}
+.more_questions .brand {
+  font-size: 2rem;
+}
+.question_container{
+  background-color: #fff;
+  width: 80%;
+  margin-top: 2rem;
+  padding: 1.5rem;
+  box-shadow: 0px 1px 13px 1px rgba(0, 0, 0, .1);
+  border-radius: .6rem;
+}
+.faq_question_item.bordered {
+  border-bottom: 1px solid #cacaca9c;
+  padding: .3rem .3rem 1.2rem .3rem;
+  cursor: pointer;
+  transition: all 2s linear;
+}
+.faq_question_item {
+  padding: .3rem .3rem 1.2rem .3rem;
+  cursor: pointer;
+  transition: all 2s linear;
+  margin: .6rem;
+}
+.faq_question_head {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+.faq_question_content.active{
+  display: block;
+}
+.faq_question_content.inactive{
+  display: none;
+}
+.faq_question_content {
+  margin-top: .9rem;
+  transition: all 4s linear;
+}
+.faq_question_content p{
+  font-size: .85rem;
+}
 /* 
   RESPONSIVE DESIGNS
 */
@@ -545,6 +613,9 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+  }
+  .footer_logo {
+    width: 45%;
   }
 }
 @media screen and (max-width: 850px){
@@ -622,6 +693,9 @@ body {
   margin: .5rem;
   cursor: pointer;
 }
+.footer_logo {
+  width: 50%;
+}
 }
 
 @media screen and (max-width: 500px) {
@@ -677,5 +751,27 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+  }
+  .app_footer {
+    background-color: #000;
+    width: 100%;
+    height: 21rem;
+    padding: 2rem 2rem 3rem 2rem;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .logo_area {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    margin-bottom: 1.5rem;
+  }
+  .contact_area {
+    grid-area: contactArea / last-line;
+    width: 100%;
   }
 }
