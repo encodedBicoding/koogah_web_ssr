@@ -445,7 +445,6 @@ body {
 }
 .contact_area {
   grid-area: contactArea / last-line;
-  border: 1px solid red;
   width: 100%;
 }
 .term_address Address {
@@ -467,7 +466,6 @@ body {
   justify-content: space-between;
 }
 .contact_area .hello {
-  border: 1px solid red;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -475,21 +473,48 @@ body {
   justify-content: space-between;
 }
 .contact_area .nav{
-  border: 1px solid red;
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
 } 
+.contact_area .contact_details{
+  margin-top: .7rem;
+}
 .contact_area .contact_details p{
   color: #cacaca;
   font-size: .9rem;
   margin: .3rem 0 .3rem 0;
 }
+.contact_area .contact_details a{
+  color: #cacaca;
+  font-size: .9rem;
+  margin: .3rem 0 .3rem 0;
+  text-decoration: none;
+}
 .footer_social p {
   color: #F29B38;
-  font-size: .7rem;
+  font-size: .8rem;
+}
+.social_items{
+  margin-top: .5rem;
+}
+.social_item img{
+  width: 100%;
+  height: auto;
+}
+.social_item{
+  width: 1.6rem;
+  margin-right: .7rem;
+}
+.footer_nav_item {
+  margin-top: .7em;
+}
+.footer_nav_item a {
+  text-decoration: none;
+  font-size: .9em;
+  color: #cacaca;
 }
 /* 
   RESPONSIVE DESIGNS
