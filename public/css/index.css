@@ -526,6 +526,12 @@ body {
   font-size: .9em;
   color: #cacaca;
 }
+.footer_nav_item span {
+  text-decoration: none;
+  font-size: .9em;
+  color: #cacaca;
+  cursor: pointer;
+}
 .more_questions {
   background-image: url('../images/more_bg.png');
   background-size: contain;
@@ -589,7 +595,7 @@ body {
   display: none; /* Hidden by default */
   position: fixed; /* Stay in place */
   z-index: 1; /* Sit on top */
-  padding-top: 25%; /* Location of the box */
+  padding-top: 100px; /* Location of the box */
   left: 0;
   top: 0;
   width: 100%; /* Full width */
@@ -605,10 +611,11 @@ body {
   margin: auto;
   padding: 20px;
   border: 1px solid #888;
-  width: 35%;
+  width: 100%;
+  height: 100%;
 }
 
-/* The Close Button */
+/* The customer Close Button */
 .close {
   color: #aaaaaa;
   float: right;
@@ -618,6 +625,21 @@ body {
 
 .close:hover,
 .close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* dispacther close */
+.closed {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.closed:hover,
+.closed:focus {
   color: #000;
   text-decoration: none;
   cursor: pointer;
