@@ -46,6 +46,8 @@
 <body id="roots">
   <script src="../js/locale.js"></script>
   <%- include('components/navbar.ejs') %>
+  <%- include('components/customerModal.ejs') %>
+  <%- include('components/dispatcherModal.ejs') %>
   <section class="hero">
     <div class="hero_bg">
       <div class="h_bg_two">
@@ -87,7 +89,7 @@
           <p class="sub_text">
             Koogah is a platform which brings a mobile-first solution and a <b>SCPPD (Single Customer Per Package Delivery)</b> system to solving logistics/delivery issues, connecting customers and business owners with dispatchers, and giving our customers control over their deliveries.
           </p>
-          <a class="link row-space-between bordered-link bg-btn-brand" href="/">
+          <a class="link row-space-between bordered-link bg-btn-brand" href="#" >
             <span>Become a dispatcher</span>
             <span class="fas fa-chevron-right"></span>
           </a>
@@ -116,7 +118,7 @@
           <p class="sub_text">
             Koogah is a platform which brings a mobile-first solution and a <b>SCPPD (Single Customer Per Package Delivery)</b> system to solving logistics/delivery issues, connecting customers and business owners with dispatchers, and giving our customers control over their deliveries.
           </p>
-          <a class="link row-space-between bordered-link bg-btn-brand" href="/">
+          <a class="link row-space-between bordered-link bg-btn-brand" href="#" >
             <span>Become a dispatcher</span>
             <span class="fas fa-chevron-right"></span>
           </a>
@@ -190,7 +192,7 @@
     <div class="cta-margin">
       <div class="row-center">
         <div class="wd-210px">
-          <a class="link row-space-between bordered-link bg-btn-brand" href="/">
+          <a class="link row-space-between bordered-link bg-btn-brand" href="#" id="dispatchBtn">
             <span>Become a dispatcher</span>
             <span class="fas fa-chevron-right"></span>
           </a>
@@ -219,7 +221,7 @@
             <li>You have access to your dispatcher actual location in real-time, from pickup to dropoff.</li>
           </ul>
           <br/>
-          <a class="link row-space-between bordered-link bg-btn-brand" href="/">
+          <a class="link row-space-between bordered-link bg-btn-brand" href="#" id="customerBtn">
             <span>Become a customer</span>
             <span class="fas fa-chevron-right"></span>
           </a>
@@ -322,7 +324,7 @@
     <div class="cta-margin">
       <div class="row-center">
         <div class="wd-210px">
-          <a class="link row-space-between bordered-link bg-btn-brand" href="/">
+          <a class="link row-space-between bordered-link bg-btn-brand" href="#" id="customerBtn">
             <span>Become a customer</span>
             <span class="fas fa-chevron-right"></span>
           </a>
