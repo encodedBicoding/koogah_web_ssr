@@ -110,6 +110,34 @@
           }
           ) %>
         </div>
+        <h3>Customer</h3>
+        <div>
+          <%- include('components/faq_question.ejs', 
+          {
+            name: 'koogah_tracking_system',
+            head: 'Do we have a tracking system?',
+            content: "Yes we do. Security is at the bedrock of our existence, The Koogah Customer application comes with a feature that allows you to track your dispatcher location in real-time from pickup to drop off."
+          }
+          ) %>
+        </div>
+        <div>
+          <%- include('components/faq_question.ejs', 
+          {
+            name: 'customer_bvn_nin',
+            head: 'Will Koogah ask for your bvn or nin as a customer?',
+            content: "Koogah will never ask a Customer of his/her BVN or NIN. Koogah only requires Dispatchers to release such information as we use them for Identity checks and verification."
+          }
+          ) %>
+        </div>
+        <div>
+          <%- include('components/faq_question.ejs', 
+          {
+            name: 'package_safety',
+            head: 'Is my package safe?',
+            content: "Koogah employs a methodical security system that allows a customer total control, being able to see your package and most of all, choose your preferred dispatcher. Security is at the top of our priorities. We also have contingency plans for any hiccups that may arise, but we are in this business to serve, and that’s all we can do. We run a rigorous background check on our Dispatchers, making it quite impossible to not recover your package in the unlikely event that it gets lost or misplaced. Your packages are well insured."
+          }
+          ) %>
+        </div>
       </div>
     </div>
   </section>
