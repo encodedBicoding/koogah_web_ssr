@@ -31,6 +31,17 @@ indexRoutes.get(
     res.end(template);
   });
 });
+indexRoutes.get(
+  '/dispatch',
+  function (req, res, next) {
+  ejs.renderFile(`${view_path}/dispatch.ejs`, {
+    page: 'dispatch'
+  }, {}, function (err, template) {
+    if (err) throw err;
+    res.end(template);
+  });
+});
+
 
 
 module.exports = indexRoutes;
