@@ -1,8 +1,7 @@
 const express = require("express");
 const registerRoute = express.Router();
-const registerController = require("../controllers/register.controller");
-const { SignUpDispatcher } = registerController;
+const Register = require("../controllers/register.controller");
 
-registerRoute.get("/dispatcher", SignUpDispatcher);
+registerRoute.get("/dispatcher", Register.SignUpDispatcher);
 
 module.exports = registerRoute;
