@@ -258,6 +258,7 @@ input {
 /* Dividing hero */
 .h_bg_two {
   position: absolute;
+  top: 23%;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -311,7 +312,7 @@ input {
   margin: 0.6rem;
 }
 .hero_bg_holder img {
-  width: 85%;
+  width: 90%;
   height: 100%;
 }
 .copy_slogan {
@@ -847,7 +848,7 @@ input {
   }
   .h_bg_two {
     position: absolute;
-    top: 15%;
+    top: 10% !important;
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -1027,5 +1028,14 @@ input {
   .contact_area {
     grid-area: contactArea / last-line;
     width: 100%;
+  }
+  .h_bg_two {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
   }
 }
