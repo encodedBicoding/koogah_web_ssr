@@ -238,6 +238,7 @@ input {
   background-repeat: repeat-x;
   background-size: contain;
 }
+
 .hero_half {
   width: 100%;
   height: calc(100vh - 45vh);
@@ -473,6 +474,8 @@ input {
   display: flex;
   justify-content: space-between;
 }
+
+
 .auth-card {
   float: right;
   display: flex;
