@@ -41,6 +41,16 @@ indexRoutes.get(
     res.end(template);
   });
 });
+indexRoutes.get(
+  '/cities',
+  function (req, res, next) {
+  ejs.renderFile(`${view_path}/cities.ejs`, {
+    page: 'faq'
+  }, {}, function (err, template) {
+    if (err) throw err;
+    res.end(template);
+  });
+});
 
 
 
