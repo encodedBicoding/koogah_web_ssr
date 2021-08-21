@@ -34,7 +34,6 @@ body {
   color: #212529;
   text-align: center;
   text-decoration: none;
-  vertical-align: middle;
   cursor: pointer;
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -175,6 +174,12 @@ input {
   flex-direction: row;
   align-items: center;
   justify-content: center;
+}
+.col-start{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
 }
 .col-center {
   display: flex;
@@ -537,11 +542,27 @@ input {
   justify-content: center;
   overflow: hidden;
 }
-.download_rel {
+.download_rel,
+.cont_email {
   position: relative;
   width: 100%;
   margin-top: 10rem;
   height: 23rem;
+}
+.cont_email {
+  background-color: #000;
+  padding: 2rem;
+  height: inherit;
+  color: #fff;
+  border-radius: 2rem;
+}
+.sub_head{
+  margin-bottom: .5rem;
+}
+.email_sub_sub_cont {
+  width: 60%;
+  z-index: 99;
+  position: relative;
 }
 .download_container_first {
   width: 100%;
@@ -555,6 +576,66 @@ input {
   border-radius: 0.9rem;
   z-index: -99;
 }
+.email_subscription_container{
+  margin-bottom: 10rem;
+}
+.subscribe_container_second {
+  position: absolute;
+  bottom: -33%;
+  right: -9%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: flex-end;
+}
+.subscribe_img {
+  width: fit-content;
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: flex-end;
+}
+.subscribe_cont_main{
+  margin-top: 2rem;
+  width: 100%;
+}
+.subscribe_input{
+  width: 55%;
+  margin-right:4%;
+}
+.subscribe_input input{
+  border-radius: 2.2rem;
+  padding: 1rem;
+  width: 100% !important;
+  background-color: #272727 !important;
+  color: #fff;
+  outline: none;
+  border: none;
+  box-sizing: border-box; 
+}
+.subscribe_btn{
+  padding: 1rem;
+  width: 8rem;
+  font-size: .7rem;
+  letter-spacing: .1rem;
+  font-weight: 600;
+  outline: none;
+  border: none;
+  border-radius: 2.2rem;
+}
+.subscribe_btn.active {
+  background-color:#f29b38;
+  cursor: pointer;
+}
+.subscribe_btn.inactive {
+  background-color: #cacaca;
+  cursor: not-allowed;
+}
+.subscribe_img img{
+  width: 35%;
+  height: 35%;
+}
 .d_c_f_main {
   width: inherit;
   height: inherit;
@@ -563,6 +644,8 @@ input {
   flex-direction: column;
   align-items: flex-start;
   justify-content: space-between;
+  position: relative;
+  z-index: 99999;
 }
 .download_container_second {
   position: absolute;
@@ -573,7 +656,6 @@ input {
   flex-direction: column;
   align-items: flex-end;
   justify-content: flex-end;
-  z-index: -9;
 }
 .download_bg {
   background-image: url("../images/d_bg.png");
@@ -955,6 +1037,23 @@ input {
   }
   .faq_question_head h4 {
     font-size: 0.9rem;
+  }
+  .email_sub_sub_cont {
+    width: 100%;
+    z-index: 99;
+    position: relative;
+  }
+  .subscribe_input{
+    width: 100%;
+    position: relative;
+    margin-bottom:4%;
+    margin-right: 0;
+  }
+  .subscribe_input input{
+    width: 100%;
+  }
+  .subscribe_btn{
+    width: 100%;
   }
 }
 
