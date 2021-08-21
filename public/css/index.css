@@ -88,6 +88,7 @@ body {
 .text-white {
   color: white;
 }
+
  .brand-border {
   border-color: #f29b38 !important;
   padding: 4px !important;
@@ -249,6 +250,19 @@ input {
   background-image: url("../images/bg.png");
   background-repeat: repeat-x;
   background-size: contain;
+}
+
+.hero_half_privacy {
+  width: 100%;
+  height: calc(80vh - 45vh);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-image: url("../images/bg.png");
+  background-repeat: repeat-x;
+  background-size: contain;
+  background-color: #f29b38 !important;
 }
 /* Dividing hero */
 .hero_row::after {

@@ -51,6 +51,16 @@ indexRoutes.get(
     res.end(template);
   });
 });
+indexRoutes.get(
+  '/privacy',
+  function (req, res, next) {
+  ejs.renderFile(`${view_path}/privacy.ejs`, {
+    page: 'faq'
+  }, {}, function (err, template) {
+    if (err) throw err;
+    res.end(template);
+  });
+});
 
 
 
