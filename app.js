@@ -11,7 +11,8 @@ require("dotenv").config();
 const app = express();
 
 const indexRoutes = require('./routes/indexRoutes');
-const registerRoute = require('./routes/register')
+const registerRoute = require('./routes/register');
+const subscribeRoute = require('./routes/subscribe');
 
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
@@ -25,7 +26,8 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use('/', indexRoutes);
-app.use('/register', registerRoute)
+app.use('/register', registerRoute);
+app.use('/subscribe', subscribeRoute);
 
 
 app.use(function(req, res, next) {
