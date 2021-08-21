@@ -16,6 +16,7 @@ function activateSubscribe() {
     Array.from(elementArray).forEach((element => element.innerHTML = text));
   }
   function resetSubscriptionInput() {
+    input_email = '';
     Array.from(all_email_submit_input).forEach((ele) => {
       ele.value = '';
     });
