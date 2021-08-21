@@ -553,6 +553,7 @@ input {
   height: 23rem;
   top: 10%;
   border-radius: 0.9rem;
+  z-index: -99;
 }
 .d_c_f_main {
   width: inherit;
@@ -565,13 +566,14 @@ input {
 }
 .download_container_second {
   position: absolute;
-  width: fit-content;
+  width: 100%;
   top: -73%;
   left: 18%;
   display: flex;
   flex-direction: column;
   align-items: flex-end;
   justify-content: flex-end;
+  z-index: -9;
 }
 .download_bg {
   background-image: url("../images/d_bg.png");
