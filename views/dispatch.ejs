@@ -64,7 +64,7 @@
       Frequently asked questions - Koogah - Delivery done efficiently
     </title>
     <script>
-     function setref() {
+      function setref() {
         if (window.location.search) {
           let query = new URLSearchParams(window.location.search);
           let ref = query.get("ref");
@@ -74,10 +74,10 @@
       }
     </script>
   </head>
-  <body id="roots" onclick='setref()'>
+  <body id="roots" onclick="setref()">
     <script src="../js/locale.js"></script>
     <%- include('components/navbar.ejs') %>
-    <section class="hero_bg" >
+    <section class="hero_bg">
       <div class="wd-100 ht-100">
         <h1 class="large-h1 container">
           Caption <span class="brand">goes</span> here
@@ -317,10 +317,11 @@
     <section name="download_now" class="container">
       <%- include('components/download_now.ejs') %>
     </section>
+    <section class="container" name="email_subscription">
+      <%- include('components/email_subscription.ejs') %>
+    </section>
     <section name="footer"><%- include('components/footer.ejs') %></section>
     <script>
-      
-
       function next() {
         document.getElementById("form1").style.display = "none";
         document.getElementById("form2").style.display = "block";
@@ -360,11 +361,12 @@
               "Content-type": "application/json; charset=UTF-8",
             },
           }
-        )
+        );
         return false;
       };
     </script>
     <script src="../js/mobile_nav.js"></script>
     <script src="../js/faq_func.js"></script>
+    <script src="../js/subscribe.js"></script>
   </body>
 </html>
