@@ -499,7 +499,7 @@ input {
   background-color: #fff;
   padding: 1.5rem;
   width: 25%;
-  height: 624px;
+  /* height: 624px; */
   margin:0.6rem 1rem 0.6rem 0;
   box-shadow: 0 3px 25px 0px rgba(0, 0, 0, 0.1);
   border-radius: 0.6rem;
@@ -843,6 +843,10 @@ input {
   padding-right: 15px;
   padding-top: 9px;
   padding-bottom: 9px;
+}
+
+.d-none {
+  display: none;
 }
 /* 
   RESPONSIVE DESIGNS

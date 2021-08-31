@@ -1,15 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content=
-      "width=device-width, initial-scale=1.0"/>
-  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-  <meta http-equiv="Content-type" content="text/html; charset=UTF-8">
-  <meta content="Koogah" name="title" />
-  <meta content="Koogah is a platform which brings a mobile-first solution and a SCPPD(Single Customer Per Package Delivery) system to solving logistics/delivery issues, connecting customers and business owners with dispatchers, and giving them control over their deliveries" name="description" />
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <meta http-equiv="Content-type" content="text/html; charset=UTF-8" />
+    <meta content="Koogah" name="title" />
+    <meta
+      content="Koogah is a platform which brings a mobile-first solution and a SCPPD(Single Customer Per Package Delivery) system to solving logistics/delivery issues, connecting customers and business owners with dispatchers, and giving them control over their deliveries"
+      name="description"
+    />
 
-  <meta name="keywords" content="
+    <meta
+      name="keywords"
+      content="
   delivery,
   logistics,
   koogah,
@@ -25,118 +29,247 @@
   koogah faq,
   frequently asked questions on koogah,
   koogah frequently asked questions
-  "/>
-  <meta name="twitter:site" content="@thekoogahbrand">
-  <meta name="twitter:domain" content="koogah.com">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:url" content="https://twitter.com/thekoogahbrand">
-  <meta name="twitter:title" content="Koogah">
-  <meta name="twitter:description" content="The fastest way to get goods/packages delivered. With actual real-time tracking, and a trusted network of dispatchers">
-  <meta name="twitter:image" content="https://pbs.twimg.com/profile_images/1411243565460688896/076o7nTm_400x400.jpg">
-  <meta name='locale' content="en_EN"/>
-  <meta name='robots' content="index, follow"/>
-  <meta name='site_name' content="Koogah"/>
-  <meta content="English" name="language" />
-  <meta content="5 days" name="revisit-after" />
-  <meta content="Koogah" name="author" />
-  <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
-  <link rel="stylesheet" href="css/index.css"/>
-  <link rel="stylesheet" href="css/nav.css"/>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <title>Frequently asked questions - Koogah - Delivery done efficiently</title>
-</head>
-<body id="roots">
-  <script src="../js/locale.js"></script>
-  <%- include('components/navbar.ejs') %>
-  <section class="hero_bg">
-    <div class="wd-100 ht-100 ">
-      <h1 class="large-h1 container">Caption <span class="brand">goes</span> here</h1>
+  "
+    />
+    <meta name="twitter:site" content="@thekoogahbrand" />
+    <meta name="twitter:domain" content="koogah.com" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://twitter.com/thekoogahbrand" />
+    <meta name="twitter:title" content="Koogah" />
+    <meta
+      name="twitter:description"
+      content="The fastest way to get goods/packages delivered. With actual real-time tracking, and a trusted network of dispatchers"
+    />
+    <meta
+      name="twitter:image"
+      content="https://pbs.twimg.com/profile_images/1411243565460688896/076o7nTm_400x400.jpg"
+    />
+    <meta name="locale" content="en_EN" />
+    <meta name="robots" content="index, follow" />
+    <meta name="site_name" content="Koogah" />
+    <meta content="English" name="language" />
+    <meta content="5 days" name="revisit-after" />
+    <meta content="Koogah" name="author" />
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="css/index.css" />
+    <link rel="stylesheet" href="css/nav.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+      integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <title>
+      Frequently asked questions - Koogah - Delivery done efficiently
+    </title>
+    <script>
+     function setref() {
+        if (window.location.search) {
+          let query = new URLSearchParams(window.location.search);
+          let ref = query.get("ref");
+          window.sessionStorage.setItem("ref", ref);
+          window.sessionStorage.setItem("fromApp=", "web");
+        }
+      }
+    </script>
+  </head>
+  <body id="roots" onclick='setref()'>
+    <script src="../js/locale.js"></script>
+    <%- include('components/navbar.ejs') %>
+    <section class="hero_bg" >
+      <div class="wd-100 ht-100">
+        <h1 class="large-h1 container">
+          Caption <span class="brand">goes</span> here
+        </h1>
 
-      <div class="auth-card top-right">
-        <div class="d-flex mb">
-          <p>Sign UP</p>
-          <i class="fas fa-comments brand"></i>
-        </div>
-        <form action="">
-          <div class="">
-            <input required  type="text" class="form-control mb" placeholder="Email">
-            <input required  type="text" class="form-control mb" placeholder="First Name">
-            <input required  type="text" class="form-control mb" placeholder="Last Name">
-            <div class="input-group mb">
-              <span class="input-group-text">+234</span>
-              <input required  type="text" class="form-control-text" placeholder="Phone Number">
+        <div class="auth-card top-right">
+          <div class="d-flex mb">
+            <p>Sign UP</p>
+            <i class="fas fa-comments brand"></i>
+          </div>
+          <form id="details">
+            <div class="" id="form1">
+              <input
+                required
+                type="text"
+                id="email"
+                class="form-control mb"
+                placeholder="Email"
+              />
+              <input
+                required
+                type="text"
+                id="first_name"
+                class="form-control mb"
+                placeholder="First Name"
+              />
+              <input
+                required
+                type="text"
+                id="last_name"
+                class="form-control mb"
+                placeholder="Last Name"
+              />
+              <div class="input-group mb">
+                <span class="input-group-text">+234</span>
+                <input
+                  required
+                  type="text"
+                  id="number"
+                  class="form-control-text"
+                  placeholder="Phone Number"
+                />
+              </div>
+              <div class="input-group mb">
+                <span class="input-group-text">Nigeria</span>
+                <input
+                  required
+                  type="text"
+                  id="state"
+                  class="form-control-text"
+                  placeholder="State"
+                />
+              </div>
+              <input
+                required
+                type="text"
+                id="town"
+                class="form-control mb"
+                placeholder="Town"
+              />
+              <input
+                required
+                type="text"
+                id="address"
+                class="form-control mb"
+                placeholder="Address"
+              />
+
+              <div class="d-grid">
+                <button class="btn brand_bg text-white" onClick="next()">
+                  Next <i class="fas fa-chevron-right text-white"></i>
+                </button>
+              </div>
             </div>
-            <div class="input-group mb">
-              <span class="input-group-text">Nigeria</span>
-              <input required  type="text" class="form-control-text" placeholder="State">
+
+            <div class="d-none" id="form2">
+              <input
+                required
+                type="text"
+                id="bvn"
+                class="form-control mb"
+                placeholder="BVN"
+              />
+              <input
+                required
+                type="text"
+                id="nin"
+                class="form-control mb"
+                placeholder="Identification Number"
+              />
+              <input
+                required
+                type="text"
+                id="contact_name_one"
+                class="form-control mb"
+                placeholder="First Emergency Contact Name"
+              />
+              <input
+                required
+                type="text"
+                id="contact_number_one"
+                class="form-control mb"
+                placeholder="First Emergency Contact Number"
+              />
+              <input
+                required
+                type="text"
+                id="contact_name_two"
+                class="form-control mb"
+                placeholder="Second Emergency Contact Name"
+              />
+              <input
+                required
+                type="text"
+                id="contact_number_two"
+                class="form-control mb"
+                placeholder="Second Emergency Contact Number"
+              />
+              <!-- <input type="text" class="form-control mb" placeholder="Address"> -->
+              <div class="mb-2">
+                <input type="checkbox" class="brand-border" />
+                <small>I Agree To Koogah Terms And Conditions</small>
+              </div>
+
+              <div class="d-grid">
+                <button class="btn brand_bg text-white" type="submit">
+                  Sign Up
+                </button>
+              </div>
             </div>
-            <input required  type="text" class="form-control mb" placeholder="Town">
-            <input required  type="text" class="form-control mb" placeholder="Address">
-
-           <div class="d-grid">
-            <button class="btn brand_bg text-white ">Next <i class="fas fa-chevron-right text-white"></i></button>
-           </div>
-          </div>
-
-          <div>
-            <input required  type="text" class="form-control mb" placeholder="BVN">
-            <input required  type="text" class="form-control mb" placeholder="Identification Number">
-            <input required  type="text" class="form-control mb" placeholder="First Emergency Contact Name">
-            <input required  type="text" class="form-control mb" placeholder="First Emergency Contact Number">
-            <input required  type="text" class="form-control mb" placeholder="Second Emergency Contact Name">
-            <input required  type="text" class="form-control mb" placeholder="Second Emergency Contact Number">
-            <!-- <input type="text" class="form-control mb" placeholder="Address"> -->
-           <div class="mb-2">
-            <input type="checkbox" class="brand-border">
-            <small>I Agree To Koogah Terms And Conditions</small>
-           </div>
-
-           <div class="d-grid">
-            <button class="btn brand_bg text-white" type="submit">Sign Up</button>
-           </div>
-          </div>
-        </form>
+          </form>
+        </div>
       </div>
-    </div>
-    <div class="brand_bg wd-100 ht-50"></div>
-  </section>
-  <!-- Middele Section -->
-  <section name="what to expect from koogah" class="bg_faint main_section_padding">
-    <div class="container">
-      <div class="wd-100 col-center">
-        <h1 class="header_font">What To Expect</h1>
-        <p class="brand header_sub_font">As a dispatcher</p>
-      </div>
-      <div class="grid_container mtop-50px">
-        <div class="info-card">
-          <div class="icon_bg color_1 consistent_delivery"></div>
-          <div class="font-bold">
-            <p class="h">Consistent <span class="brand">Deliveries</span></p>
-          </div>
-          <div class="info-card-sub-header">
-            <p>The <span class="brand">Koogah Market-place<sup>&trade;</sup></span> is designed to show you deliveries tailored to your current location, ensuring you can make round-trips. You never have to come back empty.</p>
-          </div>
+      <div class="brand_bg wd-100 ht-50"></div>
+    </section>
+    <!-- Middele Section -->
+    <section
+      name="what to expect from koogah"
+      class="bg_faint main_section_padding"
+    >
+      <div class="container">
+        <div class="wd-100 col-center">
+          <h1 class="header_font">What To Expect</h1>
+          <p class="brand header_sub_font">As a dispatcher</p>
         </div>
-        <div class="info-card">
-          <div class="icon_bg color_2 instant_payout"></div>
-          <div class="font-bold">
-            <p class="h">Instant <span class="brand">Payout</span></p>
+        <div class="grid_container mtop-50px">
+          <div class="info-card">
+            <div class="icon_bg color_1 consistent_delivery"></div>
+            <div class="font-bold">
+              <p class="h">Consistent <span class="brand">Deliveries</span></p>
+            </div>
+            <div class="info-card-sub-header">
+              <p>
+                The
+                <span class="brand">Koogah Market-place<sup>&trade;</sup></span>
+                is designed to show you deliveries tailored to your current
+                location, ensuring you can make round-trips. You never have to
+                come back empty.
+              </p>
+            </div>
           </div>
-          <div class="info-card-sub-header">
-            <p>With our <span class="brand">Koogah Wallet <sup>&trade;</sup></span> system, the payment for every delivery can be withdrawn instantly, once delivery is complete. With Koogah, no one can owe you.</p>
+          <div class="info-card">
+            <div class="icon_bg color_2 instant_payout"></div>
+            <div class="font-bold">
+              <p class="h">Instant <span class="brand">Payout</span></p>
+            </div>
+            <div class="info-card-sub-header">
+              <p>
+                With our
+                <span class="brand">Koogah Wallet <sup>&trade;</sup></span>
+                system, the payment for every delivery can be withdrawn
+                instantly, once delivery is complete. With Koogah, no one can
+                owe you.
+              </p>
+            </div>
           </div>
-        </div>
-        <div class="info-card">
-          <div class="icon_bg color_3 choose_delivery"></div>
-          <div class="font-bold">
-            <p class="h">Choose Your <span class="brand">Delivery</span></p>
+          <div class="info-card">
+            <div class="icon_bg color_3 choose_delivery"></div>
+            <div class="font-bold">
+              <p class="h">Choose Your <span class="brand">Delivery</span></p>
+            </div>
+            <div class="info-card-sub-header">
+              <p>
+                In the
+                <span class="brand">Koogah Market-place<sup>&trade;</sup></span>
+                deliveries are tailored to you, but... you still have the choice
+                to select what you want to deliver.
+              </p>
+            </div>
           </div>
-          <div class="info-card-sub-header">
-            <p>In the <span class="brand">Koogah Market-place<sup>&trade;</sup></span> deliveries are tailored to you, but... you still have the choice to select what you want to deliver.</p>
-          </div>
-        </div>
-        
-        <!-- <div class="info-card">
+
+          <!-- <div class="info-card">
           <div class="icon_bg color_4 flex_hours"></div>
           <div class="font-bold">
             <p class="h">Flexible <span class="brand">Working Hours</span></p>
@@ -163,12 +296,14 @@
             <p>With Koogah, you do not have to worry about owning a motorcycle or car. What ever means of transportation you find convenient, deliver with it!.</p>
           </div>
         </div> -->
+        </div>
       </div>
-    </div>
-    <div class="row-center">
-      <span class="brand border">See All <i class="fas fa-chevron-down"></i></span>
-    </div>
-    <!-- <div class="cta-margin">
+      <div class="row-center">
+        <span class="brand border"
+          >See All <i class="fas fa-chevron-down"></i
+        ></span>
+      </div>
+      <!-- <div class="cta-margin">
       <div class="row-center">
         <div class="wd-210px">
           <div class="link row-space-between bordered-link bg-btn-brand" id="dispatchBtn">
@@ -178,15 +313,58 @@
         </div>
       </div>
     </div> -->
-  </section>
-  <section name="download_now" class="container">
-    <%- include('components/download_now.ejs') %>
-  </section>
-  <section name="footer">
-    <%- include('components/footer.ejs') %>
-  </section>
-  <script src='../js/mobile_nav.js'></script>
-  <script src='../js/faq_func.js'></script>
-</body>
-  
+    </section>
+    <section name="download_now" class="container">
+      <%- include('components/download_now.ejs') %>
+    </section>
+    <section name="footer"><%- include('components/footer.ejs') %></section>
+    <script>
+      
+
+      function next() {
+        document.getElementById("form1").style.display = "none";
+        document.getElementById("form2").style.display = "block";
+        return false;
+      }
+
+      onsubmit = function () {
+        const ref = window.sessionStorage.getItem("ref");
+        let hasRef = ref === null ? false : true;
+        const data = {
+          email: document.getElementById("email").value,
+          firstName: document.getElementById("first_name").value,
+          lastName: document.getElementById("last_name").value,
+          phoneNumber: document.getElementById("number").value,
+          state: document.getElementById("state").value,
+          town: document.getElementById("town").value,
+          address: document.getElementById("address").value,
+          identifiction_number: document.getElementById("nin").value,
+          bvn: document.getElementById("bvn").value,
+          emergency_contact_one_name:
+            document.getElementById("contact_name_one").value,
+          emergency_contact_one_phone:
+            document.getElementById("contact_number_one").value,
+          emergency_contact_two_name:
+            document.getElementById("contact_name_two").value,
+          emergency_contact_two_phone:
+            document.getElementById("contact_number_two").value,
+          country_code: "+234",
+          nationality: "nigerian",
+        };
+        fetch(
+          `user/courier/signup?fromApp=web${hasRef ? `&&ref=${ref}` : ""}`,
+          {
+            method: "POST",
+            data,
+            headers: {
+              "Content-type": "application/json; charset=UTF-8",
+            },
+          }
+        )
+        return false;
+      };
+    </script>
+    <script src="../js/mobile_nav.js"></script>
+    <script src="../js/faq_func.js"></script>
+  </body>
 </html>
