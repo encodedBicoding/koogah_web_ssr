@@ -1,7 +1,6 @@
 class Register{
   static async SignUpDispatcher(req, res) {
     try {
-      console.log("Hello")
       console.log(req);
       return res.status(200).json({status: 200, message: 'Retrieved'})
     } catch (error) {
