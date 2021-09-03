@@ -61,6 +61,16 @@ indexRoutes.get(
     res.end(template);
   });
 });
+indexRoutes.get(
+  '/customer',
+  function (req, res, next) {
+  ejs.renderFile(`${view_path}/customer.ejs`, {
+    page: 'customer'
+  }, {}, function (err, template) {
+    if (err) throw err;
+    res.end(template);
+  });
+});
 
 
 
