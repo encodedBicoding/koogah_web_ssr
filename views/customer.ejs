@@ -61,7 +61,7 @@
       referrerpolicy="no-referrer"
     />
     <title>
-      Frequently asked questions - Koogah - Delivery done efficiently
+      Customer - Koogah - Delivery done efficiently
     </title>
     <script>
       function setref() {
@@ -85,7 +85,7 @@
 
         <div class="auth-card top-right">
           <div class="d-flex mb">
-            <p>Sign UP</p>
+            <p>Sign Up</p>
             <i class="fas fa-comments brand"></i>
           </div>
           <form id="details">
@@ -261,7 +261,7 @@
         };
         console.log(data)
         fetch(
-          `user/customer/signup`,
+          `https://core.koogahapis.com/v1/user/customer/signup`,
           {
             method: "POST",
             data,
