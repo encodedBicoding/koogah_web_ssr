@@ -1,18 +1,18 @@
-<nav class="main_nav">
+<nav class="<%- opaque ? 'opaque_nav' : 'main_nav' %>">
   <nav class="comp">
     <div class="row-space-between">
-      <a href="/">
-        <img src="images/logo.png" alt="Koogah Delivery Logo" width="120" height="auto"/>
+      <a href="/" class="logo_cont">
+        <img src="../../images/logo.svg" alt="Koogah Delivery Logo" width="100%" height="100%"/>
       </a>
       <div class="row-space-between">
         <a href="/faq" class="link">
           <% if(page === 'faq') {%>
-            <p class="font-small font-bold nav-active">FAQ</p>
+            <p class="<%- opaque ? 'font-small font-bold nav-active  nav_font_opaque' : 'font-small font-bold nav-active' %>">FAQ</p>
             <%} else {%>
-              <p class="font-small font-bold nav-inactive">FAQ</p>
+              <p class="<%- opaque ? 'font-small font-bold nav-inactive nav_font_opaque' : 'font-small font-bold nav-inactive'%>">FAQ</p>
           <%}%>
         </a>
-        <a href="mailto:contact@koogah.com" class="no_decoration cta">
+        <a href="mailto:contact@koogah.com" class="<%- opaque ? 'no_decoration cta_black' : 'no_decoration cta'%>">
           <p>Contact Us</p>
         </a>
       </div>
@@ -22,7 +22,7 @@
     <div class="row-space-between">
       <div>
         <a href="/">
-          <img src="images/logo.png" alt="Koogah Delivery Logo" width="120" height="auto"/>
+          <img src="../../images/logo.png" alt="Koogah Delivery Logo" width="120" height="auto"/>
         </a>
       </div>
       <div class="mobile_nav_container">

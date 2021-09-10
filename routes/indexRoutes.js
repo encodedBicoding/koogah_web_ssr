@@ -32,10 +32,10 @@ indexRoutes.get(
   });
 });
 indexRoutes.get(
-  '/dispatch',
+  '/dispatcher',
   function (req, res, next) {
   ejs.renderFile(`${view_path}/dispatch.ejs`, {
-    page: 'dispatch'
+    page: 'dispatcher'
   }, {}, function (err, template) {
     if (err) throw err;
     res.end(template);
@@ -45,7 +45,7 @@ indexRoutes.get(
   '/cities',
   function (req, res, next) {
   ejs.renderFile(`${view_path}/cities.ejs`, {
-    page: 'faq'
+    page: 'cities'
   }, {}, function (err, template) {
     if (err) throw err;
     res.end(template);
@@ -55,7 +55,7 @@ indexRoutes.get(
   '/privacy',
   function (req, res, next) {
   ejs.renderFile(`${view_path}/privacy.ejs`, {
-    page: 'faq'
+    page: 'privacy'
   }, {}, function (err, template) {
     if (err) throw err;
     res.end(template);
@@ -70,7 +70,36 @@ indexRoutes.get(
     if (err) throw err;
     res.end(template);
   });
-});
+  });
+indexRoutes.get(
+  '/company',
+  function (req, res, next) {
+    ejs.renderFile(`${view_path}/company.ejs`, {
+      page: 'company_index'
+    }, {}, function (err, template) {
+      if (err) throw err;
+      res.end(template);
+    });
+    }
+);
+indexRoutes.get(
+  '/company/verify/email',
+  function (req, res, next) {
+    res.redirect(`/verify/mobile?&code=${req.query.code}&key=${req.query.key}`)
+  }
+);
+
+indexRoutes.get(
+  '/verify/mobile',
+  function (req, res, next) {
+    ejs.renderFile(`${view_path}/mobile_verification.ejs`, {
+      page: 'company_verify_email',
+    }, {}, function (err, template) {
+      if (err) throw err;
+      res.end(template);
+    });
+  }
+);
 
 
 

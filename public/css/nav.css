@@ -1,15 +1,27 @@
-.main_nav{
+.logo_cont{
+  width: 10%;
+  height: auto;
+}
+.main_nav,
+.opaque_nav{
   padding: .8rem 8% .8rem 8%;
   position: sticky;
   top: 0px;
   background-color: #fff;
   z-index: 99999999;
 }
+.opaque_nav {
+  background-color: transparent !important;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
 .cta p{
   color: #fff;
   font-weight: 900;
 }
-.cta {
+.cta,
+.cta_black {
   background-color: #F29B38;
   margin-left: 60px;
   width: 142px;
@@ -19,6 +31,17 @@
   justify-items: center;
   justify-content: center;
   border-radius: 1.4rem;
+}
+.cta_black{
+  background-color: black;
+  color: #fff;
+}
+.nav_font_opaque{
+  color: white;
+  transition: all .3s linear;
+}
+.nav_font_opaque:hover {
+  color: #F29B38
 }
 
 .nav-active {

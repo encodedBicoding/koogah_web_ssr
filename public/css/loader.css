@@ -1,0 +1,24 @@
+.loader{
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  z-index: 99999999999999999999999999999999;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.719);
+}
+.loader.sh {
+  display: block;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.loader.hd{
+  display: none;
+}
+.loader_holder{
+  width: 4%;
+  height: auto;
+}
