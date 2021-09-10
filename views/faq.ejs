@@ -47,7 +47,11 @@
 </head>
 <body id="roots">
   <script src="../js/locale.js"></script>
-  <%- include('components/navbar.ejs') %>
+  <%- include('components/navbar.ejs', 
+    {
+      opaque: false,
+    }
+  ) %>
   <section class="hero_half">
     <div class="col-center wd-100 ht-100">
       <h1 class="large-h1">FAQ</h1>
@@ -89,7 +93,7 @@
           {
             name: 'percentage_koogah_charges',
             head: 'What percentage does Koogah charge per delivery?',
-            content: "Koogah collects only 5% on every delivery."
+            content: "Koogah collects 15% on deliveries made by individual dispatchers and 10% on deliveries made by cooperate dispatchers."
           }
           ) %>
         </div>

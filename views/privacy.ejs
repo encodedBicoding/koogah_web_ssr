@@ -47,7 +47,11 @@
 </head>
 <body id="roots">
   <script src="../js/locale.js"></script>
-  <%- include('components/navbar.ejs') %>
+  <%- include('components/navbar.ejs', 
+    {
+      opaque: false,
+    }
+  ) %>
   <section class="hero_half_privacy">
     <div class="col-center ht-50">
       <h1 class="large-h1 text-white">Privacy Policy</h1>    

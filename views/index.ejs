@@ -45,7 +45,11 @@
 </head>
 <body id="roots">
   <script src="../js/locale.js"></script>
-  <%- include('components/navbar.ejs') %>
+  <%- include('components/navbar.ejs', 
+    {
+      opaque: false,
+    }
+  ) %>
   <%- include('components/customerModal.ejs') %>
   <%- include('components/dispatcherModal.ejs') %>
   <section class="hero">
@@ -89,7 +93,7 @@
           <p class="sub_text">
             Koogah is a platform which brings a mobile-first solution and a <b>SCPPD (Single Customer Per Package Delivery)</b> system to solving logistics/delivery issues, connecting customers and business owners with dispatchers, and giving our customers control over their deliveries.
           </p>
-          <a href="/dispatch" class="link row-space-between bordered-link bg-btn-brand">
+          <a href="/dispatcher" class="link row-space-between bordered-link bg-btn-brand">
             <span>Become a dispatcher</span>
             <span class="fas fa-chevron-right"></span>
           </a>
@@ -118,7 +122,7 @@
           <p class="sub_text">
             Koogah is a platform which brings a mobile-first solution and a <b>SCPPD (Single Customer Per Package Delivery)</b> system to solving logistics/delivery issues, connecting customers and business owners with dispatchers, and giving our customers control over their deliveries.
           </p>
-          <a href="/dispatch" class="link row-space-between bordered-link bg-btn-brand">
+          <a href="/dispatcher" class="link row-space-between bordered-link bg-btn-brand">
             <span>Become a dispatcher</span>
             <span class="fas fa-chevron-right"></span>
           </a>
@@ -192,7 +196,7 @@
     <div class="cta-margin">
       <div class="row-center">
         <div class="wd-210px">
-          <a href="/dispatch" class="link row-space-between bordered-link bg-btn-brand">
+          <a href="/dispatcher" class="link row-space-between bordered-link bg-btn-brand">
             <span>Become a dispatcher</span>
             <span class="fas fa-chevron-right"></span>
           </a>
@@ -205,7 +209,7 @@
       <div class="session_container">
         <div class="session_holder_one">
           <div class="session_image_holder">
-            <img src="../images/oc.png" alt="earn by delivering packages on koogah" width="75%" height="auto"/>
+            <img src="../images/oc.png" alt="experience fast and efficient delivery on Koogah" width="75%" height="auto"/>
           </div>
         </div>
         <div class="session_holder_two">
@@ -251,7 +255,7 @@
         </div>
         <div class="">
           <div class="session_image_holder">
-            <img src="../images/oc.png" alt="earn by delivering packages on koogah" width="75%" height="auto"/>
+            <img src="../images/oc.png" alt="experience fast and efficient delivery on Koogah" width="75%" height="auto"/>
           </div>
         </div>
         <div class="session_holder_two">
@@ -358,10 +362,146 @@
       </div>
      </div>
   </section>
+  <section name="partner_logistics_company" class="container">
+    <div class="comp">
+      <div class="session_container">
+        <div class="session_holder_one">
+          <div class="session_image_holder">
+            <img src="../images/partner_sm.png" alt="partner with Koogah as a logistics company" width="75%" height="auto"/>
+          </div>
+        </div>
+        <div class="session_holder_two">
+          <h1 class="sub_header_col">
+            <p class="font-bold-black">Become A </p>
+            <p class="font-bold-brand">Partner Logistics Company</p>
+          </h1>
+          <p class="sub_text">
+            Experience a more convenient way to manage your dispatchers.
+          </p>
+          <ul class="bullet">
+            <li>Your dispatchers will have access to Koogah's Delivery Market-place.</li>
+            <li>In-depth details of your dispatchers activities and sales output.</li>
+            <li>You can track any dispatcher handling a delivery in real-time for free.</li>
+            <li>Instant payouts to any bank account of your choice.</li>
+          </ul>
+          <br/>
+          <a href="/company" class="link row-space-between bordered-link bg-btn-brand" id="customerBtn">
+            <span>Register as a Logistics Company</span>
+            <span class="fas fa-chevron-right"></span>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="mobile">
+      <div class="session_container">
+        <div class="session_holder_one">
+          <h1 class="sub_header_col">
+            <span class="font-bold-black">Become A Partner </span>
+            <span class="font-bold-brand">Logistics Company</span>
+          </h1>
+        </div>
+        <div class="">
+          <div class="session_image_holder">
+            <img src="../images/partner_sm.png" alt="partner with Koogah as a logistics company" width="75%" height="auto"/>
+          </div>
+        </div>
+        <div class="session_holder_two">
+          <p class="sub_text">
+            Experience a more convenient way to manage your dispatchers.
+          </p>
+          <ul class="bullet">
+            <li>Your dispatchers will have access to Koogah's Delivery Market-place.</li>
+            <li>In-depth details of your dispatchers activities and sales output.</li>
+            <li>You can track any dispatcher handling a delivery in real-time for free.</li>
+            <li>Instant payouts to any bank account of your choice.</li>
+          </ul>
+          <br/>
+          <a href="/company" class="link row-space-between bordered-link bg-btn-brand" id="customerMobile">
+            <span>Register as a Logistics Company</span>
+            <span class="fas fa-chevron-right"></span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section name="what to expect from koogah" class="bg_faint main_section_padding">
+    <div class="container">
+      <div class="wd-100 col-center">
+        <h1 class="header_font">What To Expect</h1>
+        <p class="brand header_sub_font">As a Logistics Company</p>
+      </div>
+      <div class="grid_container mtop-50px">
+        <div class="info-card">
+          <div class="icon_bg color_6 sdd"></div>
+          <div class="font-bold">
+            <p class="h">Same Day <span class="brand">Delivery</span></p>
+          </div>
+          <div class="info-card-sub-header">
+            <p>Your package is of utmost priority, with dispatchers strongly serving our one-customer-per delivery system, Koogah is determined to guarantee same day delivery.</p>
+          </div>
+        </div>
+        <div class="info-card">
+          <div class="icon_bg color_5 fast_time"></div>
+          <div class="font-bold">
+            <p class="h">Faster <span class="brand">Pickup Time</span></p>
+          </div>
+          <div class="info-card-sub-header">
+            <p>Access speed time pick up with Koogah's algorithms and market place feed system and a vast number of dispatchers.</p>
+          </div>
+        </div>
+        <div class="info-card">
+          <div class="icon_bg color_4 real_tracking"></div>
+          <div class="font-bold">
+            <p class="h"><span class="brand">Real-Time</span> Tracking & Location <span class="brand">Analysis</span></p>
+          </div>
+          <div class="info-card-sub-header">
+            <p>Your packages literally never leave your sight. With Koogah's tracking technology, you watch your packages move every step of the way. Control is everything. You now have true control.</p>
+          </div>
+        </div>
+        <div class="info-card">
+          <div class="icon_bg color_3 select_dispatcher"></div>
+          <div class="font-bold">
+            <p class="h">Select Your Preferred <span class="brand">Dispatcher</span></p>
+          </div>
+          <div class="info-card-sub-header">
+            <p>With the control you now have, you decide who picks up and delivers your package.</p>
+          </div>
+        </div>
+        <div class="info-card">
+          <div class="icon_bg color_2 earn_kc"></div>
+          <div class="font-bold">
+            <p class="h">Earn <span class="brand">Koogah Coin<sup>&trade;</sup> </sup></span> To Deliver More Packages</p>
+          </div>
+          <div class="info-card-sub-header">
+            <p>Everytime you top up your wallet, our cashback system offers you Koogah coin which enables you deliver packages for free.</p>
+          </div>
+        </div>
+        <div class="info-card">
+          <div class="icon_bg color_1 save_tm"></div>
+          <div class="font-bold">
+            <p class="h">Save <span class="brand">Time</span> And <span class="brand">Money</span></p>
+          </div>
+          <div class="info-card-sub-header">
+            <p>Koogah offers you the most time efficient and cost effective method. With a few clicks, you never have to worry about anything. Koogah gives you that control.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="cta-margin">
+      <div class="row-center">
+        <div class="wd-210px">
+          <a href="/customer" class="link row-space-between bordered-link bg-btn-brand" id="customerTwo">
+            <span>Become a customer</span>
+            <span class="fas fa-chevron-right"></span>
+          </a>
+        </div>
+      </div>
+     </div>
+  </section>
   <section name="our_partners" class="container">
     <div class="row-center">
       <h1 class="subb_header">
-        <span class="font-bold-black">Our </span>
+        <span class="font-bold-black">Our</span>
         <span class="font-bold-brand">Partners</span>
       </h1>
     </div>

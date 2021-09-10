@@ -76,7 +76,11 @@
   </head>
   <body id="roots" onclick="setref()">
     <script src="../js/locale.js"></script>
-    <%- include('components/navbar.ejs') %>
+    <%- include('components/navbar.ejs', 
+    {
+      opaque: false,
+    }
+    ) %>
     <section class="hero_bg">
       <div class="wd-100 ht-100">
         <h1 class="large-h1 container">
@@ -242,11 +246,11 @@
       </div>
     </div> -->
     </section>
-    <section name="download_now" class="container">
-      <%- include('components/download_now.ejs') %>
-    </section>
     <section class="container" name="email_subscription">
       <%- include('components/email_subscription.ejs') %>
+    </section>
+    <section name="download_now" class="container">
+      <%- include('components/download_now.ejs') %>
     </section>
     <section name="footer"><%- include('components/footer.ejs') %></section>
     <script>
