@@ -1488,6 +1488,6 @@ input {
   }
   .d-modal-content-holder{
     width: 97%;
-    height: 65vh;
+    height: fit-content;
   }
 }
