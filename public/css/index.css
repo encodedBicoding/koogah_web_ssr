@@ -505,7 +505,8 @@ input {
   justify-content: flex-start !important;
 }
 .sub_header span,
-.subb_header span {
+.subb_header span,
+.sub_header_col span {
   font-size: 2.3rem;
   margin-right: 0.5rem;
 }
@@ -1404,8 +1405,10 @@ input {
   }
   .sub_header span,
   .subb_header span,
+  .sub_header_col span,
   .header_font {
     font-size: 1.4rem;
+    display: block;
   }
   .header_sub_font {
     font-size: 0.9rem;
@@ -1450,6 +1453,13 @@ input {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+  }
+  .session_holder_one {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    width: fit-content;
   }
   .app_footer {
     background-color: #000;
