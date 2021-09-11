@@ -1274,6 +1274,9 @@ input {
     width: 60%;
     margin: 2rem;
   }
+  .d-modal-content-holder{
+    width: 60%;
+  }
 }
 @media screen and (max-width: 850px) {
   .comp {
@@ -1388,6 +1391,10 @@ input {
     width: 80%;
     margin: 2rem;
   }
+  .d-modal-content-holder{
+    width: 80%;
+    height: 65vh;
+  }
 }
 
 @media screen and (max-width: 500px) {
@@ -1478,5 +1485,9 @@ input {
   .price_estimate_form_cont{
     width: 97%;
     margin: 2rem;
+  }
+  .d-modal-content-holder{
+    width: 97%;
+    height: 65vh;
   }
 }
