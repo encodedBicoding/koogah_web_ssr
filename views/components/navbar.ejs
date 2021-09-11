@@ -5,15 +5,18 @@
         <img src="../../images/logo.svg" alt="Koogah Delivery Logo" width="100%" height="100%"/>
       </a>
       <div class="row-space-between">
-        <a href="/faq" class="link">
+        <a href="/faq" class="link nav_item">
           <% if(page === 'faq') {%>
             <p class="<%- opaque ? 'font-small font-bold nav-active  nav_font_opaque' : 'font-small font-bold nav-active' %>">FAQ</p>
             <%} else {%>
               <p class="<%- opaque ? 'font-small font-bold nav-inactive nav_font_opaque' : 'font-small font-bold nav-inactive'%>">FAQ</p>
           <%}%>
         </a>
-        <a href="mailto:contact@koogah.com" class="<%- opaque ? 'no_decoration cta_black' : 'no_decoration cta'%>">
-          <p>Contact Us</p>
+        <a href="mailto:contact@koogah.com" class="link nav_item">
+          <p  class="<%- opaque ? 'font-small font-bold nav_font_opaque' : 'font-small font-bold' %>">CONTACT US</p>
+        </a>
+        <a href="/delivery/estimate" class="<%- opaque ? 'no_decoration cta_black' : 'no_decoration cta'%>">
+          <p>GET ESTIMATE</p>
         </a>
       </div>
     </div>

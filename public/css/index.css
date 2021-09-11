@@ -45,6 +45,23 @@ body {
   border-radius: 12px;
   transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
 }
+.btn_bg{
+  width: 100%;
+  background-color: #f29b38;
+  color: #fff;
+  font-size: .9rem;
+  font-weight: 500;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  outline: none;
+  border: none;
+  padding: .6rem;
+  border-radius: 9px;
+  margin: 1rem 0 1rem 0;
+}
 .btn_col_outline {
   width: 4rem;
   height: auto;
@@ -427,7 +444,7 @@ input {
   font-size: 0.8rem;
 }
 .font-bold {
-  font-weight: 800;
+  font-weight: 700;
 }
 .container {
   margin: 5rem 11rem 5rem 11rem;
@@ -1136,6 +1153,90 @@ input {
   border: .2px solid #f29b38;
 }
 
+.price_estimate_form_cont{
+  width: 45%;
+  margin: 2rem;
+  padding: 1rem;
+  background-color: #fff;
+  box-shadow: 0 2px 23px 2px rgba(0, 0, 0, .1);
+  border-radius: 12px;
+}
+.est_form_content_holder{
+  width: 100%;
+  margin: .7rem 0;
+}
+.est_form_content_holder p{
+  color: #3D3D3D;
+  font-size: .9rem;
+  font-weight: 700;
+  margin: .3rem 0;
+}
+.est_form_sub_hld{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+.est_form_sub_hld .form_field{
+  margin: .2rem .9rem .2rem 0;
+}
+.est_form_drpdwn_cont{
+  position: relative;
+}
+.est_form_drpdwn{
+  position: absolute;
+  z-index: 99;
+  top: 54px;
+  width: 100%;
+  background-color: #fff;
+  box-shadow: 0 4px 10px 3px rgba(0, 0, 0, 0.089);
+  border-radius: 5px;
+  padding: .4rem;
+}
+.est_form_drpdwn.in-active{
+  display: none;
+}
+.est_form_drpdwn.active {
+  display: block;
+}
+.est_form_drpdwn_item_picker{
+  width: 100%;
+  padding: .6rem;
+  font-size: .9rem;
+  cursor: pointer;
+  background-color: #fff;
+  transition: all .2s linear;
+  border-radius: 4px;
+}
+.est_form_drpdwn_item_picker:hover {
+ background-color: #3d3d3d13;
+}
+.est_input{
+  width: 97% !important;
+}
+.error{
+  color: red;
+  font-size: .7rem;
+}
+.modal_close,
+.mg_top_btm{
+  margin: .8rem 0;
+}
+.est_details_container{
+  width: 100%;
+  padding: .5rem;
+  margin: .2rem 0;
+}
+.est_response{
+  width: 50%;
+  overflow: scroll;
+  padding: .4rem;
+  text-align: right;
+  white-space: nowrap
+}
+
+
 /* 
   RESPONSIVE DESIGNS
 */
@@ -1168,6 +1269,10 @@ input {
   }
   .footer_logo {
     width: 45%;
+  }
+  .price_estimate_form_cont{
+    width: 60%;
+    margin: 2rem;
   }
 }
 @media screen and (max-width: 850px) {
@@ -1279,6 +1384,10 @@ input {
   .subscribe_btn{
     width: 100%;
   }
+  .price_estimate_form_cont{
+    width: 80%;
+    margin: 2rem;
+  }
 }
 
 @media screen and (max-width: 500px) {
@@ -1365,5 +1474,9 @@ input {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+  }
+  .price_estimate_form_cont{
+    width: 97%;
+    margin: 2rem;
   }
 }
