@@ -1,28 +1,21 @@
-window.onload = function () {
-  try {
-    const nav_icon_btn = document.querySelector(".nav_icon_btn");
-    const nav_items_container = document.querySelector(".nav_items_container");
-    if (nav_icon_btn !== null) {
-      nav_icon_btn.classList.add("inactive");
+const nav_icon_btn = document.querySelector(".nav_icon_btn");
+const nav_items_container = document.querySelector(".nav_items_container");
+if (nav_icon_btn !== null) {
+  nav_icon_btn.classList.add("inactive");
+  nav_icon_btn.innerHTML = '<i class="fas fa-bars"></i>';
+  nav_icon_btn.addEventListener("click", function (e) {
+    e.preventDefault();
+    if (nav_items_container.classList.contains("active")) {
+      nav_items_container.classList.remove("active");
+      nav_items_container.classList.add("inactive");
       nav_icon_btn.innerHTML = '<i class="fas fa-bars"></i>';
-      nav_icon_btn.addEventListener("click", function (e) {
-        e.preventDefault();
-        if (nav_items_container.classList.contains("active")) {
-          nav_items_container.classList.remove("active");
-          nav_items_container.classList.add("inactive");
-          nav_icon_btn.innerHTML = '<i class="fas fa-bars"></i>';
-        } else {
-          nav_items_container.classList.remove("inactive");
-          nav_items_container.classList.add("active");
-          nav_icon_btn.innerHTML = '<i class="fas fa-times"></i>';
-        }
-      });
+    } else {
+      nav_items_container.classList.remove("inactive");
+      nav_items_container.classList.add("active");
+      nav_icon_btn.innerHTML = '<i class="fas fa-times"></i>';
     }
-  } catch (err) {
-    console.log(err);
-  }
-};
-
+  });
+}
 // Get the modal
 var dispatchModal = document.getElementById("dispatcherModal");
 var customerModal = document.getElementById("customerModal");
@@ -41,38 +34,53 @@ var span = document.getElementsByClassName("close")[0];
 var close = document.getElementsByClassName("closed")[0];
 
 // When the user clicks the button, open the modal
-btn.onclick = function () {
-  dispatchModal.style.display = "block";
-};
+if (btn) {
+  btn.onclick = function () {
+    dispatchModal.style.display = "block";
+  };
+}
 
-dispatch.onclick = function () {
-  dispatchModal.style.display = "block";
-};
+if (dispatch) {
+  dispatch.onclick = function () {
+    dispatchModal.style.display = "block";
+  };
+}
 
-mobileDispatch.onclick = function () {
-  dispatchModal.style.display = "block";
-};
-
+if (mobileDispatch) {
+  mobileDispatch.onclick = function () {
+    dispatchModal.style.display = "block";
+  };
+}
 footer.onclick = function () {
   dispatchModal.style.display = "block";
 };
 
-customer.onclick = function () {
-  customerModal.style.display = "block";
-};
+if (customer) {
+  customer.onclick = function () {
+    customerModal.style.display = "block";
+  };
+}
 
-customerTwo.onclick = function () {
-  customerModal.style.display = "block";
-};
+if (customerTwo) {
+  customerTwo.onclick = function () {
+    customerModal.style.display = "block";
+  };
+}
 
-mobileCustomer.onclick = function () {
-  customerModal.style.display = "block";
-};
+if (mobileCustomer) {
+  mobileCustomer.onclick = function () {
+    customerModal.style.display = "block";
+  };
+}
+
 
 // When the user clicks on <span> (x), close the modal
-span.onclick = function () {
-  customerModal.style.display = "none";
-};
+if (span) {
+  span.onclick = function () {
+    customerModal.style.display = "none";
+  };
+}
+
 close.onclick = function () {
   dispatchModal.style.display = "none";
 };

@@ -1,13 +1,9 @@
 const express = require('express');
 const ejs = require('ejs');
-const RouterWares = require('../middlewares/locale');
+const Estimate = require('../controllers/estimate.controller');
 
 const indexRoutes = express.Router();
 const view_path = 'views';
-
-const {
-  checkLocation,
-} = RouterWares;
 
 indexRoutes.get(
   '/',
@@ -75,7 +71,7 @@ indexRoutes.get(
   '/company',
   function (req, res, next) {
     ejs.renderFile(`${view_path}/company.ejs`, {
-      page: 'company_index'
+      page: 'company'
     }, {}, function (err, template) {
       if (err) throw err;
       res.end(template);
@@ -100,6 +96,21 @@ indexRoutes.get(
     });
   }
 );
+indexRoutes.get(
+  '/delivery/estimate',
+  function (req, res, next) {
+    ejs.renderFile(`${view_path}/estimate.ejs`, {
+      page: 'get_delivery_estimate',
+    }, {}, function (err, template) {
+      if (err) throw err;
+      res.end(template);
+    });
+  }
+);
+indexRoutes.post(
+  '/api/delivery/estimate',
+  Estimate.getDeliveryEstimate,
+)
 
 
 
