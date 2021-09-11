@@ -22,3 +22,25 @@
   width: 4%;
   height: auto;
 }
+/* 
+  RESPONSIVE DESIGNS
+*/
+@media screen and (max-width: 1024px) {
+  .loader_holder{
+    width: 5%;
+    height: auto;
+  }
+}
+@media screen and (max-width: 850px) {
+  .loader_holder{
+    width: 7%;
+    height: auto;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .loader_holder{
+    width: 15%;
+    height: auto;
+  }
+}

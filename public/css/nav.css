@@ -126,5 +126,10 @@
     top: 0px;
     background-color: #fff;
   }
+  .cta p,
+  .cta_black p{
+    font-size: .7rem;
+  }
 }
+
 
