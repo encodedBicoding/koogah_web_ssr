@@ -148,7 +148,7 @@ const estimate_vm = new Vue({
                 }
               }).then((resp) => resp.json());
               hideLoader();
-              this.clearForm();             
+              // this.clearForm();             
               if (response.status === 200) {
                 showModal();
                 showModal();
