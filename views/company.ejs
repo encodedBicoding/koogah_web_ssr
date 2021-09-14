@@ -53,6 +53,7 @@
     <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
     <link rel="stylesheet" href="css/index.css" />
     <link rel="stylesheet" href="css/nav.css" />
+    <link rel="stylesheet" href="css/toast.css" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
@@ -61,91 +62,143 @@
       referrerpolicy="no-referrer"
     />
     <title>
-      Customer - Koogah - Delivery done efficiently
+      Partner Logistics Company - Koogah - Delivery done efficiently
     </title>
-    <script>
-      function setref() {
-        if (window.location.search) {
-          let query = new URLSearchParams(window.location.search);
-          let ref = query.get("ref");
-          window.sessionStorage.setItem("ref", ref);
-          window.sessionStorage.setItem("fromApp=", "web");
-        }
-      }
-    </script>
   </head>
-  <body id="roots" onclick="setref()">
+  <body id="roots">
+    <div class="toast remove"></div>
+    <div class="d-modal hide"></div>
     <script src="../js/locale.js"></script>
-    <%- include('components/navbar.ejs', 
-    {
-      opaque: false,
-    }
-    ) %>
-    <section class="hero_bg">
-      <div class="wd-100 ht-100">
-        <h1 class="large-h1 container">
-          Caption <span class="brand">goes</span> here
-        </h1>
-
-        <div class="auth-card top-right">
+    <%- include('components/navbar.ejs', {
+      opaque: true,
+    }) %>
+    <section class="hero_bg_company">
+      <div class="hero_content_flex_center">
+        <div class="hero_info">
+          <h1 class="large-h1 font-white">
+            Become A Partner <span class="brand">Logistics</span> Company
+          </h1>
+          <p class="hero_sub_info">
+            Lorem Ipsum Dolor Sit Amet, Consectetur Adipiscing Elit. Maecenas Erat Quam, Sagittis Sed Eros Ut, Faucibus Placerat Justo. Class Aptent Taciti Sociosqu Ad Litora Torquent Per Conubia Nostra, Per Inceptos Himenaeos. Aenean Et Orci Ut Libero Rutrum Suscipit. Maecenas Dictum, Est Sed Posuere Gravida, Diam Nulla Commodo Augue, Vitae Commodo Erat Dolor Sit Amet Elit. Nam Ut Dui Lectus.
+          </p>
+        </div>
+        <div class="auth-card">
           <div class="d-flex mb">
-            <p>Sign Up</p>
+            <p class="auth_head_text">Register As A Logistics Company</p>
             <i class="fas fa-comments brand"></i>
           </div>
-          <form id="details">
-            <div class="" id="form2">
+          <form id="company_form_details">
+            <div class="form_container">
+              <div class="show" id="form1">
               <input
-                required
+               required
+                name="first_name"
                 type="text"
-                id="first_name"
                 class="form-control mb"
                 placeholder="First Name"
               />
               <input
                 required
+                name="last_name"
                 type="text"
-                id="last_name"
                 class="form-control mb"
                 placeholder="Last Name"
               />
               <input
                 required
                 type="text"
-                id="email"
+                name="nin"
+                class="form-control mb"
+                placeholder="National Identity Number"
+                maxlength="11"
+              />
+              <input
+                required
+                type="email"
+                name="email"
                 class="form-control mb"
                 placeholder="Email"
               />
-              <input
+              <div class="input-group mb">
+                <span class="input-group-text">+234</span>
+                <input
+                  required
+                  type="text"
+                  name="phone"
+                  class="form-control-text"
+                  placeholder="Phone Number"
+                  maxlength="11"
+                  minlength="10"
+                />
+              </div>
+              <br/>
+              <div class="d-grid">
+                <button class="btn brand_bg text-white" id="comp_next">
+                  Next <i class="fas fa-chevron-right text-white"></i>
+                </button>
+              </div>
+              </div>
+            </div>
+            <div class="form_container">
+              <div class="hide" id="form2">
+                <input
                 required
+                name="business_name"
                 type="text"
-                id="number"
                 class="form-control mb"
-                placeholder="Phone Number"
+                placeholder="Business Name"
               />
-              <input
+              <select
+               required
+               name="country"
+               class="form-control mb"
+               id="company_select_country"
+              >
+               <option selected value="" disabled>Select country</option>
+               <option value="nigeria">Nigeria</option>
+              </select>
+              <select
+               required
+               disabled
+               name="state"
+               class="form-control mb"
+               id="company_select_state"
+              >
+              <option selected value="" disabled>Select state</option>
+            </select>
+              <select
                 required
-                type="text"
-                id="password"
+                disabled
+                name="city"
                 class="form-control mb"
-                placeholder="Password"
+                id="company_select_city"
+              >
+              <option selected value="" disabled>Select city</option>
+            </select>
+            <input
+                required
+                name="business_address"
+                type="text"
+                class="form-control mb"
+                placeholder="Business Full Address"
               />
-              <div class="mb-2">
-                <input type="checkbox" class="brand-border" />
+              <br/>
+              <div class="mb-2 row-start-cn">
+                <input type="checkbox" class="brand-border mgrt-sm" id="company_terms"/>
                 <small>I Agree To Koogah Terms And Conditions</small>
               </div>
-
               <div class="d-grid">
-                <button class="btn brand_bg text-white" type="submit">
-                  Sign Up
+                <button class="btn brand_bg text-white" id="company_register">
+                  Register
                 </button>
+              </div>
               </div>
             </div>
           </form>
         </div>
       </div>
-      <div class="brand_bg wd-100 ht-50"></div>
     </section>
-    <!-- Middele Section -->
+    <!-- Middle Section -->
     <section
       name="what to expect from koogah"
       class="bg_faint main_section_padding"
@@ -200,34 +253,6 @@
               </p>
             </div>
           </div>
-
-          <!-- <div class="info-card">
-          <div class="icon_bg color_4 flex_hours"></div>
-          <div class="font-bold">
-            <p class="h">Flexible <span class="brand">Working Hours</span></p>
-          </div>
-          <div class="info-card-sub-header">
-            <p>With Koogah, you can't work from home, but you can work when you want to work.</p>
-          </div>
-        </div>
-        <div class="info-card">
-          <div class="icon_bg color_5 low_rates"></div>
-          <div class="font-bold">
-            <p class="h">Lowest <span class="brand">Rates</span></p>
-          </div>
-          <div class="info-card-sub-header">
-            <p>We have also got you started with the best rates ever!. We only charge as low as 5% on every delivery.</p>
-          </div>
-        </div>
-        <div class="info-card">
-          <div class="icon_bg color_6 limitless_mode"></div>
-          <div class="font-bold">
-            <p class="h">Limitless <span class="brand">Mode Of Delivery</span></p>
-          </div>
-          <div class="info-card-sub-header">
-            <p>With Koogah, you do not have to worry about owning a motorcycle or car. What ever means of transportation you find convenient, deliver with it!.</p>
-          </div>
-        </div> -->
         </div>
       </div>
       <div class="row-center">
@@ -254,31 +279,13 @@
     </section>
     <section name="footer"><%- include('components/footer.ejs') %></section>
     <script>
-      onsubmit = function () {
-        const data = {
-          email: document.getElementById("email").value,
-          first_name: document.getElementById("first_name").value,
-          last_name: document.getElementById("last_name").value,
-          mobile_number_one: document.getElementById("number").value,
-          password: document.getElementById("password").value,
-          country_code: "+234",
-        };
-        console.log(data)
-        fetch(
-          `https://core.koogahapis.com/v1/user/customer/signup`,
-          {
-            method: "POST",
-            data,
-            headers: {
-              "Content-type": "application/json; charset=UTF-8",
-            },
-          }
-        );
-        return false;
-      };
     </script>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
+    <script src="../js/toast.js"></script>
+    <script src="../js/modal.js"></script>
     <script src="../js/mobile_nav.js"></script>
-    <script src="../js/faq_func.js"></script>
     <script src="../js/subscribe.js"></script>
+    <script src="../js/cities_and_towns.js"></script>
+    <script src="../js/company.js"></script>
   </body>
 </html>

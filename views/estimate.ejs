@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <meta http-equiv="Content-type" content="text/html; charset=UTF-8" />
+    <meta content="Koogah" name="title" />
+    <meta
+      content="Koogah is a platform which brings a mobile-first solution and a SCPPD(Single Customer Per Package Delivery) system to solving logistics/delivery issues, connecting customers and business owners with dispatchers, and giving them control over their deliveries"
+      name="description"
+    />
+
+    <meta
+      name="keywords"
+      content="
+  delivery,
+  logistics,
+  koogah,
+  koogah delivery,
+  deliveries,
+  koogah logistics,
+  dispatchers,
+  couriers,
+  courier services,
+  logistics in nigeria,
+  delivery in nigeria,
+  deliveries in nigeria,
+  koogah faq,
+  frequently asked questions on koogah,
+  koogah frequently asked questions
+  "
+    />
+    <meta name="twitter:site" content="@thekoogahbrand" />
+    <meta name="twitter:domain" content="koogah.com" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://twitter.com/thekoogahbrand" />
+    <meta name="twitter:title" content="Koogah" />
+    <meta
+      name="twitter:description"
+      content="The fastest way to get goods/packages delivered. With actual real-time tracking, and a trusted network of dispatchers"
+    />
+    <meta
+      name="twitter:image"
+      content="https://pbs.twimg.com/profile_images/1411243565460688896/076o7nTm_400x400.jpg"
+    />
+    <meta name="locale" content="en_EN" />
+    <meta name="robots" content="index, follow" />
+    <meta name="site_name" content="Koogah" />
+    <meta content="English" name="language" />
+    <meta content="5 days" name="revisit-after" />
+    <meta content="Koogah" name="author" />
+    <link rel="shortcut icon" href="../../images/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="../../css/index.css" />
+    <link rel="stylesheet" href="../../css/nav.css" />
+    <link rel="stylesheet" href="../../css/toast.css" />
+    <link rel="stylesheet" href="../../css/loader.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+      integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCYPNv2kt9vLe4ApNolquwLE8TlMCBJLC0&libraries=places"></script>
+    <title>
+      Get Delivery Estimate - Koogah Logistics
+    </title>
+  </head>
+  <body id="roots">
+    <div class="loader hd">
+      <div class="loader_holder">
+        <img src="../../images/loader_icon.svg" width="100%" height="100%s"/>
+      </div>
+    </div>
+    <div class="toast remove"></div>
+    <div class="d-modal hide"></div>
+    <script src="../../js/locale.js"></script>
+    <%- include('components/navbar.ejs', {
+      opaque: false,
+    }) %>
+    <section class="hero" id="get_estimate_page">
+      <div class="hero_bg">
+        <div>
+          <h2 class="text-center">Price Estimator</h2>
+          <p class="text-center font-small">Fair Price for All.</p>
+        </div>
+        <div class="price_estimate_form_cont">
+          <form 
+            class="wd-100"
+            @submit.prevent="getEstimate"
+            novalidate="true"
+            >
+            <div class="est_form_content_holder">
+              <p>Package</p>
+              <div class="est_form_sub_hld">
+                <select
+                  required
+                  name="est_form_weight"
+                  class="form-control form_field"
+                  id="est_form_weight"
+                  v-model= "weight"
+                  v-on:change="(e) => handleInputChange(e.target.value, 'weight')"
+                >
+                  <option selected disabled value="">Choose weight</option>
+                  <option value="0-5">0 - 5kg</option>
+                  <option value="6-10">6 - 10kg</option>
+                  <option value="11-15">11 - 15kg</option>
+                  <option value="16-25">16- 25kg</option>
+                  <option value="26-40">26 - 40kg</option>
+                  <option value="50-100">50 - 100kg</option>
+                  <option value="101-200">101 - 200kg</option>
+                  <option value="201-300">201 - 300kg</option>
+                  <option value="301-400">301 - 400kg</option>
+                  <option value="401-500">401 - 500kg</option>
+                  <option value="501>">501kg and above</option>
+                </select>
+                <select
+                  required
+                  name="est_form_value"
+                  class="form-control form_field"
+                  id="est_form_value"
+                  v-model="value"
+                  v-on:change="(e) => handleInputChange(e.target.value, 'value')"
+                >
+                  <option selected disabled value="">Choose value</option>
+                  <option value="0-999">0 - 999</option>
+                  <option value="1000-9999">1,000 - 9,999</option>
+                  <option value="10000-99999">10,000 - 99,999</option>
+                  <option value="100000-999999">100,000 - 999,999</option>
+                  <option value="1000000">1,000,000 and above</option>
+                </select>
+              </div>
+            </div>
+            <div class="est_form_content_holder">
+              <p>Pick Up Address</p>
+              <span class="error">{{formErrors.pickupState || formErrors.pickupCity}}</span>
+              <div class="est_form_sub_hld">
+                <div class="wd-100 est_form_drpdwn_cont">
+                  <input 
+                    id="est_form_pickup_state"
+                    name="est_form_pickup_state"
+                    type="text"
+                    class="form-control form_field est_input"
+                    placeholder="State"
+                    aria-required="true"
+                    autocomplete="none"
+                    aria-id="1"
+                    aria-name="pickupState"
+                    v-on:keyup="(e) => handleKeyup(e)"
+                    v-model="pickupState"
+                  />
+                </div>
+                <div class="wd-100 est_form_drpdwn_cont">
+                  <input 
+                    id="est_form_pickup_city"
+                    name="est_form_pickup_city"
+                    type="text"
+                    class="form-control form_field est_input"
+                    placeholder="City"
+                    aria-required="true"
+                    autocomplete="none"
+                    aria-id="2"
+                    aria-name="pickupCity"
+                    v-on:keyup="(e) => handleKeyup(e)"
+                    v-model="pickupCity"
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="est_form_content_holder">
+              <p>Drop Off Address</p>
+              <span class="error" v-if="dispatchType === 'intra' ">{{formErrors.dropOffCity}}</span>
+              <div class="est_form_sub_hld">
+                <div class="wd-100 est_form_drpdwn_cont" v-if="dispatchType !== 'intra' ">
+                  <input 
+                    id="est_form_dropoff_state"
+                    name="est_form_dropoff_state"
+                    type="text"
+                    class="form-control form_field est_input"
+                    placeholder="State"
+                    aria-required="true"
+                    autocomplete="none"
+                    aria-id="3"
+                    aria-name="dropOffState"
+                    v-on:keyup="(e) => handleKeyup(e)"
+                    v-model="dropOffState"
+                  />
+                </div>
+                <div class="wd-100 est_form_drpdwn_cont">
+                  <input 
+                    id="est_form_dropoff_city"
+                    name="est_form_dropoff_city"
+                    type="text"
+                    class="form-control form_field est_input"
+                    placeholder="City"
+                    aria-required="true"
+                    autocomplete="none"
+                    aria-id="4"
+                    aria-name="dropOffCity"
+                    v-on:keyup="(e) => handleKeyup(e)"
+                    v-model="dropOffCity"
+                  />
+                </div>
+              </div>
+            </div>
+            <div>
+              <button type="submit" class="btn_bg">Get Estimate</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+    <section name="footer"><%- include('components/footer.ejs') %></section>
+    <script src="../../js/loader.js"></script>
+    <script src="https://unpkg.com/vue"></script>
+    <script src="../../js/toast.js"></script>
+    <script src="../../js/modal.js"></script>
+    <script src="../../js/mobile_nav.js"></script>
+    <script src="../../js/estimate.js"></script>
+  </body>
+</html>

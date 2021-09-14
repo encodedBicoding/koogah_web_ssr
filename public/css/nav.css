@@ -1,24 +1,55 @@
-.main_nav{
+.logo_cont{
+  width: 8.3%;
+  height: auto;
+}
+.main_nav,
+.opaque_nav{
   padding: .8rem 8% .8rem 8%;
   position: sticky;
   top: 0px;
   background-color: #fff;
   z-index: 99999999;
 }
-.cta p{
-  color: #fff;
-  font-weight: 900;
+.opaque_nav {
+  background-color: transparent !important;
+  position: absolute;
+  top: 0;
+  width: 100%;
 }
-.cta {
-  background-color: #F29B38;
-  margin-left: 60px;
-  width: 142px;
-  height: 43px;
+.cta p,
+.cta_black p{
+  color: #fff;
+  font-weight: 550;
+  letter-spacing: 1.3px;
+}
+.cta,
+.cta_black {
+  background-color: #000;
+  margin-left: 30px;
+  width: 130px;
+  height: 38px;
   display: flex;
   align-items: center;
   justify-items: center;
   justify-content: center;
   border-radius: 1.4rem;
+  font-size: .8rem;
+  transition: all .4s ease;
+}
+.cta:hover,
+.cta_black:hover{
+  background-color: #F29B38;
+}
+.cta:hover p,
+.cta_black:hover p{
+  color: #000;
+}
+.nav_font_opaque{
+  color: white;
+  transition: all .3s linear;
+}
+.nav_font_opaque:hover {
+  color: #F29B38
 }
 
 .nav-active {
@@ -47,6 +78,9 @@
   position: relative;
   z-index: 999;
   padding: .4rem;
+}
+.nav_item{
+  margin: 0 .6rem 0 .6rem;
 }
 .nav_items_container{
   position: absolute;
@@ -92,5 +126,10 @@
     top: 0px;
     background-color: #fff;
   }
+  .cta p,
+  .cta_black p{
+    font-size: .7rem;
+  }
 }
+
 

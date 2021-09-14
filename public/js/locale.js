@@ -1,7 +1,3 @@
-const HOST = `wss://${window.location.host.trim()}`;
-
-const socket = new WebSocket(HOST);
-
 window.onload = function () {
   if (window.navigator.geolocation) {
     window.navigator.geolocation.getCurrentPosition(async (pos) => {
@@ -20,7 +16,6 @@ window.onload = function () {
         'http://koogah.com',
         'http://www.koogah.com'
       ];
-      console.log(host);
       if (country == 'nigeria') {
         if (redirect_host.includes(host)) {
           window.location.href = `https://www.koogah.com.ng${path}${search}`;
