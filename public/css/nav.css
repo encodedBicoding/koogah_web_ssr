@@ -116,6 +116,45 @@
   height: 45px;
   border-radius: .5rem;
 }
+.dropdown_container{
+  position: relative;
+}
+.dropdown_contents_container{
+  position: absolute;
+  width: 230px;;
+  min-height: 150px;
+  padding: .5rem;
+  margin-top: .6rem;
+  background-color: #fff;
+  box-shadow: 0 2px 10px 0 rgba(0,0,0,.2);
+  border-radius: .5rem;
+  transition: all .4s linear;
+  display: block;
+}
+.dropdown_contents_container.nav-in-active{
+  display: none;
+  transition: all .4s linear;
+}
+.dropdown_contents_container.nav-active {
+  display: block;
+  transition: all .4s linear;
+}
+
+.dropdown-contents{
+  position: relative;
+  width: 100%;
+}
+.dropdown-item{
+  width: 100%;
+  padding: .4rem;
+  background-color: #fff;
+  transition: all .3s linear;
+  border-radius: .5rem;
+  margin-bottom: .2rem;
+}
+.dropdown-item:hover{
+  background-color: #f29b381e;
+}
 /* 
   RESPONSIVE DESIGNS
 */

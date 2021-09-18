@@ -1,5 +1,10 @@
+
 const nav_icon_btn = document.querySelector(".nav_icon_btn");
 const nav_items_container = document.querySelector(".nav_items_container");
+const dropdown_hover_trigger = document.querySelector('.dropdown_container');
+
+let showSignupDropdown = false;
+
 if (nav_icon_btn !== null) {
   nav_icon_btn.classList.add("inactive");
   nav_icon_btn.innerHTML = '<i class="fas fa-bars"></i>';
@@ -16,6 +21,26 @@ if (nav_icon_btn !== null) {
     }
   });
 }
+// nav dropdown.
+dropdown_hover_trigger.addEventListener('click', activateDropdownMouseOver);
+
+function activateDropdownMouseOver() {
+  let icon = document.querySelector('.drop-down-icon');
+  let dropdown_content = document.querySelector('.dropdown_contents_container');
+  if (showSignupDropdown === false) {
+    let icon = document.querySelector('.drop-down-icon');
+    let dropdown_content = document.querySelector('.dropdown_contents_container');
+  
+    icon.setAttribute('class', 'fas fa-chevron-up font-xsm chv drop-down-icon')
+    dropdown_content.setAttribute('class', 'dropdown_contents_container nav-active')
+  } else {
+    icon.setAttribute('class', 'fas fa-chevron-down font-xsm chv drop-down-icon');
+    dropdown_content.setAttribute('class', 'dropdown_contents_container nav-in-active');
+  }
+  showSignupDropdown = !showSignupDropdown;
+}
+
+
 // Get the modal
 var dispatchModal = document.getElementById("dispatcherModal");
 var customerModal = document.getElementById("customerModal");
