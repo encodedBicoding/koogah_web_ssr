@@ -5,6 +5,25 @@
         <img src="../../images/logo.svg" alt="Koogah Delivery Logo" width="100%" height="100%"/>
       </a>
       <div class="row-space-between">
+        <div class="link nav_item dropdown_container">
+          <p class="<%- opaque ? 'font-small font-bold dropdown_hover_trigger nav_font_opaque' : 'font-small font-bold dropdown_hover_trigger' %>">
+            SIGN UP 
+            <span class="fas fa-chevron-down font-xsm chv drop-down-icon"></span>
+          </p>
+          <div class="dropdown_contents_container nav-in-active">
+            <div class="dropdown-contents">
+             <div class="dropdown-item">
+                <a href="/customer" class="link nav_item font-small">As A Customer</a>
+              </div>  
+              <div class="dropdown-item">
+                <a href="/dispatcher" class="link nav_item font-small">As A Dispatcher</a>
+              </div>  
+              <div class="dropdown-item">
+                <a href="/company" class="link nav_item font-small">As A Company</a>
+              </div>  
+            </div>
+          </div>
+        </div>
         <a href="/faq" class="link nav_item">
           <% if(page === 'faq') {%>
             <p class="<%- opaque ? 'font-small font-bold nav-active  nav_font_opaque' : 'font-small font-bold nav-active' %>">FAQ</p>
@@ -48,6 +67,17 @@
             <a href="mailto:contact@koogah.com" class="link">
               <p class="font-small font-bold ">Contact Us</p>
             </a>
+            <p class="font-m font-bold">Sign Up</p>
+            <a href="/customer" class="link">
+              <p class="font-small font-bold">As A Customer</p>
+            </a> 
+            <a href="/dispatcher" class="link">
+              <p class="font-small font-bold">As A Dispatcher</p>
+            </a>
+            <a href="/company" class="link">
+              <p class="font-small font-bold">As A Company</p>
+            </a>
+            <br/>
             <a href="/delivery/estimate" class="<%- opaque ? 'no_decoration cta_black nav_item' : 'no_decoration cta'%>">
               <p class="font-small">GET ESTIMATE</p>
             </a>

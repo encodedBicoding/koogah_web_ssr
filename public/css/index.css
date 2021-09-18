@@ -493,6 +493,18 @@ select {
 .font-small {
   font-size: 0.8rem;
 }
+.font-xsm{
+  font-size: 0.6rem !important;
+}
+.chv{
+  margin-left: .3rem;
+}
+.font-bg{
+  font-size: 1.5rem;
+}
+.font-m{
+  font-size: 1rem;
+}
 .font-bold {
   font-weight: 700;
 }
@@ -906,9 +918,9 @@ select {
 }
 .download_container_second {
   position: absolute;
-  width: 100%;
-  top: -73%;
-  left: 18%;
+  /* width: 100%; */
+  top: -35%;
+  left: 10%;
   display: flex;
   flex-direction: column;
   align-items: flex-end;
@@ -928,7 +940,7 @@ select {
   align-items: center;
 }
 .download_mobile {
-  width: 88%;
+  /* width: 88%; */
 }
 .download_mobile img {
   width: 100%;
