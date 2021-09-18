@@ -443,6 +443,9 @@ input {
 .font-small {
   font-size: 0.8rem;
 }
+.font-bg{
+  font-size: 1.5rem;
+}
 .font-bold {
   font-weight: 700;
 }

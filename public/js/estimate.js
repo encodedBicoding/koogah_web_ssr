@@ -151,7 +151,6 @@ const estimate_vm = new Vue({
               this.clearForm();             
               if (response.status === 200) {
                 showModal();
-                showModal();
                 buildGetEstimateModal(response.data);
               } else {
                 showToast(
