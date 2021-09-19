@@ -53,7 +53,6 @@ window.onload = function () {
     };
     let hasIssues = false;
     Object.values(data).forEach((v) => {
-      console.log(v);
       if (!v) {
         hasIssues = true;
       } else {
