@@ -300,6 +300,7 @@ select {
   background-size: contain;
 }
 .hero_content_flex_center {
+  position: relative;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -1393,6 +1394,30 @@ select {
   }
   .d-modal-content-holder {
     width: 60%;
+  } 
+  .auth-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    background-color: #fff;
+    padding: 1.5rem;
+    width: 50%;
+    margin: 0.6rem 1rem 0.6rem 0;
+    box-shadow: 0 3px 25px 0px rgba(0, 0, 0, 0.1);
+    border-radius: 0.9rem;
+    margin-right: 8rem;
+  }
+  .large-h1{
+    font-size: 2.3rem;
+  }
+  .hero_info {
+    width: 40%;
+    margin-left: 5rem;
+    padding: 0.3rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
   }
 }
 @media screen and (max-width: 850px) {
@@ -1512,6 +1537,19 @@ select {
     width: 80%;
     height: fit-content;
   }
+  .auth-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    background-color: #fff;
+    padding: 1.5rem;
+    width: 55%;
+    margin: 0.6rem 1rem 0.6rem 0;
+    box-shadow: 0 3px 25px 0px rgba(0, 0, 0, 0.1);
+    border-radius: 0.9rem;
+    margin-right: 8rem;
+  }
+  
 }
 
 @media screen and (max-width: 500px) {
@@ -1615,5 +1653,30 @@ select {
   .d-modal-content-holder {
     width: 97%;
     height: fit-content;
+  }
+  .hero_content_flex_center{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    top: 20px;
+  }
+  .hero_info{
+    width: 93%;
+    margin: .4rem;
+    padding: 0;
+  }
+  .large-h1{
+    font-size: 1.8rem;
+  }
+  .auth-card {
+    width: 93%;
+    margin: .8rem;
+    box-shadow: 0 3px 25px 0px rgba(0, 0, 0, 0.1);
+    border-radius: 0.9rem;
+    margin-right: 8rem;
+  }
+  .m-text-center {
+    text-align: center;
   }
 }
