@@ -46,7 +46,8 @@ body {
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
     border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
-.btn_bg {
+.btn_bg,
+.btn_bg_dark {
   width: 100%;
   background-color: #f29b38;
   color: #fff;
@@ -62,6 +63,9 @@ body {
   padding: 0.6rem;
   border-radius: 9px;
   margin: 1rem 0 1rem 0;
+}
+.btn_bg_dark{
+  background-color: #212121 !important;
 }
 .btn_col_outline {
   width: 4rem;
@@ -126,7 +130,7 @@ body {
   display: block;
 }
 .brand {
-  color: #f29b38;
+  color: #f29b38 !important;
 }
 
 .brand_bg {
@@ -287,6 +291,81 @@ select {
 }
 .no_decoration {
   text-decoration: none;
+}
+.login_hero{
+  width: 100%;
+  height: 100vh;
+}
+.lh_hero_c,
+.lh_hero_c_top{
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}
+.lh_hero_c{
+  display: flex;
+  flex-direction: row;
+}
+.lh_hero_c > .logo_place {
+  width: 33%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #000;
+  overflow: hidden;
+}
+.logo_place > .overlay{
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background-color: #2121218e;
+  z-index: 9;
+}
+.lh_hero_c > .bg_place {
+  width: 67%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-image: url("../images/bg.png");
+  background-repeat: repeat-x;
+  background-size: contain;
+}
+.logo_p_lc{
+  width: 180px;
+  margin: .9rem;
+}
+.logo_p_lc_two{
+  width: 400px;
+}
+.lh_hero_c_top{
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+.lh_login_form_c{
+  width: 40%;
+  z-index: 100;
+  padding: 2rem;
+  box-shadow: 0 2px 15px 0 rgba(0, 0, 0, 0.123);
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #fff;
+}
+.lg_login_sub_c{
+  width: 100%;
+}
+.lg_login_h_sub_c{
+  width: 100px;
 }
 .hero {
   width: 100%;
@@ -492,7 +571,7 @@ select {
   color: #fff !important;
 }
 .font-small {
-  font-size: 0.8rem;
+  font-size: 0.8rem !important;
 }
 .font-xsm{
   font-size: 0.6rem !important;
@@ -932,16 +1011,12 @@ select {
   background-color: rgba(252, 252, 252, 0.589);
   background-size: contain;
   background-repeat: repeat-x;
-  border: 1px solid red;
   width: 100%;
   height: 19rem;
   padding: 2.4rem;
   overflow: visible;
   display: flex;
   align-items: center;
-}
-.download_mobile {
-  /* width: 88%; */
 }
 .download_mobile img {
   width: 100%;
@@ -1353,6 +1428,39 @@ select {
 }
 .est_response::-webkit-scrollbar {
   display: none;
+}
+.password_icon{
+  position: relative;
+  transition: all .4s linear;
+}
+.password_icon.eye_show::before{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  content: '🐵';
+  color: red;
+  cursor: pointer;
+  transition: all .4s linear;
+}
+.password_icon.eye_off::before{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  content: '🙈';
+  color: red;
+  cursor: pointer;
+  transition: all .4s linear;
+}
+.password_icon::before{
+  position: absolute;
+  height: 100%;
+  left: -33px;
+  transition: all .4s linear;
+}
+.green{
+  color: green !important;
 }
 
 /* 
