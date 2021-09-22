@@ -22,5 +22,21 @@ class Company {
   get fullPhoneNumber() {
     return `+234${this.phone}`;
   }
+  toSentenceCase(string) {
+    return string[0].toUpperCase() + string.substring(1, string.length);
+  }
+  get firstName() {
+    return this.toSentenceCase(this.first_name);
+  }
+
+  get lastName() {
+    return this.toSentenceCase(this.last_name);
+  }
+
+  get fullName() {
+    return `${this.firstName} ${this.lastName}`
+  }
 
 };
+
+module.exports = Company;

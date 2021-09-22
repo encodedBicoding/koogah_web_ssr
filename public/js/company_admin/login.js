@@ -51,7 +51,6 @@ const vm = new Vue({
           });
           
           hideLoader();
-          console.log(response);
           if (response.status !== 200) {
             showToast(
               'error',
@@ -68,13 +67,7 @@ const vm = new Vue({
               null,
               true,
             );
-            const to = setTimeout(() => {
-              // redirect to dashboard
-              let data = response.data;
-              let user = new Company(data);
-              console.log(user.fullPhoneNumber);
-              clearTimeout(to);
-            }, 200);
+            window.location.replace('/company/admin/dashboard');
           }
         }
       } catch (err) {

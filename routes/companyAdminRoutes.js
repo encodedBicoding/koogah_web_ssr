@@ -2,6 +2,8 @@ const express = require('express');
 const ejs = require('ejs');
 const companyAdminRoutes = express.Router();
 const view_path = 'views';
+const AuthMiddleware = require('../middlewares/auth.middleware');
+const Company = require('../models/user.class');
 
 companyAdminRoutes.get(
   '/',
@@ -43,6 +45,21 @@ companyAdminRoutes.get(
     });
   }
 );
+
+companyAdminRoutes.get(
+  '/admin/dashboard',
+  AuthMiddleware.checkAuthenticated,
+  function (req, res, next) {
+    ejs.renderFile(`${view_path}/company_admin/dashboard.ejs`, {
+      page: 'company_admin_dashboard_overview',
+      user: req.user,
+    }, {}, function (err, template) {
+      if (err) throw err;
+      res.end(template);
+    });
+  }
+);
+
 
 
 module.exports = companyAdminRoutes;

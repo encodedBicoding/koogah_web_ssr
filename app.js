@@ -5,6 +5,7 @@ const cors = require('cors');
 const path = require("path");
 const morgan = require('morgan');
 const cookieParser = require("cookie-parser");
+const session = require('express-session');
 require("dotenv").config();
 
 
@@ -25,6 +26,17 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
+app.use(session({
+  cookie: {
+    secure: process.env.NODE_ENV === 'production' ? true : false,
+    path: '/'
+  },
+  saveUninitialized: true,
+  proxy: true,
+  resave: false,
+  name: '__KoogahWebSess__',
+  secret: process.env.SESSION_SECRET
+}))
 
 app.use('/', indexRoutes);
 app.use('/api/register', registerRoute);

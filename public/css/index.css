@@ -26,6 +26,30 @@ body {
 .mb-2 {
   margin-bottom: 2.5rem;
 }
+.fl-row-center-space-btwn {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+.fl-col-start-space-btwn {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+.fl-row-center-start{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+}
+.fl_row_center{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
 
 .btn {
   display: block;
@@ -579,6 +603,9 @@ select {
 .chv{
   margin-left: .3rem;
 }
+.icon-font{
+  font-size: 1.11rem;
+}
 .font-bg{
   font-size: 1.5rem;
 }
@@ -591,6 +618,11 @@ select {
 .container {
   margin: 5rem 11rem 5rem 11rem;
   padding: 1rem;
+}
+.arrow_seer{
+  width: 12px;
+  height: auto;
+  margin: 0 .2rem 0 .2rem;
 }
 
 .container_mini {
@@ -1460,8 +1492,291 @@ select {
   transition: all .4s linear;
 }
 .green{
-  color: green !important;
+  color: #0EA574 !important;
 }
+/* 
+  COMPANY ADMIN STYLES
+*/
+.admin_dash_container{
+  width: 100%;
+  height: calc(100vh);
+  overflow: hidden;
+  position: absolute;
+}
+.dash_nav_main_container{
+  position: sticky;
+  top: 0;
+  width: 100%;
+  height: fit-content;
+  background-color: #fff;
+  box-shadow: 0 2px 11px 0 rgba(0, 0, 0, 0.089);
+}
+.dash_nav_container{
+  width: 100%;
+  padding: .8rem;
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+.dash_nav_logo{
+  width: 6rem;
+  cursor: pointer;
+  outline: none;
+}
+.dash_user_greeting{
+  margin-right: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: flex-end;
+}
+.dash_user_greeting > .greetings {
+  font-weight: bold;
+  font-size: .72rem;
+}
+.dash_user_greeting > .user_nav_name{
+  font-weight: bolder;
+  font-size: 1rem;
+}
+.nav_part_b{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+}
+.notification_bell{
+  margin: 0 4rem 0 .5rem;
+  position: relative;
+  width: fit-content;
+  overflow: visible;
+  cursor: pointer;
+}
+.notification_counter{
+  position: absolute;
+  background-color: #F0142F;
+  width: 14px;
+  height: 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 100%;
+  right: -1px;
+  top: -3px;
+}
+.notification_counter > span {
+  font-size: .57rem;
+  color: #fff;
+}
+.main_company_dash_grid{
+  width: 100%;
+  height: calc(98vh);
+  overflow: hidden;
+  display: grid;
+  grid-template-columns:20% 80%;
+  grid-template-rows: auto;
+}
+.main_company_side{
+  width: 100%;
+  height: calc(91vh);
+  box-shadow: 0 3px 33px 0 rgba(0, 0, 0, 0.089);
+  overflow: hidden;
+}
+.admin_overview{
+  width: 100%;
+  height: calc(94vh);
+  overflow: scroll;
+  padding: 1.2rem 1.2rem 3rem 1.2rem;
+}
+.nav_item_card{
+  width: 100%;
+  padding: 1.6rem .9rem .9rem .9rem;
+  display: grid;
+  grid-template-columns: 20% 80%;
+  grid-template-rows: auto;
+  align-items: center;
+  justify-content: center;
+}
+.nav_item_img_holder{
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 100%;
+}
+.nav_item_title_holder{
+  margin-left: .3rem;
+  position: relative;
+}
+.nav_item_title_holder > .comp_name{
+  font-size: .9rem;
+  font-weight: 700;
+}
+.nav_item_title_holder > .comp_email{
+  font-size: .7rem;
+  color: #7E84A3;
+}
+.text_scroll {
+  width: 100%;
+  overflow: scroll;
+  white-space: nowrap;
+  -ms-overflow-style: none;
+  scrollbar-width: none; 
+}
+.dash_side_main_nav_container{
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  margin-top: .1rem;
+}
+.nav_title{
+  font-size: .8rem;
+}
+.dash_side_nav_item.selected > .nav_item_bg_overlay{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  background-color: #f29b381e;
+  border-left: 3px solid #212121;
+}
+.dash_side_nav_item.selected > .nav_title {
+  color: #f29b38;
+}
+.dash_side_nav_item{
+  position: relative;
+  padding: 1rem;
+  width: 100%;
+  background-color: none;
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+}
+.nav_icon{
+  width: 20px;
+  height: 20px;
+}
+.dash_side_nav_item > .nav_icon {
+  margin-right: .9rem;
+}
+.dash_side_nav_item:hover > .nav_item_bg_overlay {
+  background-color: #f29b381e;
+  border-left: 3px solid #212121;
+  transition: background-color .4s linear;
+}
+.nav_item_bg_overlay{
+  position: absolute;
+  width: 100%;
+  background-color: none;
+  height: 100%;
+  left: 0;
+}
+.time_frame_invisible {
+  display: none;
+}
+.dash_time_frame{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: .6rem;
+  border: 1px solid #E6E9F4;
+  cursor: pointer;
+  background-color: #fff;
+  color: #000;
+  padding: .2rem .4rem .2rem .4rem;
+  font-weight: 500;
+  border-radius: 3px;
+}
+.dash_time_frame.selectedTF{
+  background-color: #f29b38;
+  border: 1px solid #f29b38;
+  color: #fff;
+  border-radius: 3px;
+}
+.dash_overview_space{
+  margin: .5rem 0 2rem 0;
+}
+.overview_top_grid{
+  display: grid;
+  align-items: center;
+  grid-template-columns: 30% 30% 30%;
+  gap: 1%;
+  grid-template-columns: auto auto auto;
+}
+.o_t_grid_item{
+  margin-bottom: .9rem;
+  padding: .9rem;
+  width: 100%;
+  height: 9rem;
+  border-radius: 6px;
+  box-shadow: 0px 6px 36px #15223214;;
+}
+.brand_green_bg{
+  background: #0EA574 0% 0% no-repeat padding-box;
+  opacity: 1;
+}
+.brand_faint_green_bg {
+  background: #0ea57523 0% 0% no-repeat padding-box;
+}
+.brand_faint_danger_bg {
+  background: #f0142e1e 0% 0% no-repeat padding-box;
+}
+.brand_faint_main_bg {
+  background: #f29b381a 0% 0% no-repeat padding-box;
+}
+.font-success {
+  color: #0EA574;
+}
+.font_brand_faint {
+  color: #7E84A3;
+}
+.font_secondary_dark{
+  color: #131523;
+}
+.font_brand_dark{
+  color: #BA6C00;
+}
+.font-danger {
+  color: #F0142F;
+}
+.otg_card{
+  height: 100%;
+  width: 100%;
+}
+.otg_card_header span{
+  font-size: .8rem;
+}
+.otg_card_body{
+  height: 50%;
+  width: 100%;
+}
+.otg_card_b_data{
+  font-size: 1.7rem;
+  font-weight: 500;
+}
+.data_loading_icon_cont{
+  width: 25px;
+  height: 25px;
+}
+.data_loading_main_cont{
+  width: 100%;
+  height: 100%;
+}
+/* 
+  END COMPANY ADMIN STYLES
+*/
 
 /* 
   RESPONSIVE DESIGNS

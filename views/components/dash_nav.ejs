@@ -1,0 +1,24 @@
+<div id="dash_nav" class="dash_nav_main_container">
+   <div class="comp">
+     <div class="dash_nav_container">
+       <div class="dash_nav_logo" v-on:click="goHome">
+        <img src="../../../images/logo_header.svg" width="100%" height="100%" alt="koogah logo"/>
+       </div>
+       <div class="nav_part_b">
+         <div class="notification_bell"> 
+           <span class="notification_counter" v-if="notifications.length > 0">
+             <span>{{notifications.length}}</span>
+           </span>
+           <span class="nav_icon">
+             <img src="../../../images/ic-bell.svg" width="100%" height="100%"/>
+           </span>
+         </div>
+         <div class="dash_user_greeting">
+           <p class="greetings">Hello,</p>
+           <p class="user_nav_name"><%- user.firstName %></p>
+         </div>
+       </div>
+     </div>
+   </div>
+   <div class="mobile">mobile</div>
+</div>

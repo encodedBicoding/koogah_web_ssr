@@ -19,14 +19,16 @@ class CompanyController {
           'Content-Type': 'application/json'
         }
       }).then((resp) => resp.json());
-      res.cookie('koogah_session_token', response.data.token, {
-        secure: true,
-        httpOnly: true,
-      });
-      res.cookie('refresh_token', response.data.refresh_token, {
-        secure: true,
-        httpOnly: true,
-      })
+      if (response.status === 200) {
+        res.cookie('koogah_session_token', response.token, {
+          secure: true,
+          httpOnly: true,
+        });
+        res.cookie('refresh_token', response.refresh_token, {
+          secure: true,
+          httpOnly: true,
+        })
+      }
       return res.json(response);
     })
       .catch((err) => {
