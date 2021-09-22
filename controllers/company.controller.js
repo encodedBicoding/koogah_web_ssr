@@ -6,7 +6,6 @@ const base_url = isProduction ? process.env.BASE_URL_PRODUCTION : process.env.BA
 
 class CompanyController {
   static login(req, res) {
-    // console.log(req.cookies['koogah_session_token']);
     return Promise.try(async () => {
       const { email, password } = req.body;
       const response = await fetch(`${base_url}/company/signin`, {
@@ -20,6 +19,8 @@ class CompanyController {
         }
       }).then((resp) => resp.json());
       if (response.status === 200) {
+        res.clearCookie('koogah_session_token', { path: '/' });
+        res.clearCookie('refresh_token', { path: '/' });
         res.cookie('koogah_session_token', response.token, {
           secure: true,
           httpOnly: true,
@@ -32,6 +33,65 @@ class CompanyController {
       return res.json(response);
     })
       .catch((err) => {
+        return res.status(500).json({
+          status: 500,
+          error: err,
+        })
+    })
+  }
+  static getTotalEarnings(req, res) {
+    return Promise.try(async () => {
+      let token = req.cookies['koogah_session_token'];
+      const { time_frame } = req.query;
+      const response = await fetch(`${base_url}/company/total_earnings?time_frame=${time_frame}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
+        }
+      }).then((resp) => resp.json());
+      return res.json(response);
+    }).catch(err => {
+        return res.status(500).json({
+          status: 500,
+          error: err,
+        })
+    })
+  }
+
+  static getTotalDispatchersOverview(req, res) {
+    return Promise.try(async () => {
+      let token = req.cookies['koogah_session_token'];
+      const { time_frame } = req.query;
+      const response = await fetch(`${base_url}/company/total_dispatchers/overview?time_frame=${time_frame}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
+        }
+      }).then((resp) => resp.json());
+      return res.json(response);
+    }).catch(err => {
+        return res.status(500).json({
+          status: 500,
+          error: err,
+        })
+    })
+  }
+
+  static getTotalDeliveriesOverview(req, res) {
+    return Promise.try(async () => {
+      let token = req.cookies['koogah_session_token'];
+      const { time_frame } = req.query;
+      const response = await fetch(`${base_url}/company/total_deliveries/overview?time_frame=${time_frame}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
+        }
+      }).then((resp) => resp.json());
+      return res.json(response);
+    }).catch(err => {
         return res.status(500).json({
           status: 500,
           error: err,

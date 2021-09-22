@@ -135,13 +135,33 @@
               </div>
               <div class="wd-100">
                 <div class="overview_top_grid">
-                  <div class="o_t_grid_item brand_green_bg">
-                    <div class="fl-col-start-space-btwn otg_card">
+                  <div class="o_t_grid_item brand_lg_green_bg">
+                    <div class="fl-col-start-space-btwn otg_card" v-if="!is_loading_total_earnings_item">
                       <div class="otg_card_header">
                         <span class="font-white">Total Earnings</span>
                       </div>
                       <div class="otg_card_body">
-                        <span class="font-white otg_card_b_data">₦<%- Intl.NumberFormat('en-IN').format(Number(user.total_payouts))%></span>
+                        <span class="font-white otg_card_b_data">₦{{Intl.NumberFormat('en-IN').format(Number(total_earnings_item.total_value))}} </span>
+                        <div class="fl-row-center-start">
+                          <span v-if="timeFrame === 'days'" class="font-small font-white">Today: {{Intl.NumberFormat('en-IN').format(Number(total_earnings_item.current_month))}}</span>
+                          <span v-if="timeFrame === 'weeks'" class="font-small font-white">This week: {{Intl.NumberFormat('en-IN').format(Number(total_earnings_item.current_month))}}</span>
+                          <span v-if="timeFrame === 'months'" class="font-small font-white">This month: {{Intl.NumberFormat('en-IN').format(Number(total_earnings_item.current_month))}}</span>
+                        </div>
+                        <div class="fl-row-center-start">
+                          <span :class="total_earnings_item.increased ? 'font-white font-small' : 'font-danger font-small' ">{{Intl.NumberFormat('en-IN').format(Number(total_earnings_item.percent))}}%</span>
+                          <div class="arrow_seer">
+                            <img v-if="total_earnings_item.increased" src="../../../images/arrow_up.svg" width="100%" height="100%"/>
+                            <img v-else src="../../../images/arrow_down.svg" width="100%" height="100%"/>
+                          </div>
+                          <span class="font-small font-white" v-if="timeFrame === 'months' ">than last month</span>
+                          <span class="font-small font-white" v-if="timeFrame === 'weeks' ">than last week</span>
+                          <span class="font-small font-white" v-if="timeFrame === 'days' ">than yesterday</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div v-else class="fl_row_center data_loading_main_cont">
+                      <div class="data_loading_icon_cont">
+                        <img src="../../../images/loader_icon.svg" width="100%" height="100%"/>
                       </div>
                     </div>
                   </div>
@@ -151,9 +171,14 @@
                         <span class="font_brand_faint">Total dispatchers</span>
                       </div>
                       <div class="otg_card_body">
-                        <span class="font_secondary_dark otg_card_b_data">{{Intl.NumberFormat('en-IN').format(Number(total_dispatchers_item.current_month))}}</span>
+                        <span class="font_secondary_dark otg_card_b_data">{{Intl.NumberFormat('en-IN').format(Number(total_dispatchers_item.total_value))}}</span>
                         <div class="fl-row-center-start">
-                          <span :class="total_dispatchers_item.increased ? 'font-success font-small' : 'font-danger font-small' ">{{total_dispatchers_item.percent}}%</span>
+                          <span v-if="timeFrame === 'days'" class="font-small font_brand_faint">Today: {{Intl.NumberFormat('en-IN').format(Number(total_dispatchers_item.current_month))}}</span>
+                          <span v-if="timeFrame === 'weeks'" class="font-small font_brand_faint">This week: {{Intl.NumberFormat('en-IN').format(Number(total_dispatchers_item.current_month))}}</span>
+                          <span v-if="timeFrame === 'months'" class="font-small font_brand_faint">This month: {{Intl.NumberFormat('en-IN').format(Number(total_dispatchers_item.current_month))}}</span>
+                        </div>
+                        <div class="fl-row-center-start">
+                          <span :class="total_dispatchers_item.increased ? 'font-success font-small' : 'font-danger font-small' ">{{Intl.NumberFormat('en-IN').format(Number(total_dispatchers_item.percent))}}%</span>
                           <div class="arrow_seer">
                             <img v-if="total_dispatchers_item.increased" src="../../../images/arrow_up.svg" width="100%" height="100%"/>
                             <img v-else src="../../../images/arrow_down.svg" width="100%" height="100%"/>
@@ -178,7 +203,12 @@
                       <div class="otg_card_body">
                         <span class="font_secondary_dark otg_card_b_data">{{Intl.NumberFormat('en-IN').format(Number(total_delivery_item.current_month))}}</span>
                         <div class="fl-row-center-start">
-                          <span :class="total_delivery_item.increased ? 'font-success font-small' : 'font-danger font-small' ">{{total_delivery_item.percent}}%</span>
+                          <span v-if="timeFrame === 'days'" class="font-small font_brand_faint">Today: {{Intl.NumberFormat('en-IN').format(Number(total_delivery_item.current_month))}}</span>
+                          <span v-if="timeFrame === 'weeks'" class="font-small font_brand_faint">This week: {{Intl.NumberFormat('en-IN').format(Number(total_delivery_item.current_month))}}</span>
+                          <span v-if="timeFrame === 'months'" class="font-small font_brand_faint">This month: {{Intl.NumberFormat('en-IN').format(Number(total_delivery_item.current_month))}}</span>
+                        </div>
+                        <div class="fl-row-center-start">
+                          <span :class="total_delivery_item.increased ? 'font-success font-small' : 'font-danger font-small' ">{{Intl.NumberFormat('en-IN').format(Number(total_delivery_item.percent))}}%</span>
                           <div class="arrow_seer">
                             <img v-if="total_delivery_item.increased" src="../../../images/arrow_up.svg" width="100%" height="100%"/>
                             <img v-else src="../../../images/arrow_down.svg" width="100%" height="100%"/>
@@ -231,7 +261,7 @@
                         <span class="font_brand_dark">Tracking dispatchers</span>
                       </div>
                       <div class="otg_card_body">
-                        <span class="font_secondary_dark otg_card_b_data">{{currently_tracking_dispatchers}}</span>
+                        <span class="font_secondary_dark otg_card_b_data">{{currently_tracking_dispatchers.length}}</span>
                       </div>
                     </div>
                   </div>

@@ -622,7 +622,7 @@ select {
 .arrow_seer{
   width: 12px;
   height: auto;
-  margin: 0 .2rem 0 .2rem;
+  margin: 0 .1rem 0 .1rem;
 }
 
 .container_mini {
@@ -1723,6 +1723,10 @@ select {
   border-radius: 6px;
   box-shadow: 0px 6px 36px #15223214;;
 }
+.brand_lg_green_bg {
+  background: #0ea575b6 0% 0% no-repeat padding-box;
+  opacity: 1;
+}
 .brand_green_bg{
   background: #0EA574 0% 0% no-repeat padding-box;
   opacity: 1;
@@ -1759,7 +1763,7 @@ select {
   font-size: .8rem;
 }
 .otg_card_body{
-  height: 50%;
+  height: 58%;
   width: 100%;
 }
 .otg_card_b_data{

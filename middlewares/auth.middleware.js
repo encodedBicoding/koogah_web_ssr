@@ -32,14 +32,15 @@ class AuthMiddleware {
               'Content-Type': 'application/json',
             }
           }).then((resp) => resp.json()).then((res) => res);
-          console.log(refresh_response);
           if (refresh_response.status !== 200) {
             return res.redirect('/company/admin/login');
           } else {
+            res.clearCookie('koogah_session_token', { path: '/' });
             res.cookie('koogah_session_token', refresh_response.token, {
               secure: true,
               httpOnly: true,
             });
+            res.clearCookie('refresh_token', { path: '/' });
             res.cookie('refresh_token', refresh_response.refresh_token, {
               secure: true,
               httpOnly: true,
