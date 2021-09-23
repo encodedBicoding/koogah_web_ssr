@@ -61,5 +61,20 @@ companyAdminRoutes.get(
 );
 
 
+companyAdminRoutes.get(
+  '/admin/wallet',
+  AuthMiddleware.checkAuthenticated,
+  function (req, res, next) {
+    ejs.renderFile(`${view_path}/company_admin/wallet.ejs`, {
+      page: 'company_admin_dashboard_wallet',
+      user: req.user,
+    }, {}, function (err, template) {
+      if (err) throw err;
+      res.end(template);
+    });
+  }
+);
+
+
 
 module.exports = companyAdminRoutes;

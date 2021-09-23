@@ -1,7 +1,7 @@
 
 this.showLoader();
 const vm = new Vue({
-  el: '#company_admin_dashboard',
+  el: '#company_admin_dashboard_wallet',
   data: {
     socket: '',
     host: '',
