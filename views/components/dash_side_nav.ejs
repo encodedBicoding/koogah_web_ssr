@@ -11,7 +11,7 @@
         </div>
         <div class="nav_item_title_holder">
           <div class="text_scroll comp_name">
-            <p><%- user.business_name%></p>
+            <p><%- user.business_name.toUpperCase()%></p>
           </div>
           <div class="text_scroll comp_email">
             <p><%- user.email%></p>
@@ -34,14 +34,18 @@
       <nav class="dash_side_main_nav_container" v-on:click="() => gotoRoute('/company/admin/wallet')">
         <div class="<%=page === 'company_admin_dashboard_wallet' ? 'dash_side_nav_item selected' : 'dash_side_nav_item'%>">
           <div class="nav_item_bg_overlay"></div>
-          <span class="fa fa-user nav_icon"></span>
+          <span class="nav_icon">
+            <img src="../../../images/ic_wallet.svg" width="100%" height="100%"/>
+          </span>
           <span class="nav_title">Wallet</span>
         </div> 
       </nav>
-      <nav class="dash_side_main_nav_container">
+      <nav class="dash_side_main_nav_container" v-on:click="() => gotoRoute('/company/admin/dispatchers')">
         <div class="<%=page === 'company_admin_dashboard_dispatchers' ? 'dash_side_nav_item selected' : 'dash_side_nav_item'%>">
           <div class="nav_item_bg_overlay"></div>
-          <span class="fa fa-user nav_icon"></span>
+          <span class="nav_icon">
+            <img src="../../../images/ic_users.svg" width="100%" height="100%"/>
+          </span>
           <span class="nav_title">Dispatchers</span>
         </div> 
       </nav>
@@ -49,7 +53,7 @@
         <div class="<%=page === 'company_admin_dashboard_profile' ? 'dash_side_nav_item selected' : 'dash_side_nav_item'%>">
           <div class="nav_item_bg_overlay"></div>
           <span class="nav_icon">
-            <img src="../../../images/ic_users.svg" width="100%" height="100%"/>
+            <img src="../../../images/ic_profile.svg" width="100%" height="100%"/>
           </span>
           <span class="nav_title">Profile</span>
         </div> 

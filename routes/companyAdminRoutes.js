@@ -74,6 +74,32 @@ companyAdminRoutes.get(
     });
   }
 );
+companyAdminRoutes.get(
+  '/admin/dispatchers',
+  AuthMiddleware.checkAuthenticated,
+  function (req, res, next) {
+    ejs.renderFile(`${view_path}/company_admin/dispatcher.ejs`, {
+      page: 'company_admin_dashboard_dispatchers',
+      user: req.user,
+    }, {}, function (err, template) {
+      if (err) throw err;
+      res.end(template);
+    });
+  }
+);
+companyAdminRoutes.get(
+  '/dispatcher/profile',
+  AuthMiddleware.checkAuthenticated,
+  function (req, res, next) {
+    ejs.renderFile(`${view_path}/company_admin/dispatcher_profile.ejs`, {
+      page: 'company_admin_dashboard_dispatchers',
+      user: req.user,
+    }, {}, function (err, template) {
+      if (err) throw err;
+      res.end(template);
+    });
+  }
+);
 
 
 

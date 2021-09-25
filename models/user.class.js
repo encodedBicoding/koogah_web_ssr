@@ -17,6 +17,7 @@ class Company {
     this.phone = args['phone'];
     this.profile_image = args['profile_image'];
     this.total_payouts = args['total_payouts'];
+    this.current_wallet_balance = args['current_wallet_balance']
   }
 
   get fullPhoneNumber() {

@@ -67,7 +67,7 @@ const vm = new Vue({
               null,
               true,
             );
-            window.location.replace('/company/admin/dashboard');
+           window.location.replace('/company/admin/dashboard');
           }
         }
       } catch (err) {

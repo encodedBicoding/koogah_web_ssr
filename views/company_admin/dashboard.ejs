@@ -66,7 +66,7 @@
     />
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCYPNv2kt9vLe4ApNolquwLE8TlMCBJLC0&libraries=places"></script>
     <title>
-     <%-user.business_name%> - Koogah Company Dashboard
+     <%-user.business_name%> - Overview - Koogah Company Dashboard
     </title>
   </head>
   <body id="roots">
@@ -78,7 +78,11 @@
     <div class="toast remove"></div>
     <div class="d-modal hide"></div>
     <section id="company_admin_dashboard" class="admin_dash_container">
-      <%- include('../components/dash_nav.ejs') %>
+      <%- include('../components/dash_nav.ejs', 
+      {
+        has_back_arrow: false,
+      }
+      )%>
       <section class="main_company_dash_grid">
         <%- include('../components/dash_side_nav.ejs') %>
         <div class="admin_overview">

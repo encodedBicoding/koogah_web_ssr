@@ -5,6 +5,11 @@ const AuthMiddleware = require('../middlewares/auth.middleware');
 
 companyApis.post('/admin/login', CompanyController.login);
 companyApis.get(
+  '/admin/me',
+  AuthMiddleware.checkAuthenticated,
+  CompanyController.getMe,
+);
+companyApis.get(
   '/admin/total_earnings',
   AuthMiddleware.checkAuthenticated,
   CompanyController.getTotalEarnings
@@ -19,6 +24,41 @@ companyApis.get(
   AuthMiddleware.checkAuthenticated,
   CompanyController.getTotalDeliveriesOverview,
 );
+companyApis.get(
+  '/admin/balance/withdrawable',
+  AuthMiddleware.checkAuthenticated,
+  CompanyController.getWithdrawableBalance,
+);
+
+companyApis.post(
+  '/admin/accounts/payout/request',
+  AuthMiddleware.checkAuthenticated,
+  CompanyController.requestPayout,
+);
+
+companyApis.get(
+  '/admin/dispatchers/new',
+  AuthMiddleware.checkAuthenticated,
+  CompanyController.getNewDispatchers,
+);
+
+companyApis.get(
+  '/admin/dispatcher/all',
+  AuthMiddleware.checkAuthenticated,
+  CompanyController.getAllDispatchers,
+);
+
+companyApis.get(
+  '/admin/dispatcher/profile/:id',
+  AuthMiddleware.checkAuthenticated,
+  CompanyController.getSingleDispatcher,
+);
+
+companyApis.get(
+  '/admin/dispatcher/delivery/history/:id',
+  AuthMiddleware.checkAuthenticated,
+  CompanyController.getSingleDispatcherDeliveryHistory,
+)
 
 
 

@@ -1,4 +1,3 @@
-
 this.showLoader();
 const vm = new Vue({
   el: '#company_admin_dashboard_wallet',
@@ -6,39 +5,14 @@ const vm = new Vue({
     socket: '',
     host: '',
     notifications: [],
-    is_loading_total_earnings_item: false,
-    total_earnings_item: {
-      total_value: 0,
-      current_month: 0,
-      last_month: 0,
-      increased: false,
-      percent: -2.4,
-    },
-    is_loading_total_dispatchers_item: false,
-    total_dispatchers_item: {
-      total_value: 0,
-      current_month: 0,
-      last_month: 0,
-      increased: false,
-      percent: -2.4,
-    },
-    is_loading_total_delivery_item: false,
-    total_delivery_item: {
-      total_value: 0,
-      current_month: 1234,
-      last_month: 0,
-      increased: true,
-      percent: -2.4,
-    },
-    is_loading_delivery_status: false,
-    total_successful_deliveries: 0,
-    total_failed_deliveries: 0,
+    banks: [],
+    bank_code: '',
+    user: {},
+    is_fetching_banks: true,
     currently_tracking_dispatchers: [],
-    dateRange: {
-      start: null,
-      end: null
-    },
-    timeFrame: 'months'
+    is_loading_withdrawable_current_balance: true,
+    withdrawable_balance: 0,
+    current_balance: 0,
   },
   beforeMount() {
     this.host = window.location.origin;
@@ -66,9 +40,9 @@ const vm = new Vue({
   },
   mounted() {
     hideLoader();
-    this.getTotalEarningsData();
-    this.getTotalDispatchersOverview();
-    this.getTotalDeleveriesOverview();
+    this.getWithdrawableBalance();
+    this.fetchMe();
+    this.fetchNigerianBanks();
   },
   methods: {
     goHome: function () {
@@ -76,58 +50,110 @@ const vm = new Vue({
     },
     gotoRoute: function (route) {
       window.location.href = route;
-     },
-    selectTimeFrame: async function (tf) {
-      this.timeFrame = tf;
-      await this.getTotalEarningsData();
-      await this.getTotalDispatchersOverview();
-      await this.getTotalDeleveriesOverview();
     },
-    getTotalEarningsData: async function () {
+    fetchMe: async function () {
       try {
-        this.is_loading_total_earnings_item = true;
-        const response = await window.fetch(`${this.host}/api/company/admin/total_earnings?&time_frame=${this.timeFrame}`, {
+        const response = await window.fetch(`${this.host}/api/company/admin/me`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json'
           }
         }).then((resp) => resp.json()).then((res) => res);
-        this.total_earnings_item = {}
-        this.is_loading_total_earnings_item = false;
-        this.total_earnings_item = response.data;
+        this.user = response.data;
       } catch (err) {
         console.log(err);
       }
     },
-    getTotalDispatchersOverview: async function () {
+    fetchNigerianBanks: async function () {
+      let retry = 0;
+      this.is_fetching_banks = true;
       try {
-        this.is_loading_total_dispatchers_item = true;
-        const response = await window.fetch(`${this.host}/api/company/admin/total_dispatchers_overview?&time_frame=${this.timeFrame}`, {
+        const response = await window.fetch('https://api.paystack.co/bank', {
+          method: 'GET'
+        }).then((resp) => resp.json()).then((res) => res);
+        if (response.status === true) {
+          this.banks = [];
+          this.banks = response.data;
+          if (!this.user) {
+            await this.fetchMe();
+          }
+          this.bank_code = this.banks.find((b) => b.name === this.user.bank_account_name).code;
+        }
+        this.is_fetching_banks = false;
+      } catch (err) {
+        if (retry < 5) {
+          this.fetchNigerianBanks();
+          retry = retry + 1;
+        }
+      }
+    },
+    getWithdrawableBalance: async function () {
+      try {
+        this.is_loading_withdrawable_current_balance = true;
+        const response = await window.fetch(`${this.host}/api/company/admin/balance/withdrawable`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json'
           }
         }).then((resp) => resp.json()).then((res) => res);
-        this.total_dispatchers_item = {}
-        this.is_loading_total_dispatchers_item = false;
-        this.total_dispatchers_item = response.data;
+        this.is_loading_withdrawable_current_balance = false;
+        this.withdrawable_balance = response.data.withdrawable_balance;
       } catch (err) {
         console.log(err);
       }
     },
-    getTotalDeleveriesOverview: async function () {
+    proceedWithrawal: async function () {
       try {
-        this.is_loading_total_delivery_item = true;
-        const response = await window.fetch(`${this.host}/api/company/admin/total_deliveries_overview?&time_frame=${this.timeFrame}`, {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json'
+        hideModal();
+        showLoader();
+        const response = await window.fetch(`${this.host}/api/company/admin/accounts/payout/request`,
+          {
+            method: 'POST',
+            body: JSON.stringify({bank_code: this.bank_code}),
+            headers: {
+              'Content-Type': 'application/json'
+            }
           }
-        }).then((resp) => resp.json()).then((res) => res);
-        this.total_delivery_item = {}
-        this.is_loading_total_delivery_item = false;
-        this.total_delivery_item = response.data;
-        this.total_successful_deliveries = response.data.total_value;
+        ).then((resp) => resp.json()).then((res) => res);
+        hideLoader();
+        if (response.status === 200) {
+          showModal();
+          buildNoticeModal(
+            response.message,
+            () => {
+              hideModal();
+              window.location.reload();
+            },
+            'Okay',
+            false,
+            'success',
+          );
+        } else {
+          showToast(
+            'error',
+            response.error,
+            null,
+            null,
+            true,
+          );
+        }
+      } catch (err) {
+        console.log(err);
+        hideLoader();
+      }
+    },
+    withdrawFunds: async function () {
+      try {
+        if (this.currently_tracking_dispatchers.length > 0) {
+          showModal();
+          buildNoticeModal(
+            'You have dispatcher(s) currently on a delivery. Money paid to you may be lower than your current balance.',
+            await this.proceedWithrawal,
+            'Proceed'
+          )
+        } else {
+          await this.proceedWithrawal();
+        }
       } catch (err) {
         console.log(err);
       }

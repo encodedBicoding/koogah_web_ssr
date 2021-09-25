@@ -34,7 +34,6 @@ WsServer.on('connection', async function (ws, req, client) {
       ws.on('message', async function (message) {
         let msg = JSON.parse(message);
         if (msg.event === 'check_location') {
-          console.log('got here');
           eventEmitter.emit('check_location', {
             longitude: msg.longitude,
             latitude: msg.latitude,

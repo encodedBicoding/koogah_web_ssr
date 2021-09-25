@@ -39,6 +39,24 @@ class CompanyController {
         })
     })
   }
+  static getMe(req, res) {
+    return Promise.try(async () => {
+      let token = req.cookies['koogah_session_token'];
+      const response = await fetch(`${base_url}/company/me`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        }
+      }).then((resp) => resp.json()).then((res) => res);
+      return res.json(response);
+    }).catch(err => {
+      return res.status(500).json({
+        status: 500,
+        error: err,
+      });
+    });
+  }
   static getTotalEarnings(req, res) {
     return Promise.try(async () => {
       let token = req.cookies['koogah_session_token'];
@@ -96,6 +114,126 @@ class CompanyController {
           status: 500,
           error: err,
         })
+    })
+  }
+
+  static getWithdrawableBalance(req, res) {
+    return Promise.try(async () => {
+      let token = req.cookies['koogah_session_token'];
+      const response = await fetch(`${base_url}/company/accounts/wallet/withdrawable`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
+        }
+      }).then((resp) => resp.json());
+      return res.json(response);
+    }).catch(err => {
+        return res.status(500).json({
+          status: 500,
+          error: err,
+        })
+    })
+  }
+
+  static requestPayout(req, res) {
+    return Promise.try(async () => {
+      let token = req.cookies['koogah_session_token'];
+      const { bank_code } = req.body;
+      const response = await fetch(`${base_url}/company/accounts/payout`, {
+        method: 'POST',
+        body: JSON.stringify({bank_code}),
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
+        }
+      }).then((resp) => resp.json());
+      return res.json(response);
+    }).catch(err => {
+        return res.status(500).json({
+          status: 500,
+          error: err,
+        })
+    })
+  }
+
+  static getNewDispatchers(req, res) {
+    return Promise.try(async () => {
+      let token = req.cookies['koogah_session_token'];
+      const response = await fetch(`${base_url}/company/dispatchers/new`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
+        }
+      }).then((resp) => resp.json());
+      return res.json(response);
+    }).catch(err => {
+      return res.status(500).json({
+        status: 500,
+        error: err,
+      })
+    })
+  }
+
+  static getAllDispatchers(req, res) {
+    return Promise.try(async () => {
+      let token = req.cookies['koogah_session_token'];
+      const { field, fieldValue, page } = req.query;
+      const response = await fetch(`${base_url}/company/dispatcher/all?field=${field}&fieldValue=${fieldValue}&page=${page}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
+        }
+      }).then((resp) => resp.json());
+      return res.json(response);
+    }).catch((err) => {
+      return res.status(500).json({
+        status: 500,
+        error: err,
+      })
+    })
+  }
+
+  static getSingleDispatcher(req, res) {
+    return Promise.try(async () => {
+      let token = req.cookies['koogah_session_token'];
+      let { id } = req.params;
+      const response = await fetch(`${base_url}/company/dispatcher/single/${id}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
+        }
+      }).then((resp) => resp.json());
+      return res.json(response);
+    }).catch(err => {
+      return res.status(500).json({
+        status: 500,
+        error: err,
+      })
+    })
+  }
+
+  static getSingleDispatcherDeliveryHistory(req, res) {
+    return Promise.try(async () => {
+      let token = req.cookies['koogah_session_token'];
+      let { id } = req.params;
+      const { page } = req.query;
+      const response = await fetch(`${base_url}/company/dispatcher/delivery/history/${id}?page=${page}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
+        }
+      }).then((resp) => resp.json());
+      return res.json(response);
+    }).catch(err => {
+      return res.status(500).json({
+        status: 500,
+        error: err,
+      })
     })
   }
 };

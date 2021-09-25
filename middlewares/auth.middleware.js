@@ -1,5 +1,6 @@
 const fetch = require('node-fetch');
 const Promise = require('bluebird');
+const ejs = require('ejs');
 
 const isProduction = process.env.NODE_ENV === 'production';
 const base_url = isProduction ? process.env.BASE_URL_PRODUCTION : process.env.BASE_URL_DEVELOPMENT;
@@ -56,6 +57,7 @@ class AuthMiddleware {
         return next();
       }
     ).catch(err => {
+      // render server down page here
       return res.status(500).json({
         status: 500,
         error: err,
