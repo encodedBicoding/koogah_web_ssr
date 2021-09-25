@@ -1,5 +1,6 @@
 
 this.showLoader();
+
 const vm = new Vue({
   el: '#company_dispatcher_profile',
   data: {
@@ -20,6 +21,12 @@ const vm = new Vue({
     total_pages: 0,
     history_error_retry: 5,
     error_fetch_single_retry: 5,
+    current_tracking_package: null,
+    packageTrackingData: null,
+    map: null,
+    dispatcher_location: { lat: null, lng: null }, // dispatcher location
+    package_location: { lat: null, lng: null },
+    location_fetch_interval: null,
   },
   beforeMount() {
     this.host = window.location.origin;
@@ -48,13 +55,19 @@ const vm = new Vue({
       }
     } 
   },
+
   mounted() {
+    const admin_overview = document.querySelector('.admin_overview');
+    admin_overview.addEventListener('touchstart', null, { passive: true })
+    admin_overview.addEventListener('touchmove', null, { passive: true })
     hideLoader();
     this.fetchDispatcherDeliveryHistory(this.current_dispatcher_id, true);
+
     let table_container = document.querySelector('.main_disp_table_body_con');
-    let lastScrollPos = 0;
-    const self = this;
-    table_container.addEventListener('scroll', async (e) => {
+
+    let scroll_function = async (e) => {
+      let lastScrollPos = 0;
+      const self = this;
       const elems = Array.from(document.getElementsByName('dispatcher_table_map_body'));
       const last_elem = elems[elems.length - 1];
       let st = e.target.scrollTop;
@@ -66,7 +79,10 @@ const vm = new Vue({
         }
       }
       lastScrollPos = st <= 0 ? 0 : st;
-    }, false)
+    }
+    if (this.map_table_state === 'history') {
+      table_container.addEventListener('scroll', scroll_function, false);
+    }
   },
   methods: {
     goHome: function () {
@@ -97,7 +113,7 @@ const vm = new Vue({
           if (value === 'history') {
             await this.fetchDispatcherDeliveryHistory(this.active_dispatcher.id, true);
           } else {
-
+            await this.fetchTrackingData();
           }
         }
       }
@@ -108,7 +124,7 @@ const vm = new Vue({
       }
     },
     reload: async function () {
-      await this.fetchSingleDispatcher(this.current_dispatcher_id);s
+      await this.fetchSingleDispatcher(this.current_dispatcher_id);
     },
     fetchSingleDispatcher: async function (id) {
       const self = this;
@@ -125,6 +141,9 @@ const vm = new Vue({
           this.active_dispatcher = response.data.dispatcher;
           this.total_money_made_overview = response.data.total_money_made_overview;
           this.total_delivery_overview = response.data.total_delivery_overview;
+          if (response.data.dispatcher.is_currently_dispatching === true) {
+            this.selectMapTable('tracking');
+          }
         } else {
           if (response.status === 404) {
             window.location.href = '/company/admin/dispatchers';
@@ -175,7 +194,12 @@ const vm = new Vue({
         }).then((resp) => resp.json()).then((res) => res);
         this.is_table_loading = false;
         if (response.status === 200) {
-          const result = this.formatDeliveryHistory(response.data.rows)
+          const result = this.formatDeliveryHistory(response.data.rows);
+          // find and update the current tracking package
+          const isFoundCurrentTracking = result.findIndex((d) => d.status === 'tracking');
+          if (isFoundCurrentTracking !== -1) {
+            this.current_tracking_package = isFoundCurrentTracking;
+          }
           this.delivery_histories = this.delivery_histories.concat(result);
           this.total_pages = response.data.totalPages;
           this.current_history_page = response.data.currentPage;
@@ -199,6 +223,127 @@ const vm = new Vue({
         self.is_table_loading = false;
         console.log(err);
       }
-    }
+    },
+    fetchTrackingData: async function () {
+      let self = this;
+      try {
+        this.is_table_loading = true;
+        const response = await window.fetch(`${this.host}/api/company/admin/dispatcher/tracking/${self.active_dispatcher.id}`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+        }).then((resp) => resp.json()).then((res) => res);
+        this.is_table_loading = false;
+        console.log(response);
+        if (response.status === 200) {
+          // first save the data.
+          let result = response.data.tracking_package;
+          let dispatcher_location = {};
+          let package_location = {};
+          dispatcher_location.lat = result.dispatcher_lat;
+          dispatcher_location.lng = result.dispatcher_lng;
+          package_location.lat = result.destination_lat;
+          package_location.lng = result.destination_lng;
+
+          if (self.package_location.lat === null && self.package_location.lng == null) {
+            self.package_location = package_location;
+          }
+          if (self.dispatcher_location.lat !== dispatcher_location.lat
+            || self.dispatcher_location.lng !== dispatcher_location.lng) {
+            self.dispatcher_location = dispatcher_location;
+            this.initializeMap();
+          }
+          // activate interval recalls;
+          self.location_fetch_interval = setInterval(() => {
+            self.fetchTrackingData();
+          }, 40000)
+        } else {
+          if (self.location_fetch_interval != null) {
+            clearInterval(self.location_fetch_interval);
+          }
+          self.selectMapTable('history');
+          return;
+        }
+
+      } catch (err) {
+        this.is_table_loading = false;
+        if (self.location_fetch_interval != null) {
+          clearInterval(self.location_fetch_interval);
+        }
+        self.selectMapTable('history');
+      }
+    },
+    initializeMap: function () {
+      const self = this;
+      let interval;
+      try {
+        const package_location_marker = `${this.host}/images/delivery_destination.png`;
+        const dispatcher_location_marker = `${this.host}/images/dispatcher_location_marker.png`;
+        let retry = 10;
+        let elem;
+        if (!elem) {
+          if (retry > 0) {
+            interval = setInterval(() => {
+              elem = document.getElementById('map_holder');
+              if (elem) {
+                if (google) {
+                  this.map = new google.maps.Map(document.getElementById('map_holder'), {
+                    center: this.dispatcher_location,
+                    zoom: 15,
+                    zoomControl: true,
+                  });
+                  const dispatcher_marker = new google.maps.Marker({
+                    position: this.dispatcher_location,
+                    map: this.map,
+                    title: 'Dispatcher location',
+                    icon: dispatcher_location_marker,
+                    optimized: true,
+                  });
+                  const d_info_window = new google.maps.InfoWindow({
+                    content: `
+                      <span class='font-bold'>${self.toSentenceCase(this.active_dispatcher.first_name)}'s </span>
+                      <span>location is being tracked.</span>
+                    `
+                  });
+                  dispatcher_marker.addListener('click', () => {
+                    d_info_window.open({
+                      anchor: dispatcher_marker,
+                      map: this.map,
+                      shouldFocus: false,
+                    })
+                  });
+                  // add circle
+                  new google.maps.Circle({
+                    strokeColor: "#f29b38",
+                    strokeOpacity: 0.8,
+                    strokeWeight: 1,
+                    fillColor: "#f29b38",
+                    fillOpacity: 0.35,
+                    map: self.map,
+                    center: self.dispatcher_location,
+                    radius: 150,
+                  });
+                   const package_marker = new google.maps.Marker({
+                    position: this.package_location,
+                    map: this.map,
+                    title: 'Package Location',
+                    icon: package_location_marker,
+                    optimized: true,
+                   });
+                  clearInterval(interval);
+                }
+              }
+              retry--;
+            }, 1000);
+          } else {
+            clearInterval(interval);
+          }
+        }
+      } catch (err) {
+        clearInterval(interval);
+        console.log(err);
+      }
+    },
   }
 });

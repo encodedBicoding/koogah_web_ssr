@@ -105,7 +105,7 @@
 }
 .toast_content{
   position: fixed;
-  width: 20%;
+  width: fit-content;
   word-wrap: break-word;
   height: fit-content;
   background-color: #fff;

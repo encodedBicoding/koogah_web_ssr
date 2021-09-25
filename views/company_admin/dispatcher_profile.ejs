@@ -64,7 +64,8 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCYPNv2kt9vLe4ApNolquwLE8TlMCBJLC0&libraries=places"></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCYPNv2kt9vLe4ApNolquwLE8TlMCBJLC0&v=weekly&library=places" async></script>
     <title>
      <%-user.business_name%> - Dispatchers - Koogah Company Dashboard
     </title>
@@ -298,55 +299,85 @@
                       </div>
                     </div>
                   </div>
-                  <div class="dispatcher_table_map_header" v-if="map_table_state === 'history'">
-                    <p class="table_header_text table_h_n">package id</p>
-                    <p class="table_header_text">status</p>
-                    <p class="table_header_text">description</p>
-                    <p class="table_header_text">amount</p>
-                    <p class="table_header_text">pickup</p>
-                    <p class="table_header_text">dropoff</p>
-                    <p class="table_header_text">date</p>
-                  </div>
-                  <div v-if="!is_table_loading" class="main_disp_table_body_con">
-                    <div v-if="map_table_state === 'history'" class="wd-100">
-                      <div v-if="delivery_histories.length > 0">
-                        <div class="dispatcher_table_map_body" name="dispatcher_table_map_body" v-for="package in delivery_histories">
-                          <div class="table_h_n table_body_text">
-                            <p class="table_text_scrollable_no_wrap">{{package.package_id}}</p>
-                          </div>
-                          <div class="table_body_text">
-                            <p>{{package.status}}</p>
-                          </div>
-                          <div class="table_body_text">
-                            <p class="table_text_scrollable_wrap">{{package.description}}</p>
-                          </div>
-                          <div class="table_body_text">
-                            <p>₦{{Intl.NumberFormat('en-IN').format(Number(package.delivery_price))}}</p>
-                          </div>
-                          <div class="table_body_text">
-                            <p class="table_text_scrollable_wrap">{{package.pickup_address}}</p>
-                          </div>
-                          <div class="table_body_text">
-                            <p class="table_text_scrollable_wrap">{{package.dropoff_address}}</p>
-                          </div>
-                          <div class="table_body_text">
-                            <p>{{package.created_at}}</p>
-                          </div>
-                        </div>
-                      </div>
-                      <div v-else class="disp_table_no_data">
-                        <div class="no_data_cont">
-                          <img src="../../../images/no-data.svg" width="100%" height="100%"/>
-                        </div>
-                      </div>
-                    </div>
-                    <div v-else>
-                      tracking map....
-                    </div>
-                  </div>
-                  <div v-else class="fl_row_center data_loading_main_cont disp-table_loading">
+                  <div v-if="is_table_loading && map_table_state === 'tracking'  " class="map_loading_overlay">
                     <div class="data_loading_icon_cont">
                       <img src="../../../images/loader_icon.svg" width="100%" height="100%"/>
+                    </div><br/>
+                    <div>
+                      <p class="font-small">fetching tracking data...</p>
+                    </div>
+                  </div>
+                  <div v-if="map_table_state === 'tracking' && !is_table_loading && current_tracking_package !== null" class="tracking_package_detail">
+                    <div class="sub_tracking_package_details">
+                      <div class="tracking_pd_h">
+                        <p class="ddi_header">Pickup</p>
+                        <p class="ddi_header">Dropoff</p>
+                        <p class="ddi_header">Package ID</p>
+                      </div>
+                      <div class="tracking_pg_b">
+                        <p class="table_text_scrollable_no_wrap">
+                          {{current_tracking_package.pickup_address}}
+                        </p>
+                        <p class="table_text_scrollable_no_wrap">
+                          {{current_tracking_package.dropoff_address}}
+                        </p>
+                        <p class="table_text_scrollable_no_wrap">
+                          {{current_tracking_package.id}}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div v-if="map_table_state === 'tracking' && !is_table_loading" id="map_holder"></div>
+                  <div v-else>
+                    <div v-if="!is_table_loading" class="wd-100 ht-100">
+                      <div class="dispatcher_table_map_header" v-if="map_table_state === 'history'">
+                        <p class="table_header_text table_h_n">package id</p>
+                        <p class="table_header_text">status</p>
+                        <p class="table_header_text">description</p>
+                        <p class="table_header_text">amount</p>
+                        <p class="table_header_text">pickup</p>
+                        <p class="table_header_text">dropoff</p>
+                        <p class="table_header_text">date</p>
+                      </div>
+                      <div class="main_disp_table_body_con">
+                        <div v-if="map_table_state === 'history'" class="wd-100">
+                          <div v-if="delivery_histories.length > 0">
+                            <div class="dispatcher_table_map_body" name="dispatcher_table_map_body" v-for="package in delivery_histories">
+                              <div class="table_h_n table_body_text">
+                                <p class="table_text_scrollable_no_wrap">{{package.package_id}}</p>
+                              </div>
+                              <div class="table_body_text">
+                                <p>{{package.status}}</p>
+                              </div>
+                              <div class="table_body_text">
+                                <p class="table_text_scrollable_wrap">{{package.description}}</p>
+                              </div>
+                              <div class="table_body_text">
+                                <p>₦{{Intl.NumberFormat('en-IN').format(Number(package.delivery_price))}}</p>
+                              </div>
+                              <div class="table_body_text">
+                                <p class="table_text_scrollable_wrap">{{package.pickup_address}}</p>
+                              </div>
+                              <div class="table_body_text">
+                                <p class="table_text_scrollable_wrap">{{package.dropoff_address}}</p>
+                              </div>
+                              <div class="table_body_text">
+                                <p>{{package.created_at}}</p>
+                              </div>
+                            </div>
+                          </div>
+                          <div v-else class="disp_table_no_data">
+                            <div class="no_data_cont">
+                              <img src="../../../images/no-data.svg" width="100%" height="100%"/>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div v-else class="fl_row_center data_loading_main_cont disp-table_loading">
+                      <div class="data_loading_icon_cont">
+                        <img src="../../../images/loader_icon.svg" width="100%" height="100%"/>
+                      </div>
                     </div>
                   </div>
                 </div>

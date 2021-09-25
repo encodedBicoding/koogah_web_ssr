@@ -58,6 +58,12 @@ companyApis.get(
   '/admin/dispatcher/delivery/history/:id',
   AuthMiddleware.checkAuthenticated,
   CompanyController.getSingleDispatcherDeliveryHistory,
+);
+
+companyApis.get(
+  '/admin/dispatcher/tracking/:id',
+  AuthMiddleware.checkAuthenticated,
+  CompanyController.fetchSingleDispatcherTrackingLocation,
 )
 
 

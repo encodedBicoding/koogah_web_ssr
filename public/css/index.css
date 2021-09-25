@@ -1526,6 +1526,63 @@ select {
 .green{
   color: #0EA574 !important;
 }
+#tracking_map {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  overflow: visible;
+}
+#map_holder{
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  height: calc(70vh);
+  padding: 2rem;
+}
+.map_loading_overlay{
+  position: relative;
+  width: 100%;
+  height: calc(40vh);
+  background-color: #fff;
+  z-index: 99999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.tracking_package_detail{
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
+}
+.sub_tracking_package_details{
+  background-color: #fff;
+  padding: .4rem;
+  box-shadow: 0px 1px 13px 1px rgba(0, 0, 0, 0.1);
+  width: 40%;
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+.tracking_pd_h,
+.tracking_pg_b{
+  width: 100%;
+  display: grid;
+  grid-template-columns: 33% 33% 33%;
+  gap:1%;
+  grid-template-rows: 30% 30% 30%;
+  border-bottom: .9px solid #E6E9F4;
+}
+.tracking_pg_b{
+  border: none;
+}
 /* 
   COMPANY ADMIN STYLES
 */
@@ -1926,7 +1983,7 @@ select {
   border-bottom-right-radius: 4px;
   white-space: nowrap;
   -ms-overflow-style: none;
-  scrollbar-width: none !important; 
+  scrollbar-width: none !important;
 }
 .disp-table_loading{
   width: 100%;
@@ -2045,7 +2102,7 @@ select {
   margin-bottom: .2rem;
 }
 .ddi_body {
-  font-size: .8rem;
+  font-size: .85rem;
   color: #131523;
   margin-bottom: .5rem;
 }
@@ -2080,7 +2137,7 @@ select {
   background-color: #fff;
   margin-top: 1.3rem;
   width: 100%;
-  height: auto;
+  height: 100%;
   box-shadow: 0px 6px 36px #15223214;
 }
 
