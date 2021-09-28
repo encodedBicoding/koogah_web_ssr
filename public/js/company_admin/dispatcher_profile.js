@@ -56,6 +56,9 @@ const vm = new Vue({
         self.notifications = [];
         self.notifications = msg.payload;
       }
+      if (msg.event === 'company_new_package_creation') {
+        showMarketPlaceToast('neutral', msg.payload, null, 'bottom_left', true);
+      }
     } 
   },
 
