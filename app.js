@@ -5,14 +5,16 @@ const cors = require('cors');
 const path = require("path");
 const morgan = require('morgan');
 const cookieParser = require("cookie-parser");
+const session = require('express-session');
 require("dotenv").config();
 
 
 const app = express();
-var router = express.Router();
 const indexRoutes = require('./routes/indexRoutes');
 const registerRoute = require('./routes/registerRoute');
 const subscribeRoute = require('./routes/subscribeRoute');
+const companyAdminRoutes = require('./routes/companyAdminRoutes');
+const companyApis = require('./routes/companyApis.js');
 
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
@@ -24,11 +26,22 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
+app.use(session({
+  cookie: {
+    secure: process.env.NODE_ENV === 'production' ? true : false,
+    path: '/'
+  },
+  saveUninitialized: true,
+  proxy: true,
+  resave: false,
+  secret: process.env.SESSION_SECRET
+}))
 
 app.use('/', indexRoutes);
 app.use('/api/register', registerRoute);
+app.use('/company', companyAdminRoutes);
 app.use('/subscribe', subscribeRoute);
-
+app.use('/api/company', companyApis);
 
 app.use(function(req, res, next) {
   ejs.renderFile('views/not_found.ejs', {

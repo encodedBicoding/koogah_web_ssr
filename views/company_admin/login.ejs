@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <meta http-equiv="Content-type" content="text/html; charset=UTF-8" />
+    <meta content="Koogah" name="title" />
+    <meta
+      content="Koogah is a platform which brings a mobile-first solution and a SCPPD(Single Customer Per Package Delivery) system to solving logistics/delivery issues, connecting customers and business owners with dispatchers, and giving them control over their deliveries"
+      name="description"
+    />
+
+    <meta
+      name="keywords"
+      content="
+  delivery,
+  logistics,
+  koogah,
+  koogah delivery,
+  deliveries,
+  koogah logistics,
+  dispatchers,
+  couriers,
+  courier services,
+  logistics in nigeria,
+  delivery in nigeria,
+  deliveries in nigeria,
+  koogah faq,
+  frequently asked questions on koogah,
+  koogah frequently asked questions
+  "
+    />
+    <meta name="twitter:site" content="@thekoogahbrand" />
+    <meta name="twitter:domain" content="koogah.com" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://twitter.com/thekoogahbrand" />
+    <meta name="twitter:title" content="Koogah" />
+    <meta
+      name="twitter:description"
+      content="The fastest way to get goods/packages delivered. With actual real-time tracking, and a trusted network of dispatchers"
+    />
+    <meta
+      name="twitter:image"
+      content="https://pbs.twimg.com/profile_images/1411243565460688896/076o7nTm_400x400.jpg"
+    />
+    <meta name="locale" content="en_EN" />
+    <meta name="robots" content="index, follow" />
+    <meta name="site_name" content="Koogah" />
+    <meta content="English" name="language" />
+    <meta content="5 days" name="revisit-after" />
+    <meta content="Koogah" name="author" />
+    <link rel="shortcut icon" href="../../../images/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="../../../css/index.css" />
+    <link rel="stylesheet" href="../../../css/nav.css" />
+    <link rel="stylesheet" href="../../../css/toast.css" />
+    <link rel="stylesheet" href="../../../css/loader.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+      integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCYPNv2kt9vLe4ApNolquwLE8TlMCBJLC0&libraries=places"></script>
+    <title>
+     Company Login - Koogah Logistics
+    </title>
+  </head>
+  <body id="roots">
+    <div class="loader hd">
+      <div class="loader_holder">
+        <img src="../../../images/loader_icon.svg" width="100%" height="100%s"/>
+      </div>
+    </div>
+    <div class="toast remove"></div>
+    <div class="d-modal hide"></div>
+    <section class="login_hero" id="admin_login_page">
+      <div class="lh_hero_c">
+        <div class="logo_place">
+          <div class="overlay"></div>
+          <div class="logo_p_lc">
+            <img src='../../../images/logo_gold.svg' width="100%" height="100%"/>
+          </div>
+          <div class="logo_p_lc_two">
+            <img src='../../../images/partner_logo.png' width="100%" height="100%"/>
+          </div>
+        </div>
+        <div class="bg_place"></div>
+      </div>
+      <div class="lh_hero_c_top">
+        <div class="lh_login_form_c">
+          <div class="lg_login_sub_c">
+            <div class="lg_login_header_c">
+              <div class="lg_login_h_sub_c mb">
+                <img src="../../../images/logo_header.svg" width="100%" height="100%" alt="koogah logo"/>
+              </div>
+              <div class="mb">
+                <h2>Login to access your Dashboard</h2>
+              </div>
+            </div>
+            <form
+              class="wd-100"
+              @submit.prevent="login"
+              novalidate="true"
+              >
+             <div class="est_form_sub_hld">
+              <div class="wd-100 est_form_drpdwn_cont">
+                <input 
+                  id="company_login_email"
+                  name="company_login_email"
+                  type="email"
+                  class="form-control form_field"
+                  placeholder="Email Address"
+                  aria-required="true"
+                  v-model="email"
+                />
+              </div>
+             </div>
+             <div class="est_form_content_holder">
+              <div class="est_form_sub_hld">
+                <div class="wd-100 est_form_drpdwn_cont">
+                  <input 
+                    id="company_setup_password"
+                    name="company_setup_password"
+                    :type="showPassword ? 'text' : 'password'"
+                    class="form-control form_field"
+                    placeholder="Password"
+                    autocomplete="none"
+                    v-model="password"
+                  />
+                </div>
+                <div :class="showPassword ? 'password_icon eye_show' : 'password_icon eye_off' " v-on:click="togglePasswordReveal"></div>
+              </div>
+              <span class="error" v-if="formErrors.password">{{formErrors.password}}</span>
+              <div>
+                <p class="link brand font-small">Forgot password?</p>
+              </div>
+            </div>
+            <br/>
+            <div>
+              <button class="btn_bg_dark" type="submit">Sign in</button>
+            </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+    <script src="../../../js/loader.js"></script>
+    <script src="https://unpkg.com/vue"></script>
+    <script src="../../../js/toast.js"></script>
+    <script src="../../../js/modal.js"></script>
+    <script src="../../../js/company_admin/login.js"></script>
+  </body>
+</html>

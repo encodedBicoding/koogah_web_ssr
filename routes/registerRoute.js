@@ -10,6 +10,10 @@ registerRoute.post('/mobile/verify', Register.sendMobileVerificationCode);
 
 registerRoute.post('/mobile/code', Register.mobileCodeVerification);
 
+registerRoute.post('/verify_bank_details', Register.verifyBankDetails);
+
+registerRoute.post('/company/activate/account', Register.activateAccount);
+
 
 
 

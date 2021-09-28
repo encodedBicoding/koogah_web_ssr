@@ -64,6 +64,55 @@ class Register{
         })
       })
   }
+  static verifyBankDetails(req, res) {
+    return Promise.try(async () => {
+      const { bank_code, account_number } = req.body;
+      const response = await fetch(
+        `https://api.paystack.co/bank/resolve?account_number=${account_number}&bank_code=${bank_code}`,
+        {
+          method: 'GET',
+          headers: {
+            'Authorization': `Bearer ${process.env.PAYSTACK_LIVE_SECRET_KEY}`,
+            'Content-Type': 'application/json'
+          }
+        }
+      ).then((resp) => resp.json());
+      return res.json(response);
+    }).catch(err => {
+      return res.status(500).json({
+        status: 500,
+        error: err,
+      })
+    });
+  }
+
+  static activateAccount(req, res) {
+    return Promise.try(async () => {
+      const { password, bank_name, account_number } = req.body;
+      const token = req.query.key;
+      const response = await fetch(
+        `${base_url}/company/approved/welcome?key=${token}`,
+        {
+          method: 'POST',
+          body: JSON.stringify({
+            password,
+            bank_name,
+            account_number
+          }),
+          headers: {
+            'Authorization': `Bearer ${process.env.PAYSTACK_LIVE_SECRET_KEY}`,
+            'Content-Type': 'application/json'
+          }
+        }
+      ).then((resp) => resp.json());
+      return res.json(response);
+    }).catch(err => {
+      return res.status(500).json({
+        status: 500,
+        error: err,
+      });
+    });
+  }
 }
 
 module.exports = Register;
