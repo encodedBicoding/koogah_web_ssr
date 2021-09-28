@@ -66,24 +66,25 @@ const vm = new Vue({
       }
     },
     fetchNigerianBanks: async function () {
-      this.is_fetching_banks = true;
       const self = this;
       try {
+        self.is_fetching_banks = true;
         const response = await window.fetch('https://api.paystack.co/bank', {
           method: 'GET'
         }).then((resp) => resp.json()).then((res) => res);
-        if (response.status === true) {
-          this.banks = [];
-          this.banks = response.data;
-          if (!this.user) {
-            await this.fetchMe();
+        console.log(response);
+        if (response.status == true) {
+          self.banks = [];
+          self.banks = response.data;
+          if (!self.user) {
+            await self.fetchMe();
           }
-          this.bank_code = this.banks.find((b) => b.name === this.user.bank_account_name).code;
+          self.bank_code = self.banks.find((b) => b.name === self.user.bank_account_name).code;
+          self.is_fetching_banks = false;
         }
-        this.is_fetching_banks = false;
       } catch (err) {
         if (self.retry_fetch_nigerian_banks < 5) {
-          this.fetchNigerianBanks();
+          self.fetchNigerianBanks();
           self.retry_fetch_nigerian_banks = self.retry_fetch_nigerian_banks + 1;
         }
       }
