@@ -83,6 +83,7 @@ const vm = new Vue({
           self.is_fetching_banks = false;
         }
       } catch (err) {
+        console.log(err);
         if (self.retry_fetch_nigerian_banks < 5) {
           self.fetchNigerianBanks();
           self.retry_fetch_nigerian_banks = self.retry_fetch_nigerian_banks + 1;
