@@ -54,13 +54,14 @@ const vm = new Vue({
     },
     fetchMe: async function () {
       try {
+        const self = this;
         const response = await window.fetch(`${this.host}/api/company/admin/me`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json'
           }
         }).then((resp) => resp.json()).then((res) => res);
-        this.user = response.data;
+        self.user = response.data;
       } catch (err) {
         console.log(err);
       }
@@ -72,15 +73,16 @@ const vm = new Vue({
         const response = await window.fetch('https://api.paystack.co/bank', {
           method: 'GET'
         }).then((resp) => resp.json()).then((res) => res);
-        console.log(response);
         if (response.status == true) {
           self.banks = [];
           self.banks = response.data;
           if (!self.user) {
             await self.fetchMe();
           }
-          self.bank_code = self.banks.find((b) => b.name === self.user.bank_account_name).code;
+          console.log(self.user);
+          self.bank_code = response.data.find((b) => b.name === self.user.bank_account_name).code;
           self.is_fetching_banks = false;
+          console.log(self.bank_code);
         }
       } catch (err) {
         console.log(err);
