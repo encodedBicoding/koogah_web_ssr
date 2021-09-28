@@ -56,13 +56,13 @@ function getSecondFormData() {
   let sex = document.getElementById("sex").value;
   let owns_automobile = automobile;
   let done_dispatch_before = dispatch;
-  let nin = document.getElementById("nin").value;
+  let identification_number = document.getElementById("nin").value;
   let data = {
     address,
     sex,
     owns_automobile,
     done_dispatch_before,
-    nin,
+    identification_number,
   };
   let hasIssues = false;
   Object.values(data).forEach((v) => {
@@ -81,18 +81,18 @@ function getSecondFormData() {
 
 function getFirstDispatchData() {
   let email = document.getElementById("email").value;
-  let firstName = document.getElementById("first_name").value;
-  let lastName = document.getElementById("last_name").value;
-  let phoneNumber = document.getElementById("number").value;
+  let first_name = document.getElementById("first_name").value;
+  let last_name = document.getElementById("last_name").value;
+  let mobile_number = document.getElementById("number").value;
   let nationality = document.getElementById("dispatch_select_country").value;
   let state = document.getElementById("dispatch_select_state").value;
   let town = document.getElementById("dispatch_select_city").value;
 
   let data = {
     email,
-    firstName,
-    lastName,
-    phoneNumber,
+    first_name,
+    last_name,
+    mobile_number,
     country_code: determineCountryCode(nationality),
     nationality,
     state,
@@ -183,7 +183,7 @@ async function registerDispatcher(e) {
       const host = window.location.origin;
       register_dispatcher.innerHTML = "Loading...";
       const response = await fetch(
-        `user/courier/signup?fromApp=web${hasRef ? `&&ref=${ref}` : ""}`,
+        `https://core.koogahapis.com/v1/user/courier/signup?fromApp=web${hasRef ? `&&ref=${ref}` : ""}`,
         {
           method: "POST",
           body: JSON.stringify(formData),
@@ -191,7 +191,11 @@ async function registerDispatcher(e) {
             "Content-Type": "application/json",
           },
         }
-      ).then((resp) => resp.json());
+      ).then((resp) => {
+        resp.json()
+        console.log(resp)
+      });
+      console.log(response)
       register_dispatcher.innerHTML = "Sign Up";
       if (response.status === 200) {
         console.log(response.data)

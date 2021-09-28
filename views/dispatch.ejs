@@ -60,182 +60,183 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
-    <title>
-      Dispatcher - Koogah - Delivery done efficiently
-    </title>
+    <title>Dispatcher - Koogah - Delivery done efficiently</title>
   </head>
   <body id="roots">
     <script src="../js/locale.js"></script>
     <%- include('components/navbar.ejs', { opaque: true, } ) %>
-    <section class="hero_bg_dispatch">
-      <div class="wd-100 ht-100 hero_bg_dispatch_two">
-      <div class="hero_bg_dispatch_colo">
-        <h1 class="large-h1 container_mini text-white ">
-          <span class="brand">Our</span> Dispatchers.
-         </h1>
-        
-          <div class="dispatch-auth-card top-right">
-           <div class="d-flex mb">
-             <p>Sign UP</p>
-             <i class="fas fa-comments brand"></i>
-           </div>
-           <form id="details">
-             <div class="show" id="form1">
-               <input
-                 required
-                 type="text"
-                 name="email"
-                 id="email"
-                 class="form-control mb"
-                 placeholder="Email"
-               />
-               <input
-                 required
-                 type="text"
-                 name="firstName"
-                 id="first_name"
-                 class="form-control mb"
-                 placeholder="First Name"
-               />
-               <input
-                 required
-                 type="text"
-                 name="lastName"
-                 id="last_name"
-                 class="form-control mb"
-                 placeholder="Last Name"
-               />
-               <div class="input-group mb">
-                 <span class="input-group-text">+234</span>
-                 <input
-                   required
-                   type="text"
-                   name="phoneNumber"
-                   id="number"
-                   class="form-control-text"
-                   placeholder="Phone Number"
-                 />
-               </div>
-               <select
-                 required
-                 name="country"
-                 class="form-control mb"
-                 id="dispatch_select_country"
-               >
-                 <option selected value="" disabled>Select country</option>
-                 <option value="nigeria">Nigeria</option>
-               </select>
-               <select
-                 required
-                 disabled
-                 name="state"
-                 class="form-control mb"
-                 id="dispatch_select_state"
-               >
-                 <option selected value="" disabled>Select state</option>
-               </select>
-        
-               <select
-                 required
-                 disabled
-                 name="city"
-                 class="form-control mb"
-                 id="dispatch_select_city"
-               >
-                 <option selected value="" disabled>Select city</option>
-               </select>
-        
-               <div class="d-grid">
-                 <button class="btn brand_bg text-white" id="next">
-                   Next <i class="fas fa-chevron-right text-white"></i>
-                 </button>
-               </div>
-             </div>
-        
-             <div class="hide" id="form_2">
-               <input
-                 required
-                 type="text"
-                 name="address"
-                 id="address"
-                 class="form-control mb"
-                 placeholder="Full House Address"
-               />
-        
-               <select
-                 id="sex"
-                 name="sex"
-                 class="form-select mb"
-                 aria-label="Default select example"
-               >
-                 <option selected>Gender</option>
-                 <option value="M">Male</option>
-                 <option value="F">Female</option>
-                 <option value="N">Prefer not to say</option>
-               </select>
-               <input
-                 required
-                 type="text"
-                 name="nin"
-                 id="nin"
-                 class="form-control mb"
-                 placeholder="Identification Number"
-               />
-        
-               <div class="mb">
-                 <div class="mb">
-                   <label for="automobile" class="form-label"
-                     >Do you own a functionong automobile?</label
-                   >
-                 </div>
-                 <select
-                   id="automobile"
-                   name="automobile"
-                   class="form-select"
-                   aria-label="Default select example"
-                 >
-                   <option selected>Select Answer</option>
-                   <option value="yes">Yes</option>
-                   <option value="no">No</option>
-                 </select>
-               </div>
-               <div class="mb-2">
-                 <div class="mb">
-                   <label for="dispatch" class="form-label"
-                     >Have you made money as a dispatcher before?</label
-                   >
-                 </div>
-                 <select
-                   id="dispatch"
-                   name="dispatch"
-                   class="form-select"
-                   aria-label="Default select example"
-                 >
-                   <option selected>Select Answer</option>
-                   <option value="yes">Yes</option>
-                   <option value="no">No</option>
-                 </select>
-               </div>
-               <div class="mb-2 row-start-cn">
-                 <input
-                   type="checkbox"
-                   class="brand-border mgrt-sm"
-                   id="dispatch_terms"
-                 />
-                 <small>I Agree To Koogah Terms And Conditions</small>
-               </div>
-        
-               <div class="d-grid">
-                 <button class="btn brand_bg text-white" id="submit">
-                   Sign Up
-                 </button>
-               </div>
-             </div>
-           </form>
-         </div> 
+    <section class="hero_bg_company">
+      <div class="hero_content_flex_center">
+        <div class="hero_info">
+          <h1 class="large-h1 font-white m-text-center">
+            <span class="brand">Our</span> Dispatcher
+          </h1>
+          <p class="hero_sub_info m-text-center">
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+            Aspernatur, impedit velit non ut quos ratione ipsam laborum animi
+            quaerat et sunt modi sint quas fuga a tempora ducimus repudiandae
+            sit!
+          </p>
+        </div>
+        <div class="auth-card">
+          <div class="d-flex mb">
+            <p class="auth_head_text">Sign Up</p>
+            <i class="fas fa-comments brand"></i>
+          </div>
+          <form id="details">
+            <div class="show" id="form1">
+              <input
+                required
+                type="text"
+                name="email"
+                id="email"
+                class="form-control mb"
+                placeholder="Email"
+              />
+              <input
+                required
+                type="text"
+                name="firstName"
+                id="first_name"
+                class="form-control mb"
+                placeholder="First Name"
+              />
+              <input
+                required
+                type="text"
+                name="lastName"
+                id="last_name"
+                class="form-control mb"
+                placeholder="Last Name"
+              />
+              <div class="input-group mb">
+                <span class="input-group-text">+234</span>
+                <input
+                  required
+                  type="text"
+                  name="phoneNumber"
+                  id="number"
+                  class="form-control-text"
+                  placeholder="Phone Number"
+                />
+              </div>
+              <select
+                required
+                name="country"
+                class="form-control mb"
+                id="dispatch_select_country"
+              >
+                <option selected value="" disabled>Select country</option>
+                <option value="nigeria">Nigeria</option>
+              </select>
+              <select
+                required
+                disabled
+                name="state"
+                class="form-control mb"
+                id="dispatch_select_state"
+              >
+                <option selected value="" disabled>Select state</option>
+              </select>
+          
+              <select
+                required
+                disabled
+                name="city"
+                class="form-control mb"
+                id="dispatch_select_city"
+              >
+                <option selected value="" disabled>Select city</option>
+              </select>
+          
+              <div class="d-grid">
+                <button class="btn brand_bg text-white" id="next">
+                  Next <i class="fas fa-chevron-right text-white"></i>
+                </button>
+              </div>
+            </div>
+          
+            <div class="hide" id="form_2">
+              <input
+                required
+                type="text"
+                name="address"
+                id="address"
+                class="form-control mb"
+                placeholder="Full House Address"
+              />
+          
+              <select
+                id="sex"
+                name="sex"
+                class="form-select mb"
+                aria-label="Default select example"
+              >
+                <option selected>Gender</option>
+                <option value="M">Male</option>
+                <option value="F">Female</option>
+              </select>
+              <input
+                required
+                type="text"
+                name="nin"
+                id="nin"
+                class="form-control mb"
+                placeholder="Identification Number"
+              />
+          
+              <div class="mb">
+                <div class="mb">
+                  <label for="automobile" class="form-label"
+                    >Do you own a functionong automobile?</label
+                  >
+                </div>
+                <select
+                  id="automobile"
+                  name="automobile"
+                  class="form-select"
+                  aria-label="Default select example"
+                >
+                  <option selected>Select Answer</option>
+                  <option value="yes">Yes</option>
+                  <option value="no">No</option>
+                </select>
+              </div>
+              <div class="mb-2">
+                <div class="mb">
+                  <label for="dispatch" class="form-label"
+                    >Have you made money as a dispatcher before?</label
+                  >
+                </div>
+                <select
+                  id="dispatch"
+                  name="dispatch"
+                  class="form-select"
+                  aria-label="Default select example"
+                >
+                  <option selected>Select Answer</option>
+                  <option value="yes">Yes</option>
+                  <option value="no">No</option>
+                </select>
+              </div>
+              <div class="mb-2 row-start-cn">
+                <input
+                  type="checkbox"
+                  class="brand-border mgrt-sm"
+                  id="dispatch_terms"
+                />
+                <small>I Agree To Koogah Terms And Conditions</small>
+              </div>
+          
+              <div class="d-grid">
+                <button class="btn brand_bg text-white" id="submit">
+                  Sign Up
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
       </div>
-      </div>
-      <!-- <div class="brand_bg wd-100 ht-50"></div> -->
     </section>
     <!-- Middele Section -->
     <section
@@ -345,7 +346,7 @@
       <%- include('components/download_now.ejs') %>
     </section>
     <section name="footer"><%- include('components/footer.ejs') %></section>
-<<<<<<< HEAD
+    <<<<<<< HEAD
     <script>
       function next() {
         document.getElementById("form1").style.display = "none";
@@ -378,7 +379,9 @@
           nationality: "nigerian",
         };
         fetch(
-          `https://core.koogahapis.com/v1/user/courier/signup?fromApp=web${hasRef ? `&&ref=${ref}` : ""}`,
+          `https://core.koogahapis.com/v1/user/courier/signup?fromApp=web${
+            hasRef ? `&&ref=${ref}` : ""
+          }`,
           {
             method: "POST",
             data,
@@ -390,9 +393,9 @@
         return false;
       };
     </script>
-=======
+    =======
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
->>>>>>> 6a05a6df8252757c651b16a235c0cb9f3af5dafa
+    >>>>>>> 6a05a6df8252757c651b16a235c0cb9f3af5dafa
     <script src="../js/mobile_nav.js"></script>
     <script src="../js/faq_func.js"></script>
     <script src="../js/subscribe.js"></script>
