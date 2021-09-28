@@ -38,6 +38,9 @@ const vm = new Vue({
       if (msg.event === 'company_tracking_dispatchers_result') {
         self.currently_tracking_dispatchers = msg.payload;
       }
+      if (msg.event === 'company_new_package_creation') {
+        showMarketPlaceToast('neutral', msg.payload, null, 'bottom_left', true);
+      }
     } 
   },
   mounted() {
