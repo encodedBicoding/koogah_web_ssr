@@ -99,5 +99,6 @@ companyApis.post(
   AuthMiddleware.checkAuthenticated,
   CompanyController.completeDispatcherRegisteration,
 );
+companyApis.get('/admin/logout', CompanyController.logout);
 
 module.exports = companyApis;
