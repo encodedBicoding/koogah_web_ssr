@@ -187,6 +187,10 @@ select {
   width: 210px;
 }
 
+.fs-6 {
+  font-size: 12px;
+}
+
 .position-relative {
   position: relative;
 }
@@ -317,11 +321,20 @@ select {
   background-size: cover;
 }
 
+.hero_bg_customer {
+  width: 100%;
+  height: calc(100vh);
+  background-image: url("../images/Backdrop2.png");
+  background-repeat: no-repeat;
+  background-position: bottom;
+  background-size: cover;
+}
+
 .hero_bg_dispatch {
   position: relative;
   width: 100%;
   height: calc(100vh);
-  background-image: linear-gradient(to right, #ffcd6879 , #e27b0677), url("../images/bg.png");
+  background-image: url("../images/Dispatchdrop.png");
   background-repeat: no-repeat;
   background-position: bottom;
   background-size: cover;
@@ -332,7 +345,6 @@ select {
 
 .hero_bg_dispatch_two {
   position: absolute;
-  background-image: linear-gradient(to right, #ffcd6879 , #e27b0677),  url("../images/wk.png");
   background-repeat: no-repeat;
   background-position: bottom;
   background-size: cover;
@@ -345,25 +357,7 @@ select {
     /* opacity: 0.5;  */
     
 }
- 
-.hero_bg_dispatch_color {
-  /* position: absolute; */
-  /* background-image: linear-gradient(to right, #ffcd6879 , #e27b0677);
-  background-color: #00000060;
-  width: 100%; */
-  /* background-image: linear-gradient(to right, #ffcd68bd , #e27b06be); */
-  /* background-image: url("../images/wk.png"); */
-  /* background-repeat: no-repeat;
-  background-position: bottom;
-  background-size: cover;
-  object-fit: cover; */
-  /* 
-  height: calc(80vh);
-  top: 100px;
-  right: 90px;
-  opacity: 0.5;
-  background-color: #000000; */
-}
+
 
 .hero_bg {
   width: 100%;
