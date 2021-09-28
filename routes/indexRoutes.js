@@ -67,23 +67,6 @@ indexRoutes.get(
     res.end(template);
   });
   });
-indexRoutes.get(
-  '/company',
-  function (req, res, next) {
-    ejs.renderFile(`${view_path}/company.ejs`, {
-      page: 'company'
-    }, {}, function (err, template) {
-      if (err) throw err;
-      res.end(template);
-    });
-    }
-);
-indexRoutes.get(
-  '/company/verify/email',
-  function (req, res, next) {
-    res.redirect(`/verify/mobile?&code=${req.query.code}&key=${req.query.key}`)
-  }
-);
 
 indexRoutes.get(
   '/verify/mobile',
@@ -110,7 +93,7 @@ indexRoutes.get(
 indexRoutes.post(
   '/api/delivery/estimate',
   Estimate.getDeliveryEstimate,
-)
+);
 
 
 

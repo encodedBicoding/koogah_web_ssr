@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <meta http-equiv="Content-type" content="text/html; charset=UTF-8" />
+    <meta content="Koogah" name="title" />
+    <meta
+      content="Koogah is a platform which brings a mobile-first solution and a SCPPD(Single Customer Per Package Delivery) system to solving logistics/delivery issues, connecting customers and business owners with dispatchers, and giving them control over their deliveries"
+      name="description"
+    />
+
+    <meta
+      name="keywords"
+      content="
+  delivery,
+  logistics,
+  koogah,
+  koogah delivery,
+  deliveries,
+  koogah logistics,
+  dispatchers,
+  couriers,
+  courier services,
+  logistics in nigeria,
+  delivery in nigeria,
+  deliveries in nigeria,
+  koogah faq,
+  frequently asked questions on koogah,
+  koogah frequently asked questions,
+  koogah for company,
+  koogah4company
+  "
+    />
+    <meta name="twitter:site" content="@thekoogahbrand" />
+    <meta name="twitter:domain" content="koogah.com" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://twitter.com/thekoogahbrand" />
+    <meta name="twitter:title" content="Koogah" />
+    <meta
+      name="twitter:description"
+      content="The fastest way to get goods/packages delivered. With actual real-time tracking, and a trusted network of dispatchers"
+    />
+    <meta
+      name="twitter:image"
+      content="https://pbs.twimg.com/profile_images/1411243565460688896/076o7nTm_400x400.jpg"
+    />
+    <meta name="locale" content="en_EN" />
+    <meta name="robots" content="index, follow" />
+    <meta name="site_name" content="Koogah" />
+    <meta content="English" name="language" />
+    <meta content="5 days" name="revisit-after" />
+    <meta content="Koogah" name="author" />
+    <link rel="shortcut icon" href="../../../images/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="../../../css/index.css" />
+    <link rel="stylesheet" href="../../../css/nav.css" />
+    <link rel="stylesheet" href="../../../css/toast.css" />
+    <link rel="stylesheet" href="../../../css/loader.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+      integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCYPNv2kt9vLe4ApNolquwLE8TlMCBJLC0&v=weekly&library=places" async></script>
+    <title>
+     <%-user.business_name%> - Dispatchers - Koogah Company Dashboard
+    </title>
+  </head>
+  <body id="roots">
+    <div class="loader hd">
+      <div class="loader_holder">
+        <img src="../../../images/loader_icon.svg" width="100%" height="100%s"/>
+      </div>
+    </div>
+    <div class="toast remove"></div>
+    <section id="company_dispatcher_profile" class="admin_dash_container">
+      <!-- 
+        MODALS
+       -->
+      <div class="d-modal show" v-if="show_edit_dispatcher_modal">
+        <div class="d-modal-container">
+          <div class="d-modal-content-holder">
+            <div class="d-modal-pri-cont_start">
+              <h4 class="mg_top_btm">Edit dispatcher detail</h4>
+              <div class="est_form_sub_hld">
+                <input v-model="edit_form_field.first_name" type="text" class="form-control form_field"/>
+                <input v-model="edit_form_field.last_name" type="text" class="form-control form_field"/>
+              </div>
+              <div class="input-group mg_top_btm">
+                <span class="input-group-text">+234</span>
+                <input
+                  required
+                  type="text"
+                  name="phone"
+                  class="form-control-text"
+                  placeholder="Phone Number"
+                  maxlength="11"
+                  minlength="10"
+                  v-model="edit_form_field.mobile_number"
+                />
+              </div>
+            </div>
+            <div class="d-modal_footer_action">
+              <div class="btn_bg_white_norm_width modal_btn modal_close" v-on:click="hideEditDispatcherForm">Cancel</div>
+              <div class="btn_bg_dark_norm_width modal_btn btn_action" v-on:click="actionEditDispatcher">Save</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 
+
+        END MODAL
+       -->
+      <%- include('../components/dash_nav.ejs', 
+      {
+        has_back_arrow: true,
+        nav_back_text: 'Dispatcher detail',
+      }
+      )%>
+      <section class="main_company_dash_grid">
+        <%- include('../components/dash_side_nav.ejs') %>
+        <div class="admin_overview">
+          <div class="wd-100">
+            <div class="comp">
+              <section class="dispatcher_profile_container">
+                <div v-if="!is_fetching_profile" class="wd-100 ht-100">
+                  <div v-if="active_dispatcher" class="wd-100 ht-100">
+                    <div class="dispatcher_top_profile_grid">
+                      <div class="ht-100 dispatcher_top_profile_grid_item">
+                        <div class="fl_row_start_start">
+                          <div class="disp_profile_image_container">
+                            <img :src="active_dispatcher.profile_image" width="100%" height="100%" class="disp_profile_image" alt="profile avatar"/>
+                          </div>
+                          <div class="dispatcher_details_grid">
+                            <div class="ddi">
+                              <div class="ddi_header">fullname</div>
+                              <div class="ddi_body">{{toSentenceCase(active_dispatcher.first_name) + ' ' + toSentenceCase(active_dispatcher.last_name)}}</div>
+                            </div>
+                            <div class="ddi">
+                              <div class="ddi_header">nationality</div>
+                              <div class="ddi_body">{{toSentenceCase(active_dispatcher.nationality)}}</div>
+                            </div>
+                            <div class="ddi">
+                              <div class="ddi_header">gender</div>
+                              <div class="ddi_body">{{active_dispatcher.sex === 'M' ? 'Male' : 'Female'}}</div>
+                            </div>
+                            <div class="ddi">
+                              <div class="ddi_header">email</div>
+                              <div class="ddi_body">{{active_dispatcher.email}}</div>
+                            </div>
+                            <div class="ddi">
+                              <div class="ddi_header">state of residence</div>
+                              <div class="ddi_body">{{toSentenceCase(active_dispatcher.state)}}</div>
+                            </div>
+                            <div class="ddi">
+                              <div class="ddi_header">rating</div>
+                              <div class="ddi_body">{{active_dispatcher.rating}}</div>
+                            </div>
+                            <div class="ddi">
+                              <div class="ddi_header">phone</div>
+                              <div class="ddi_body">{{formatMobileNumber(active_dispatcher.nationality, active_dispatcher.mobile_number)}}</div>
+                            </div>
+                            <div class="ddi">
+                              <div class="ddi_header">city</div>
+                              <div class="ddi_body">{{toSentenceCase(active_dispatcher.town)}}</div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="ht-100 dispatcher_top_profile_grid_item">
+                        <div class="wd-100 ht-100 disp_tpgs">
+                          <div class="btn_bg_dark disp_p_edit" v-on:click="showEditDispatcherForm">
+                            <p>Edit</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div v-else class="data_loading_main_cont fl-col-center-space-btwn ht-100">
+                    <p class="font-small">An Error Occurred</p>
+                    <div class="btn_bg_dark wd-20" v-on:click="reload">
+                      <p class="font-small">Reload</p>
+                    </div>
+                  </div>
+                </div>
+                <div v-else class="fl_row_center data_loading_main_cont">
+                  <div class="data_loading_icon_cont">
+                    <img src="../../../images/loader_icon.svg" width="100%" height="100%"/>
+                  </div>
+                </div>
+              </section>
+              <section class="dispatcher_actions_details_grid">
+                <div class="disp_actions_details_grid_item">
+                  <div class="fl-col-start-space-btwn otg_card" v-if="!is_fetching_profile">
+                    <div class="otg_card_header">
+                      <span class="font_brand_faint">Total money made</span>
+                    </div>
+                    <div class="otg_card_body">
+                      <span class="font-success otg_card_b_data">₦{{Intl.NumberFormat('en-IN').format(Number(total_money_made_overview.total_value))}}</span>
+                      <div class="fl-row-center-start">
+                        <span class="font-small font_brand_faint">This month: {{Intl.NumberFormat('en-IN').format(Number(total_money_made_overview.current_month))}}</span>
+                      </div>
+                      <div class="fl-row-center-start">
+                        <span :class="total_money_made_overview.increased ? 'font-success font-small' : 'font-danger font-small' ">{{Intl.NumberFormat('en-IN').format(Number(total_money_made_overview.percent))}}%</span>
+                        <div class="arrow_seer">
+                          <img v-if="total_money_made_overview.increased" src="../../../images/arrow_up.svg" width="100%" height="100%"/>
+                          <img v-else src="../../../images/arrow_down.svg" width="100%" height="100%"/>
+                        </div>
+                        <span class="font-small font_brand_faint">than last month</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div v-else class="fl_row_center data_loading_main_cont">
+                    <div class="data_loading_icon_cont">
+                      <img src="../../../images/loader_icon.svg" width="100%" height="100%"/>
+                    </div>
+                  </div>
+                </div>
+                <div class="disp_actions_details_grid_item">
+                  <div class="fl-col-start-space-btwn otg_card" v-if="!is_fetching_profile">
+                    <div class="otg_card_header">
+                      <span class="font_brand_faint">Total deliveries</span>
+                    </div>
+                    <div class="otg_card_body">
+                      <span class="font_secondary_dark otg_card_b_data">{{Intl.NumberFormat('en-IN').format(Number(total_delivery_overview.total_value))}}</span>
+                      <div class="fl-row-center-start">
+                        <span class="font-small font_brand_faint">This month: {{Intl.NumberFormat('en-IN').format(Number(total_delivery_overview.current_month))}}</span>
+                      </div>
+                      <div class="fl-row-center-start">
+                        <span :class="total_delivery_overview.increased ? 'font-success font-small' : 'font-danger font-small' ">{{Intl.NumberFormat('en-IN').format(Number(total_delivery_overview.percent))}}%</span>
+                        <div class="arrow_seer">
+                          <img v-if="total_delivery_overview.increased" src="../../../images/arrow_up.svg" width="100%" height="100%"/>
+                          <img v-else src="../../../images/arrow_down.svg" width="100%" height="100%"/>
+                        </div>
+                        <span class="font-small font_brand_faint">than last month</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div v-else class="fl_row_center data_loading_main_cont">
+                    <div class="data_loading_icon_cont">
+                      <img src="../../../images/loader_icon.svg" width="100%" height="100%"/>
+                    </div>
+                  </div>
+                </div>
+                <div class="disp_actions_details_grid_item">
+                  <div class="fl-col-start-space-btwn otg_card" v-if="!is_fetching_profile">
+                    <div class="otg_card_header">
+                      <span class="font_brand_faint">Successful deliveries</span>
+                    </div>
+                    <div class="otg_card_body">
+                      <span class="font_secondary_dark otg_card_b_data">{{Intl.NumberFormat('en-IN').format(Number(total_delivery_overview.total_value))}}</span>
+                      <div class="fl-row-center-start">
+                        <span class="font-small font_brand_faint">This month: {{Intl.NumberFormat('en-IN').format(Number(total_delivery_overview.current_month))}}</span>
+                      </div>
+                      <div class="fl-row-center-start">
+                        <span :class="total_delivery_overview.increased ? 'font-success font-small' : 'font-danger font-small' ">{{Intl.NumberFormat('en-IN').format(Number(total_delivery_overview.percent))}}%</span>
+                        <div class="arrow_seer">
+                          <img v-if="total_delivery_overview.increased" src="../../../images/arrow_up.svg" width="100%" height="100%"/>
+                          <img v-else src="../../../images/arrow_down.svg" width="100%" height="100%"/>
+                        </div>
+                        <span class="font-small font_brand_faint">than last month</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div v-else class="fl_row_center data_loading_main_cont">
+                    <div class="data_loading_icon_cont">
+                      <img src="../../../images/loader_icon.svg" width="100%" height="100%"/>
+                    </div>
+                  </div>
+                </div>
+                <div class="disp_actions_details_grid_item">
+                  <div class="fl-col-start-space-btwn otg_card" v-if="!is_fetching_profile">
+                    <div class="otg_card_header">
+                      <span class="font_brand_faint">Failed deliveries</span>
+                    </div>
+                    <div class="otg_card_body">
+                      <span class="font-danger otg_card_b_data">0</span>
+                      <div class="fl-row-center-start">
+                        <span class="font-small font_brand_faint">This month: 0</span>
+                      </div>
+                      <div class="fl-row-center-start">
+                        <span :class="total_delivery_overview.increased ? 'font-success font-small' : 'font-success font-small' ">0%</span>
+                        <div class="arrow_seer">
+                          <img src="../../../images/arrow_up.svg" width="100%" height="100%"/>
+                          <!-- <img v-else src="../../../images/arrow_down.svg" width="100%" height="100%"/> -->
+                        </div>
+                        <span class="font-small font_brand_faint">than last month</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div v-else class="fl_row_center data_loading_main_cont">
+                    <div class="data_loading_icon_cont">
+                      <img src="../../../images/loader_icon.svg" width="100%" height="100%"/>
+                    </div>
+                  </div>
+                </div>
+              </section>
+              <section class="wd-100">
+                <div class="dispatcher_table_map_place">
+                  <div class="table_controls">
+                    <div class="fl-row-center-space-btwn">
+                      <div class="fl_row_center">
+                        <span 
+                          for="map_table_nav_history" 
+                          :class="map_table_state === 'history' ? 'dash_time_frame selectedTF' : 'dash_time_frame' "
+                          v-on:click="() => selectMapTable('history')">
+                          <input 
+                            type="checkbox" 
+                            name="map_table_nav_history" 
+                            value="history" 
+                            title="map_table_nav" 
+                            class="time_frame_invisible"
+                            :checked="map_table_state === 'history'"
+                            />
+                            History
+                        </span>
+                        <span 
+                        for="map_table_nav_history" 
+                        :class="map_table_state === 'tracking' ? 'dash_time_frame selectedTF' : 'dash_time_frame' "
+                        v-on:click="() => selectMapTable('tracking')">
+                        <input 
+                          type="checkbox" 
+                          name="map_table_nav_history" 
+                          value="tracking" 
+                          title="table_nav" 
+                          class="time_frame_invisible"
+                          :checked="map_table_state === 'tracking'"
+                          />
+                          Tracking
+                      </span>
+                      </div>
+                    </div>
+                  </div>
+                  <div v-if="is_table_loading && map_table_state === 'tracking'  " class="map_loading_overlay">
+                    <div class="data_loading_icon_cont">
+                      <img src="../../../images/loader_icon.svg" width="100%" height="100%"/>
+                    </div><br/>
+                    <div>
+                      <p class="font-small">fetching tracking data...</p>
+                    </div>
+                  </div>
+                  <div v-if="map_table_state === 'tracking' && !is_table_loading && current_tracking_package !== null" class="tracking_package_detail">
+                    <div class="sub_tracking_package_details">
+                      <div class="tracking_pd_h">
+                        <p class="ddi_header">Pickup</p>
+                        <p class="ddi_header">Dropoff</p>
+                        <p class="ddi_header">Package ID</p>
+                      </div>
+                      <div class="tracking_pg_b">
+                        <p class="table_text_scrollable_no_wrap">
+                          {{current_tracking_package.pickup_address}}
+                        </p>
+                        <p class="table_text_scrollable_no_wrap">
+                          {{current_tracking_package.dropoff_address}}
+                        </p>
+                        <p class="table_text_scrollable_no_wrap">
+                          {{current_tracking_package.id}}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div v-if="map_table_state === 'tracking' && !is_table_loading" id="map_holder"></div>
+                  <div v-else>
+                    <div v-if="!is_table_loading" class="wd-100 ht-100">
+                      <div class="dispatcher_table_map_header" v-if="map_table_state === 'history'">
+                        <p class="table_header_text table_h_n">package id</p>
+                        <p class="table_header_text">status</p>
+                        <p class="table_header_text">description</p>
+                        <p class="table_header_text">amount</p>
+                        <p class="table_header_text">pickup</p>
+                        <p class="table_header_text">dropoff</p>
+                        <p class="table_header_text">date</p>
+                      </div>
+                      <div class="main_disp_table_body_con">
+                        <div v-if="map_table_state === 'history'" class="wd-100">
+                          <div v-if="delivery_histories.length > 0">
+                            <div class="dispatcher_table_map_body" name="dispatcher_table_map_body" v-for="package in delivery_histories">
+                              <div class="table_h_n table_body_text">
+                                <p class="table_text_scrollable_no_wrap">{{package.package_id}}</p>
+                              </div>
+                              <div class="table_body_text">
+                                <p>{{package.status}}</p>
+                              </div>
+                              <div class="table_body_text">
+                                <p class="table_text_scrollable_wrap">{{package.description}}</p>
+                              </div>
+                              <div class="table_body_text">
+                                <p>₦{{Intl.NumberFormat('en-IN').format(Number(package.delivery_price))}}</p>
+                              </div>
+                              <div class="table_body_text">
+                                <p class="table_text_scrollable_wrap">{{package.pickup_address}}</p>
+                              </div>
+                              <div class="table_body_text">
+                                <p class="table_text_scrollable_wrap">{{package.dropoff_address}}</p>
+                              </div>
+                              <div class="table_body_text">
+                                <p>{{package.created_at}}</p>
+                              </div>
+                            </div>
+                          </div>
+                          <div v-else class="disp_table_no_data">
+                            <div class="no_data_cont">
+                              <img src="../../../images/no-data.svg" width="100%" height="100%"/>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div v-else class="fl_row_center data_loading_main_cont disp-table_loading">
+                      <div class="data_loading_icon_cont">
+                        <img src="../../../images/loader_icon.svg" width="100%" height="100%"/>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+            </div>
+            <div class="mobile"></div>
+          </div>
+          <div></div>
+        </div>
+      </section>
+    </section>
+    <script src="../../../js/loader.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment-with-locales.min.js" integrity="sha512-LGXaggshOkD/at6PFNcp2V2unf9LzFq6LE+sChH7ceMTDP0g2kn6Vxwgg7wkPP7AAtX+lmPqPdxB47A0Nz0cMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="../../../js/vue.min.js"></script>
+    <script src="../../../js/toast.js"></script>
+    <script src="../../../js/modal.js"></script>
+    <script src="../../../models/user.js"></script>
+    <script src="../../../js/company_admin/dispatcher_profile.js"></script>
+  </body>
+</html>

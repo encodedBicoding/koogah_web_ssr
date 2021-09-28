@@ -110,7 +110,13 @@ function buildRegisterSuccessModal(message, action) {
   document.querySelector('.modal_close').addEventListener('click', action);
 }
 
-function buildErrorModal(message, action) {
+function buildNoticeModal(
+  message,
+  action,
+  actionText = 'Okay',
+  showCloseButton = true,
+  title = 'Notice!'
+) {
   if (!action) {
     action = hideModal;
   }
@@ -120,19 +126,30 @@ function buildErrorModal(message, action) {
   modal_container.innerHTML = `
   <div class="d-modal-content-holder">
     <div class="d-modal-pri-cont">
-      <h2 class="brand">Thank You!</h2>
+      <h3 class="font_secondary_dark">${title}</h3>
       <div class="text-center-cont">
-         <p class="text-center">${message}</p>
+         <p class="text-center font-small">${message}</p>
       </div>
-      <div class="btn_col_outline modal_close">
-        <p>Okay</p>
+      ${
+      showCloseButton ?
+      `<div class="fl-row-center-space-btwn">
+        <div class="btn_bg_dark modal_close mgrt-mm font-small">
+          <p>Close</p>
+        </div>
+        <div class="btn_col_outline btn_action">
+          <p class="font-small">${actionText}</p>
+        </div>
+      </div>`
+      :
+      `<div class="btn_col_outline btn_action">
+        <p class="font-small">${actionText}</p>
       </div>
-    </div>
-    <div class="d-modal-img-cont">
-      <img src="../images/email_response_img.png" alt="Register on Koogah as a logistics company" width="100%" height="100%"/>
+      `
+      }
     </div>
   </div>
   `;
   modal.appendChild(modal_container);
-  document.querySelector('.modal_close').addEventListener('click', action);
+  document.querySelector('.modal_close').addEventListener('click', hideModal);
+  document.querySelector('.btn_action').addEventListener('click', action);
 }

@@ -105,7 +105,7 @@
 }
 .toast_content{
   position: fixed;
-  width: 20%;
+  min-width: 200px;
   word-wrap: break-word;
   height: fit-content;
   background-color: #fff;
@@ -127,6 +127,10 @@
 .toast_content.success{
   color: green;
 }
+.toast_content.neutral{
+  color: #131523;
+}
+
 .toast_close{
   color: #3D3D3D;
   font-size: xx-small;

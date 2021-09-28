@@ -5,8 +5,8 @@ window.onload = function () {
   const query = new URLSearchParams(window.location.href);
   const account = query.get('code').toLowerCase();
   const token = query.get('key');
-  // sendMobileVerificationCode(account, token);
-  // get all inputs;
+  sendMobileVerificationCode(account, token);
+  // get all inputs;s
   const mobCodeOne = document.getElementById('mob_code_one');
   const mobCodeTwo = document.getElementById('mob_code_two');
   const mobCodeThree = document.getElementById('mob_code_three');

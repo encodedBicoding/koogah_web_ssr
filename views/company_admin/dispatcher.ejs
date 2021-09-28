@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <meta http-equiv="Content-type" content="text/html; charset=UTF-8" />
+    <meta content="Koogah" name="title" />
+    <meta
+      content="Koogah is a platform which brings a mobile-first solution and a SCPPD(Single Customer Per Package Delivery) system to solving logistics/delivery issues, connecting customers and business owners with dispatchers, and giving them control over their deliveries"
+      name="description"
+    />
+
+    <meta
+      name="keywords"
+      content="
+  delivery,
+  logistics,
+  koogah,
+  koogah delivery,
+  deliveries,
+  koogah logistics,
+  dispatchers,
+  couriers,
+  courier services,
+  logistics in nigeria,
+  delivery in nigeria,
+  deliveries in nigeria,
+  koogah faq,
+  frequently asked questions on koogah,
+  koogah frequently asked questions,
+  koogah for company,
+  koogah4company
+  "
+    />
+    <meta name="twitter:site" content="@thekoogahbrand" />
+    <meta name="twitter:domain" content="koogah.com" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://twitter.com/thekoogahbrand" />
+    <meta name="twitter:title" content="Koogah" />
+    <meta
+      name="twitter:description"
+      content="The fastest way to get goods/packages delivered. With actual real-time tracking, and a trusted network of dispatchers"
+    />
+    <meta
+      name="twitter:image"
+      content="https://pbs.twimg.com/profile_images/1411243565460688896/076o7nTm_400x400.jpg"
+    />
+    <meta name="locale" content="en_EN" />
+    <meta name="robots" content="index, follow" />
+    <meta name="site_name" content="Koogah" />
+    <meta content="English" name="language" />
+    <meta content="5 days" name="revisit-after" />
+    <meta content="Koogah" name="author" />
+    <link rel="shortcut icon" href="../../../images/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="../../../css/index.css" />
+    <link rel="stylesheet" href="../../../css/nav.css" />
+    <link rel="stylesheet" href="../../../css/toast.css" />
+    <link rel="stylesheet" href="../../../css/loader.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+      integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCYPNv2kt9vLe4ApNolquwLE8TlMCBJLC0&libraries=places"></script>
+    <title>
+     <%-user.business_name%> - Dispatchers - Koogah Company Dashboard
+    </title>
+  </head>
+  <body id="roots">
+    <div class="loader hd">
+      <div class="loader_holder">
+        <img src="../../../images/loader_icon.svg" width="100%" height="100%s"/>
+      </div>
+    </div>
+    <div class="toast remove"></div>
+    <div class="d-modal hide"></div>
+    <section id="company_admin_dispatcher" class="admin_dash_container">
+      <!-- 
+        MODALS
+       -->
+       <div class="d-modal show" v-if="show_edit_dispatcher_modal">
+        <div class="d-modal-container">
+          <div class="d-modal-content-holder">
+            <div class="d-modal-pri-cont_start">
+              <h4 class="mg_top_btm">Edit dispatcher detail</h4>
+              <div class="est_form_sub_hld">
+                <input v-model="edit_form_field.first_name" type="text" class="form-control form_field"/>
+                <input v-model="edit_form_field.last_name" type="text" class="form-control form_field"/>
+              </div>
+              <div class="input-group mg_top_btm">
+                <span class="input-group-text">+234</span>
+                <input
+                  required
+                  type="text"
+                  name="phone"
+                  class="form-control-text"
+                  placeholder="Phone Number"
+                  maxlength="11"
+                  minlength="10"
+                  v-model="edit_form_field.mobile_number"
+                />
+              </div>
+            </div>
+            <div class="d-modal_footer_action">
+              <div class="btn_bg_white_norm_width modal_btn modal_close" v-on:click="closeEditDispatcher">Cancel</div>
+              <div class="btn_bg_dark_norm_width modal_btn btn_action" v-on:click="editDispatcher">Save</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div v-if="is_adding_dispatcher" class="d-modal show">
+        <div class="d-modal-container">
+          <div v-if="is_adding_dispatcher_email" class="d-modal-content-holder">
+            <div class="d-modal-pri-cont_start">
+              <div class="d-modal-pri-header">
+                <h4>Add a new dispatcher</h4>
+              </div>
+              <div class="d-modal-pri-body">
+                <p class="font-small mg_top_btn_sm">Enter dispatcher email address</p>
+                <div class="wd-100">
+                  <input 
+                    v-model="new_dispatcher.email" 
+                    type="email" 
+                    class="form-control-text"
+                    required
+                  />
+                </div>
+                <p class="font-xsm mg_top_btn_sm font_brand_faint">A verification code will be sent to this {{current_dispatcher_add_phase === 'email' ? 'email address' : 'mobile number'}}, ask your dispatcher to send the code to you.</p>
+              </div>
+            </div>
+            <div class="d-modal_footer_action">
+              <div class="btn_bg_white_norm_width modal_btn modal_close" v-on:click="closeAddingDispatcher">Cancel</div>
+              <div class="btn_bg_dark_norm_width modal_btn btn_action" v-on:click="sendEmailVerificationCode">Submit</div>
+            </div>
+          </div>
+          <div v-if="is_adding_dispatcher_phone" class="d-modal-content-holder">
+            <div class="d-modal-pri-cont_start">
+              <div class="d-modal-pri-header">
+                <h4>Dispatcher phone number</h4>
+              </div>
+              <div class="d-modal-pri-body">
+                <p class="font-small mg_top_btn_sm">Enter phone number to verify</p>
+                <div class="input-group mg_top_btm">
+                  <span class="input-group-text">+234</span>
+                  <input
+                    required
+                    type="text"
+                    name="phone"
+                    class="form-control-text"
+                    placeholder="Phone Number"
+                    maxlength="11"
+                    minlength="10"
+                    v-model="new_dispatcher.mobile_number"
+                  />
+                </div>
+                <p class="font-xsm mg_top_btn_sm font_brand_faint">A verification code will be sent to this {{current_dispatcher_add_phase === 'email' ? 'email address' : 'mobile number'}}, ask your dispatcher to send the code to you.</p>
+              </div>
+            </div>
+            <div class="d-modal_footer_action">
+              <div class="btn_bg_white_norm_width modal_btn modal_close" v-on:click="closeAddingDispatcher">Cancel</div>
+              <div class="btn_bg_dark_norm_width modal_btn btn_action" v-on:click="sendMobileVerificationCode">Submit</div>
+            </div>
+          </div>
+          <div v-if="is_verifying_signup_code" class="d-modal-content-holder">
+            <div class="d-modal-pri-cont_start">
+              <div class="d-modal-pri-header">
+                <h4 class="text-center wd-100">Verify dispatcher {{current_dispatcher_add_phase === 'email' ? 'email' : 'mobile number'}}</h4>
+              </div>
+              <div class="d-modal-pri-body">
+                <p class="font-small mg_top_btn_sm wd-100 text-center">Enter code sent to dispatcher {{current_dispatcher_add_phase === 'email' ? 'email address' : 'mobile number'}}</p>
+                <div class="wd-100">
+                  <div class="mobile_code_form">
+                    <input
+                      name="dispatcher_reg_code"
+                      type="tel"
+                      maxlength="1"
+                      class="mob_code_item"
+                      id="dispatcher_reg_code_one"
+                      v-model="dispatcher_reg_code_one"
+                    />
+                    <input
+                      name="dispatcher_reg_code"
+                      type="tel"
+                      maxlength="1"
+                      class="mob_code_item"
+                      id="dispatcher_reg_code_two"
+                      v-model="dispatcher_reg_code_two"
+                    />
+                    <input
+                      name="dispatcher_reg_code"
+                      type="tel"
+                      maxlength="1"
+                      class="mob_code_item"
+                      id="dispatcher_reg_code_three"
+                      v-model="dispatcher_reg_code_three"
+                    />
+                    <input
+                      name="dispatcher_reg_code"
+                      type="tel"
+                      maxlength="1"
+                      class="mob_code_item"
+                      id="dispatcher_reg_code_four"
+                      v-model="dispatcher_reg_code_four"
+                    />
+                    <input
+                      name="dispatcher_reg_code"
+                      type="tel"
+                      maxlength="1"
+                      class="mob_code_item"
+                      id="dispatcher_reg_code_five"
+                      v-model="dispatcher_reg_code_five"
+                    />
+                  </div>
+                  <div class="wd-100 mtop-sm">
+                    <p class="text-center font_brand_faint font-xsm">Didn't get code? <span class="font-xsm brand link">Resend</span></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="d-modal_footer_action">
+              <div class="btn_bg_white_norm_width modal_btn modal_close" v-on:click="closeAddingDispatcher">Cancel</div>
+              <div class="btn_bg_dark_norm_width modal_btn btn_action" v-on:click="verifyDispatcherCode">Verify</div>
+            </div>
+          </div>
+          <div v-if="is_adding_dispatcher_data" class="d-modal-content-holder">
+            <div class="d-modal-pri-cont_start">
+              <div class="d-modal-pri-header">
+                <h4>Add dispatcher detail</h4>
+                <p class="font-xsm font_brand_faint">Fill correctly the fields below to finish adding your dispatcher</p>
+              </div>
+              <div class="add_disp_headshot_container">
+                <input 
+                id="add_dispatcher_profile_image" 
+                type="file" 
+                class="d-none" 
+                accept="image/*"
+                v-model="temp_dispatcher_profile_image"
+                />
+                <div class="add_disp_headshot_container_sub" onclick="document.getElementById('add_dispatcher_profile_image').click()">
+                  <div class="add_disp_image_holder">
+                    <img :src="new_dispatcher.profile_image ? new_dispatcher.profile_image : '../../../images/default_company_icon.png'" width="100%" max-height="auto"/>
+                  </div>
+                  <div>
+                    <p class="font-xsm brand">Upload dispatcher headshot</p>
+                    <p class="font-xsm font_brand_faint">Image should be a headshot in jpeg or png format.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="add_dispatcher_body_container">
+                <div class="est_form_sub_hld">
+                  <div class="wd-100 est_form_drpdwn_cont">
+                    <input 
+                      id="new_dispatcher_first_name"
+                      type="text"
+                      class="form-control form_field est_input"
+                      placeholder="First name"
+                      autocomplete="none"
+                      v-model="new_dispatcher.first_name"
+                    />
+                  </div>
+                  <div class="wd-100 est_form_drpdwn_cont">
+                    <input 
+                      id="new_dispatcher_last_name"
+                      type="text"
+                      class="form-control form_field est_input"
+                      placeholder="Last name"
+                      autocomplete="none"
+                      v-model="new_dispatcher.last_name"
+                    />
+                  </div>
+                </div>
+                <div class="est_form_sub_hld">
+                  <div class="wd-100 est_form_drpdwn_cont">
+                    <select
+                      required
+                      name="country"
+                      class="form-control form_field est_input"
+                      v-model="selected_dispatcher_country"
+                    >
+                      <option selected value="" disabled>Select country</option>
+                      <option value="nigeria">Nigeria</option>
+                   </select>
+                  </div>
+                  <div class="wd-100 est_form_drpdwn_cont">
+                    <select
+                      required
+                      name="country"
+                      class="form-control form_field est_input"
+                      v-model="selected_dispatcher_state"
+                      :disabled="selected_dispatcher_country ? false : true"
+                      >
+                      <option selected value="" disabled>Select state</option>
+                      <option v-for="state of all_states" :value="state.toLowerCase()">{{state}}</option>
+                  </select>
+                  </div>
+                </div>
+                <div class="est_form_sub_hld">
+                  <div class="wd-100 est_form_drpdwn_cont">
+                    <select
+                      required
+                      name="country"
+                      class="form-control form_field est_input"
+                      id="company_select_country"
+                      v-model="selected_dispatcher_city"
+                      :disabled="selected_dispatcher_state ? false : true"
+                    >
+                      <option selected value="" disabled>Select city/town</option>
+                      <option v-for="city of all_selected_towns" :value="city.toLowerCase()">{{city}}</option>
+                   </select>
+                  </div>
+                  <div class="wd-100 est_form_drpdwn_cont">
+                    <select
+                      required
+                      name="country"
+                      class="form-control form_field est_input"
+                      id="company_select_country"
+                      v-model="selected_dispatcher_gender"
+                      >
+                      <option selected value="" disabled>Select gender</option>
+                      <option value="F">Female</option>
+                      <option value="M">Male</option>
+                  </select>
+                  </div>
+                </div>
+                <div class="est_form_sub_hld">
+                  <div class="est_form_sub_hld">
+                    <div class="wd-100 est_form_drpdwn_cont">
+                      <input 
+                        id="dispatcher_setup_password"
+                        name="dispatcher_setup_password"
+                        :type="show_new_dispatcher_password ? 'text' : 'password'"
+                        class="form-control form_field"
+                        placeholder="Password"
+                        autocomplete="none"
+                        v-model="new_dispatcher.password"
+                      />
+                    </div>
+                    <div :class="show_new_dispatcher_password ? 'password_icon eye_show' : 'password_icon eye_off' " v-on:click="togglePasswordReveal"></div>
+                  </div>
+                  <div class="wd-100 est_form_drpdwn_cont">
+                    <input 
+                      id="new_dispatcher_full_address"
+                      type="text"
+                      class="form-control form_field est_input"
+                      placeholder="Full address"
+                      v-model="new_dispatcher.address"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="d-modal_footer_action">
+              <div class="btn_bg_white_norm_width modal_btn modal_close" v-on:click="closeAddingDispatcher">Cancel</div>
+              <div class="btn_bg_dark_norm_width modal_btn btn_action" v-on:click="addNewDispatcher">Add</div>
+            </div>
+          </div>
+        </div>
+  
+      </div>
+
+      <!-- 
+
+        END MODAL
+       -->
+      <%- include('../components/dash_nav.ejs', 
+      {
+        has_back_arrow: false,
+      }
+      )%>
+      <section class="main_company_dash_grid">
+        <%- include('../components/dash_side_nav.ejs') %>
+        <div class="admin_overview">
+          <div class="wd-100">
+            <div class="comp">
+              <div class="fl-row-center-space-btwn dash_overview_space">
+                <h3>Dispatchers</h3>
+                <div class="fl-row-center-space-btwn" v-on:click="startDispatcherAddition">
+                  <button class="btn_bg_dark">Add Dispatcher</button>
+                </div>
+              </div>
+              <div class="wd-100">
+                <div class="overview_top_grid">
+                  <div class="o_t_grid_item">
+                    <div class="fl-col-start-space-btwn otg_card" v-if="!is_loading_total_dispatchers_item">
+                      <div class="otg_card_header">
+                        <span class="font_brand_faint">Total dispatchers</span>
+                      </div>
+                      <div class="otg_card_body">
+                        <span class="font_secondary_dark otg_card_b_data">{{Intl.NumberFormat('en-IN').format(Number(total_dispatchers_item.total_value))}}</span>
+                        <div class="fl-row-center-start">
+                          <span v-if="timeFrame === 'days'" class="font-small font_brand_faint">Today: {{Intl.NumberFormat('en-IN').format(Number(total_dispatchers_item.current_month))}}</span>
+                          <span v-if="timeFrame === 'weeks'" class="font-small font_brand_faint">This week: {{Intl.NumberFormat('en-IN').format(Number(total_dispatchers_item.current_month))}}</span>
+                          <span v-if="timeFrame === 'months'" class="font-small font_brand_faint">This month: {{Intl.NumberFormat('en-IN').format(Number(total_dispatchers_item.current_month))}}</span>
+                        </div>
+                        <div class="fl-row-center-start">
+                          <span :class="total_dispatchers_item.increased ? 'font-success font-small' : 'font-danger font-small' ">{{Intl.NumberFormat('en-IN').format(Number(total_dispatchers_item.percent))}}%</span>
+                          <div class="arrow_seer">
+                            <img v-if="total_dispatchers_item.increased" src="../../../images/arrow_up.svg" width="100%" height="100%"/>
+                            <img v-else src="../../../images/arrow_down.svg" width="100%" height="100%"/>
+                          </div>
+                          <span class="font-small font_brand_faint" v-if="timeFrame === 'months' ">than last month</span>
+                          <span class="font-small font_brand_faint" v-if="timeFrame === 'weeks' ">than last week</span>
+                          <span class="font-small font_brand_faint" v-if="timeFrame === 'days' ">than yesterday</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div v-else class="fl_row_center data_loading_main_cont">
+                      <div class="data_loading_icon_cont">
+                        <img src="../../../images/loader_icon.svg" width="100%" height="100%"/>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="o_t_grid_item brand_bg_no_hover">
+                    <div class="fl-col-start-space-btwn otg_card">
+                      <div class="otg_card_header">
+                        <span class="font-white">Tracking dispatchers</span>
+                      </div>
+                      <div class="otg_card_body">
+                        <span class="font-white otg_card_b_data">{{currently_tracking_dispatchers.length}}</span>
+                        <div class="view_dispatcher_item_card">
+                          <div class="view_dispatcher_item" v-on:click="selectTableNav('tracking')">
+                            <span class="fa fa-eye font-small font_secondary_dark_faint"></span>
+                            <span class="font_secondary_dark_faint font-xsm">View</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="o_t_grid_item">
+                    <div class="fl-col-start-space-btwn otg_card" v-if="!is_fetching_new_dispatchers">
+                      <div class="otg_card_header">
+                        <span class="font_brand_faint">New dispatchers</span>
+                      </div>
+                      <div class="otg_card_body">
+                        <span class="font_secondary_dark otg_card_b_data">{{Intl.NumberFormat('en-IN').format(Number(new_dispatchers_count))}}</span>
+                        <div class="fl-row-center-start">
+                          <span class="font-small font_brand_faint">Since 4 days ago</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div v-else class="fl_row_center data_loading_main_cont">
+                      <div class="data_loading_icon_cont">
+                        <img src="../../../images/loader_icon.svg" width="100%" height="100%"/>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <section class="wd-100" name="dispatchers_table">
+                <div class="table_container">
+                  <div class="table_controls">
+                    <div class="fl-row-center-space-btwn">
+                      <div class="fl_row_center">
+                        <span 
+                          for="table_nav_all" 
+                          :class="selectedTableNav === 'all' ? 'dash_time_frame selectedTF' : 'dash_time_frame' "
+                          v-on:click="() => selectTableNav('all')">
+                          <input 
+                            type="checkbox" 
+                            name="table_nav_all" 
+                            value="all" 
+                            title="table_nav" 
+                            class="time_frame_invisible"
+                            :checked="selectedTableNav === 'all'"
+                            />
+                            All
+                        </span>
+                        <span 
+                          for="table_nav_new" 
+                          :class="selectedTableNav === 'new' ? 'dash_time_frame selectedTF' : 'dash_time_frame' "
+                          v-on:click="() => selectTableNav('new')">
+                          <input 
+                            type="checkbox" 
+                            name="table_nav_new" 
+                            value="new" 
+                            title="table_nav" 
+                            class="time_frame_invisible"
+                            :checked="selectedTableNav === 'new'"
+                            />
+                            New
+                        </span>
+                        <span 
+                        for="table_nav_traccking" 
+                        :class="selectedTableNav === 'tracking' ? 'dash_time_frame selectedTF' : 'dash_time_frame' "
+                        v-on:click="() => selectTableNav('tracking')">
+                        <input 
+                          type="checkbox" 
+                          name="table_nav_tracking" 
+                          value="tracking" 
+                          title="table_nav" 
+                          class="time_frame_invisible"
+                          :checked="selectedTableNav === 'tracking'"
+                          />
+                          Tracking
+                      </span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="dispatcher_table_header">
+                    <p class="table_header_text table_h_n">name</p>
+                    <p class="table_header_text">deliveries</p>
+                    <p class="table_header_text">email</p>
+                    <p class="table_header_text">ratings (5 max)</p>
+                    <p class="table_header_text">date created</p>
+                    <p></p>
+                  </div>
+                  <div v-if="!is_table_loading" class="main_disp_table_body_con">
+                    <div v-if="dispatchers.length > 0">
+                      <div class="dispatcher_table_body" v-for="dispatcher in dispatchers" name="dispatcher_table_body">
+                        <div class="table_body_text table_b_nt">
+                          <!-- <div class="checkbox_cont">
+                            <input 
+                              type="checkbox"
+                              name="disp_table_checkbox"
+                              class="table_checkbox"
+                            />
+                          </div> -->
+                          <div class="disp_table_image">
+                            <img :src="dispatcher.profile_image" width="100%" height="100%"/>
+                          </div>
+                          <div>{{dispatcher.full_name}}</div>
+                        </div>
+                        <p class="table_body_text">
+                          {{dispatcher.deliveries}}
+                        </p>
+                        <p class="table_body_text">{{dispatcher.email}}</p>
+                        <p class="table_body_text">{{dispatcher.rating}}</p>
+                        <p class="table_body_text">{{dispatcher.date}}</p>
+                        <div class="disp_table_elips_cont">
+                          <span class="fa fa-ellipsis-v font_secondary_dark_faint" aria-hidden="true" v-on:click="activateOptionId(dispatcher.id)"></span>
+                          <div class="disp_table_option_id" v-if="dispatcher.id === active_option_id">
+                            <div class="disp_option_item" v-on:click="viewDispatcher(dispatcher.id)">
+                              <p class="font-small">View</p>
+                            </div>
+                            <div class="disp_option_item" v-on:click="showEditDispatcher(dispatcher.id)">
+                              <p class="font-small">Edit</p>
+                            </div>
+                            <div class="disp_option_item">
+                              <p class="font-small font-danger">Remove</p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div v-else class="disp_table_no_data">
+                      <div class="no_data_cont">
+                        <img src="../../../images/no-data.svg" width="100%" height="100%"/>
+                      </div>
+                    </div>
+                  </div>
+                  <div v-else class="fl_row_center data_loading_main_cont disp-table_loading">
+                    <div class="data_loading_icon_cont">
+                      <img src="../../../images/loader_icon.svg" width="100%" height="100%"/>
+                    </div>
+                  </div>
+                </div>
+              </section>
+            </div>
+            <div class="mobile"></div>
+          </div>
+          <div></div>
+        </div>
+      </section>
+    </section>
+    <script src="../../../js/loader.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment-with-locales.min.js" integrity="sha512-LGXaggshOkD/at6PFNcp2V2unf9LzFq6LE+sChH7ceMTDP0g2kn6Vxwgg7wkPP7AAtX+lmPqPdxB47A0Nz0cMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="../../../js/vue.min.js"></script>
+    <script src="../../../js/toast.js"></script>
+    <script src="../../../js/modal.js"></script>
+    <script src="../../../models/user.js"></script>
+    <script src="../../../js/cities_and_towns.js"></script>
+    <script src="../../../js/company_admin/dispatcher.js"></script>
+  </body>
+</html>
