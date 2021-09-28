@@ -44,7 +44,7 @@ const vm = new Vue({
     // connect to websocket.
     // listen for notification
     const self = this;
-    let connectionString = 'ws://localhost:4000/data_seeking'
+    let connectionString = 'wss://koogah-api-staging.herokuapp.com/data_seeking'
     const webSocket = new WebSocket(connectionString);
     webSocket.onopen = function () {
       self.socket = webSocket;
