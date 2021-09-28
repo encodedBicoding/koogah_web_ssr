@@ -13,6 +13,7 @@ const vm = new Vue({
     is_loading_withdrawable_current_balance: true,
     withdrawable_balance: 0,
     current_balance: 0,
+    retry_fetch_nigerian_banks: 0,
   },
   beforeMount() {
     this.host = window.location.origin;
@@ -21,7 +22,7 @@ const vm = new Vue({
     // connect to websocket.
     // listen for notification
     const self = this;
-    let connectionString = 'ws://localhost:4000/data_seeking'
+    let connectionString = 'wss://koogah-api-staging.herokuapp.com/data_seeking' //wss://core.koogahapis.com/data_seeking
     const webSocket = new WebSocket(connectionString);
     webSocket.onopen = function () {
       self.socket = webSocket;
@@ -65,8 +66,8 @@ const vm = new Vue({
       }
     },
     fetchNigerianBanks: async function () {
-      let retry = 0;
       this.is_fetching_banks = true;
+      const self = this;
       try {
         const response = await window.fetch('https://api.paystack.co/bank', {
           method: 'GET'
@@ -81,9 +82,9 @@ const vm = new Vue({
         }
         this.is_fetching_banks = false;
       } catch (err) {
-        if (retry < 5) {
+        if (self.retry_fetch_nigerian_banks < 5) {
           this.fetchNigerianBanks();
-          retry = retry + 1;
+          self.retry_fetch_nigerian_banks = self.retry_fetch_nigerian_banks + 1;
         }
       }
     },
