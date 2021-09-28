@@ -78,6 +78,293 @@
     <div class="toast remove"></div>
     <div class="d-modal hide"></div>
     <section id="company_admin_dispatcher" class="admin_dash_container">
+      <!-- 
+        MODALS
+       -->
+       <div class="d-modal show" v-if="show_edit_dispatcher_modal">
+        <div class="d-modal-container">
+          <div class="d-modal-content-holder">
+            <div class="d-modal-pri-cont_start">
+              <h4 class="mg_top_btm">Edit dispatcher detail</h4>
+              <div class="est_form_sub_hld">
+                <input v-model="edit_form_field.first_name" type="text" class="form-control form_field"/>
+                <input v-model="edit_form_field.last_name" type="text" class="form-control form_field"/>
+              </div>
+              <div class="input-group mg_top_btm">
+                <span class="input-group-text">+234</span>
+                <input
+                  required
+                  type="text"
+                  name="phone"
+                  class="form-control-text"
+                  placeholder="Phone Number"
+                  maxlength="11"
+                  minlength="10"
+                  v-model="edit_form_field.mobile_number"
+                />
+              </div>
+            </div>
+            <div class="d-modal_footer_action">
+              <div class="btn_bg_white_norm_width modal_btn modal_close" v-on:click="closeEditDispatcher">Cancel</div>
+              <div class="btn_bg_dark_norm_width modal_btn btn_action" v-on:click="editDispatcher">Save</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div v-if="is_adding_dispatcher" class="d-modal show">
+        <div class="d-modal-container">
+          <div v-if="is_adding_dispatcher_email" class="d-modal-content-holder">
+            <div class="d-modal-pri-cont_start">
+              <div class="d-modal-pri-header">
+                <h4>Add a new dispatcher</h4>
+              </div>
+              <div class="d-modal-pri-body">
+                <p class="font-small mg_top_btn_sm">Enter dispatcher email address</p>
+                <div class="wd-100">
+                  <input 
+                    v-model="new_dispatcher.email" 
+                    type="email" 
+                    class="form-control-text"
+                    required
+                  />
+                </div>
+                <p class="font-xsm mg_top_btn_sm font_brand_faint">A verification code will be sent to this {{current_dispatcher_add_phase === 'email' ? 'email address' : 'mobile number'}}, ask your dispatcher to send the code to you.</p>
+              </div>
+            </div>
+            <div class="d-modal_footer_action">
+              <div class="btn_bg_white_norm_width modal_btn modal_close" v-on:click="closeAddingDispatcher">Cancel</div>
+              <div class="btn_bg_dark_norm_width modal_btn btn_action" v-on:click="sendEmailVerificationCode">Submit</div>
+            </div>
+          </div>
+          <div v-if="is_adding_dispatcher_phone" class="d-modal-content-holder">
+            <div class="d-modal-pri-cont_start">
+              <div class="d-modal-pri-header">
+                <h4>Dispatcher phone number</h4>
+              </div>
+              <div class="d-modal-pri-body">
+                <p class="font-small mg_top_btn_sm">Enter phone number to verify</p>
+                <div class="input-group mg_top_btm">
+                  <span class="input-group-text">+234</span>
+                  <input
+                    required
+                    type="text"
+                    name="phone"
+                    class="form-control-text"
+                    placeholder="Phone Number"
+                    maxlength="11"
+                    minlength="10"
+                    v-model="new_dispatcher.mobile_number"
+                  />
+                </div>
+                <p class="font-xsm mg_top_btn_sm font_brand_faint">A verification code will be sent to this {{current_dispatcher_add_phase === 'email' ? 'email address' : 'mobile number'}}, ask your dispatcher to send the code to you.</p>
+              </div>
+            </div>
+            <div class="d-modal_footer_action">
+              <div class="btn_bg_white_norm_width modal_btn modal_close" v-on:click="closeAddingDispatcher">Cancel</div>
+              <div class="btn_bg_dark_norm_width modal_btn btn_action" v-on:click="sendMobileVerificationCode">Submit</div>
+            </div>
+          </div>
+          <div v-if="is_verifying_signup_code" class="d-modal-content-holder">
+            <div class="d-modal-pri-cont_start">
+              <div class="d-modal-pri-header">
+                <h4 class="text-center wd-100">Verify dispatcher {{current_dispatcher_add_phase === 'email' ? 'email' : 'mobile number'}}</h4>
+              </div>
+              <div class="d-modal-pri-body">
+                <p class="font-small mg_top_btn_sm wd-100 text-center">Enter code sent to dispatcher {{current_dispatcher_add_phase === 'email' ? 'email address' : 'mobile number'}}</p>
+                <div class="wd-100">
+                  <div class="mobile_code_form">
+                    <input
+                      name="dispatcher_reg_code"
+                      type="tel"
+                      maxlength="1"
+                      class="mob_code_item"
+                      id="dispatcher_reg_code_one"
+                      v-model="dispatcher_reg_code_one"
+                    />
+                    <input
+                      name="dispatcher_reg_code"
+                      type="tel"
+                      maxlength="1"
+                      class="mob_code_item"
+                      id="dispatcher_reg_code_two"
+                      v-model="dispatcher_reg_code_two"
+                    />
+                    <input
+                      name="dispatcher_reg_code"
+                      type="tel"
+                      maxlength="1"
+                      class="mob_code_item"
+                      id="dispatcher_reg_code_three"
+                      v-model="dispatcher_reg_code_three"
+                    />
+                    <input
+                      name="dispatcher_reg_code"
+                      type="tel"
+                      maxlength="1"
+                      class="mob_code_item"
+                      id="dispatcher_reg_code_four"
+                      v-model="dispatcher_reg_code_four"
+                    />
+                    <input
+                      name="dispatcher_reg_code"
+                      type="tel"
+                      maxlength="1"
+                      class="mob_code_item"
+                      id="dispatcher_reg_code_five"
+                      v-model="dispatcher_reg_code_five"
+                    />
+                  </div>
+                  <div class="wd-100 mtop-sm">
+                    <p class="text-center font_brand_faint font-xsm">Didn't get code? <span class="font-xsm brand link">Resend</span></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="d-modal_footer_action">
+              <div class="btn_bg_white_norm_width modal_btn modal_close" v-on:click="closeAddingDispatcher">Cancel</div>
+              <div class="btn_bg_dark_norm_width modal_btn btn_action" v-on:click="verifyDispatcherCode">Verify</div>
+            </div>
+          </div>
+          <div v-if="is_adding_dispatcher_data" class="d-modal-content-holder">
+            <div class="d-modal-pri-cont_start">
+              <div class="d-modal-pri-header">
+                <h4>Add dispatcher detail</h4>
+                <p class="font-xsm font_brand_faint">Fill correctly the fields below to finish adding your dispatcher</p>
+              </div>
+              <div class="add_disp_headshot_container">
+                <input 
+                id="add_dispatcher_profile_image" 
+                type="file" 
+                class="d-none" 
+                accept="image/*"
+                v-model="temp_dispatcher_profile_image"
+                />
+                <div class="add_disp_headshot_container_sub" onclick="document.getElementById('add_dispatcher_profile_image').click()">
+                  <div class="add_disp_image_holder">
+                    <img :src="new_dispatcher.profile_image ? new_dispatcher.profile_image : '../../../images/default_company_icon.png'" width="100%" max-height="auto"/>
+                  </div>
+                  <div>
+                    <p class="font-xsm brand">Upload dispatcher headshot</p>
+                    <p class="font-xsm font_brand_faint">Image should be a headshot in jpeg or png format.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="add_dispatcher_body_container">
+                <div class="est_form_sub_hld">
+                  <div class="wd-100 est_form_drpdwn_cont">
+                    <input 
+                      id="new_dispatcher_first_name"
+                      type="text"
+                      class="form-control form_field est_input"
+                      placeholder="First name"
+                      autocomplete="none"
+                      v-model="new_dispatcher.first_name"
+                    />
+                  </div>
+                  <div class="wd-100 est_form_drpdwn_cont">
+                    <input 
+                      id="new_dispatcher_last_name"
+                      type="text"
+                      class="form-control form_field est_input"
+                      placeholder="Last name"
+                      autocomplete="none"
+                      v-model="new_dispatcher.last_name"
+                    />
+                  </div>
+                </div>
+                <div class="est_form_sub_hld">
+                  <div class="wd-100 est_form_drpdwn_cont">
+                    <select
+                      required
+                      name="country"
+                      class="form-control form_field est_input"
+                      v-model="selected_dispatcher_country"
+                    >
+                      <option selected value="" disabled>Select country</option>
+                      <option value="nigeria">Nigeria</option>
+                   </select>
+                  </div>
+                  <div class="wd-100 est_form_drpdwn_cont">
+                    <select
+                      required
+                      name="country"
+                      class="form-control form_field est_input"
+                      v-model="selected_dispatcher_state"
+                      :disabled="selected_dispatcher_country ? false : true"
+                      >
+                      <option selected value="" disabled>Select state</option>
+                      <option v-for="state of all_states" :value="state.toLowerCase()">{{state}}</option>
+                  </select>
+                  </div>
+                </div>
+                <div class="est_form_sub_hld">
+                  <div class="wd-100 est_form_drpdwn_cont">
+                    <select
+                      required
+                      name="country"
+                      class="form-control form_field est_input"
+                      id="company_select_country"
+                      v-model="selected_dispatcher_city"
+                      :disabled="selected_dispatcher_state ? false : true"
+                    >
+                      <option selected value="" disabled>Select city/town</option>
+                      <option v-for="city of all_selected_towns" :value="city.toLowerCase()">{{city}}</option>
+                   </select>
+                  </div>
+                  <div class="wd-100 est_form_drpdwn_cont">
+                    <select
+                      required
+                      name="country"
+                      class="form-control form_field est_input"
+                      id="company_select_country"
+                      v-model="selected_dispatcher_gender"
+                      >
+                      <option selected value="" disabled>Select gender</option>
+                      <option value="F">Female</option>
+                      <option value="M">Male</option>
+                  </select>
+                  </div>
+                </div>
+                <div class="est_form_sub_hld">
+                  <div class="est_form_sub_hld">
+                    <div class="wd-100 est_form_drpdwn_cont">
+                      <input 
+                        id="dispatcher_setup_password"
+                        name="dispatcher_setup_password"
+                        :type="show_new_dispatcher_password ? 'text' : 'password'"
+                        class="form-control form_field"
+                        placeholder="Password"
+                        autocomplete="none"
+                        v-model="new_dispatcher.password"
+                      />
+                    </div>
+                    <div :class="show_new_dispatcher_password ? 'password_icon eye_show' : 'password_icon eye_off' " v-on:click="togglePasswordReveal"></div>
+                  </div>
+                  <div class="wd-100 est_form_drpdwn_cont">
+                    <input 
+                      id="new_dispatcher_full_address"
+                      type="text"
+                      class="form-control form_field est_input"
+                      placeholder="Full address"
+                      v-model="new_dispatcher.address"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="d-modal_footer_action">
+              <div class="btn_bg_white_norm_width modal_btn modal_close" v-on:click="closeAddingDispatcher">Cancel</div>
+              <div class="btn_bg_dark_norm_width modal_btn btn_action" v-on:click="addNewDispatcher">Add</div>
+            </div>
+          </div>
+        </div>
+  
+      </div>
+
+      <!-- 
+
+        END MODAL
+       -->
       <%- include('../components/dash_nav.ejs', 
       {
         has_back_arrow: false,
@@ -90,7 +377,7 @@
             <div class="comp">
               <div class="fl-row-center-space-btwn dash_overview_space">
                 <h3>Dispatchers</h3>
-                <div class="fl-row-center-space-btwn">
+                <div class="fl-row-center-space-btwn" v-on:click="startDispatcherAddition">
                   <button class="btn_bg_dark">Add Dispatcher</button>
                 </div>
               </div>
@@ -224,13 +511,13 @@
                     <div v-if="dispatchers.length > 0">
                       <div class="dispatcher_table_body" v-for="dispatcher in dispatchers" name="dispatcher_table_body">
                         <div class="table_body_text table_b_nt">
-                          <div class="checkbox_cont">
+                          <!-- <div class="checkbox_cont">
                             <input 
                               type="checkbox"
                               name="disp_table_checkbox"
                               class="table_checkbox"
                             />
-                          </div>
+                          </div> -->
                           <div class="disp_table_image">
                             <img :src="dispatcher.profile_image" width="100%" height="100%"/>
                           </div>
@@ -248,7 +535,7 @@
                             <div class="disp_option_item" v-on:click="viewDispatcher(dispatcher.id)">
                               <p class="font-small">View</p>
                             </div>
-                            <div class="disp_option_item">
+                            <div class="disp_option_item" v-on:click="showEditDispatcher(dispatcher.id)">
                               <p class="font-small">Edit</p>
                             </div>
                             <div class="disp_option_item">
@@ -280,10 +567,11 @@
     </section>
     <script src="../../../js/loader.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment-with-locales.min.js" integrity="sha512-LGXaggshOkD/at6PFNcp2V2unf9LzFq6LE+sChH7ceMTDP0g2kn6Vxwgg7wkPP7AAtX+lmPqPdxB47A0Nz0cMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="https://unpkg.com/vue"></script>
+    <script src="../../../js/vue.min.js"></script>
     <script src="../../../js/toast.js"></script>
     <script src="../../../js/modal.js"></script>
     <script src="../../../models/user.js"></script>
+    <script src="../../../js/cities_and_towns.js"></script>
     <script src="../../../js/company_admin/dispatcher.js"></script>
   </body>
 </html>

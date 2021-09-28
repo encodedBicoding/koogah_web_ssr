@@ -34,7 +34,6 @@ app.use(session({
   saveUninitialized: true,
   proxy: true,
   resave: false,
-  name: '__KoogahWebSess__',
   secret: process.env.SESSION_SECRET
 }))
 

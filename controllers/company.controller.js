@@ -256,6 +256,125 @@ class CompanyController {
       })
     })
   }
+
+  static editDispatcherDetail(req, res) {
+    return Promise.try(async () => {
+      let token = req.cookies['koogah_session_token'];
+      let { id } = req.params;
+      const { ...data } = req.body;
+      const response = await fetch(`${base_url}/company/dispatcher/edit/${id}`, {
+        method: 'PUT',
+        body: JSON.stringify({...data}),
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
+        }
+      }).then((resp) => resp.json());
+      return res.json(response);
+    }).catch(err => {
+      return res.status(500).json({
+        status: 500,
+        error: err,
+      })
+    })
+  }
+  static sendDispatcherEmailVerificationCode(req, res) {
+    return Promise.try(async () => {
+      let token = req.cookies['koogah_session_token'];
+      let { email } = req.params;
+      const response = await fetch(`${base_url}/company/dispatcher/signup/email`, {
+        method: 'POST',
+        body: JSON.stringify({email}),
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
+        }
+      }).then((resp) => resp.json());
+      return res.json(response);
+    }).catch((err) => {
+      return res.status(500).json({
+        status: 500,
+        error: err,
+      })
+    })
+  }
+  static sendDispatcherMobileVerificationCode(req, res) {
+    return Promise.try(async () => {
+      let token = req.cookies['koogah_session_token'];
+      const response = await fetch(`${base_url}/company/dispatcher/signup/mobile`, {
+        method: 'POST',
+        body: JSON.stringify({...req.body}),
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
+        }
+      }).then((resp) => resp.json());
+      return res.json(response);
+    }).catch((err) => {
+      return res.status(500).json({
+        status: 500,
+        error: err,
+      })
+    })
+  }
+  static verifyDispatcherEmailVerificationCode(req, res) {
+    return Promise.try(async () => {
+      let token = req.cookies['koogah_session_token'];
+      const response = await fetch(`${base_url}/company/dispatcher/verify/code/email`, {
+        method: 'POST',
+        body: JSON.stringify({...req.body}),
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
+        }
+      }).then((resp) => resp.json());
+      return res.json(response);
+    }).catch(err => {
+      return res.status(500).json({
+        status: 500,
+        error: err,
+      })
+    })
+  }
+  
+  static verifyDispatcherMobileVerificationCode(req, res) {
+    return Promise.try(async () => {
+      let token = req.cookies['koogah_session_token'];
+      const response = await fetch(`${base_url}/company/dispatcher/verify/code/mobile`, {
+        method: 'POST',
+        body: JSON.stringify({...req.body}),
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
+        }
+      }).then((resp) => resp.json());
+      return res.json(response);
+    }).catch(err => {
+      return res.status(500).json({
+        status: 500,
+        error: err,
+      })
+    })
+  }
+  static completeDispatcherRegisteration(req, res) {
+    return Promise.try(async () => {
+      let token = req.cookies['koogah_session_token'];
+      const response = await fetch(`${base_url}/company/dispatcher/registration/complete`, {
+        method: 'POST',
+        body: JSON.stringify({...req.body}),
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
+        }
+      }).then((resp) => resp.json());
+      return res.json(response);
+    }).catch(err => {
+      return res.status(500).json({
+        status: 500,
+        error: err,
+      })
+    })
+  }
 };
 
 module.exports = CompanyController;

@@ -66,7 +66,38 @@ companyApis.get(
   CompanyController.fetchSingleDispatcherTrackingLocation,
 )
 
+companyApis.post(
+  '/admin/dispatcher/edit/:id',
+  AuthMiddleware.checkAuthenticated,
+  CompanyController.editDispatcherDetail,
+);
 
+companyApis.post(
+  '/admin/dispatcher/signup/email/:email',
+  AuthMiddleware.checkAuthenticated,
+  CompanyController.sendDispatcherEmailVerificationCode,
+);
 
+companyApis.post(
+  '/admin/dispatcher/signup/mobile/',
+  AuthMiddleware.checkAuthenticated,
+  CompanyController.sendDispatcherMobileVerificationCode,
+);
+
+companyApis.post(
+  '/admin/dispatcher/verify/code/email',
+  AuthMiddleware.checkAuthenticated,
+  CompanyController.verifyDispatcherEmailVerificationCode,
+);
+companyApis.post(
+  '/admin/dispatcher/verify/code/mobile',
+  AuthMiddleware.checkAuthenticated,
+  CompanyController.verifyDispatcherMobileVerificationCode,
+);
+companyApis.post(
+  '/admin/dispatcher/registration/complete',
+  AuthMiddleware.checkAuthenticated,
+  CompanyController.completeDispatcherRegisteration,
+);
 
 module.exports = companyApis;

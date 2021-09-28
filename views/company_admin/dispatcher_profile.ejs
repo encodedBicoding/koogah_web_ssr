@@ -77,8 +77,45 @@
       </div>
     </div>
     <div class="toast remove"></div>
-    <div class="d-modal hide"></div>
     <section id="company_dispatcher_profile" class="admin_dash_container">
+      <!-- 
+        MODALS
+       -->
+      <div class="d-modal show" v-if="show_edit_dispatcher_modal">
+        <div class="d-modal-container">
+          <div class="d-modal-content-holder">
+            <div class="d-modal-pri-cont_start">
+              <h4 class="mg_top_btm">Edit dispatcher detail</h4>
+              <div class="est_form_sub_hld">
+                <input v-model="edit_form_field.first_name" type="text" class="form-control form_field"/>
+                <input v-model="edit_form_field.last_name" type="text" class="form-control form_field"/>
+              </div>
+              <div class="input-group mg_top_btm">
+                <span class="input-group-text">+234</span>
+                <input
+                  required
+                  type="text"
+                  name="phone"
+                  class="form-control-text"
+                  placeholder="Phone Number"
+                  maxlength="11"
+                  minlength="10"
+                  v-model="edit_form_field.mobile_number"
+                />
+              </div>
+            </div>
+            <div class="d-modal_footer_action">
+              <div class="btn_bg_white_norm_width modal_btn modal_close" v-on:click="hideEditDispatcherForm">Cancel</div>
+              <div class="btn_bg_dark_norm_width modal_btn btn_action" v-on:click="actionEditDispatcher">Save</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 
+
+        END MODAL
+       -->
       <%- include('../components/dash_nav.ejs', 
       {
         has_back_arrow: true,
@@ -118,7 +155,7 @@
                             </div>
                             <div class="ddi">
                               <div class="ddi_header">state of residence</div>
-                              <div class="ddi_body">{{active_dispatcher.state}}</div>
+                              <div class="ddi_body">{{toSentenceCase(active_dispatcher.state)}}</div>
                             </div>
                             <div class="ddi">
                               <div class="ddi_header">rating</div>
@@ -130,14 +167,14 @@
                             </div>
                             <div class="ddi">
                               <div class="ddi_header">city</div>
-                              <div class="ddi_body">{{active_dispatcher.town}}</div>
+                              <div class="ddi_body">{{toSentenceCase(active_dispatcher.town)}}</div>
                             </div>
                           </div>
                         </div>
                       </div>
                       <div class="ht-100 dispatcher_top_profile_grid_item">
                         <div class="wd-100 ht-100 disp_tpgs">
-                          <div class="btn_bg_dark disp_p_edit">
+                          <div class="btn_bg_dark disp_p_edit" v-on:click="showEditDispatcherForm">
                             <p>Edit</p>
                           </div>
                         </div>
@@ -391,7 +428,7 @@
     </section>
     <script src="../../../js/loader.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment-with-locales.min.js" integrity="sha512-LGXaggshOkD/at6PFNcp2V2unf9LzFq6LE+sChH7ceMTDP0g2kn6Vxwgg7wkPP7AAtX+lmPqPdxB47A0Nz0cMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="https://unpkg.com/vue"></script>
+    <script src="../../../js/vue.min.js"></script>
     <script src="../../../js/toast.js"></script>
     <script src="../../../js/modal.js"></script>
     <script src="../../../models/user.js"></script>

@@ -27,6 +27,8 @@ const vm = new Vue({
     dispatcher_location: { lat: null, lng: null }, // dispatcher location
     package_location: { lat: null, lng: null },
     location_fetch_interval: null,
+    show_edit_dispatcher_modal: false,
+    edit_form_field: {},
   },
   beforeMount() {
     this.host = window.location.origin;
@@ -108,12 +110,16 @@ const vm = new Vue({
           );
           return;
         } else {
-          this.map_table_state = value;
-          // fetch based on map table state.
-          if (value === 'history') {
-            await this.fetchDispatcherDeliveryHistory(this.active_dispatcher.id, true);
+          if (value === this.map_table_state) {
+            return;
           } else {
-            await this.fetchTrackingData();
+            this.map_table_state = value;
+            // fetch based on map table state.
+            if (value === 'history') {
+              await this.fetchDispatcherDeliveryHistory(this.active_dispatcher.id, true);
+            } else {
+              await this.fetchTrackingData();
+            }
           }
         }
       }
@@ -235,7 +241,6 @@ const vm = new Vue({
           },
         }).then((resp) => resp.json()).then((res) => res);
         this.is_table_loading = false;
-        console.log(response);
         if (response.status === 200) {
           // first save the data.
           let result = response.data.tracking_package;
@@ -342,6 +347,53 @@ const vm = new Vue({
         }
       } catch (err) {
         clearInterval(interval);
+        console.log(err);
+      }
+    },
+    hideEditDispatcherForm: function () {
+      this.edit_form_field = {};
+      this.show_edit_dispatcher_modal = false;
+    },
+    showEditDispatcherForm: function () {
+      this.edit_form_field.first_name = this.active_dispatcher.first_name;
+      this.edit_form_field.last_name = this.active_dispatcher.last_name;
+      this.edit_form_field.mobile_number = this.active_dispatcher.mobile_number;
+      this.show_edit_dispatcher_modal = true;
+    },
+    actionEditDispatcher: async function () {
+      try {
+        if (!this.edit_form_field.first_name) {
+          showToast('error', 'First name cannot be empty', null, null, true);
+          return;
+        }
+        if (!this.edit_form_field.last_name) {
+          showToast('error', 'Last name cannot be empty', null, null, true);
+          return;
+        }
+        if (!this.edit_form_field.mobile_number) {
+          showToast('error', 'Mobile number cannot be empty', null, null, true);
+          return;
+        }
+        showLoader();
+        const response = await window.fetch(`${this.host}/api/company/admin/dispatcher/edit/${this.active_dispatcher.id}`, {
+          method: 'POST',
+          body: JSON.stringify(this.edit_form_field),
+          headers: {
+            'Content-Type': 'application/json'
+          },
+        }).then((resp) => resp.json()).then((res) => res);
+        hideLoader();
+        if (response.status === 200) {
+          showToast('success', response.message, null, null, true);
+          this.show_edit_dispatcher_modal = false;
+          this.active_dispatcher = response.data;
+        } else {
+          showToast('error', response.error, null, null, true);
+        }
+      } catch (err) {
+        hideLoader();
+        showToast('error', 'An error occurred', null, null, true);
+        this.show_edit_dispatcher_modal = false;
         console.log(err);
       }
     },
