@@ -29,6 +29,7 @@ const vm = new Vue({
     location_fetch_interval: null,
     show_edit_dispatcher_modal: false,
     edit_form_field: {},
+    show_logout_dropdown: false,
   },
   beforeMount() {
     this.host = window.location.origin;
@@ -87,6 +88,24 @@ const vm = new Vue({
     }
   },
   methods: {
+    logout: async function () {
+      try {
+        const response = await window.fetch(`${this.host}/api/company/admin/logout`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        }).then((resp) => resp.json()).then((res) => res);
+        if (response.status === 200) {
+          window.location.href = '/company/admin/login';
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    },
+    toggleLogout: function () {
+      this.show_logout_dropdown = !this.show_logout_dropdown;
+    },
     goHome: function () {
       window.location.href = '/company/admin/dashboard';
     },

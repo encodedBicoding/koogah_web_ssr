@@ -53,6 +53,7 @@ const vm = new Vue({
     selected_dispatcher_country: '',
     selected_dispatcher_city: '',
     selected_dispatcher_gender: '',
+    show_logout_dropdown: false,
   },
   beforeMount() {
     this.host = window.location.origin;
@@ -200,6 +201,24 @@ const vm = new Vue({
     }, false);
   },
   methods: {
+    logout: async function () {
+      try {
+        const response = await window.fetch(`${this.host}/api/company/admin/logout`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        }).then((resp) => resp.json()).then((res) => res);
+        if (response.status === 200) {
+          window.location.href = '/company/admin/login';
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    },
+    toggleLogout: function () {
+      this.show_logout_dropdown = !this.show_logout_dropdown;
+    },
     selectTableNav: async function (nav) {
       if (nav !== this.selectedTableNav) {
         this.selectedTableNav = nav;

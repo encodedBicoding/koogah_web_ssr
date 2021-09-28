@@ -14,6 +14,7 @@ const vm = new Vue({
     withdrawable_balance: 0,
     current_balance: 0,
     retry_fetch_nigerian_banks: 0,
+    show_logout_dropdown: false,
   },
   beforeMount() {
     this.host = window.location.origin;
@@ -46,6 +47,24 @@ const vm = new Vue({
     this.fetchNigerianBanks();
   },
   methods: {
+    logout: async function () {
+      try {
+        const response = await window.fetch(`${this.host}/api/company/admin/logout`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        }).then((resp) => resp.json()).then((res) => res);
+        if (response.status === 200) {
+          window.location.href = '/company/admin/login';
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    },
+    toggleLogout: function () {
+      this.show_logout_dropdown = !this.show_logout_dropdown;
+    },
     goHome: function () {
       window.location.href = '/company/admin/dashboard';
     },
@@ -79,13 +98,10 @@ const vm = new Vue({
           if (!self.user) {
             await self.fetchMe();
           }
-          console.log(self.user);
           self.bank_code = response.data.find((b) => b.name === self.user.bank_account_name).code;
           self.is_fetching_banks = false;
-          console.log(self.bank_code);
         }
       } catch (err) {
-        console.log(err);
         if (self.retry_fetch_nigerian_banks < 5) {
           self.fetchNigerianBanks();
           self.retry_fetch_nigerian_banks = self.retry_fetch_nigerian_banks + 1;
