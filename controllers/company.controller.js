@@ -391,6 +391,26 @@ class CompanyController {
       })
     })
   }
+
+  static companyUpdateProfile(req, res) {
+    return Promise.try(async () => {
+      let token = req.cookies['koogah_session_token'];
+      const response = await fetch(`${base_url}/company/profile/update`, {
+        method: 'PUT',
+        body: JSON.stringify({...req.body}),
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
+        }
+      }).then((resp) => resp.json());
+      return res.json(response);
+    }).catch(err => {
+      return res.status(500).json({
+        status: 500,
+        error: err,
+      });
+    });
+  }
 };
 
 module.exports = CompanyController;

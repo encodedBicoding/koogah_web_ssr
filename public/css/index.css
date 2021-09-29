@@ -56,6 +56,12 @@ body {
   align-items: center;
   justify-content: flex-start;
 }
+.fl-row-center-end{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+}
 .fl_row_center{
   display: flex;
   flex-direction: row;
@@ -1716,6 +1722,7 @@ select {
   flex-direction: row;
   align-items: center;
   justify-content: flex-end;
+  cursor: pointer;
 }
 .logout_dropdown_container{
   position: absolute;
@@ -1724,6 +1731,39 @@ select {
   padding: .6rem;
   box-shadow: 0 2px 9px 0 rgba(0, 0, 0, .089);
   background-color: #fff;
+}
+.profile_holder_container{
+  width: 75%;
+  box-shadow: 0 3px 33px 0 rgba(0, 0, 0, 0.089);
+  border-radius: 4px;
+  padding: 1.2rem;
+}
+.profile_update_btn_container{
+  width: fit-content;
+}
+.profile_main_avatar_holder{
+  width: 110px;
+  max-height: 110px;
+  overflow: hidden;
+  border-radius: 100%;
+  margin-right: 1.3rem;
+}
+.profile_image_holder_container{
+  display: flex;
+  width: 100%;
+  padding: .9rem 0;
+  align-items: center;
+  justify-content: flex-start;
+  cursor: pointer;
+}
+.main_profile_sub_holder{
+  margin-top: 2rem;
+}
+.profile_info_text_holder{
+  padding: 0.8rem 1.3rem;
+  background: #E6E9F4 0% 0% no-repeat padding-box;
+  border-radius: 6px;
+  opacity: 0.62;
 }
 .dash_user_greeting > .greetings {
   font-weight: bold;
@@ -1813,11 +1853,10 @@ select {
 .nav_item_img_holder{
   position: relative;
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
-  width: 100%;
-  height: 100%;
+  width: 50px;
+  max-height: 50px;
   overflow: hidden;
   border-radius: 100%;
 }
@@ -1978,6 +2017,17 @@ select {
 }
 .otg_card_body{
   height: 60%;
+  width: 100%;
+}
+.profile_disp_item{
+  margin-top: 1.3rem;
+  background: #57B8FF 0% 0% no-repeat padding-box;
+  box-shadow: 0px 6px 36px #15223214;
+  border-radius: 6px;
+  opacity: 1;
+}
+.profile_g_card_body{
+  height: fit-content;
   width: 100%;
 }
 .view_dispatcher_item_card{

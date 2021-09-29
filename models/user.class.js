@@ -17,7 +17,8 @@ class Company {
     this.phone = args['phone'];
     this.profile_image = args['profile_image'];
     this.total_payouts = args['total_payouts'];
-    this.current_wallet_balance = args['current_wallet_balance']
+    this.current_wallet_balance = args['current_wallet_balance'];
+    this.created_at = args['createdAt'];
   }
 
   get fullPhoneNumber() {
@@ -36,6 +37,10 @@ class Company {
 
   get fullName() {
     return `${this.firstName} ${this.lastName}`
+  }
+
+  get formatedDate() {
+    return moment(this.created_at);
   }
 
 };

@@ -58,9 +58,11 @@ class AuthMiddleware {
       }
     ).catch(err => {
       // render server down page here
-      return res.status(500).json({
-        status: 500,
-        error: err,
+      ejs.renderFile('views/server_down.ejs', {
+        page: 'error'
+      }, {}, function (err, template) {
+        if (err) throw err;
+          res.end(template);
       })
     })
   }

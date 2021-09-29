@@ -14,10 +14,10 @@
               <img src="../../../images/ic-bell.svg" width="100%" height="100%"/>
             </span>
           </div>
-          <div class="dash_user_greeting">
+          <div class="dash_user_greeting" v-on:click="toggleLogout">
             <p class="user_nav_name"><%- user.firstName %></p>
-            <span v-if="!show_logout_dropdown" class="fa fa-chevron-down logout_icon" v-on:click="toggleLogout"></span>
-            <span v-if="show_logout_dropdown" class="fa fa-chevron-up logout_icon" v-on:click="toggleLogout"></span>
+            <span v-if="!show_logout_dropdown" class="fa fa-chevron-down logout_icon"></span>
+            <span v-if="show_logout_dropdown" class="fa fa-chevron-up logout_icon" ></span>
             <div class="logout_dropdown_container" v-if="show_logout_dropdown">
               <p class="link font-xsm" v-on:click="logout">Logout</p>
             </div>
@@ -40,10 +40,10 @@
                 <img src="../../../images/ic-bell.svg" width="100%" height="100%"/>
               </span>
             </div>
-            <div class="dash_user_greeting">
+            <div class="dash_user_greeting" v-on:click="toggleLogout">
               <p class="user_nav_name"><%- user.firstName %></p>
-              <span v-if="!show_logout_dropdown" class="fa fa-chevron-down logout_icon" v-on:click="toggleLogout"></span>
-              <span v-if="show_logout_dropdown" class="fa fa-chevron-up logout_icon" v-on:click="toggleLogout"></span>
+              <span v-if="!show_logout_dropdown" class="fa fa-chevron-down logout_icon"></span>
+              <span v-if="show_logout_dropdown" class="fa fa-chevron-up logout_icon"></span>
               <div class="logout_dropdown_container" v-if="show_logout_dropdown">
                 <p class="link font-xsm" v-on:click="logout">Logout</p>
               </div>
