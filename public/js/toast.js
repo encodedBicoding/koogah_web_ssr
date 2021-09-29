@@ -1,4 +1,3 @@
-let timeInterval;
 function showToast(
   type,
   message,
@@ -6,6 +5,7 @@ function showToast(
   position,
   isInverted,
 ) {
+  let timeInterval;
   const toast = document.querySelector('.toast');
   let countdown = duration ? duration : 4;
   // type = error, success;
@@ -61,6 +61,7 @@ function showMarketPlaceToast(
   position,
   isInverted,
 ) {
+  let timeInterval;
   const toast = document.querySelector('.marketplace_toast');
   let countdown = duration ? duration : 3;
   // type = error, success;
@@ -87,7 +88,6 @@ function showMarketPlaceToast(
     <div class="toast_text ${position}">
       <p>${message}</p>
     </div>
-    <div class="toast_close" onclick=closeMarketPlaceToast()>close</div>
   `;
   toast.setAttribute('class', `marketplace_toast show ${position}`);
   toast.appendChild(toastContent);

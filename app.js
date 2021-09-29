@@ -29,7 +29,8 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(session({
   cookie: {
     secure: process.env.NODE_ENV === 'production' ? true : false,
-    path: '/'
+    path: '/',
+    expires: new Date(253402300000000),
   },
   saveUninitialized: true,
   proxy: true,

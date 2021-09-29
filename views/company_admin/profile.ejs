@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <meta http-equiv="Content-type" content="text/html; charset=UTF-8" />
+    <meta content="Koogah" name="title" />
+    <meta
+      content="Koogah is a platform which brings a mobile-first solution and a SCPPD(Single Customer Per Package Delivery) system to solving logistics/delivery issues, connecting customers and business owners with dispatchers, and giving them control over their deliveries"
+      name="description"
+    />
+
+    <meta
+      name="keywords"
+      content="
+  delivery,
+  logistics,
+  koogah,
+  koogah delivery,
+  deliveries,
+  koogah logistics,
+  dispatchers,
+  couriers,
+  courier services,
+  logistics in nigeria,
+  delivery in nigeria,
+  deliveries in nigeria,
+  koogah faq,
+  frequently asked questions on koogah,
+  koogah frequently asked questions,
+  koogah for company,
+  koogah4company
+  "
+    />
+    <meta name="twitter:site" content="@thekoogahbrand" />
+    <meta name="twitter:domain" content="koogah.com" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://twitter.com/thekoogahbrand" />
+    <meta name="twitter:title" content="Koogah" />
+    <meta
+      name="twitter:description"
+      content="The fastest way to get goods/packages delivered. With actual real-time tracking, and a trusted network of dispatchers"
+    />
+    <meta
+      name="twitter:image"
+      content="https://pbs.twimg.com/profile_images/1411243565460688896/076o7nTm_400x400.jpg"
+    />
+    <meta name="locale" content="en_EN" />
+    <meta name="robots" content="index, follow" />
+    <meta name="site_name" content="Koogah" />
+    <meta content="English" name="language" />
+    <meta content="5 days" name="revisit-after" />
+    <meta content="Koogah" name="author" />
+    <link rel="shortcut icon" href="../../../images/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="../../../css/index.css" />
+    <link rel="stylesheet" href="../../../css/nav.css" />
+    <link rel="stylesheet" href="../../../css/toast.css" />
+    <link rel="stylesheet" href="../../../css/loader.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+      integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCYPNv2kt9vLe4ApNolquwLE8TlMCBJLC0&libraries=places"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment-with-locales.min.js" integrity="sha512-LGXaggshOkD/at6PFNcp2V2unf9LzFq6LE+sChH7ceMTDP0g2kn6Vxwgg7wkPP7AAtX+lmPqPdxB47A0Nz0cMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <title>
+     <%-user.business_name%> - Overview - Koogah Company Dashboard
+    </title>
+  </head>
+  <body id="roots" class="company_admin_pages">
+    <div class="loader hd">
+      <div class="loader_holder">
+        <img src="../../../images/loader_icon.svg" width="100%" height="100%s"/>
+      </div>
+    </div>
+    <div class="toast remove"></div>
+    <div class="marketplace_toast remove"></div>
+    <div class="d-modal hide"></div>
+    <section id="company_admin_dashboard_profile" class="admin_dash_container">
+      <%- include('../components/dash_nav.ejs', 
+      {
+        has_back_arrow: false,
+      }
+      )%>
+      <section class="main_company_dash_grid">
+        <%- include('../components/dash_side_nav.ejs') %>
+        <div class="admin_overview">
+          <div class="wd-100">
+            <div class="comp">
+              <div class="profile_holder_container">
+                <p v-if="user" class="font-small font-bold">Member since: {{user.created_at}}</p>
+                <div class="wd-100 o_t_grid_item profile_disp_item">
+                  <div class="fl-col-start-space-btwn otg_card" v-if="!is_loading_total_dispatchers_item">
+                    <div class="otg_card_header">
+                      <span>Total dispatchers</span>
+                    </div>
+                    <div class="profile_g_card_body">
+                      <span class="font-white otg_card_b_data">{{Intl.NumberFormat('en-IN').format(Number(total_dispatchers_item.total_value))}}</span>
+                        <div class="fl-row-center-start">
+                          <span v-if="timeFrame === 'months'" class="font-small font-white">This month: {{Intl.NumberFormat('en-IN').format(Number(total_dispatchers_item.current_month))}}</span>
+                        </div>
+                        <div class="fl-row-center-start">
+                          <span :class="total_dispatchers_item.increased ? 'font-success font-small' : 'font-danger font-small' ">{{Intl.NumberFormat('en-IN').format(Number(total_dispatchers_item.percent))}}%</span>
+                          <div class="arrow_seer">
+                            <img v-if="total_dispatchers_item.increased" src="../../../images/arrow_up.svg" width="100%" height="100%"/>
+                            <img v-else src="../../../images/arrow_down.svg" width="100%" height="100%"/>
+                          </div>
+                          <span class="font-small font-white" v-if="timeFrame === 'months' ">than last month</span>
+                        </div>
+                    </div>
+                  </div>
+                  <div v-else class="fl_row_center data_loading_main_cont">
+                    <div class="data_loading_icon_cont">
+                      <img src="../../../images/loader_icon.svg" width="100%" height="100%"/>
+                    </div>
+                  </div>
+                </div>
+                <div class="main_profile_sub_holder">
+                  <div class="profile_info_text_holder">
+                    <p class="font-small font-bold">Profile Info</p>
+                  </div>
+                  <div v-if="user" class="wd-100">
+                    <div class="profile_image_holder_container" onclick="document.getElementById('temp_profile_image_upload').click()">
+                      <input type="file" v-model="temp_profile_image_upload" class="d-none" id="temp_profile_image_upload"/>
+                      <div class="profile_main_avatar_holder">
+                        <img :src="user_profile_image ? user_profile_image : '../../../images/default_company_icon.png' " width="100%" height="100%"/>
+                      </div>
+                      <div>
+                        <p class="brand font-small">Upload Company logo</p>
+                        <p class="font-xsm font_brand_faint mtop-sm">Image should be in jpeg or png format.</p>
+                      </div>
+                    </div>
+                    <div class="profile_details_main_container">
+                      <div class="mtop-sm">
+                        <label class="font-xsm font_brand_faint" for="profile_user_first_name">Firstname</label>
+                        <div class="wd-100 est_form_drpdwn_cont">
+                          <input 
+                            id="profile_user_first_name"
+                            name="profile_user_first_name"
+                            type="text"
+                            class="form-control form_field"
+                            placeholder="Firstname"
+                            aria-required="true"
+                            v-model="user_first_name"
+                          />
+                        </div>
+                      </div>
+                      <div class="mtop-sm">
+                        <label class="font-xsm font_brand_faint" for="profile_user_last_name">Lastname</label>
+                        <div class="wd-100 est_form_drpdwn_cont">
+                          <input 
+                            id="profile_user_last_name"
+                            name="profile_user_last_name"
+                            type="text"
+                            class="form-control form_field"
+                            placeholder="Firstname"
+                            aria-required="true"
+                            v-model="user_last_name"
+                          />
+                        </div>
+                      </div>
+                      <div class="mtop-sm">
+                        <label class="font-xsm font_brand_faint" for="profile_user_email">Email address</label>
+                        <div class="wd-100 est_form_drpdwn_cont">
+                          <input 
+                            id="profile_user_email"
+                            name="profile_user_email"
+                            type="email"
+                            class="form-control form_field"
+                            placeholder="Email address"
+                            aria-required="true"
+                            v-model="user_email"
+                          />
+                        </div>
+                      </div>
+                      <div class="wd-100 mtop-sm" v-if="!is_fetching_banks">
+                        <div class="wd-100 mtop-sm">
+                          <label class="font-xsm font_brand_faint" for="profile_user_bank_name">Bank name</label>
+                          <select
+                          required
+                          name="profile_user_bank_name"
+                          class="form-control form_field"
+                          id="profile_user_bank_name"
+                          v-model= "user_bank_account_name"
+                        >
+                          <option selected disabled value="">Choose Bank</option>
+                          <option 
+                            v-for="bank in banks" 
+                            v:value="bank.name"
+                            :selected="user_bank_account_name === bank.name"
+                            >{{bank.name}}</option>
+                        </select>
+                        </div>
+                        <div class="wd-100 mtop-sm">
+                          <label class="font-xsm font_brand_faint" for="profile_user_bank_account_number">Bank account number</label>
+                          <div class="wd-100 est_form_drpdwn_cont">
+                            <input 
+                              id="profile_user_bank_account_number"
+                              name="profile_user_bank_account_number"
+                              type="text"
+                              class="form-control form_field"
+                              placeholder="Bank account number"
+                              aria-required="true"
+                              v-model="user_bank_account_number"
+                            />
+                          </div>
+                        </div>
+                      </div>
+                      <div v-else class="fl_row_center data_loading_main_cont">
+                        <div class="data_loading_icon_cont">
+                          <img src="../../../images/loader_icon.svg" width="100%" height="100%"/>
+                        </div>
+                      </div>
+                      <div class="fl-row-center-end">
+                        <div class="profile_update_btn_container">
+                          <div class="btn_bg_dark" v-on:click="updateProfile">
+                            <p>Update</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div v-else class="fl_row_center data_loading_main_cont">
+                    <div class="data_loading_icon_cont">
+                      <img src="../../../images/loader_icon.svg" width="100%" height="100%"/>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="mobile"></div>
+          </div>
+          <div></div>
+        </div>
+      </section>
+    </section>
+    <script src="../../../js/loader.js"></script>
+    <script src="../../../js/vue.min.js"></script>
+    <script src="../../../js/toast.js"></script>
+    <script src="../../../js/modal.js"></script>
+    <script src="../../../models/user.js"></script>
+    <script src="../../../js/company_admin/profile.js"></script>
+  </body>
+</html>

@@ -3,7 +3,6 @@ const ejs = require('ejs');
 const companyAdminRoutes = express.Router();
 const view_path = 'views';
 const AuthMiddleware = require('../middlewares/auth.middleware');
-const Company = require('../models/user.class');
 
 companyAdminRoutes.get(
   '/',
@@ -101,6 +100,19 @@ companyAdminRoutes.get(
   }
 );
 
+companyAdminRoutes.get(
+  '/admin/profile',
+  AuthMiddleware.checkAuthenticated,
+  function (req, res, next) {
+    ejs.renderFile(`${view_path}/company_admin/profile.ejs`, {
+      page: 'company_admin_dashboard_profile',
+      user: req.user,
+    }, {}, function (err, template) {
+      if (err) throw err;
+      res.end(template);
+    });
+  }
+);
 
 
 module.exports = companyAdminRoutes;
