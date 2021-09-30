@@ -53,5 +53,38 @@
        <%}%>
      </div>
    </div>
-   <div class="mobile">mobile</div>
+   <div class="mobile">
+     <div class="dash_nav_container">
+       <%if(has_back_arrow === false) {%>
+        <div class="dash_nav_logo" v-on:click="goHome">
+          <img src="../../../images/logo_header.svg" width="100%" height="100%" alt="koogah logo"/>
+         </div>
+       <%} else {%>
+        <div class="fl-row-center-start nav_back" v-on:click="gotoRoute('/company/admin/dispatchers')">
+          <span class="fa fa-angle-left icon-font"></span>
+          <span class="font-bold">
+            <%-nav_back_text%>
+          </span>
+        </div>
+        <%}%>
+        <div class="nav_part_b">
+          <div class="notification_bell"> 
+            <span class="notification_counter" v-if="notifications.length > 0">
+              <span>{{notifications.length}}</span>
+            </span>
+            <span class="nav_icon">
+              <img src="../../../images/ic-bell.svg" width="100%" height="100%"/>
+            </span>
+          </div>
+          <div class="dash_user_greeting" v-on:click="toggleLogout">
+            <p class="user_nav_name"><%- user.firstName %></p>
+            <span v-if="!show_logout_dropdown" class="fa fa-chevron-down logout_icon"></span>
+            <span v-if="show_logout_dropdown" class="fa fa-chevron-up logout_icon"></span>
+            <div class="logout_dropdown_container" v-if="show_logout_dropdown">
+              <p class="link font-xsm" v-on:click="logout">Logout</p>
+            </div>
+          </div>
+        </div>
+     </div>
+   </div>
 </div>
