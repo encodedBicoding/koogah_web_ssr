@@ -56,5 +56,40 @@
       </nav>
     </div>
   </div>
-  <div class="mobile"></div>
+  <div class="mobile">
+    <div class="main_bottom_nav">
+      <nav class="dash_side_main_nav_container" v-on:click="() => gotoRoute('/company/admin/dashboard')">
+        <div class="<%=page === 'company_admin_dashboard_overview' ? 'dash_side_nav_item selected' : 'dash_side_nav_item'%>">
+          <span class="nav_icon">
+            <span class="fa fa-th-large font-m"></span>
+          </span>
+          <span class="nav_title">Overview</span>
+        </div> 
+      </nav>
+      <nav class="dash_side_main_nav_container" v-on:click="() => gotoRoute('/company/admin/wallet')">
+        <div class="<%=page === 'company_admin_dashboard_wallet' ? 'dash_side_nav_item selected' : 'dash_side_nav_item'%>">
+          <span class="nav_icon">
+            <span class="fa fa-money-bill font-m"></span>
+          </span>
+          <span class="nav_title">Wallet</span>
+        </div> 
+      </nav>
+      <nav class="dash_side_main_nav_container" v-on:click="() => gotoRoute('/company/admin/dispatchers')">
+        <div class="<%=page === 'company_admin_dashboard_dispatchers' ? 'dash_side_nav_item selected' : 'dash_side_nav_item'%>">
+          <span class="nav_icon">
+            <span class="fa fa-users font-m"></span>
+          </span>
+          <span class="nav_title">Dispatchers</span>
+        </div> 
+      </nav>
+      <nav class="dash_side_main_nav_container" v-on:click="() => gotoRoute('/company/admin/profile')">
+        <div class="<%=page === 'company_admin_dashboard_profile' ? 'dash_side_nav_item selected' : 'dash_side_nav_item'%>">
+          <span class="nav_icon">
+            <span class="fa fa-user font-m"></span>
+          </span>
+          <span class="nav_title">Profile</span>
+        </div> 
+      </nav>
+    </div>
+  </div>
 </div>

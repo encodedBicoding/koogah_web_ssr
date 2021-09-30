@@ -560,7 +560,191 @@
                 </div>
               </section>
             </div>
-            <div class="mobile"></div>
+            <div class="mobile">
+              <div class="fl-row-center-space-btwn mob_dont_scroll">
+                <h3 class="dash_page_title">Dispatchers</h3>
+                <div class="fl-row-center-space-btwn" v-on:click="startDispatcherAddition">
+                  <button class="btn_bg_dark">Add Dispatcher</button>
+                </div>
+              </div>
+              <div class="wd-100 mob_page_top">
+                <div class="overview_top_grid">
+                  <div class="o_t_grid_item">
+                    <div class="fl-col-start-space-btwn otg_card" v-if="!is_loading_total_dispatchers_item">
+                      <div class="otg_card_header">
+                        <span class="font_brand_faint">Total dispatchers</span>
+                      </div>
+                      <div class="otg_card_body">
+                        <span class="font_secondary_dark otg_card_b_data">{{Intl.NumberFormat('en-IN').format(Number(total_dispatchers_item.total_value))}}</span>
+                        <div class="fl-row-center-start">
+                          <span v-if="timeFrame === 'days'" class="font-small font_brand_faint">Today: {{Intl.NumberFormat('en-IN').format(Number(total_dispatchers_item.current_month))}}</span>
+                          <span v-if="timeFrame === 'weeks'" class="font-small font_brand_faint">This week: {{Intl.NumberFormat('en-IN').format(Number(total_dispatchers_item.current_month))}}</span>
+                          <span v-if="timeFrame === 'months'" class="font-small font_brand_faint">This month: {{Intl.NumberFormat('en-IN').format(Number(total_dispatchers_item.current_month))}}</span>
+                        </div>
+                        <div class="fl-row-center-start">
+                          <span :class="total_dispatchers_item.increased ? 'font-success font-small' : 'font-danger font-small' ">{{Intl.NumberFormat('en-IN').format(Number(total_dispatchers_item.percent))}}%</span>
+                          <div class="arrow_seer">
+                            <img v-if="total_dispatchers_item.increased" src="../../../images/arrow_up.svg" width="100%" height="100%"/>
+                            <img v-else src="../../../images/arrow_down.svg" width="100%" height="100%"/>
+                          </div>
+                          <span class="font-small font_brand_faint" v-if="timeFrame === 'months' ">than last month</span>
+                          <span class="font-small font_brand_faint" v-if="timeFrame === 'weeks' ">than last week</span>
+                          <span class="font-small font_brand_faint" v-if="timeFrame === 'days' ">than yesterday</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div v-else class="fl_row_center data_loading_main_cont">
+                      <div class="data_loading_icon_cont">
+                        <img src="../../../images/loader_icon.svg" width="100%" height="100%"/>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="o_t_grid_item brand_bg_no_hover">
+                    <div class="fl-col-start-space-btwn otg_card">
+                      <div class="otg_card_header">
+                        <span class="font-white">Tracking dispatchers</span>
+                      </div>
+                      <div class="otg_card_body">
+                        <span class="font-white otg_card_b_data">{{currently_tracking_dispatchers.length}}</span>
+                        <div class="view_dispatcher_item_card">
+                          <div class="view_dispatcher_item" v-on:click="selectTableNav('tracking')">
+                            <span class="fa fa-eye font-small font_secondary_dark_faint"></span>
+                            <span class="font_secondary_dark_faint font-xsm">View</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="o_t_grid_item">
+                    <div class="fl-col-start-space-btwn otg_card" v-if="!is_fetching_new_dispatchers">
+                      <div class="otg_card_header">
+                        <span class="font_brand_faint">New dispatchers</span>
+                      </div>
+                      <div class="otg_card_body">
+                        <span class="font_secondary_dark otg_card_b_data">{{Intl.NumberFormat('en-IN').format(Number(new_dispatchers_count))}}</span>
+                        <div class="fl-row-center-start">
+                          <span class="font-small font_brand_faint">Since 4 days ago</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div v-else class="fl_row_center data_loading_main_cont">
+                      <div class="data_loading_icon_cont">
+                        <img src="../../../images/loader_icon.svg" width="100%" height="100%"/>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <section class="wd-100" name="dispatchers_table">
+                <div class="table_container">
+                  <div class="table_controls">
+                    <div class="fl-row-center-space-btwn">
+                      <div class="fl_row_center">
+                        <span 
+                          for="table_nav_all" 
+                          :class="selectedTableNav === 'all' ? 'dash_time_frame selectedTF' : 'dash_time_frame' "
+                          v-on:click="() => selectTableNav('all')">
+                          <input 
+                            type="checkbox" 
+                            name="table_nav_all" 
+                            value="all" 
+                            title="table_nav" 
+                            class="time_frame_invisible"
+                            :checked="selectedTableNav === 'all'"
+                            />
+                            All
+                        </span>
+                        <span 
+                          for="table_nav_new" 
+                          :class="selectedTableNav === 'new' ? 'dash_time_frame selectedTF' : 'dash_time_frame' "
+                          v-on:click="() => selectTableNav('new')">
+                          <input 
+                            type="checkbox" 
+                            name="table_nav_new" 
+                            value="new" 
+                            title="table_nav" 
+                            class="time_frame_invisible"
+                            :checked="selectedTableNav === 'new'"
+                            />
+                            New
+                        </span>
+                        <span 
+                        for="table_nav_traccking" 
+                        :class="selectedTableNav === 'tracking' ? 'dash_time_frame selectedTF' : 'dash_time_frame' "
+                        v-on:click="() => selectTableNav('tracking')">
+                        <input 
+                          type="checkbox" 
+                          name="table_nav_tracking" 
+                          value="tracking" 
+                          title="table_nav" 
+                          class="time_frame_invisible"
+                          :checked="selectedTableNav === 'tracking'"
+                          />
+                          Tracking
+                      </span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="dispatcher_table_header">
+                    <p class="table_header_text table_h_n">name</p>
+                    <p class="table_header_text">deliveries</p>
+                    <p class="table_header_text small_hide">email</p>
+                    <p class="table_header_text small_hide">ratings (5 max)</p>
+                    <p class="table_header_text small_hide">date created</p>
+                    <p></p>
+                  </div>
+                  <div v-if="!is_table_loading" class="main_disp_table_body_con">
+                    <div v-if="dispatchers.length > 0">
+                      <div class="dispatcher_table_body" v-for="dispatcher in dispatchers" name="dispatcher_table_body">
+                        <div class="table_body_text table_b_nt">
+                          <!-- <div class="checkbox_cont">
+                            <input 
+                              type="checkbox"
+                              name="disp_table_checkbox"
+                              class="table_checkbox"
+                            />
+                          </div> -->
+                          <div class="disp_table_image">
+                            <img :src="dispatcher.profile_image" width="100%" height="100%"/>
+                          </div>
+                          <div>{{dispatcher.full_name}}</div>
+                        </div>
+                        <p class="table_body_text">
+                          {{dispatcher.deliveries}}
+                        </p>
+                        <p class="table_body_text small_hide">{{dispatcher.email}}</p>
+                        <p class="table_body_text small_hide">{{dispatcher.rating}}</p>
+                        <p class="table_body_text small_hide">{{dispatcher.date}}</p>
+                        <div class="disp_table_elips_cont">
+                          <span class="fa fa-ellipsis-v font_secondary_dark_faint" aria-hidden="true" v-on:click="activateOptionId(dispatcher.id)"></span>
+                          <div class="disp_table_option_id" v-if="dispatcher.id === active_option_id">
+                            <div class="disp_option_item" v-on:click="viewDispatcher(dispatcher.id)">
+                              <p class="font-small">View</p>
+                            </div>
+                            <div class="disp_option_item" v-on:click="showEditDispatcher(dispatcher.id)">
+                              <p class="font-small">Edit</p>
+                            </div>
+                            <div class="disp_option_item">
+                              <p class="font-small font-danger">Remove</p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div v-else class="disp_table_no_data">
+                      <div class="no_data_cont">
+                        <img src="../../../images/no-data.svg" width="100%" height="100%"/>
+                      </div>
+                    </div>
+                  </div>
+                  <div v-else class="fl_row_center data_loading_main_cont disp-table_loading">
+                    <div class="data_loading_icon_cont">
+                      <img src="../../../images/loader_icon.svg" width="100%" height="100%"/>
+                    </div>
+                  </div>
+                </div>
+              </section>
+            </div>
           </div>
           <div></div>
         </div>
