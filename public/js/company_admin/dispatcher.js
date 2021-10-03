@@ -28,6 +28,7 @@ const vm = new Vue({
     currently_tracking_dispatchers: [],
     current_fetch_page: 0,
     total_pages: 0,
+    total_data_count: 0,
     dispatchers: [],
     is_table_loading: false,
     timeFrame: 'months',
@@ -54,6 +55,7 @@ const vm = new Vue({
     selected_dispatcher_city: '',
     selected_dispatcher_gender: '',
     show_logout_dropdown: false,
+    last_data_timestamp: '',
   },
   beforeMount() {
     this.host = window.location.origin;
@@ -186,6 +188,7 @@ const vm = new Vue({
     this.getTotalDispatchersOverview();
     this.getNewDispatchersCount();
     this.fetchAllDispatchers(true);
+    
     let table_container = document.querySelector('.main_disp_table_body_con');
     let lastScrollPos = 0;
     const self = this;
@@ -195,9 +198,7 @@ const vm = new Vue({
       let st = e.target.scrollTop;
       if (st > lastScrollPos) {
         if (st > last_elem.getBoundingClientRect().x) {
-          if (self.total_pages > self.dispatchers.length) {
-            await this.fetchAllDispatchers();
-          }
+          await this.loadOlderData();
         }
       }
       lastScrollPos = st <= 0 ? 0 : st;
@@ -225,6 +226,7 @@ const vm = new Vue({
     selectTableNav: async function (nav) {
       if (nav !== this.selectedTableNav) {
         this.selectedTableNav = nav;
+        this.last_data_timestamp = '';
         this.resetPageData();
         if (this.selectedTableNav === 'all') {
           await this.fetchAllDispatchers(true);
@@ -336,6 +338,19 @@ const vm = new Vue({
       }
       return result;
     },
+    loadOlderData: async function () {
+      let to;
+      let data = this.dispatchers;
+      let last_data_timestamp = data[data.length - 1].created_at;
+      if (this.last_data_timestamp !== last_data_timestamp) {
+        this.last_data_timestamp = last_data_timestamp;
+        to = setTimeout(async () => {
+          await this.fetchAllDispatchers();
+        }, 1500)
+      } else {
+        clearTimeout(to);
+      }
+    },
     fetchAllDispatchers: async function (showLoading = false) {
       const self = this;
       try {
@@ -351,9 +366,11 @@ const vm = new Vue({
         this.is_table_loading = false;
         if (response.status === 200) {
           let result = this.formatDispatcherData(response.data.rows);
-          this.dispatchers = this.dispatchers.concat(result);
+          let temp_data = this.dispatchers.concat(result);
+          this.dispatchers = temp_data;
           this.total_pages = response.data.totalPages;
           this.current_fetch_page = response.data.currentPage;
+          this.total_data_count = response.data.count;
         } else {
           if (self.fetch_dispatcher_error_retry > 0) {
             self.is_table_loading = true;
