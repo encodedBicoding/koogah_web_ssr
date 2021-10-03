@@ -30,6 +30,7 @@ const vm = new Vue({
     show_edit_dispatcher_modal: false,
     edit_form_field: {},
     show_logout_dropdown: false,
+    last_history_data_timestamp: '',
   },
   beforeMount() {
     this.host = window.location.origin;
@@ -79,9 +80,7 @@ const vm = new Vue({
       let st = e.target.scrollTop;
       if (st > lastScrollPos) {
         if (st > last_elem.getBoundingClientRect().x) {
-          if (self.total_pages > self.delivery_histories.length) {
-            await this.fetchDispatcherDeliveryHistory(this.active_dispatcher.id, false);
-          }
+          await this.loadOlderHistoryData();
         }
       }
       lastScrollPos = st <= 0 ? 0 : st;
@@ -122,6 +121,7 @@ const vm = new Vue({
       if (!this.active_dispatcher) {
         return;
       } else {
+        this.last_history_data_timestamp = '';
         if (value === 'tracking' && this.active_dispatcher.is_currently_dispatching === false) {
           showToast(
             'neutral',
@@ -207,7 +207,20 @@ const vm = new Vue({
         return obj;
       });
       return result;
-     },
+    },
+    loadOlderHistoryData: async function () {
+      let to;
+      let data = this.delivery_histories;
+      let last_history_data_timestamp = data[data.length - 1].created_at;
+      if (this.last_history_data_timestamp !== last_history_data_timestamp) {
+        this.last_history_data_timestamp = last_history_data_timestamp;
+        to = setTimeout(async () => {
+          await this.fetchDispatcherDeliveryHistory(this.active_dispatcher.id, false);
+        }, 1500)
+      } else {
+        clearTimeout(to);
+      }
+    },
     fetchDispatcherDeliveryHistory: async function (id, showLoading = true) {
       const self = this;
       try {
