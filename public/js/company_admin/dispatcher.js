@@ -56,6 +56,7 @@ const vm = new Vue({
     selected_dispatcher_gender: '',
     show_logout_dropdown: false,
     last_data_timestamp: '',
+    show_notification_dropdown: false,
   },
   beforeMount() {
     this.host = window.location.origin;
@@ -164,7 +165,8 @@ const vm = new Vue({
     // listen for notification
     const self = this;
     let connectionString = 'wss://koogah-api-staging.herokuapp.com/data_seeking'
-    const webSocket = new WebSocket(connectionString);
+    let localConnectionString = 'ws://localhost:4000/data_seeking';
+    const webSocket = new WebSocket(localConnectionString);
     webSocket.onopen = function () {
       self.socket = webSocket;
       self.wsGetTrackingDispatchers();
@@ -176,6 +178,7 @@ const vm = new Vue({
         self.notifications = msg.payload;
       }
       if (msg.event === 'company_tracking_dispatchers_result') {
+        console.log(msg);
         self.currently_tracking_dispatchers = msg.payload;
       }
       if (msg.event === 'company_new_package_creation') {
@@ -188,7 +191,6 @@ const vm = new Vue({
     this.getTotalDispatchersOverview();
     this.getNewDispatchersCount();
     this.fetchAllDispatchers(true);
-    
     let table_container = document.querySelector('.main_disp_table_body_con');
     let lastScrollPos = 0;
     const self = this;
@@ -667,6 +669,13 @@ const vm = new Vue({
         }
       } catch (err) {
         showToast('error', 'An error occurred', null, null, true);
+        console.log(err);
+      }
+    },
+    activateNotification: function () {
+      try {
+        this.show_notification_dropdown = !this.show_notification_dropdown;
+      } catch (err) {
         console.log(err);
       }
     }
