@@ -119,7 +119,10 @@ const vm = new Vue({
         }).then((resp) => resp.json()).then((res) => res);
         this.total_earnings_item = {}
         this.is_loading_total_earnings_item = false;
-        this.total_earnings_item = response.data;
+        if (response.status === 200) {
+          this.total_earnings_item = response.data;
+        }
+
       } catch (err) {
         console.log(err);
       }
@@ -135,7 +138,10 @@ const vm = new Vue({
         }).then((resp) => resp.json()).then((res) => res);
         this.total_dispatchers_item = {}
         this.is_loading_total_dispatchers_item = false;
-        this.total_dispatchers_item = response.data;
+        if (response.status === 200) {
+          this.total_dispatchers_item = response.data;
+        }
+
       } catch (err) {
         console.log(err);
       }
@@ -151,8 +157,11 @@ const vm = new Vue({
         }).then((resp) => resp.json()).then((res) => res);
         this.total_delivery_item = {}
         this.is_loading_total_delivery_item = false;
-        this.total_delivery_item = response.data;
-        this.total_successful_deliveries = response.data.total_value;
+        if (response.status === 200) {
+          this.total_delivery_item = response.data;
+          this.total_successful_deliveries = response.data.total_value;
+        }
+
       } catch (err) {
         console.log(err);
       }
