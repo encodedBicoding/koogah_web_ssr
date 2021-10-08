@@ -22,11 +22,7 @@
         <div class="<%=page === 'company_admin_dashboard_overview' ? 'dash_side_nav_item selected' : 'dash_side_nav_item'%>">
           <div class="nav_item_bg_overlay"></div>
           <span class="nav_icon">
-            <% if(page === 'company_admin_dashboard_overview') {%>
-              <img src="../../../images/ic_dashboard.svg" width="100%" height="100%"/>
-            <%} else {%>
-              <img src="../../../images/ic_dashboard.svg" width="100%" height="100%"/>
-            <%}%>
+            <span class="fa fa-th-large font-m"></span>
           </span>
           <span class="nav_title">Overview</span>
         </div> 
@@ -35,7 +31,7 @@
         <div class="<%=page === 'company_admin_dashboard_wallet' ? 'dash_side_nav_item selected' : 'dash_side_nav_item'%>">
           <div class="nav_item_bg_overlay"></div>
           <span class="nav_icon">
-            <img src="../../../images/ic_wallet.svg" width="100%" height="100%"/>
+            <span class="fa fa-money-bill font-m"></span>
           </span>
           <span class="nav_title">Wallet</span>
         </div> 
@@ -44,21 +40,56 @@
         <div class="<%=page === 'company_admin_dashboard_dispatchers' ? 'dash_side_nav_item selected' : 'dash_side_nav_item'%>">
           <div class="nav_item_bg_overlay"></div>
           <span class="nav_icon">
-            <img src="../../../images/ic_users.svg" width="100%" height="100%"/>
+            <span class="fa fa-users font-m"></span>
           </span>
           <span class="nav_title">Dispatchers</span>
         </div> 
       </nav>
-      <nav class="dash_side_main_nav_container">
+      <nav class="dash_side_main_nav_container" v-on:click="() => gotoRoute('/company/admin/profile')">
         <div class="<%=page === 'company_admin_dashboard_profile' ? 'dash_side_nav_item selected' : 'dash_side_nav_item'%>">
           <div class="nav_item_bg_overlay"></div>
           <span class="nav_icon">
-            <img src="../../../images/ic_profile.svg" width="100%" height="100%"/>
+            <span class="fa fa-user font-m"></span>
           </span>
           <span class="nav_title">Profile</span>
         </div> 
       </nav>
     </div>
   </div>
-  <div class="mobile"></div>
+  <div class="mobile">
+    <div class="main_bottom_nav">
+      <nav class="dash_side_main_nav_container" v-on:click="() => gotoRoute('/company/admin/dashboard')">
+        <div class="<%=page === 'company_admin_dashboard_overview' ? 'dash_side_nav_item selected' : 'dash_side_nav_item'%>">
+          <span class="nav_icon">
+            <span class="fa fa-th-large font-m"></span>
+          </span>
+          <span class="nav_title">Overview</span>
+        </div> 
+      </nav>
+      <nav class="dash_side_main_nav_container" v-on:click="() => gotoRoute('/company/admin/wallet')">
+        <div class="<%=page === 'company_admin_dashboard_wallet' ? 'dash_side_nav_item selected' : 'dash_side_nav_item'%>">
+          <span class="nav_icon">
+            <span class="fa fa-money-bill font-m"></span>
+          </span>
+          <span class="nav_title">Wallet</span>
+        </div> 
+      </nav>
+      <nav class="dash_side_main_nav_container" v-on:click="() => gotoRoute('/company/admin/dispatchers')">
+        <div class="<%=page === 'company_admin_dashboard_dispatchers' ? 'dash_side_nav_item selected' : 'dash_side_nav_item'%>">
+          <span class="nav_icon">
+            <span class="fa fa-users font-m"></span>
+          </span>
+          <span class="nav_title">Dispatchers</span>
+        </div> 
+      </nav>
+      <nav class="dash_side_main_nav_container" v-on:click="() => gotoRoute('/company/admin/profile')">
+        <div class="<%=page === 'company_admin_dashboard_profile' ? 'dash_side_nav_item selected' : 'dash_side_nav_item'%>">
+          <span class="nav_icon">
+            <span class="fa fa-user font-m"></span>
+          </span>
+          <span class="nav_title">Profile</span>
+        </div> 
+      </nav>
+    </div>
+  </div>
 </div>

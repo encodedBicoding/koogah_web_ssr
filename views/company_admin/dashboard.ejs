@@ -69,13 +69,14 @@
      <%-user.business_name%> - Overview - Koogah Company Dashboard
     </title>
   </head>
-  <body id="roots">
+  <body id="roots" class="company_admin_pages">
     <div class="loader hd">
       <div class="loader_holder">
         <img src="../../../images/loader_icon.svg" width="100%" height="100%s"/>
       </div>
     </div>
     <div class="toast remove"></div>
+    <div class="marketplace_toast remove"></div>
     <div class="d-modal hide"></div>
     <section id="company_admin_dashboard" class="admin_dash_container">
       <%- include('../components/dash_nav.ejs', 
@@ -205,7 +206,7 @@
                         <span class="font_brand_faint">Total deliveries</span>
                       </div>
                       <div class="otg_card_body">
-                        <span class="font_secondary_dark otg_card_b_data">{{Intl.NumberFormat('en-IN').format(Number(total_delivery_item.current_month))}}</span>
+                        <span class="font_secondary_dark otg_card_b_data">{{Intl.NumberFormat('en-IN').format(Number(total_delivery_item.total_value))}}</span>
                         <div class="fl-row-center-start">
                           <span v-if="timeFrame === 'days'" class="font-small font_brand_faint">Today: {{Intl.NumberFormat('en-IN').format(Number(total_delivery_item.current_month))}}</span>
                           <span v-if="timeFrame === 'weeks'" class="font-small font_brand_faint">This week: {{Intl.NumberFormat('en-IN').format(Number(total_delivery_item.current_month))}}</span>
@@ -272,14 +273,197 @@
                 </div>
               </div>
             </div>
-            <div class="mobile"></div>
+            <div class="mobile">
+              <div class="fl-row-center-space-btwn mob_dont_scroll">
+                <h3 class="dash_page_title">Overview</h3>
+                <div class="fl-row-center-space-btwn">
+                  <div class="fl_row_center">
+                    <span 
+                      for="time_frame_days" 
+                      :class="timeFrame === 'days' ? 'dash_time_frame selectedTF' : 'dash_time_frame' "
+                      v-on:click="() => selectTimeFrame('days')">
+                      <input 
+                        type="checkbox" 
+                        name="time_frame_days" 
+                        value="days" 
+                        title="time_frame" 
+                        class="time_frame_invisible"
+                        :checked="timeFrame === 'days'"
+                        />
+                        Days
+                    </span>
+                    <span 
+                      for="time_frame_weeks" 
+                      :class="timeFrame === 'weeks' ? 'dash_time_frame selectedTF' : 'dash_time_frame' "
+                      v-on:click="() => selectTimeFrame('weeks')">
+                      <input 
+                        type="checkbox" 
+                        name="time_frame_weeks" 
+                        value="weeks" 
+                        title="time_frame" 
+                        class="time_frame_invisible"
+                        :checked="timeFrame === 'weeks'"
+                        />
+                        Weeks
+                    </span>
+                    <span 
+                      for="time_frame_months" 
+                      :class="timeFrame === 'months' ? 'dash_time_frame selectedTF' : 'dash_time_frame' "
+                      v-on:click="() => selectTimeFrame('months')">
+                      <input 
+                        type="checkbox" 
+                        name="time_frame_months" 
+                        value="months" 
+                        title="time_frame" 
+                        class="time_frame_invisible"
+                        :checked="timeFrame === 'months'"
+                        />
+                        Months
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div class="wd-100 mob_page_top">
+                <div class="overview_top_grid">
+                  <div class="o_t_grid_item brand_lg_green_bg">
+                    <div class="fl-col-start-space-btwn otg_card" v-if="!is_loading_total_earnings_item">
+                      <div class="otg_card_header">
+                        <span class="font-white">Total Earnings</span>
+                      </div>
+                      <div class="otg_card_body">
+                        <span class="font-white otg_card_b_data">₦{{Intl.NumberFormat('en-IN').format(Number(total_earnings_item.total_value))}} </span>
+                        <div class="fl-row-center-start">
+                          <span v-if="timeFrame === 'days'" class="font-small font-white">Today: {{Intl.NumberFormat('en-IN').format(Number(total_earnings_item.current_month))}}</span>
+                          <span v-if="timeFrame === 'weeks'" class="font-small font-white">This week: {{Intl.NumberFormat('en-IN').format(Number(total_earnings_item.current_month))}}</span>
+                          <span v-if="timeFrame === 'months'" class="font-small font-white">This month: {{Intl.NumberFormat('en-IN').format(Number(total_earnings_item.current_month))}}</span>
+                        </div>
+                        <div class="fl-row-center-start">
+                          <span :class="total_earnings_item.increased ? 'font-white font-small' : 'font-danger font-small' ">{{Intl.NumberFormat('en-IN').format(Number(total_earnings_item.percent))}}%</span>
+                          <div class="arrow_seer">
+                            <img v-if="total_earnings_item.increased" src="../../../images/arrow_up.svg" width="100%" height="100%"/>
+                            <img v-else src="../../../images/arrow_down.svg" width="100%" height="100%"/>
+                          </div>
+                          <span class="font-small font-white" v-if="timeFrame === 'months' ">than last month</span>
+                          <span class="font-small font-white" v-if="timeFrame === 'weeks' ">than last week</span>
+                          <span class="font-small font-white" v-if="timeFrame === 'days' ">than yesterday</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div v-else class="fl_row_center data_loading_main_cont">
+                      <div class="data_loading_icon_cont">
+                        <img src="../../../images/loader_icon.svg" width="100%" height="100%"/>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="o_t_grid_item">
+                    <div class="fl-col-start-space-btwn otg_card" v-if="!is_loading_total_dispatchers_item">
+                      <div class="otg_card_header">
+                        <span class="font_brand_faint">Total dispatchers</span>
+                      </div>
+                      <div class="otg_card_body">
+                        <span class="font_secondary_dark otg_card_b_data">{{Intl.NumberFormat('en-IN').format(Number(total_dispatchers_item.total_value))}}</span>
+                        <div class="fl-row-center-start">
+                          <span v-if="timeFrame === 'days'" class="font-small font_brand_faint">Today: {{Intl.NumberFormat('en-IN').format(Number(total_dispatchers_item.current_month))}}</span>
+                          <span v-if="timeFrame === 'weeks'" class="font-small font_brand_faint">This week: {{Intl.NumberFormat('en-IN').format(Number(total_dispatchers_item.current_month))}}</span>
+                          <span v-if="timeFrame === 'months'" class="font-small font_brand_faint">This month: {{Intl.NumberFormat('en-IN').format(Number(total_dispatchers_item.current_month))}}</span>
+                        </div>
+                        <div class="fl-row-center-start">
+                          <span :class="total_dispatchers_item.increased ? 'font-success font-small' : 'font-danger font-small' ">{{Intl.NumberFormat('en-IN').format(Number(total_dispatchers_item.percent))}}%</span>
+                          <div class="arrow_seer">
+                            <img v-if="total_dispatchers_item.increased" src="../../../images/arrow_up.svg" width="100%" height="100%"/>
+                            <img v-else src="../../../images/arrow_down.svg" width="100%" height="100%"/>
+                          </div>
+                          <span class="font-small font_brand_faint" v-if="timeFrame === 'months' ">than last month</span>
+                          <span class="font-small font_brand_faint" v-if="timeFrame === 'weeks' ">than last week</span>
+                          <span class="font-small font_brand_faint" v-if="timeFrame === 'days' ">than yesterday</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div v-else class="fl_row_center data_loading_main_cont">
+                      <div class="data_loading_icon_cont">
+                        <img src="../../../images/loader_icon.svg" width="100%" height="100%"/>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="o_t_grid_item">
+                    <div class="fl-col-start-space-btwn otg_card" v-if="!is_loading_total_delivery_item">
+                      <div class="otg_card_header">
+                        <span class="font_brand_faint">Total deliveries</span>
+                      </div>
+                      <div class="otg_card_body">
+                        <span class="font_secondary_dark otg_card_b_data">{{Intl.NumberFormat('en-IN').format(Number(total_delivery_item.total_value))}}</span>
+                        <div class="fl-row-center-start">
+                          <span v-if="timeFrame === 'days'" class="font-small font_brand_faint">Today: {{Intl.NumberFormat('en-IN').format(Number(total_delivery_item.current_month))}}</span>
+                          <span v-if="timeFrame === 'weeks'" class="font-small font_brand_faint">This week: {{Intl.NumberFormat('en-IN').format(Number(total_delivery_item.current_month))}}</span>
+                          <span v-if="timeFrame === 'months'" class="font-small font_brand_faint">This month: {{Intl.NumberFormat('en-IN').format(Number(total_delivery_item.current_month))}}</span>
+                        </div>
+                        <div class="fl-row-center-start">
+                          <span :class="total_delivery_item.increased ? 'font-success font-small' : 'font-danger font-small' ">{{Intl.NumberFormat('en-IN').format(Number(total_delivery_item.percent))}}%</span>
+                          <div class="arrow_seer">
+                            <img v-if="total_delivery_item.increased" src="../../../images/arrow_up.svg" width="100%" height="100%"/>
+                            <img v-else src="../../../images/arrow_down.svg" width="100%" height="100%"/>
+                          </div>
+                          <span class="font-small font_brand_faint" v-if="timeFrame === 'months' ">than last month</span>
+                          <span class="font-small font_brand_faint" v-if="timeFrame === 'weeks' ">than last week</span>
+                          <span class="font-small font_brand_faint" v-if="timeFrame === 'days' ">than yesterday</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div v-else class="fl_row_center data_loading_main_cont">
+                      <div class="data_loading_icon_cont">
+                        <img src="../../../images/loader_icon.svg" width="100%" height="100%"/>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="o_t_grid_item brand_faint_green_bg">
+                    <div class="fl-col-start-space-btwn otg_card" v-if="!is_loading_delivery_status">
+                      <div class="otg_card_header">
+                        <span class="font_brand_faint">Successful deliveries</span>
+                      </div>
+                      <div class="otg_card_body">
+                        <span class="font_secondary_dark otg_card_b_data">{{total_successful_deliveries}}</span>
+                      </div>
+                    </div>
+                    <div v-else class="fl_row_center data_loading_main_cont">
+                      <div class="data_loading_icon_cont">
+                        <img src="../../../images/loader_icon.svg" width="100%" height="100%"/>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="o_t_grid_item brand_faint_danger_bg">
+                    <div class="fl-col-start-space-btwn otg_card" v-if="!is_loading_delivery_status">
+                      <div class="otg_card_header">
+                        <span class="font_brand_faint">Failed deliveries</span>
+                      </div>
+                      <div class="otg_card_body">
+                        <span class="font_secondary_dark otg_card_b_data">{{total_failed_deliveries}}</span>
+                      </div>
+                    </div>
+                    <div v-else class="fl_row_center data_loading_main_cont">
+                      <div class="data_loading_icon_cont">
+                        <img src="../../../images/loader_icon.svg" width="100%" height="100%"/>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="o_t_grid_item brand_faint_main_bg">
+                    <div class="fl-col-start-space-btwn otg_card">
+                      <div class="otg_card_header">
+                        <span class="font_brand_dark">Tracking dispatchers</span>
+                      </div>
+                      <div class="otg_card_body">
+                        <span class="font_secondary_dark otg_card_b_data">{{currently_tracking_dispatchers.length}}</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
           <div></div>
         </div>
       </section>
     </section>
     <script src="../../../js/loader.js"></script>
-    <!-- <script src="https://unpkg.com/vue"></script> -->
     <script src="../../../js/vue.min.js"></script>
     <script src="../../../js/toast.js"></script>
     <script src="../../../js/modal.js"></script>

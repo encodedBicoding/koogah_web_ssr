@@ -5,6 +5,22 @@ const isProduction = process.env.NODE_ENV === 'production';
 const base_url = isProduction ? process.env.BASE_URL_PRODUCTION : process.env.BASE_URL_DEVELOPMENT;
 
 class CompanyController {
+  static logout(req, res, next) {
+    return Promise.try(async () => {
+      res.clearCookie('koogah_session_token', { path: '/' });
+      res.clearCookie('refresh_token', { path: '/' });
+      return res.status(200).json({
+        status: 200,
+        message: 'Logout successfully',
+      })
+    }).catch((err) => {
+      return res.status(500).json({
+        status: 500,
+        error: err,
+      });
+    });
+  }
+  
   static login(req, res) {
     return Promise.try(async () => {
       const { email, password } = req.body;
@@ -374,6 +390,26 @@ class CompanyController {
         error: err,
       })
     })
+  }
+
+  static companyUpdateProfile(req, res) {
+    return Promise.try(async () => {
+      let token = req.cookies['koogah_session_token'];
+      const response = await fetch(`${base_url}/company/profile/update`, {
+        method: 'PUT',
+        body: JSON.stringify({...req.body}),
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
+        }
+      }).then((resp) => resp.json());
+      return res.json(response);
+    }).catch(err => {
+      return res.status(500).json({
+        status: 500,
+        error: err,
+      });
+    });
   }
 };
 

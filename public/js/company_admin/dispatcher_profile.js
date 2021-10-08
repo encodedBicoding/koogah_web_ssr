@@ -29,6 +29,9 @@ const vm = new Vue({
     location_fetch_interval: null,
     show_edit_dispatcher_modal: false,
     edit_form_field: {},
+    show_logout_dropdown: false,
+    last_history_data_timestamp: '',
+    show_notification_dropdown: false,
   },
   beforeMount() {
     this.host = window.location.origin;
@@ -45,7 +48,9 @@ const vm = new Vue({
     // listen for notification
     const self = this;
     let connectionString = 'wss://koogah-api-staging.herokuapp.com/data_seeking'
-    const webSocket = new WebSocket(connectionString);
+    let mainConnectionString = 'wss://core.koogahapis.com/data_seeking';
+    let localConnectionString = 'ws://localhost:4000/data_seeking';
+    const webSocket = new WebSocket(mainConnectionString);
     webSocket.onopen = function () {
       self.socket = webSocket;
     }
@@ -54,6 +59,9 @@ const vm = new Vue({
       if (msg.event === 'in_app_notification') {
         self.notifications = [];
         self.notifications = msg.payload;
+      }
+      if (msg.event === 'company_new_package_creation') {
+        showMarketPlaceToast('neutral', msg.payload, null, 'bottom_left', true);
       }
     } 
   },
@@ -75,9 +83,7 @@ const vm = new Vue({
       let st = e.target.scrollTop;
       if (st > lastScrollPos) {
         if (st > last_elem.getBoundingClientRect().x) {
-          if (self.total_pages > self.delivery_histories.length) {
-            await this.fetchDispatcherDeliveryHistory(this.active_dispatcher.id, false);
-          }
+          await this.loadOlderHistoryData();
         }
       }
       lastScrollPos = st <= 0 ? 0 : st;
@@ -87,6 +93,24 @@ const vm = new Vue({
     }
   },
   methods: {
+    logout: async function () {
+      try {
+        const response = await window.fetch(`${this.host}/api/company/admin/logout`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        }).then((resp) => resp.json()).then((res) => res);
+        if (response.status === 200) {
+          window.location.href = '/company/admin/login';
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    },
+    toggleLogout: function () {
+      this.show_logout_dropdown = !this.show_logout_dropdown;
+    },
     goHome: function () {
       window.location.href = '/company/admin/dashboard';
     },
@@ -100,6 +124,7 @@ const vm = new Vue({
       if (!this.active_dispatcher) {
         return;
       } else {
+        this.last_history_data_timestamp = '';
         if (value === 'tracking' && this.active_dispatcher.is_currently_dispatching === false) {
           showToast(
             'neutral',
@@ -116,8 +141,13 @@ const vm = new Vue({
             this.map_table_state = value;
             // fetch based on map table state.
             if (value === 'history') {
+              if (this.location_fetch_interval !== null) {
+                clearInterval(this.location_fetch_interval);
+              }
               await this.fetchDispatcherDeliveryHistory(this.active_dispatcher.id, true);
             } else {
+              this.dispatcher_location.lat = 0;
+              this.dispatcher_location.lng = 0;
               await this.fetchTrackingData();
             }
           }
@@ -185,7 +215,20 @@ const vm = new Vue({
         return obj;
       });
       return result;
-     },
+    },
+    loadOlderHistoryData: async function () {
+      let to;
+      let data = this.delivery_histories;
+      let last_history_data_timestamp = data[data.length - 1].created_at;
+      if (this.last_history_data_timestamp !== last_history_data_timestamp) {
+        this.last_history_data_timestamp = last_history_data_timestamp;
+        to = setTimeout(async () => {
+          await this.fetchDispatcherDeliveryHistory(this.active_dispatcher.id, false);
+        }, 1500)
+      } else {
+        clearTimeout(to);
+      }
+    },
     fetchDispatcherDeliveryHistory: async function (id, showLoading = true) {
       const self = this;
       try {
@@ -204,7 +247,7 @@ const vm = new Vue({
           // find and update the current tracking package
           const isFoundCurrentTracking = result.findIndex((d) => d.status === 'tracking');
           if (isFoundCurrentTracking !== -1) {
-            this.current_tracking_package = isFoundCurrentTracking;
+            this.current_tracking_package = result[isFoundCurrentTracking];
           }
           this.delivery_histories = this.delivery_histories.concat(result);
           this.total_pages = response.data.totalPages;
@@ -230,10 +273,12 @@ const vm = new Vue({
         console.log(err);
       }
     },
-    fetchTrackingData: async function () {
+    fetchTrackingData: async function (showTableLoading = true) {
       let self = this;
       try {
-        this.is_table_loading = true;
+        if (showTableLoading) {
+          this.is_table_loading = true;
+        }
         const response = await window.fetch(`${this.host}/api/company/admin/dispatcher/tracking/${self.active_dispatcher.id}`, {
           method: 'GET',
           headers: {
@@ -246,10 +291,10 @@ const vm = new Vue({
           let result = response.data.tracking_package;
           let dispatcher_location = {};
           let package_location = {};
-          dispatcher_location.lat = result.dispatcher_lat;
-          dispatcher_location.lng = result.dispatcher_lng;
-          package_location.lat = result.destination_lat;
-          package_location.lng = result.destination_lng;
+          dispatcher_location.lat = Number(result.dispatcher_lat);
+          dispatcher_location.lng = Number(result.dispatcher_lng);
+          package_location.lat = Number(result.destination_lat);
+          package_location.lng = Number(result.destination_lng);
 
           if (self.package_location.lat === null && self.package_location.lng == null) {
             self.package_location = package_location;
@@ -261,8 +306,8 @@ const vm = new Vue({
           }
           // activate interval recalls;
           self.location_fetch_interval = setInterval(() => {
-            self.fetchTrackingData();
-          }, 40000)
+            self.fetchTrackingData(false);
+          }, 900000)
         } else {
           if (self.location_fetch_interval != null) {
             clearInterval(self.location_fetch_interval);
@@ -290,14 +335,28 @@ const vm = new Vue({
         if (!elem) {
           if (retry > 0) {
             interval = setInterval(() => {
-              elem = document.getElementById('map_holder');
+              if (window.screen.width < 1024) {
+                elem = document.getElementById('mobile_map_holder');
+              } else {
+                elem = document.getElementById('map_holder');
+              }
               if (elem) {
                 if (google) {
-                  this.map = new google.maps.Map(document.getElementById('map_holder'), {
-                    center: this.dispatcher_location,
-                    zoom: 15,
-                    zoomControl: true,
-                  });
+                  this.map = null;
+                  if (window, screen.width < 1024) {
+                    this.map = new google.maps.Map(document.getElementById('mobile_map_holder'), {
+                      center: this.dispatcher_location,
+                      zoom: 15,
+                      zoomControl: true,
+                    });
+                  } else {
+                    this.map = new google.maps.Map(document.getElementById('map_holder'), {
+                      center: this.dispatcher_location,
+                      zoom: 15,
+                      zoomControl: true,
+                    });
+                  }
+                  
                   const dispatcher_marker = new google.maps.Marker({
                     position: this.dispatcher_location,
                     map: this.map,
@@ -397,5 +456,12 @@ const vm = new Vue({
         console.log(err);
       }
     },
+    activateNotification: function () {
+      try {
+        this.show_notification_dropdown = !this.show_notification_dropdown;
+      } catch (err) {
+        console.log(err);
+      }
+    }
   }
 });

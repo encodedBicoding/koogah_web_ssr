@@ -38,7 +38,9 @@ const vm = new Vue({
       start: null,
       end: null
     },
-    timeFrame: 'months'
+    timeFrame: 'months',
+    show_logout_dropdown: false,
+    show_notification_dropdown: false,
   },
   beforeMount() {
     this.host = window.location.origin;
@@ -47,8 +49,10 @@ const vm = new Vue({
     // connect to websocket.
     // listen for notification
     const self = this;
-    let connectionString = 'wss://koogah-api-staging.herokuapp.com/data_seeking'
-    const webSocket = new WebSocket(connectionString);
+    let connectionString = 'wss://koogah-api-staging.herokuapp.com/data_seeking';
+    let mainConnectionString = 'wss://core.koogahapis.com/data_seeking';
+    let localConnectionString = 'ws://localhost:4000/data_seeking';
+    const webSocket = new WebSocket(mainConnectionString);
     webSocket.onopen = function () {
       self.socket = webSocket;
       self.wsGetTrackingDispatchers();
@@ -62,6 +66,9 @@ const vm = new Vue({
       if (msg.event === 'company_tracking_dispatchers_result') {
         self.currently_tracking_dispatchers = msg.payload;
       }
+      if (msg.event === 'company_new_package_creation') {
+        showMarketPlaceToast('neutral', msg.payload, null, 'bottom_left', true);
+      }
     } 
   },
   mounted() {
@@ -71,6 +78,24 @@ const vm = new Vue({
     this.getTotalDeleveriesOverview();
   },
   methods: {
+    logout: async function () {
+      try {
+        const response = await window.fetch(`${this.host}/api/company/admin/logout`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        }).then((resp) => resp.json()).then((res) => res);
+        if (response.status === 200) {
+          window.location.href = '/company/admin/login';
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    },
+    toggleLogout: function () {
+      this.show_logout_dropdown = !this.show_logout_dropdown;
+    },
     goHome: function () {
       window.location.href = '/company/admin/dashboard';
     },
@@ -140,5 +165,12 @@ const vm = new Vue({
         this.socket.send(message);
       }
     },
+    activateNotification: function () {
+      try {
+        this.show_notification_dropdown = !this.show_notification_dropdown;
+      } catch (err) {
+        console.log(err);
+      }
+    }
   }
 });

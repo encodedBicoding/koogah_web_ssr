@@ -69,13 +69,14 @@
       <%-user.business_name%> - Wallet - Koogah Company Dashboard
     </title>
   </head>
-  <body id="roots">
+  <body id="roots" class="company_admin_pages">
     <div class="loader hd">
       <div class="loader_holder">
         <img src="../../../images/loader_icon.svg" width="100%" height="100%s"/>
       </div>
     </div>
     <div class="toast remove"></div>
+    <div class="marketplace_toast remove"></div>
     <div class="d-modal hide"></div>
     <section id="company_admin_dashboard_wallet" class="admin_dash_container">
       <%- include('../components/dash_nav.ejs', 
@@ -142,7 +143,61 @@
                 </div>
               </div>
             </div>
-            <div class="mobile"></div>
+            <div class="mobile">
+              <div class="fl-row-center-space-btwn mob_dont_scroll">
+                <h3 class="dash_page_title">Wallet</h3>
+                <div class="fl-row-center-space-btwn" v-on:click="withdrawFunds">
+                  <button class="btn_bg_dark" v-if="!is_fetching_banks">Withdraw</button>
+                  <div class="data_loading_icon_cont_sm" v-else>
+                    <img src="../../../images/loader_icon.svg" width="100%" height="100%"/>
+                  </div>
+                </div>
+              </div>
+              <div class="wd-100 mob_page_top">
+                <div class="overview_top_grid">
+                  <div class="o_t_grid_item">
+                    <div class="fl-col-start-space-btwn otg_card">
+                      <div class="otg_card_header">
+                        <span class="font_brand_faint">Total payout</span>
+                      </div>
+                      <div class="otg_card_body">
+                        <span class="font_secondary_dark otg_card_b_data">₦<%- Intl.NumberFormat('en-IN').format(Number(user.total_payouts))%></span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="o_t_grid_item">
+                    <div class="fl-col-start-space-btwn otg_card">
+                      <div class="otg_card_header">
+                        <span class="font_brand_faint">Current balance</span>
+                      </div>
+                      <div class="otg_card_body">
+                        <span class="font_secondary_dark otg_card_b_data">₦<%-Intl.NumberFormat('en-IN').format(Number(user.current_wallet_balance))%></span>
+                        <br/>
+                        <div class="fl-col-start-space-btwn" v-if="!is_loading_withdrawable_current_balance">
+                          <span class="font-xsm font_brand_faint">Amount payable: </span>
+                          <span class="font-success font-small">₦{{Intl.NumberFormat('en-IN').format(Number(withdrawable_balance))}}</span>
+                        </div>
+                        <div v-else class="fl-row-center-start data_loading_main_cont">
+                          <div class="data_loading_icon_cont_sm">
+                            <img src="../../../images/loader_icon.svg" width="100%" height="100%"/>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="o_t_grid_item">
+                    <div class="fl-col-start-space-btwn otg_card">
+                      <div class="otg_card_header">
+                        <span class="font_brand_faint">Last payout</span>
+                      </div>
+                      <div class="otg_card_body">
+                        <span class="font_secondary_dark otg_card_b_data">₦<%- Intl.NumberFormat('en-IN').format(Number(user.last_payout))%></span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
           <div></div>
         </div>

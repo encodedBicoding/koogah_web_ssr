@@ -14,6 +14,8 @@ const vm = new Vue({
     withdrawable_balance: 0,
     current_balance: 0,
     retry_fetch_nigerian_banks: 0,
+    show_logout_dropdown: false,
+    show_notification_dropdown: false,
   },
   beforeMount() {
     this.host = window.location.origin;
@@ -23,7 +25,9 @@ const vm = new Vue({
     // listen for notification
     const self = this;
     let connectionString = 'wss://koogah-api-staging.herokuapp.com/data_seeking' //wss://core.koogahapis.com/data_seeking
-    const webSocket = new WebSocket(connectionString);
+    let mainConnectionString = 'wss://core.koogahapis.com/data_seeking';
+    let localConnectionString = 'ws://localhost:4000/data_seeking';
+    const webSocket = new WebSocket(mainConnectionString);
     webSocket.onopen = function () {
       self.socket = webSocket;
       self.wsGetTrackingDispatchers();
@@ -37,6 +41,9 @@ const vm = new Vue({
       if (msg.event === 'company_tracking_dispatchers_result') {
         self.currently_tracking_dispatchers = msg.payload;
       }
+      if (msg.event === 'company_new_package_creation') {
+        showMarketPlaceToast('neutral', msg.payload, null, 'bottom_left', true);
+      }
     } 
   },
   mounted() {
@@ -46,6 +53,24 @@ const vm = new Vue({
     this.fetchNigerianBanks();
   },
   methods: {
+    logout: async function () {
+      try {
+        const response = await window.fetch(`${this.host}/api/company/admin/logout`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        }).then((resp) => resp.json()).then((res) => res);
+        if (response.status === 200) {
+          window.location.href = '/company/admin/login';
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    },
+    toggleLogout: function () {
+      this.show_logout_dropdown = !this.show_logout_dropdown;
+    },
     goHome: function () {
       window.location.href = '/company/admin/dashboard';
     },
@@ -54,36 +79,37 @@ const vm = new Vue({
     },
     fetchMe: async function () {
       try {
+        const self = this;
         const response = await window.fetch(`${this.host}/api/company/admin/me`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json'
           }
         }).then((resp) => resp.json()).then((res) => res);
-        this.user = response.data;
+        self.user = response.data;
       } catch (err) {
         console.log(err);
       }
     },
     fetchNigerianBanks: async function () {
-      this.is_fetching_banks = true;
       const self = this;
       try {
+        self.is_fetching_banks = true;
         const response = await window.fetch('https://api.paystack.co/bank', {
           method: 'GET'
         }).then((resp) => resp.json()).then((res) => res);
-        if (response.status === true) {
-          this.banks = [];
-          this.banks = response.data;
-          if (!this.user) {
-            await this.fetchMe();
+        if (response.status == true) {
+          self.banks = [];
+          self.banks = response.data;
+          if (!self.user) {
+            await self.fetchMe();
           }
-          this.bank_code = this.banks.find((b) => b.name === this.user.bank_account_name).code;
+          self.bank_code = response.data.find((b) => b.name === self.user.bank_account_name).code;
+          self.is_fetching_banks = false;
         }
-        this.is_fetching_banks = false;
       } catch (err) {
         if (self.retry_fetch_nigerian_banks < 5) {
-          this.fetchNigerianBanks();
+          self.fetchNigerianBanks();
           self.retry_fetch_nigerian_banks = self.retry_fetch_nigerian_banks + 1;
         }
       }
@@ -167,5 +193,12 @@ const vm = new Vue({
         this.socket.send(message);
       }
     },
+    activateNotification: function () {
+      try {
+        this.show_notification_dropdown = !this.show_notification_dropdown;
+      } catch (err) {
+        console.log(err);
+      }
+    }
   }
 });
