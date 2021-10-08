@@ -15,6 +15,7 @@ const vm = new Vue({
     current_balance: 0,
     retry_fetch_nigerian_banks: 0,
     show_logout_dropdown: false,
+    show_notification_dropdown: false,
   },
   beforeMount() {
     this.host = window.location.origin;
@@ -24,7 +25,9 @@ const vm = new Vue({
     // listen for notification
     const self = this;
     let connectionString = 'wss://koogah-api-staging.herokuapp.com/data_seeking' //wss://core.koogahapis.com/data_seeking
-    const webSocket = new WebSocket(connectionString);
+    let mainConnectionString = 'wss://core.koogahapis.com/data_seeking';
+    let localConnectionString = 'ws://localhost:4000/data_seeking';
+    const webSocket = new WebSocket(mainConnectionString);
     webSocket.onopen = function () {
       self.socket = webSocket;
       self.wsGetTrackingDispatchers();
@@ -190,5 +193,12 @@ const vm = new Vue({
         this.socket.send(message);
       }
     },
+    activateNotification: function () {
+      try {
+        this.show_notification_dropdown = !this.show_notification_dropdown;
+      } catch (err) {
+        console.log(err);
+      }
+    }
   }
 });
