@@ -48,8 +48,9 @@ const vm = new Vue({
     // listen for notification
     const self = this;
     let connectionString = 'wss://koogah-api-staging.herokuapp.com/data_seeking'
+    let mainConnectionString = 'wss://core.koogahapis.com/data_seeking';
     let localConnectionString = 'ws://localhost:4000/data_seeking';
-    const webSocket = new WebSocket(localConnectionString);
+    const webSocket = new WebSocket(mainConnectionString);
     webSocket.onopen = function () {
       self.socket = webSocket;
     }
@@ -331,7 +332,6 @@ const vm = new Vue({
         const dispatcher_location_marker = `${this.host}/images/dispatcher_location_marker.png`;
         let retry = 10;
         let elem;
-        console.log(window.screen.width);
         if (!elem) {
           if (retry > 0) {
             interval = setInterval(() => {
