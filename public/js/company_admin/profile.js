@@ -82,13 +82,14 @@ const vm = new Vue({
       this.user_update.bank_account_number = nv;
     }
   },
-  created() {
+  async created() {
     // connect to websocket.
     // listen for notification
     const self = this;
-    let connectionString = 'wss://koogah-api-staging.herokuapp.com/data_seeking'
-    let mainConnectionString = 'wss://core.koogahapis.com/data_seeking';
-    let localConnectionString = 'ws://localhost:4000/data_seeking';
+    const ws_string_response = await fetch(`${this.host}/api/company/admin/ws/connect`).then((resp => resp.json())).then((res) => res);
+    let connectionString = `wss://koogah-api-staging.herokuapp.com${ws_string_response.connection_url}`;
+    let mainConnectionString = `wss://core.koogahapis.com${ws_string_response.connection_url}`;
+    let localConnectionString = `ws://localhost:4000${ws_string_response.connection_url}`;
     const webSocket = new WebSocket(mainConnectionString);
     webSocket.onopen = function () {
       self.socket = webSocket;
