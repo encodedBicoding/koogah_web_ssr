@@ -45,13 +45,14 @@ const vm = new Vue({
   beforeMount() {
     this.host = window.location.origin;
   },
-  created() {
+  async created() {
     // connect to websocket.
     // listen for notification
     const self = this;
-    let connectionString = 'wss://koogah-api-staging.herokuapp.com/data_seeking';
-    let mainConnectionString = 'wss://core.koogahapis.com/data_seeking';
-    let localConnectionString = 'ws://localhost:4000/data_seeking';
+    const ws_string_response = await fetch(`${this.host}/api/company/admin/ws/connect`).then((resp => resp.json())).then((res) => res);
+    let connectionString = `wss://koogah-api-staging.herokuapp.com${ws_string_response.connection_url}`;
+    let mainConnectionString = `wss://core.koogahapis.com${ws_string_response.connection_url}`;
+    let localConnectionString = `ws://localhost:4000${ws_string_response.connection_url}`;
     const webSocket = new WebSocket(mainConnectionString);
     webSocket.onopen = function () {
       self.socket = webSocket;
@@ -61,6 +62,7 @@ const vm = new Vue({
       let msg = JSON.parse(message.data);
       if (msg.event === 'in_app_notification') {
         self.notifications = [];
+        console.log(msg.payload);
         self.notifications = msg.payload;
       }
       if (msg.event === 'company_tracking_dispatchers_result') {
