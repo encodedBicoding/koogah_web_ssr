@@ -62,6 +62,7 @@ const vm = new Vue({
           return;
         }
       } catch (err) {
+        showToast('error', 'Image upload error, please retry or choose another image', null, null, true);
         console.log(err);
       }
     },
