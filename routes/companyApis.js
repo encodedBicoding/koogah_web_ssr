@@ -3,7 +3,6 @@ const companyApis = express.Router();
 const CompanyController = require('../controllers/company.controller.js');
 const AuthMiddleware = require('../middlewares/auth.middleware');
 
-// testing
 companyApis.get('/admin/ws/connect', CompanyController.connect_ws);
 companyApis.post('/admin/login', CompanyController.login);
 companyApis.get(

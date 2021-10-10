@@ -62,7 +62,6 @@ const vm = new Vue({
       let msg = JSON.parse(message.data);
       if (msg.event === 'in_app_notification') {
         self.notifications = [];
-        console.log(msg.payload);
         self.notifications = msg.payload;
       }
       if (msg.event === 'company_tracking_dispatchers_result') {
