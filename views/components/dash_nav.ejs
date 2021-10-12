@@ -6,7 +6,12 @@
        </div>
        <%if(has_back_arrow === false) {%>
         <div class="nav_part_b">
-          <div class="notification_bell"> 
+          <div v-if="show_notification_dropdown && notifications.length > 0" class="notification_dropdown">
+            <div class="notification_data" v-for="notification of notifications">
+              <p>{{notification.message}}</p>
+            </div>
+          </div>
+          <div class="notification_bell" v-on:click="activateNotification"> 
             <span class="notification_counter" v-if="notifications.length > 0">
               <span>{{notifications.length}}</span>
             </span>
@@ -32,7 +37,12 @@
             </span>
           </div>
           <div class="nav_part_b">
-            <div class="notification_bell"> 
+            <div v-if="show_notification_dropdown && notifications.length > 0" class="notification_dropdown">
+              <div class="notification_data" v-for="notification of notifications">
+                <p>{{notification.message}}</p>
+              </div>
+            </div>
+            <div class="notification_bell" v-on:click="activateNotification"> 
               <span class="notification_counter" v-if="notifications.length > 0">
                 <span>{{notifications.length}}</span>
               </span>
@@ -68,7 +78,12 @@
         </div>
         <%}%>
         <div class="nav_part_b">
-          <div class="notification_bell"> 
+          <div v-if="show_notification_dropdown && notifications.length > 0" class="notification_dropdown">
+            <div class="notification_data" v-for="notification of notifications">
+              <p>{{notification.message}}</p>
+            </div>
+          </div>
+          <div class="notification_bell" v-on:click="activateNotification"> 
             <span class="notification_counter" v-if="notifications.length > 0">
               <span>{{notifications.length}}</span>
             </span>
