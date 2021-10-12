@@ -206,7 +206,7 @@
                         <span class="font_brand_faint">Total deliveries</span>
                       </div>
                       <div class="otg_card_body">
-                        <span class="font_secondary_dark otg_card_b_data">{{Intl.NumberFormat('en-IN').format(Number(total_delivery_item.current_month))}}</span>
+                        <span class="font_secondary_dark otg_card_b_data">{{Intl.NumberFormat('en-IN').format(Number(total_delivery_item.total_value))}}</span>
                         <div class="fl-row-center-start">
                           <span v-if="timeFrame === 'days'" class="font-small font_brand_faint">Today: {{Intl.NumberFormat('en-IN').format(Number(total_delivery_item.current_month))}}</span>
                           <span v-if="timeFrame === 'weeks'" class="font-small font_brand_faint">This week: {{Intl.NumberFormat('en-IN').format(Number(total_delivery_item.current_month))}}</span>
@@ -391,7 +391,7 @@
                         <span class="font_brand_faint">Total deliveries</span>
                       </div>
                       <div class="otg_card_body">
-                        <span class="font_secondary_dark otg_card_b_data">{{Intl.NumberFormat('en-IN').format(Number(total_delivery_item.current_month))}}</span>
+                        <span class="font_secondary_dark otg_card_b_data">{{Intl.NumberFormat('en-IN').format(Number(total_delivery_item.total_value))}}</span>
                         <div class="fl-row-center-start">
                           <span v-if="timeFrame === 'days'" class="font-small font_brand_faint">Today: {{Intl.NumberFormat('en-IN').format(Number(total_delivery_item.current_month))}}</span>
                           <span v-if="timeFrame === 'weeks'" class="font-small font_brand_faint">This week: {{Intl.NumberFormat('en-IN').format(Number(total_delivery_item.current_month))}}</span>

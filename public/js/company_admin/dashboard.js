@@ -40,16 +40,20 @@ const vm = new Vue({
     },
     timeFrame: 'months',
     show_logout_dropdown: false,
+    show_notification_dropdown: false,
   },
   beforeMount() {
     this.host = window.location.origin;
   },
-  created() {
+  async created() {
     // connect to websocket.
     // listen for notification
     const self = this;
-    let connectionString = 'wss://koogah-api-staging.herokuapp.com/data_seeking'
-    const webSocket = new WebSocket(connectionString);
+    const ws_string_response = await fetch(`${this.host}/api/company/admin/ws/connect`).then((resp => resp.json())).then((res) => res);
+    let connectionString = `wss://koogah-api-staging.herokuapp.com${ws_string_response.connection_url}`;
+    let mainConnectionString = `wss://core.koogahapis.com${ws_string_response.connection_url}`;
+    let localConnectionString = `ws://localhost:4000${ws_string_response.connection_url}`;
+    const webSocket = new WebSocket(mainConnectionString);
     webSocket.onopen = function () {
       self.socket = webSocket;
       self.wsGetTrackingDispatchers();
@@ -116,7 +120,10 @@ const vm = new Vue({
         }).then((resp) => resp.json()).then((res) => res);
         this.total_earnings_item = {}
         this.is_loading_total_earnings_item = false;
-        this.total_earnings_item = response.data;
+        if (response.status === 200) {
+          this.total_earnings_item = response.data;
+        }
+
       } catch (err) {
         console.log(err);
       }
@@ -132,7 +139,10 @@ const vm = new Vue({
         }).then((resp) => resp.json()).then((res) => res);
         this.total_dispatchers_item = {}
         this.is_loading_total_dispatchers_item = false;
-        this.total_dispatchers_item = response.data;
+        if (response.status === 200) {
+          this.total_dispatchers_item = response.data;
+        }
+
       } catch (err) {
         console.log(err);
       }
@@ -148,8 +158,11 @@ const vm = new Vue({
         }).then((resp) => resp.json()).then((res) => res);
         this.total_delivery_item = {}
         this.is_loading_total_delivery_item = false;
-        this.total_delivery_item = response.data;
-        this.total_successful_deliveries = response.data.total_value;
+        if (response.status === 200) {
+          this.total_delivery_item = response.data;
+          this.total_successful_deliveries = response.data.total_value;
+        }
+
       } catch (err) {
         console.log(err);
       }
@@ -162,5 +175,12 @@ const vm = new Vue({
         this.socket.send(message);
       }
     },
+    activateNotification: function () {
+      try {
+        this.show_notification_dropdown = !this.show_notification_dropdown;
+      } catch (err) {
+        console.log(err);
+      }
+    }
   }
 });
