@@ -16,9 +16,15 @@ const subscribeRoute = require('./routes/subscribeRoute');
 const companyAdminRoutes = require('./routes/companyAdminRoutes');
 const companyApis = require('./routes/companyApis.js');
 
+
+const isProduction = app.get('env') === 'production';
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
-app.set('trust proxy', true)
+app.enable('trust proxy');
+if (isProduction) {
+  app.set('trust proxy', 1)  
+}
+
 
 app.use(morgan('tiny'));
 app.use(cors());
@@ -31,6 +37,8 @@ app.use(session({
     secure: process.env.NODE_ENV === 'production' ? true : false,
     path: '/',
     expires: new Date(253402300000000),
+    httpOnly: true,
+    sameSite: 'none'
   },
   saveUninitialized: true,
   proxy: true,

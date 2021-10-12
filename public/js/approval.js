@@ -88,11 +88,10 @@ const estimate_vm = new Vue({
       let canProceed = false;
       const query = new URLSearchParams(window.location.href);
       const token = query.values().next().value;
-      console.log(token);
       if (!token) {
         return;
       } else {
-        canProceed = Object.values(this.formErrors).length > 0 ? false : true;
+        canProceed = Object.values(this.formErrors).reduce((acc, curr) => { if (curr) acc = false; return acc }, true);
         if (canProceed) {
           showLoader()
           const response = await window.fetch(

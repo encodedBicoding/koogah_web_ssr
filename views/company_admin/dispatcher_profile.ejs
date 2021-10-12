@@ -337,7 +337,7 @@
                       </div>
                     </div>
                   </div>
-                  <div v-if="is_table_loading && map_table_state === 'tracking'  " class="map_loading_overlay">
+                  <div v-if="is_table_loading && map_table_state === 'tracking' " class="map_loading_overlay">
                     <div class="data_loading_icon_cont">
                       <img src="../../../images/loader_icon.svg" width="100%" height="100%"/>
                     </div><br/>
@@ -360,12 +360,12 @@
                           {{current_tracking_package.dropoff_address}}
                         </p>
                         <p class="table_text_scrollable_no_wrap">
-                          {{current_tracking_package.id}}
+                          {{current_tracking_package.package_id}}
                         </p>
                       </div>
                     </div>
                   </div>
-                  <div v-if="map_table_state === 'tracking' && !is_table_loading" id="map_holder"></div>
+                  <div v-if="map_table_state === 'tracking' && !is_table_loading" id="map_holder" name="map_holder"></div>
                   <div v-else>
                     <div v-if="!is_table_loading" class="wd-100 ht-100">
                       <div class="dispatcher_table_map_header" v-if="map_table_state === 'history'">
@@ -631,7 +631,7 @@
                       </div>
                     </div>
                   </div>
-                  <div v-if="is_table_loading && map_table_state === 'tracking'  " class="map_loading_overlay">
+                  <div v-if="is_table_loading && map_table_state === 'tracking' " class="map_loading_overlay">
                     <div class="data_loading_icon_cont">
                       <img src="../../../images/loader_icon.svg" width="100%" height="100%"/>
                     </div><br/>
@@ -654,12 +654,12 @@
                           {{current_tracking_package.dropoff_address}}
                         </p>
                         <p class="table_text_scrollable_no_wrap">
-                          {{current_tracking_package.id}}
+                          {{current_tracking_package.package_id}}
                         </p>
                       </div>
                     </div>
                   </div>
-                  <div v-if="map_table_state === 'tracking' && !is_table_loading" id="map_holder"></div>
+                  <div v-if="map_table_state === 'tracking' && !is_table_loading" id="mobile_map_holder" name="mobile_map_holder"></div>
                   <div v-else>
                     <div v-if="!is_table_loading" class="wd-100 ht-100">
                       <div class="dispatcher_table_map_header" v-if="map_table_state === 'history'">

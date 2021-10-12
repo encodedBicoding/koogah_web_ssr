@@ -27,6 +27,7 @@ const vm = new Vue({
     banks: [],
     retry_fetch_nigerian_banks: '',
     is_fetching_banks: true,
+    show_notification_dropdown:false,
   },
   beforeMount() {
     this.host = window.location.origin;
@@ -61,6 +62,7 @@ const vm = new Vue({
           return;
         }
       } catch (err) {
+        showToast('error', 'Image upload error, please retry or choose another image', null, null, true);
         console.log(err);
       }
     },
@@ -80,12 +82,15 @@ const vm = new Vue({
       this.user_update.bank_account_number = nv;
     }
   },
-  created() {
+  async created() {
     // connect to websocket.
     // listen for notification
     const self = this;
-    let connectionString = 'wss://koogah-api-staging.herokuapp.com/data_seeking'
-    const webSocket = new WebSocket(connectionString);
+    const ws_string_response = await fetch(`${this.host}/api/company/admin/ws/connect`).then((resp => resp.json())).then((res) => res);
+    let connectionString = `wss://koogah-api-staging.herokuapp.com${ws_string_response.connection_url}`;
+    let mainConnectionString = `wss://core.koogahapis.com${ws_string_response.connection_url}`;
+    let localConnectionString = `ws://localhost:4000${ws_string_response.connection_url}`;
+    const webSocket = new WebSocket(mainConnectionString);
     webSocket.onopen = function () {
       self.socket = webSocket;
     }
@@ -216,5 +221,12 @@ const vm = new Vue({
         console.log(err);
       }
     },
+    activateNotification: function () {
+      try {
+        this.show_notification_dropdown = !this.show_notification_dropdown;
+      } catch (err) {
+        console.log(err);
+      }
+    }
   }
 });
