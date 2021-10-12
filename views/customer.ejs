@@ -53,6 +53,7 @@
     <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
     <link rel="stylesheet" href="css/index.css" />
     <link rel="stylesheet" href="css/nav.css" />
+    <link rel="stylesheet" href="../../css/toast.css" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
@@ -63,87 +64,89 @@
     <title>
       Customer - Koogah - Delivery done efficiently
     </title>
-    <script>
-      function setref() {
-        if (window.location.search) {
-          let query = new URLSearchParams(window.location.search);
-          let ref = query.get("ref");
-          window.sessionStorage.setItem("ref", ref);
-          window.sessionStorage.setItem("fromApp=", "web");
-        }
-      }
-    </script>
   </head>
-  <body id="roots" onclick="setref()">
+  <body id="roots">
     <script src="../js/locale.js"></script>
     <%- include('components/navbar.ejs', 
     {
-      opaque: false,
+      opaque: true,
     }
     ) %>
-    <section class="hero_bg">
-      <div class="wd-100 ht-100">
-        <h1 class="large-h1 container">
-          Caption <span class="brand">goes</span> here
-        </h1>
-
-        <div class="auth-card top-right">
+    <div class="toast remove"></div>
+    <section class="hero_bg_customer">
+      <div class="hero_content_flex_center">
+        <div class="hero_info">
+          <h1 class="large-h1 font-white m-text-center">
+            <span class="brand">Our</span> Customers
+          </h1>
+          <p class="hero_sub_info m-text-center">
+            <i>"If I have seen further, it is by standing on the shoulders of giants."</i> - <b>Isaac Newton.</b> <br/>
+            This is the beginning of our journey together to build an awesome logistics network.
+          </p>
+        </div>
+        <div class="auth-card">
           <div class="d-flex mb">
-            <p>Sign Up</p>
+            <p class="auth_head_text">Sign Up</p>
             <i class="fas fa-comments brand"></i>
           </div>
-          <form id="details">
-            <div class="" id="form2">
-              <input
-                required
-                type="text"
-                id="first_name"
-                class="form-control mb"
-                placeholder="First Name"
-              />
-              <input
-                required
-                type="text"
-                id="last_name"
-                class="form-control mb"
-                placeholder="Last Name"
-              />
-              <input
-                required
-                type="text"
-                id="email"
-                class="form-control mb"
-                placeholder="Email"
-              />
-              <input
-                required
-                type="text"
-                id="number"
-                class="form-control mb"
-                placeholder="Phone Number"
-              />
-              <input
-                required
-                type="text"
-                id="password"
-                class="form-control mb"
-                placeholder="Password"
-              />
-              <div class="mb-2">
-                <input type="checkbox" class="brand-border" />
-                <small>I Agree To Koogah Terms And Conditions</small>
-              </div>
-
-              <div class="d-grid">
-                <button class="btn brand_bg text-white" type="submit">
-                  Sign Up
-                </button>
+          <form id="company_form_details">
+            <div class="form_container">
+              <div class="show" id="form1">
+                <input
+                  required
+                  type="email"
+                  id="email"
+                  class="form-control mb"
+                  placeholder="Email"
+                />
+                <input
+                  required
+                  id="first_name"
+                  type="text"
+                  class="form-control mb"
+                  placeholder="First Name"
+                />
+                <input
+                  required
+                  id="last_name"
+                  type="text"
+                  class="form-control mb"
+                  placeholder="Last Name"
+                />
+                <div class="input-group mb">
+                  <span class="input-group-text">+234</span>
+                  <input
+                    required
+                    type="text"
+                    id="phone"
+                    class="form-control-text"
+                    placeholder="Phone Number"
+                    maxlength="11"
+                    minlength="10"
+                  />
+                </div>
+                <input
+                  required
+                  type="password"
+                  id="password"
+                  class="form-control mb"
+                  placeholder="Password"
+                />
+                <br/>
+                <div class="mb-2 row-start-cn">
+                  <input type="checkbox" class="brand-border mgrt-sm" id="chk_terms"/>
+                  <label for="chk_terms"><small>I Agree To Koogah Terms And Conditions</small></label>
+                </div>
+                <div class="d-grid">
+                  <button class="btn brand_bg text-white" id="btn-register">
+                    Register
+                  </button>
+                </div>
               </div>
             </div>
           </form>
         </div>
       </div>
-      <div class="brand_bg wd-100 ht-50"></div>
     </section>
     <!-- Middele Section -->
     <section
@@ -153,7 +156,7 @@
       <div class="container">
         <div class="wd-100 col-center">
           <h1 class="header_font">What To Expect</h1>
-          <p class="brand header_sub_font">As a dispatcher</p>
+          <p class="brand header_sub_font">As A Customer</p>
         </div>
         <div class="grid_container mtop-50px">
           <div class="info-card">
@@ -200,34 +203,6 @@
               </p>
             </div>
           </div>
-
-          <!-- <div class="info-card">
-          <div class="icon_bg color_4 flex_hours"></div>
-          <div class="font-bold">
-            <p class="h">Flexible <span class="brand">Working Hours</span></p>
-          </div>
-          <div class="info-card-sub-header">
-            <p>With Koogah, you can't work from home, but you can work when you want to work.</p>
-          </div>
-        </div>
-        <div class="info-card">
-          <div class="icon_bg color_5 low_rates"></div>
-          <div class="font-bold">
-            <p class="h">Lowest <span class="brand">Rates</span></p>
-          </div>
-          <div class="info-card-sub-header">
-            <p>We have also got you started with the best rates ever!. We only charge as low as 5% on every delivery.</p>
-          </div>
-        </div>
-        <div class="info-card">
-          <div class="icon_bg color_6 limitless_mode"></div>
-          <div class="font-bold">
-            <p class="h">Limitless <span class="brand">Mode Of Delivery</span></p>
-          </div>
-          <div class="info-card-sub-header">
-            <p>With Koogah, you do not have to worry about owning a motorcycle or car. What ever means of transportation you find convenient, deliver with it!.</p>
-          </div>
-        </div> -->
         </div>
       </div>
       <div class="row-center">
@@ -235,16 +210,6 @@
           >See All <i class="fas fa-chevron-down"></i
         ></span>
       </div>
-      <!-- <div class="cta-margin">
-      <div class="row-center">
-        <div class="wd-210px">
-          <div class="link row-space-between bordered-link bg-btn-brand" id="dispatchBtn">
-            <span>Become a dispatcher</span>
-            <span class="fas fa-chevron-right"></span>
-          </div>
-        </div>
-      </div>
-    </div> -->
     </section>
     <section class="container" name="email_subscription">
       <%- include('components/email_subscription.ejs') %>
@@ -253,32 +218,73 @@
       <%- include('components/download_now.ejs') %>
     </section>
     <section name="footer"><%- include('components/footer.ejs') %></section>
+    <script src="../../js/toast.js"></script>
     <script>
-      onsubmit = function () {
+      let hasCheckedTerms = false;
+
+      function checkTerms() {
+        hasCheckedTerms = !hasCheckedTerms;
+      }
+
+      const terms = document.getElementById("chk_terms");
+      terms.addEventListener("change", checkTerms);
+
+      const btnRegister = document.getElementById("btn-register");
+
+      onsubmit = function (evt) {
+        evt.preventDefault()
+        if (!hasCheckedTerms) {
+          showToast(
+            "error",
+            "Please agree to our T&C before proceeding",
+            5,
+            "bottom"
+          );
+          return;
+        }
         const data = {
           email: document.getElementById("email").value,
           first_name: document.getElementById("first_name").value,
           last_name: document.getElementById("last_name").value,
-          mobile_number_one: document.getElementById("number").value,
+          mobile_number_one: document.getElementById("phone").value,
           password: document.getElementById("password").value,
           country_code: "+234",
         };
-        console.log(data)
+        btnRegister.innerHTML = "Loading..."
+        btnRegister.disabled = true;
         fetch(
-          `https://core.koogahapis.com/v1/user/customer/signup`,
+          `${window.location.origin}/api/register/client/customer`,
           {
             method: "POST",
-            data,
+            body: JSON.stringify(data),
             headers: {
               "Content-type": "application/json; charset=UTF-8",
             },
           }
-        );
-        return false;
+        ).then(resp => {
+          btnRegister.innerHTML = "Register"
+          btnRegister.disabled = false;
+          
+          resp.json().then(data => {
+            showToast(
+              resp.ok ? "success" : "error",
+              resp.ok ? data.message : (Array.isArray(data.error) ? data.error[0].message : data.error)
+            );
+          })
+          
+        }).catch((err) => {
+          console.log(err)
+          btnRegister.innerHTML = "Register"
+          btnRegister.disabled = false;
+          showToast(
+            "error",
+            "Something went wrong. Please try again",
+          );
+        });
       };
     </script>
-    <script src="../js/mobile_nav.js"></script>
-    <script src="../js/faq_func.js"></script>
-    <script src="../js/subscribe.js"></script>
+    <script src="../../js/mobile_nav.js"></script>
+    <script src="../../js/faq_func.js"></script>
+    <script src="../../js/subscribe.js"></script>
   </body>
 </html>

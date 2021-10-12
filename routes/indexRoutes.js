@@ -69,6 +69,19 @@ indexRoutes.get(
   });
 
 indexRoutes.get(
+  '/register',
+  function (req, res, next) {
+    if(req.query && req.query.ref)
+    {
+      res.cookie('ref', req.query.ref, {
+        secure: true,
+        httpOnly: true,
+      });
+    }
+    res.redirect('/')
+  });
+
+indexRoutes.get(
   '/verify/mobile',
   function (req, res, next) {
     ejs.renderFile(`${view_path}/mobile_verification.ejs`, {
