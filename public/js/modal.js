@@ -96,6 +96,9 @@ function buildRegisterSuccessModal(message, action) {
       <h2 class="brand">Thank You!</h2>
       <div class="text-center-cont">
          <p class="text-center">${message}</p>
+         <br/>
+         <p class="text-center font-xsm">If you signed up as a customer or a dispatcher, please download our mobile app on your device to login.</p>
+         <p class="text-center font-xsm">Search for either <b>Koogah</b> or <b>Koogah dispatcher</b><p>
       </div>
       <div class="btn_col_outline modal_close">
         <p>Okay</p>

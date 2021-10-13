@@ -42,7 +42,11 @@ class Register{
       const ref = req.cookies && req.cookies.ref
 
       //override profile image value with upload result
-      req.body.profile_image = response.data.secure_url
+      if (response) {
+        if (response.data) {
+          req.body.profile_image = response.data.secure_url
+        }
+      }
 
       response = await fetch(
         `${base_url}/user/${req.params.type}/signup?fromApp=web${ref ? `&&ref=${ref}` : ""}`, 
