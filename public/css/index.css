@@ -469,20 +469,25 @@ select {
   background-size: cover;
 }
 
-.hero_bg_dispatch {
-  position: relative;
+.hero_bg_customer {
   width: 100%;
   height: calc(100vh);
-  background-image: linear-gradient(to right, #ffcd6879 , #e27b0677), url("../images/bg.png");
+  background-image: url("../images/customer_backdrop.png");
   background-repeat: no-repeat;
   background-position: bottom;
   background-size: cover;
-  /* opacity: 0.5; */ 
-  background-color: #00000060;
-  
 }
 
-.hero_bg_dispatch_two {
+.hero_bg_dispatcher {
+  width: 100%;
+  height: calc(100vh);
+  background-image: url("../images/dispatcher_backdrop.png");
+  background-repeat: no-repeat;
+  background-position: bottom;
+  background-size: cover;
+}
+
+/*.hero_bg_dispatch_two {
   position: absolute;
   background-image: linear-gradient(to right, #ffcd6879 , #e27b0677),  url("../images/wk.png");
   background-repeat: no-repeat;
@@ -498,9 +503,9 @@ select {
     
 }
  
-.hero_bg_dispatch_color {
+/*.hero_bg_dispatch_color {*/
   /* position: absolute; */
-  /* background-image: linear-gradient(to right, #ffcd6879 , #e27b0677);
+ /*  background-image: linear-gradient(to right, #ffcd6879 , #e27b0677);
   background-color: #00000060;
   width: 100%; */
   /* background-image: linear-gradient(to right, #ffcd68bd , #e27b06be); */
@@ -515,7 +520,7 @@ select {
   right: 90px;
   opacity: 0.5;
   background-color: #000000; */
-}
+/*}*/
 
 .hero_bg {
   width: 100%;

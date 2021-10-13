@@ -53,6 +53,7 @@
     <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
     <link rel="stylesheet" href="css/index.css" />
     <link rel="stylesheet" href="css/nav.css" />
+    <link rel="stylesheet" href="../../css/toast.css" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
@@ -67,175 +68,199 @@
   <body id="roots">
     <script src="../js/locale.js"></script>
     <%- include('components/navbar.ejs', { opaque: true, } ) %>
-    <section class="hero_bg_dispatch">
-      <div class="wd-100 ht-100 hero_bg_dispatch_two">
-      <div class="hero_bg_dispatch_colo">
-        <h1 class="large-h1 container_mini text-white ">
-          <span class="brand">Our</span> Dispatchers.
-         </h1>
-        
-          <div class="dispatch-auth-card top-right">
-           <div class="d-flex mb">
-             <p>Sign UP</p>
-             <i class="fas fa-comments brand"></i>
-           </div>
-           <form id="details">
-             <div class="show" id="form1">
-               <input
-                 required
-                 type="text"
-                 name="email"
-                 id="email"
-                 class="form-control mb"
-                 placeholder="Email"
-               />
-               <input
-                 required
-                 type="text"
-                 name="firstName"
-                 id="first_name"
-                 class="form-control mb"
-                 placeholder="First Name"
-               />
-               <input
-                 required
-                 type="text"
-                 name="lastName"
-                 id="last_name"
-                 class="form-control mb"
-                 placeholder="Last Name"
-               />
-               <div class="input-group mb">
-                 <span class="input-group-text">+234</span>
-                 <input
-                   required
-                   type="text"
-                   name="phoneNumber"
-                   id="number"
-                   class="form-control-text"
-                   placeholder="Phone Number"
-                 />
-               </div>
-               <select
-                 required
-                 name="country"
-                 class="form-control mb"
-                 id="dispatch_select_country"
-               >
-                 <option selected value="" disabled>Select country</option>
-                 <option value="nigeria">Nigeria</option>
-               </select>
-               <select
-                 required
-                 disabled
-                 name="state"
-                 class="form-control mb"
-                 id="dispatch_select_state"
-               >
-                 <option selected value="" disabled>Select state</option>
-               </select>
-        
-               <select
-                 required
-                 disabled
-                 name="city"
-                 class="form-control mb"
-                 id="dispatch_select_city"
-               >
-                 <option selected value="" disabled>Select city</option>
-               </select>
-        
-               <div class="d-grid">
-                 <button class="btn brand_bg text-white" id="next">
-                   Next <i class="fas fa-chevron-right text-white"></i>
-                 </button>
-               </div>
-             </div>
-        
-             <div class="hide" id="form_2">
-               <input
-                 required
-                 type="text"
-                 name="address"
-                 id="address"
-                 class="form-control mb"
-                 placeholder="Full House Address"
-               />
-        
-               <select
-                 id="sex"
-                 name="sex"
-                 class="form-select mb"
-                 aria-label="Default select example"
-               >
-                 <option selected>Gender</option>
-                 <option value="M">Male</option>
-                 <option value="F">Female</option>
-                 <option value="N">Prefer not to say</option>
-               </select>
-               <input
-                 required
-                 type="text"
-                 name="nin"
-                 id="nin"
-                 class="form-control mb"
-                 placeholder="Identification Number"
-               />
-        
-               <div class="mb">
-                 <div class="mb">
-                   <label for="automobile" class="form-label"
-                     >Do you own a functionong automobile?</label
-                   >
-                 </div>
-                 <select
-                   id="automobile"
-                   name="automobile"
-                   class="form-select"
-                   aria-label="Default select example"
-                 >
-                   <option selected>Select Answer</option>
-                   <option value="yes">Yes</option>
-                   <option value="no">No</option>
-                 </select>
-               </div>
-               <div class="mb-2">
-                 <div class="mb">
-                   <label for="dispatch" class="form-label"
-                     >Have you made money as a dispatcher before?</label
-                   >
-                 </div>
-                 <select
-                   id="dispatch"
-                   name="dispatch"
-                   class="form-select"
-                   aria-label="Default select example"
-                 >
-                   <option selected>Select Answer</option>
-                   <option value="yes">Yes</option>
-                   <option value="no">No</option>
-                 </select>
-               </div>
-               <div class="mb-2 row-start-cn">
-                 <input
-                   type="checkbox"
-                   class="brand-border mgrt-sm"
-                   id="dispatch_terms"
-                 />
-                 <small>I Agree To Koogah Terms And Conditions</small>
-               </div>
-        
-               <div class="d-grid">
-                 <button class="btn brand_bg text-white" id="submit">
-                   Sign Up
-                 </button>
-               </div>
-             </div>
-           </form>
-         </div> 
+    <div class="toast remove"></div>
+    <section class="hero_bg_dispatcher">
+      <div class="hero_content_flex_center">
+        <div class="hero_info">
+          <h1 class="large-h1 font-white m-text-center">
+            <span class="brand">Our</span> Dispatchers
+          </h1>
+          <p class="hero_sub_info m-text-center">
+            <i>"If I have seen further, it is by standing on the shoulders of giants."</i> - <b>Isaac Newton.</b> <br/>
+            This is the beginning of our journey together to build an awesome logistics network.
+          </p>
+        </div>
+        <div class="auth-card">
+          <div class="d-flex mb">
+            <p class="auth_head_text">Sign Up</p>
+            <i class="fas fa-comments brand"></i>
+          </div>
+          <form class="show" id="form1" onsubmit="goToForm2(event)">
+            <input
+              required
+              type="email"
+              name="email"
+              id="email"
+              class="form-control mb"
+              placeholder="Email"
+            />
+            <input
+              required
+              type="text"
+              name="firstName"
+              id="first_name"
+              class="form-control mb"
+              placeholder="First Name"
+            />
+            <input
+              required
+              type="text"
+              name="lastName"
+              id="last_name"
+              class="form-control mb"
+              placeholder="Last Name"
+            />
+            <div class="input-group mb">
+              <span class="input-group-text">+234</span>
+              <input
+                required
+                type="text"
+                name="phoneNumber"
+                id="phone_number"
+                class="form-control-text"
+                placeholder="Phone Number"
+              />
+            </div>
+            <select
+              required
+              name="country"
+              class="form-control mb"
+              id="country"
+            >
+              <option selected value="" disabled>Select country</option>
+              <option value="nigeria">Nigeria</option>
+            </select>
+            <select
+              required
+              name="state"
+              class="form-control mb"
+              id="state"
+              onchange="handleStateSelected(this)"
+            >
+              <option selected value="" disabled>Select state</option>
+            </select>
+
+            <select
+              required
+              name="city"
+              class="form-control mb"
+              id="city"
+            >
+              <option selected value="" disabled>Select city</option>
+            </select>
+
+            <div class="d-grid">
+              <button class="btn brand_bg text-white" id="next">
+                Next <i class="fas fa-chevron-right text-white"></i>
+              </button>
+            </div>
+          </form>
+          <form class="hide" id="form2" onsubmit="registerCourier(event)">
+            <div class="add_disp_headshot_container">
+              <input 
+                id="add_dispatcher_profile_image" 
+                type="file" 
+                class="d-none" 
+                accept="image/*"
+                name="file"
+                onchange="handleFileChanged(this)" 
+              />
+              <div class="add_disp_headshot_container_sub" onclick="document.getElementById('add_dispatcher_profile_image').click()">
+                <div class="add_disp_image_holder">
+                  <img
+                    id="img_headshot" 
+                    src="../../../images/default_company_icon.png" 
+                    width="100%" max-height="auto"
+                  />
+                </div>
+                <div>
+                  <p class="font-xsm brand">Upload dispatcher headshot</p>
+                  <p class="font-xsm font_brand_faint">Image should be a headshot in jpeg or png format.</p>
+                </div>
+              </div>
+            </div>
+            <input
+              required
+              type="text"
+              name="address"
+              id="address"
+              class="form-control mb"
+              placeholder="Full House Address"
+            />
+
+            <select
+              id="sex"
+              name="sex"
+              class="form-select mb"
+              aria-label="Default select example"
+            >
+              <option selected disabled>Gender</option>
+              <option value="M">Male</option>
+              <option value="F">Female</option>
+              <option value="N">Prefer not to say</option>
+            </select>
+            <input
+              required
+              type="text"
+              name="nin"
+              id="nin"
+              class="form-control mb"
+              placeholder="National Identification Number"
+            />
+
+            <div class="mb">
+              <div class="mb">
+                <label for="automobile" class="form-label"
+                  >Do you own a functionong automobile?</label
+                >
+              </div>
+              <select
+                required
+                id="automobile"
+                name="automobile"
+                class="form-select"
+                aria-label="Default select example"
+              >
+                <option selected disabled>Select Answer</option>
+                <option value="true">Yes</option>
+                <option value="false">No</option>
+              </select>
+            </div>
+            <div class="mb-2">
+              <div class="mb">
+                <label for="dispatch" class="form-label"
+                  >Have you made money as a dispatcher before?</label
+                >
+              </div>
+              <select
+                required
+                id="dispatch"
+                name="dispatch"
+                class="form-select"
+                aria-label="Default select example"
+              >
+                <option selected disabled>Select Answer</option>
+                <option value="true">Yes</option>
+                <option value="false">No</option>
+              </select>
+            </div>
+            <div class="mb-2 row-start-cn">
+              <input
+                type="checkbox"
+                class="brand-border mgrt-sm"
+                id="chk_terms"
+              />
+              <label for="chk_terms"><small>I Agree To Koogah Terms And Conditions</small></label>
+            </div>
+
+            <div class="d-grid">
+              <button class="btn brand_bg text-white" id="submit">
+                Sign Up
+              </button>
+            </div>
+          </form>
+        </div>
       </div>
-      </div>
-      <!-- <div class="brand_bg wd-100 ht-50"></div> -->
     </section>
     <!-- Middele Section -->
     <section
@@ -292,34 +317,6 @@
               </p>
             </div>
           </div>
-
-          <!-- <div class="info-card">
-          <div class="icon_bg color_4 flex_hours"></div>
-          <div class="font-bold">
-            <p class="h">Flexible <span class="brand">Working Hours</span></p>
-          </div>
-          <div class="info-card-sub-header">
-            <p>With Koogah, you can't work from home, but you can work when you want to work.</p>
-          </div>
-        </div>
-        <div class="info-card">
-          <div class="icon_bg color_5 low_rates"></div>
-          <div class="font-bold">
-            <p class="h">Lowest <span class="brand">Rates</span></p>
-          </div>
-          <div class="info-card-sub-header">
-            <p>We have also got you started with the best rates ever!. We only charge as low as 5% on every delivery.</p>
-          </div>
-        </div>
-        <div class="info-card">
-          <div class="icon_bg color_6 limitless_mode"></div>
-          <div class="font-bold">
-            <p class="h">Limitless <span class="brand">Mode Of Delivery</span></p>
-          </div>
-          <div class="info-card-sub-header">
-            <p>With Koogah, you do not have to worry about owning a motorcycle or car. What ever means of transportation you find convenient, deliver with it!.</p>
-          </div>
-        </div> -->
         </div>
       </div>
       <div class="row-center">
@@ -327,16 +324,6 @@
           >See All <i class="fas fa-chevron-down"></i
         ></span>
       </div>
-      <!-- <div class="cta-margin">
-      <div class="row-center">
-        <div class="wd-210px">
-          <div class="link row-space-between bordered-link bg-btn-brand" id="dispatchBtn">
-            <span>Become a dispatcher</span>
-            <span class="fas fa-chevron-right"></span>
-          </div>
-        </div>
-      </div>
-    </div> -->
     </section>
     <section class="container" name="email_subscription">
       <%- include('components/email_subscription.ejs') %>
@@ -345,60 +332,154 @@
       <%- include('components/download_now.ejs') %>
     </section>
     <section name="footer"><%- include('components/footer.ejs') %></section>
-<<<<<<< HEAD
+    <script src="../../js/toast.js"></script>
+    <script src="../../js/cities_and_towns.js"></script>
     <script>
-      function next() {
-        document.getElementById("form1").style.display = "none";
-        document.getElementById("form2").style.display = "block";
-        return false;
+      const selectState = document.getElementById("state");
+      const options = citiesAndTowns.map((state) => {
+        const option = document.createElement("option");
+        option.value = state.name.toLowerCase();
+        option.innerHTML = state.name;
+        return option
+      })
+      selectState.append(...options)
+
+
+      let hasCheckedTerms = false;
+      function checkTerms() {
+        hasCheckedTerms = !hasCheckedTerms;
+      }
+      const terms = document.getElementById("chk_terms");
+      terms.addEventListener("change", checkTerms);
+
+
+      function handleFileChanged(elm) {
+        const file = elm.files[0]
+
+        if(!file)
+          return
+
+        const img = document.getElementById("img_headshot")
+
+        const reader = new FileReader();
+        reader.onload = (function(aImg) { return function(e) { aImg.src = e.target.result; }; })(img);
+        reader.readAsDataURL(file);
       }
 
-      onsubmit = function () {
-        const ref = window.sessionStorage.getItem("ref");
-        let hasRef = ref === null ? false : true;
+
+      function handleStateSelected(elm) {
+        const selectedState = elm.value
+
+        const selectCity = document.getElementById("city");
+
+        if (selectCity.children.length > 1) {
+          Array.from(selectCity.children).forEach((child, index) => index > 0 && selectCity.removeChild(child));
+        }
+        const optionsCity = citiesAndTowns.find((state) => state.name.toLowerCase() === selectedState)[
+          "lgas"
+        ].map((city) => {
+          let option = document.createElement("option");
+          option.value = city.toLowerCase();
+          option.innerHTML = city;
+          return option
+        });
+        
+        selectCity.append(...optionsCity)
+
+      }
+
+
+      function goToForm2(evt) {
+        evt.preventDefault()
+        document.getElementById("form1").classList.replace("show", "hide");
+        document.getElementById("form2").classList.replace("hide", "show");
+      }
+
+
+      function registerCourier(evt) {
+        evt.preventDefault()
+        if (!hasCheckedTerms) {
+          showToast(
+            "error",
+            "Please agree to our T&C before proceeding",
+            5,
+            "bottom"
+          );
+          return;
+        }
+
+        const headshot = document.getElementById("add_dispatcher_profile_image").files[0]
+
+        if(!headshot) {
+          showToast(
+            "error",
+            "Kindly upload an headshot of yourself",
+            5,
+            "bottom"
+          );
+          return;
+        }
         const data = {
           email: document.getElementById("email").value,
-          firstName: document.getElementById("first_name").value,
-          lastName: document.getElementById("last_name").value,
-          phoneNumber: document.getElementById("number").value,
+          first_name: document.getElementById("first_name").value,
+          last_name: document.getElementById("last_name").value,
+          mobile_number: document.getElementById("phone_number").value,
           state: document.getElementById("state").value,
-          town: document.getElementById("town").value,
+          town: document.getElementById("city").value,
           address: document.getElementById("address").value,
-          identifiction_number: document.getElementById("nin").value,
-          bvn: document.getElementById("bvn").value,
-          emergency_contact_one_name:
-            document.getElementById("contact_name_one").value,
-          emergency_contact_one_phone:
-            document.getElementById("contact_number_one").value,
-          emergency_contact_two_name:
-            document.getElementById("contact_name_two").value,
-          emergency_contact_two_phone:
-            document.getElementById("contact_number_two").value,
+          identification_number: document.getElementById("nin").value,
           country_code: "+234",
-          nationality: "nigerian",
+          nationality: document.getElementById("country").value,
+          sex: document.getElementById("sex").value,
+          owns_automobile: document.getElementById("automobile").value,
+          done_dispatch_before: document.getElementById("dispatch").value,
+          profile_image: document.getElementById("img_headshot").src
         };
+
+        const btnRegister = document.getElementById("submit");
+        btnRegister.innerHTML = "Loading..."
+        btnRegister.disabled = true;
         fetch(
-          `https://core.koogahapis.com/v1/user/courier/signup?fromApp=web${hasRef ? `&&ref=${ref}` : ""}`,
+          `${window.location.origin}/api/register/client/courier`,
           {
             method: "POST",
-            data,
+            body: JSON.stringify(data),
             headers: {
               "Content-type": "application/json; charset=UTF-8",
             },
           }
-        );
-        return false;
-      };
+        ).then(resp => {
+          btnRegister.innerHTML = "Sign Up"
+          btnRegister.disabled = false;
+
+          if(resp.status === 413){
+            showToast(
+              "error",
+              "Image too large, Kindly upload another image"
+            );
+            return
+          }
+          
+          resp.json().then(data => {
+            showToast(
+              resp.ok ? "success" : "error",
+              resp.ok ? data.message : (Array.isArray(data.error) ? data.error[0].message : data.error)
+            );
+          })
+          
+        }).catch((err) => {
+          console.log(err)
+          btnRegister.innerHTML = "Sign Up"
+          btnRegister.disabled = false;
+          showToast(
+            "error",
+            "Something went wrong. Please try again",
+          );
+        });
+      }
     </script>
-=======
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
->>>>>>> 6a05a6df8252757c651b16a235c0cb9f3af5dafa
-    <script src="../js/mobile_nav.js"></script>
-    <script src="../js/faq_func.js"></script>
-    <script src="../js/subscribe.js"></script>
-    <script src="../js/cities_and_towns.js"></script>
-    <script src="../js/dispatch.js"></script>
-    <script src="../js/toast.js"></script>
-    <script src="../js/modal.js"></script>
+    <script src="../../js/mobile_nav.js"></script>
+    <script src="../../js/faq_func.js"></script>
+    <script src="../../js/subscribe.js"></script>
   </body>
 </html>
