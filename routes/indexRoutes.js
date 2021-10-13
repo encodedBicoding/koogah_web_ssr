@@ -80,6 +80,12 @@ indexRoutes.get(
     }
     res.redirect('/')
   });
+indexRoutes.get(
+  '/verify_email',
+  function (req, res, next) {
+    res.redirect(`/verify/mobile?&code=${req.query.code}&key=${req.query.key}`)
+  }
+);
 
 indexRoutes.get(
   '/verify/mobile',
