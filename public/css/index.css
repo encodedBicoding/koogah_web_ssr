@@ -487,7 +487,7 @@ select {
   background-size: cover;
 }
 
-/*.hero_bg_dispatch_two {
+/* .hero_bg_dispatch_two {
   position: absolute;
   background-image: linear-gradient(to right, #ffcd6879 , #e27b0677),  url("../images/wk.png");
   background-repeat: no-repeat;
@@ -498,10 +498,8 @@ select {
   height: calc(80vh);
   top: 100px;
   left: 90px;
-  /* background-color: #00000060; */
-    /* opacity: 0.5;  */
-    
-}
+  background-color: #00000060;
+} */
  
 /*.hero_bg_dispatch_color {*/
   /* position: absolute; */

@@ -38,7 +38,7 @@ function buildGetEstimateModal(data, action) {
       <div class="est_details_container">
          <div class="row-space-between mg_top_btm">
             <p class="font-bold">Delivery Price: </p>
-            <p class="font-bold est_response font-bg">₦${Intl.NumberFormat('en-IN').format(Number(data.delivery_price))}</p>
+            <p class="font-bold est_response font-bg">₦${Intl.NumberFormat('en-US').format(Number(data.delivery_price))}</p>
          </div>
          <div class="row-space-between mg_top_btm">
             <p class="font-bold">Pickup State: </p>
