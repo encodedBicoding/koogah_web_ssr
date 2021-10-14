@@ -106,7 +106,7 @@
                         <span class="font_brand_faint">Total payout</span>
                       </div>
                       <div class="otg_card_body">
-                        <span class="font_secondary_dark otg_card_b_data">₦<%- Intl.NumberFormat('en-IN').format(Number(user.total_payouts))%></span>
+                        <span class="font_secondary_dark otg_card_b_data">₦<%- Intl.NumberFormat('en-US').format(Number(user.total_payouts))%></span>
                       </div>
                     </div>
                   </div>
@@ -116,11 +116,11 @@
                         <span class="font_brand_faint">Current balance</span>
                       </div>
                       <div class="otg_card_body">
-                        <span class="font_secondary_dark otg_card_b_data">₦<%-Intl.NumberFormat('en-IN').format(Number(user.current_wallet_balance))%></span>
+                        <span class="font_secondary_dark otg_card_b_data">₦<%-Intl.NumberFormat('en-US').format(Number(user.current_wallet_balance))%></span>
                         <br/>
                         <div class="fl-col-start-space-btwn" v-if="!is_loading_withdrawable_current_balance">
                           <span class="font-xsm font_brand_faint">Amount payable: </span>
-                          <span class="font-success font-small">₦{{Intl.NumberFormat('en-IN').format(Number(withdrawable_balance))}}</span>
+                          <span class="font-success font-small">₦{{Intl.NumberFormat('en-US').format(Number(withdrawable_balance))}}</span>
                         </div>
                         <div v-else class="fl-row-center-start data_loading_main_cont">
                           <div class="data_loading_icon_cont_sm">
@@ -136,7 +136,7 @@
                         <span class="font_brand_faint">Last payout</span>
                       </div>
                       <div class="otg_card_body">
-                        <span class="font_secondary_dark otg_card_b_data">₦<%- Intl.NumberFormat('en-IN').format(Number(user.last_payout))%></span>
+                        <span class="font_secondary_dark otg_card_b_data">₦<%- Intl.NumberFormat('en-US').format(Number(user.last_payout))%></span>
                       </div>
                     </div>
                   </div>
@@ -161,7 +161,7 @@
                         <span class="font_brand_faint">Total payout</span>
                       </div>
                       <div class="otg_card_body">
-                        <span class="font_secondary_dark otg_card_b_data">₦<%- Intl.NumberFormat('en-IN').format(Number(user.total_payouts))%></span>
+                        <span class="font_secondary_dark otg_card_b_data">₦<%- Intl.NumberFormat('en-US').format(Number(user.total_payouts))%></span>
                       </div>
                     </div>
                   </div>
@@ -171,11 +171,11 @@
                         <span class="font_brand_faint">Current balance</span>
                       </div>
                       <div class="otg_card_body">
-                        <span class="font_secondary_dark otg_card_b_data">₦<%-Intl.NumberFormat('en-IN').format(Number(user.current_wallet_balance))%></span>
+                        <span class="font_secondary_dark otg_card_b_data">₦<%-Intl.NumberFormat('en-US').format(Number(user.current_wallet_balance))%></span>
                         <br/>
                         <div class="fl-col-start-space-btwn" v-if="!is_loading_withdrawable_current_balance">
                           <span class="font-xsm font_brand_faint">Amount payable: </span>
-                          <span class="font-success font-small">₦{{Intl.NumberFormat('en-IN').format(Number(withdrawable_balance))}}</span>
+                          <span class="font-success font-small">₦{{Intl.NumberFormat('en-US').format(Number(withdrawable_balance))}}</span>
                         </div>
                         <div v-else class="fl-row-center-start data_loading_main_cont">
                           <div class="data_loading_icon_cont_sm">
@@ -191,7 +191,7 @@
                         <span class="font_brand_faint">Last payout</span>
                       </div>
                       <div class="otg_card_body">
-                        <span class="font_secondary_dark otg_card_b_data">₦<%- Intl.NumberFormat('en-IN').format(Number(user.last_payout))%></span>
+                        <span class="font_secondary_dark otg_card_b_data">₦<%- Intl.NumberFormat('en-US').format(Number(user.last_payout))%></span>
                       </div>
                     </div>
                   </div>
