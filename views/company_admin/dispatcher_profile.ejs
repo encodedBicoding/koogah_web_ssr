@@ -202,12 +202,12 @@
                       <span class="font_brand_faint">Total money made</span>
                     </div>
                     <div class="otg_card_body">
-                      <span class="font-success otg_card_b_data">₦{{Intl.NumberFormat('en-IN').format(Number(total_money_made_overview.total_value))}}</span>
+                      <span class="font-success otg_card_b_data">₦{{Intl.NumberFormat('en-US').format(Number(total_money_made_overview.total_value))}}</span>
                       <div class="fl-row-center-start">
-                        <span class="font-small font_brand_faint">This month: {{Intl.NumberFormat('en-IN').format(Number(total_money_made_overview.current_month))}}</span>
+                        <span class="font-small font_brand_faint">This month: {{Intl.NumberFormat('en-US').format(Number(total_money_made_overview.current_month))}}</span>
                       </div>
                       <div class="fl-row-center-start">
-                        <span :class="total_money_made_overview.increased ? 'font-success font-small' : 'font-danger font-small' ">{{Intl.NumberFormat('en-IN').format(Number(total_money_made_overview.percent))}}%</span>
+                        <span :class="total_money_made_overview.increased ? 'font-success font-small' : 'font-danger font-small' ">{{Intl.NumberFormat('en-US').format(Number(total_money_made_overview.percent))}}%</span>
                         <div class="arrow_seer">
                           <img v-if="total_money_made_overview.increased" src="../../../images/arrow_up.svg" width="100%" height="100%"/>
                           <img v-else src="../../../images/arrow_down.svg" width="100%" height="100%"/>
@@ -228,12 +228,12 @@
                       <span class="font_brand_faint">Total deliveries</span>
                     </div>
                     <div class="otg_card_body">
-                      <span class="font_secondary_dark otg_card_b_data">{{Intl.NumberFormat('en-IN').format(Number(total_delivery_overview.total_value))}}</span>
+                      <span class="font_secondary_dark otg_card_b_data">{{Intl.NumberFormat('en-US').format(Number(total_delivery_overview.total_value))}}</span>
                       <div class="fl-row-center-start">
-                        <span class="font-small font_brand_faint">This month: {{Intl.NumberFormat('en-IN').format(Number(total_delivery_overview.current_month))}}</span>
+                        <span class="font-small font_brand_faint">This month: {{Intl.NumberFormat('en-US').format(Number(total_delivery_overview.current_month))}}</span>
                       </div>
                       <div class="fl-row-center-start">
-                        <span :class="total_delivery_overview.increased ? 'font-success font-small' : 'font-danger font-small' ">{{Intl.NumberFormat('en-IN').format(Number(total_delivery_overview.percent))}}%</span>
+                        <span :class="total_delivery_overview.increased ? 'font-success font-small' : 'font-danger font-small' ">{{Intl.NumberFormat('en-US').format(Number(total_delivery_overview.percent))}}%</span>
                         <div class="arrow_seer">
                           <img v-if="total_delivery_overview.increased" src="../../../images/arrow_up.svg" width="100%" height="100%"/>
                           <img v-else src="../../../images/arrow_down.svg" width="100%" height="100%"/>
@@ -254,12 +254,12 @@
                       <span class="font_brand_faint">Successful deliveries</span>
                     </div>
                     <div class="otg_card_body">
-                      <span class="font_secondary_dark otg_card_b_data">{{Intl.NumberFormat('en-IN').format(Number(total_delivery_overview.total_value))}}</span>
+                      <span class="font_secondary_dark otg_card_b_data">{{Intl.NumberFormat('en-US').format(Number(total_delivery_overview.total_value))}}</span>
                       <div class="fl-row-center-start">
-                        <span class="font-small font_brand_faint">This month: {{Intl.NumberFormat('en-IN').format(Number(total_delivery_overview.current_month))}}</span>
+                        <span class="font-small font_brand_faint">This month: {{Intl.NumberFormat('en-US').format(Number(total_delivery_overview.current_month))}}</span>
                       </div>
                       <div class="fl-row-center-start">
-                        <span :class="total_delivery_overview.increased ? 'font-success font-small' : 'font-danger font-small' ">{{Intl.NumberFormat('en-IN').format(Number(total_delivery_overview.percent))}}%</span>
+                        <span :class="total_delivery_overview.increased ? 'font-success font-small' : 'font-danger font-small' ">{{Intl.NumberFormat('en-US').format(Number(total_delivery_overview.percent))}}%</span>
                         <div class="arrow_seer">
                           <img v-if="total_delivery_overview.increased" src="../../../images/arrow_up.svg" width="100%" height="100%"/>
                           <img v-else src="../../../images/arrow_down.svg" width="100%" height="100%"/>
@@ -391,7 +391,7 @@
                                 <p class="table_text_scrollable_wrap">{{package.description}}</p>
                               </div>
                               <div class="table_body_text">
-                                <p>₦{{Intl.NumberFormat('en-IN').format(Number(package.delivery_price))}}</p>
+                                <p>₦{{Intl.NumberFormat('en-US').format(Number(package.delivery_price))}}</p>
                               </div>
                               <div class="table_body_text">
                                 <p class="table_text_scrollable_wrap">{{package.pickup_address}}</p>
@@ -496,12 +496,12 @@
                       <span class="font_brand_faint">Total money made</span>
                     </div>
                     <div class="otg_card_body">
-                      <span class="font-success otg_card_b_data">₦{{Intl.NumberFormat('en-IN').format(Number(total_money_made_overview.total_value))}}</span>
+                      <span class="font-success otg_card_b_data">₦{{Intl.NumberFormat('en-US').format(Number(total_money_made_overview.total_value))}}</span>
                       <div class="fl-row-center-start">
-                        <span class="font-small font_brand_faint">This month: {{Intl.NumberFormat('en-IN').format(Number(total_money_made_overview.current_month))}}</span>
+                        <span class="font-small font_brand_faint">This month: {{Intl.NumberFormat('en-US').format(Number(total_money_made_overview.current_month))}}</span>
                       </div>
                       <div class="fl-row-center-start">
-                        <span :class="total_money_made_overview.increased ? 'font-success font-small' : 'font-danger font-small' ">{{Intl.NumberFormat('en-IN').format(Number(total_money_made_overview.percent))}}%</span>
+                        <span :class="total_money_made_overview.increased ? 'font-success font-small' : 'font-danger font-small' ">{{Intl.NumberFormat('en-US').format(Number(total_money_made_overview.percent))}}%</span>
                         <div class="arrow_seer">
                           <img v-if="total_money_made_overview.increased" src="../../../images/arrow_up.svg" width="100%" height="100%"/>
                           <img v-else src="../../../images/arrow_down.svg" width="100%" height="100%"/>
@@ -522,12 +522,12 @@
                       <span class="font_brand_faint">Total deliveries</span>
                     </div>
                     <div class="otg_card_body">
-                      <span class="font_secondary_dark otg_card_b_data">{{Intl.NumberFormat('en-IN').format(Number(total_delivery_overview.total_value))}}</span>
+                      <span class="font_secondary_dark otg_card_b_data">{{Intl.NumberFormat('en-US').format(Number(total_delivery_overview.total_value))}}</span>
                       <div class="fl-row-center-start">
-                        <span class="font-small font_brand_faint">This month: {{Intl.NumberFormat('en-IN').format(Number(total_delivery_overview.current_month))}}</span>
+                        <span class="font-small font_brand_faint">This month: {{Intl.NumberFormat('en-US').format(Number(total_delivery_overview.current_month))}}</span>
                       </div>
                       <div class="fl-row-center-start">
-                        <span :class="total_delivery_overview.increased ? 'font-success font-small' : 'font-danger font-small' ">{{Intl.NumberFormat('en-IN').format(Number(total_delivery_overview.percent))}}%</span>
+                        <span :class="total_delivery_overview.increased ? 'font-success font-small' : 'font-danger font-small' ">{{Intl.NumberFormat('en-US').format(Number(total_delivery_overview.percent))}}%</span>
                         <div class="arrow_seer">
                           <img v-if="total_delivery_overview.increased" src="../../../images/arrow_up.svg" width="100%" height="100%"/>
                           <img v-else src="../../../images/arrow_down.svg" width="100%" height="100%"/>
@@ -548,12 +548,12 @@
                       <span class="font_brand_faint">Successful deliveries</span>
                     </div>
                     <div class="otg_card_body">
-                      <span class="font_secondary_dark otg_card_b_data">{{Intl.NumberFormat('en-IN').format(Number(total_delivery_overview.total_value))}}</span>
+                      <span class="font_secondary_dark otg_card_b_data">{{Intl.NumberFormat('en-US').format(Number(total_delivery_overview.total_value))}}</span>
                       <div class="fl-row-center-start">
-                        <span class="font-small font_brand_faint">This month: {{Intl.NumberFormat('en-IN').format(Number(total_delivery_overview.current_month))}}</span>
+                        <span class="font-small font_brand_faint">This month: {{Intl.NumberFormat('en-US').format(Number(total_delivery_overview.current_month))}}</span>
                       </div>
                       <div class="fl-row-center-start">
-                        <span :class="total_delivery_overview.increased ? 'font-success font-small' : 'font-danger font-small' ">{{Intl.NumberFormat('en-IN').format(Number(total_delivery_overview.percent))}}%</span>
+                        <span :class="total_delivery_overview.increased ? 'font-success font-small' : 'font-danger font-small' ">{{Intl.NumberFormat('en-US').format(Number(total_delivery_overview.percent))}}%</span>
                         <div class="arrow_seer">
                           <img v-if="total_delivery_overview.increased" src="../../../images/arrow_up.svg" width="100%" height="100%"/>
                           <img v-else src="../../../images/arrow_down.svg" width="100%" height="100%"/>
@@ -685,7 +685,7 @@
                                 <p class="table_text_scrollable_wrap">{{package.description}}</p>
                               </div>
                               <div class="table_body_text small_hide">
-                                <p>₦{{Intl.NumberFormat('en-IN').format(Number(package.delivery_price))}}</p>
+                                <p>₦{{Intl.NumberFormat('en-US').format(Number(package.delivery_price))}}</p>
                               </div>
                               <div class="table_body_text small_hide">
                                 <p class="table_text_scrollable_wrap">{{package.pickup_address}}</p>
