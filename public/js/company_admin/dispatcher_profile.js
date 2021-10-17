@@ -76,7 +76,7 @@ const vm = new Vue({
     hideLoader();
     this.fetchDispatcherDeliveryHistory(this.current_dispatcher_id, true);
 
-    let table_container = document.querySelector('.main_disp_table_body_con');
+    let table_containers = document.querySelectorAll('.main_disp_table_body_con');
 
     let scroll_function = async (e) => {
       let lastScrollPos = 0;
@@ -92,7 +92,9 @@ const vm = new Vue({
       lastScrollPos = st <= 0 ? 0 : st;
     }
     if (this.map_table_state === 'history') {
-      table_container.addEventListener('scroll', scroll_function, false);
+      Array.from(table_containers).forEach(table_container => {
+        table_container.addEventListener('scroll', scroll_function, false);
+      })
     }
   },
   methods: {
@@ -503,7 +505,6 @@ const vm = new Vue({
             Array.isArray(response.error) ? response.error[0] : response.error,
           )
         }
-        console.log(response);
       } catch (err) {
         console.log(err);
       }

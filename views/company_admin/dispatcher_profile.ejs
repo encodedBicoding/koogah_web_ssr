@@ -723,7 +723,7 @@
                       <div class="main_disp_table_body_con">
                         <div v-if="map_table_state === 'history'" class="wd-100">
                           <div v-if="delivery_histories.length > 0">
-                            <div class="dispatcher_table_map_body" name="dispatcher_table_map_body" v-for="package in delivery_histories">
+                            <div class="dispatcher_table_map_body" name="dispatcher_table_map_body" v-for="package in delivery_histories" v-on:click="() => getSinglePackageDetail(package.package_id, package.dispatcher_id)">
                               <div class="table_h_n table_body_text">
                                 <p class="table_text_scrollable_no_wrap">{{package.package_id}}</p>
                               </div>
