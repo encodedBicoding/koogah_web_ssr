@@ -1346,7 +1346,8 @@ select {
   justify-content: flex-end;
 }
 .d-modal.hide {
-  display: none;
+  opacity: 0;
+  /* display: none; */
 }
 .d-modal-container {
   position: relative;
@@ -2143,6 +2144,13 @@ select {
   background: #fff 0% 0% no-repeat padding-box;
   opacity: 1;
   padding: .8rem 0;
+}
+.dispatcher_table_map_body{
+  cursor: pointer;
+  transition: all .2s linear;
+}
+.dispatcher_table_map_body:hover{
+  background-color: #2121210a;
 }
 .table_header_text{
   font-size: .7rem;

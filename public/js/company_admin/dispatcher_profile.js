@@ -411,10 +411,16 @@ const vm = new Vue({
       }
     },
     hideEditDispatcherForm: function () {
+      const editModal = document.getElementById('show_edit_dispatcher_modal');
+      editModal.classList.remove('show');
+      editModal.classList.add('hide');
       this.edit_form_field = {};
       this.show_edit_dispatcher_modal = false;
     },
     showEditDispatcherForm: function () {
+      const editModal = document.getElementById('show_edit_dispatcher_modal');
+      editModal.classList.remove('hide');
+      editModal.classList.add('show');
       this.edit_form_field.first_name = this.active_dispatcher.first_name;
       this.edit_form_field.last_name = this.active_dispatcher.last_name;
       this.edit_form_field.mobile_number = this.active_dispatcher.mobile_number;
