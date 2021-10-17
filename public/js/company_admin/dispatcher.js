@@ -446,6 +446,10 @@ const vm = new Vue({
     showEditDispatcher: function (id) {
       try {
         // get the actual dispatcher
+        const editModal = document.getElementById('show_edit_dispatcher_modal');
+        editModal.classList.remove('hide');
+        editModal.classList.add('show');
+
         const disp = this.dispatchers.find((d) => d.id === id);
         if (disp !== -1) {
           this.edit_form_field = {};
@@ -463,11 +467,17 @@ const vm = new Vue({
       }
     },
     closeEditDispatcher: function () {
+      const editModal = document.getElementById('show_edit_dispatcher_modal');
+      editModal.classList.remove('show');
+      editModal.classList.add('hide');
       this.active_edit_dispatcher_id = null;
       this.edit_form_field = null;
       this.show_edit_dispatcher_modal = false;
     },
     closeAddingDispatcher: function () {
+      const addDispatcherModal = document.getElementById('is_adding_dispatcher');
+      addDispatcherModal.classList.remove('show');
+      addDispatcherModal.classList.add('hide');
       this.is_adding_dispatcher = false;
       this.is_adding_dispatcher_data = false;
       this.is_adding_dispatcher_phone = false;
@@ -476,6 +486,9 @@ const vm = new Vue({
       this.new_dispatcher = {};
     },
     startDispatcherAddition: function () {
+      const addDispatcherModal = document.getElementById('is_adding_dispatcher');
+      addDispatcherModal.classList.remove('hide');
+      addDispatcherModal.classList.add('show');
       this.is_adding_dispatcher = true;
       this.is_adding_dispatcher_email = true;
     },

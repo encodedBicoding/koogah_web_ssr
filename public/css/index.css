@@ -1398,6 +1398,13 @@ select {
   justify-content: center;
   margin: .4rem 0;
 }
+.package_detail_image{
+  width: 100%;
+  max-height: 250px;
+}
+.package_detail_image img {
+  border-radius: .5rem;
+}
 /* END D-MODAL */
 /* The Modal (background) */
 .modal {
@@ -2143,6 +2150,13 @@ select {
   background: #fff 0% 0% no-repeat padding-box;
   opacity: 1;
   padding: .8rem 0;
+}
+.dispatcher_table_map_body{
+  cursor: pointer;
+  transition: all .2s linear;
+}
+.dispatcher_table_map_body:hover{
+  background-color: #2121210a;
 }
 .table_header_text{
   font-size: .7rem;
