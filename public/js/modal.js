@@ -67,7 +67,7 @@ function buildGetEstimateModal(data, action) {
             <p class="est_response">${data.weight}kg</p>
          </div>
          <div class="row-space-between mg_top_btm">
-            <p class="font-bold">Estimated Package Value: </p>
+            <p class="font-bold">Estimated Value: </p>
             <p class="est_response">${data.value}</p>
          </div>
       </div>

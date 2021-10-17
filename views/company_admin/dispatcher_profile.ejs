@@ -82,6 +82,55 @@
       <!-- 
         MODALS
        -->
+       <div class="d-modal hide" id="show_single_package">
+         <div class="d-modal-container" v-if="show_single_package">
+           <div class="d-modal-content-holder">
+             <div class="d-modal-pri-cont_start">
+                <h4 class="mg_top_btm">Package details</h4>
+                <div class="package_detail_image">
+                  <img :src="package_to_show.image_urls[0]" alt="koogah package detail image" width="100%" height="100%"/>
+                </div>
+                <div class="row-space-between mg_top_btm wd-100">
+                  <p class="font-bold">Delivery Price: </p>
+                  <p class="font-bold est_response font-bg">₦{{Intl.NumberFormat('en-US').format(Number(package_to_show.delivery_price))}}</p>
+                </div>
+                <div class="row-space-between mg_top_btm wd-100">
+                  <p class="font-bold">Pickup State: </p>
+                  <p class="est_response">{{package_to_show.from_state}}</p>
+                </div>
+                <div class="row-space-between mg_top_btm wd-100">
+                  <p class="font-bold">DropOff State: </p>
+                  <div class="est_response">
+                    <p class="wd-100">{{package_to_show.to_state}}</p>
+                  </div>
+               </div>
+               <div class="row-space-between mg_top_btm wd-100">
+                <p class="font-bold">Pickup City: </p>
+                <p class="est_response">{{package_to_show.from_town}}</p>
+                </div>
+              <div class="row-space-between mg_top_btm wd-100">
+                <p class="font-bold">DropOff City: </p>
+                <p class="est_response">{{package_to_show.to_town}}</p>
+              </div>
+               <div class="row-space-between mg_top_btm wd-100">
+                  <p class="font-bold">Distance: </p>
+                  <p class="est_response">{{package_to_show.distance}}km</p>
+               </div>
+               <div class="row-space-between mg_top_btm wd-100">
+                  <p class="font-bold">Package Weight: </p>
+                  <p class="est_response">{{package_to_show.weight}}kg</p>
+               </div>
+               <div class="row-space-between mg_top_btm wd-100">
+                  <p class="font-bold">Estimated Value: </p>
+                  <p class="est_response">{{package_to_show.value}}</p>
+               </div>
+             </div>
+            <div class="d-modal_footer_action">
+              <div class="btn_bg_white_norm_width modal_btn modal_close" v-on:click="closeSinglePackageModal">Close</div>
+            </div>
+           </div>
+         </div>
+       </div>
       <div class="d-modal hide" id="show_edit_dispatcher_modal">
         <div class="d-modal-container" v-if="show_edit_dispatcher_modal">
           <div class="d-modal-content-holder">
@@ -380,7 +429,7 @@
                       <div class="main_disp_table_body_con">
                         <div v-if="map_table_state === 'history'" class="wd-100">
                           <div v-if="delivery_histories.length > 0">
-                            <div class="dispatcher_table_map_body" name="dispatcher_table_map_body" v-for="package in delivery_histories">
+                            <div class="dispatcher_table_map_body" name="dispatcher_table_map_body" v-for="package in delivery_histories" v-on:click="() => getSinglePackageDetail(package.package_id, package.dispatcher_id)">
                               <div class="table_h_n table_body_text">
                                 <p class="table_text_scrollable_no_wrap">{{package.package_id}}</p>
                               </div>
