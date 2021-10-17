@@ -32,6 +32,8 @@ const vm = new Vue({
     show_logout_dropdown: false,
     last_history_data_timestamp: '',
     show_notification_dropdown: false,
+    show_single_package: false,
+    package_to_show: {},
   },
   beforeMount() {
     this.host = window.location.origin;
@@ -207,6 +209,7 @@ const vm = new Vue({
       let result = data.map((d) => {
         let obj = {};
         obj.package_id = d.package_id;
+        obj.dispatcher_id = d.dispatcher_id;
         obj.status = d.status;
         obj.description = d.description;
         obj.delivery_price = d.delivery_price;
@@ -411,10 +414,16 @@ const vm = new Vue({
       }
     },
     hideEditDispatcherForm: function () {
+      const editModal = document.getElementById('show_edit_dispatcher_modal');
+      editModal.classList.remove('show');
+      editModal.classList.add('hide');
       this.edit_form_field = {};
       this.show_edit_dispatcher_modal = false;
     },
     showEditDispatcherForm: function () {
+      const editModal = document.getElementById('show_edit_dispatcher_modal');
+      editModal.classList.remove('hide');
+      editModal.classList.add('show');
       this.edit_form_field.first_name = this.active_dispatcher.first_name;
       this.edit_form_field.last_name = this.active_dispatcher.last_name;
       this.edit_form_field.mobile_number = this.active_dispatcher.mobile_number;
@@ -460,6 +469,41 @@ const vm = new Vue({
     activateNotification: function () {
       try {
         this.show_notification_dropdown = !this.show_notification_dropdown;
+      } catch (err) {
+        console.log(err);
+      }
+    },
+    closeSinglePackageModal: function () {
+      const showSinglePackageModal = document.getElementById('show_single_package');
+      showSinglePackageModal.classList.remove('show');
+      showSinglePackageModal.classList.add('hide');
+      this.package_to_show = {};
+      this.show_single_package = false;
+    },
+    getSinglePackageDetail: async function (pid, did) {
+      try {
+        showLoader();
+        const response = await window.fetch(`${this.host}/api/company/admin/package/single/${pid}/${did}`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+        }).then((resp) => resp.json()).then((res) => res);
+        hideLoader();
+        if (response.status === 200) {
+          this.package_to_show = {};
+          this.package_to_show = response.data;
+          const showSinglePackageModal = document.getElementById('show_single_package');
+          showSinglePackageModal.classList.remove('hide');
+          showSinglePackageModal.classList.add('show');
+          this.show_single_package = true;
+        } else {
+          showToast(
+            'error',
+            Array.isArray(response.error) ? response.error[0] : response.error,
+          )
+        }
+        console.log(response);
       } catch (err) {
         console.log(err);
       }

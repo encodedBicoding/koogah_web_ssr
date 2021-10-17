@@ -86,6 +86,8 @@ companyApis.post(
 
 companyApis.post('/admin/profile/update', CompanyController.companyUpdateProfile);
 
+companyApis.get('/admin/package/single/:pid/:did', CompanyController.companyGetSinglePackage);
+
 companyApis.get('/admin/logout', CompanyController.logout);
 
 module.exports = companyApis;

@@ -82,8 +82,8 @@
       <!-- 
         MODALS
        -->
-       <div class="d-modal show" v-if="show_edit_dispatcher_modal" name="vue_not_loaded">
-        <div class="d-modal-container">
+       <div class="d-modal hide" id="show_edit_dispatcher_modal">
+        <div class="d-modal-container" v-if="show_edit_dispatcher_modal">
           <div class="d-modal-content-holder">
             <div class="d-modal-pri-cont_start">
               <h4 class="mg_top_btm">Edit dispatcher detail</h4>
@@ -112,8 +112,8 @@
           </div>
         </div>
       </div>
-      <div v-if="is_adding_dispatcher" class="d-modal show">
-        <div class="d-modal-container vue_not_allowed">
+      <div class="d-modal hide" id="is_adding_dispatcher">
+        <div class="d-modal-container" v-if="is_adding_dispatcher">
           <div v-if="is_adding_dispatcher_email" class="d-modal-content-holder">
             <div class="d-modal-pri-cont_start">
               <div class="d-modal-pri-header">

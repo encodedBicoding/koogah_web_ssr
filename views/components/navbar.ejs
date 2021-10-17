@@ -12,14 +12,14 @@
           </p>
           <div class="dropdown_contents_container nav-in-active">
             <div class="dropdown-contents">
-             <div class="dropdown-item">
-                <a href="/customer" class="link nav_item font-small">As A Customer</a>
+             <div class="dropdown-item" onclick="document.getElementById('goto_customer_web').click()">
+                <a href="/customer" class="link nav_item font-small" id="goto_customer_web">As A Customer</a>
               </div>  
-              <div class="dropdown-item">
-                <a href="/dispatcher" class="link nav_item font-small">As A Dispatcher</a>
+              <div class="dropdown-item" onclick="document.getElementById('goto_dispatcher_web').click()">
+                <a href="/dispatcher" class="link nav_item font-small" id="goto_dispatcher_web">As A Dispatcher</a>
               </div>  
-              <div class="dropdown-item">
-                <a href="/company" class="link nav_item font-small">As A Company</a>
+              <div class="dropdown-item" onclick="document.getElementById('goto_company_web').click()">
+                <a href="/company" class="link nav_item font-small" id="goto_company_web">As A Company</a>
               </div>  
             </div>
           </div>
@@ -68,13 +68,13 @@
               <p class="font-small font-bold ">Contact Us</p>
             </a>
             <a href="/customer" class="link">
-              <p class="font-small font-bold">Sign up - As A Customer</p>
+              <p class="font-small font-bold">Customer</p>
             </a> 
             <a href="/dispatcher" class="link">
-              <p class="font-small font-bold">Sign up - As A Dispatcher</p>
+              <p class="font-small font-bold">Dispatcher</p>
             </a>
             <a href="/company" class="link">
-              <p class="font-small font-bold">Sign up -As A Company</p>
+              <p class="font-small font-bold">Company</p>
             </a>
             <br/>
             <a href="/delivery/estimate" class="<%- opaque ? 'no_decoration cta_black nav_item' : 'no_decoration cta'%>">
