@@ -193,10 +193,10 @@ const vm = new Vue({
     this.getTotalDispatchersOverview();
     this.getNewDispatchersCount();
     this.fetchAllDispatchers(true);
-    let table_container = document.querySelector('.main_disp_table_body_con');
+    let table_containers = document.querySelectorAll('.main_disp_table_body_con');
     let lastScrollPos = 0;
     const self = this;
-    table_container.addEventListener('scroll', async (e) => {
+    const scroll_function = async (e) => {
       const elems = Array.from(document.getElementsByName('dispatcher_table_body'));
       const last_elem = elems[elems.length - 1];
       let st = e.target.scrollTop;
@@ -206,7 +206,11 @@ const vm = new Vue({
         }
       }
       lastScrollPos = st <= 0 ? 0 : st;
-    }, false);
+    }
+
+    Array.from(table_containers).forEach(table_container => {
+      table_container.addEventListener('scroll', scroll_function, false);
+    })
   },
   methods: {
     logout: async function () {
