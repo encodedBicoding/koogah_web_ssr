@@ -1346,8 +1346,7 @@ select {
   justify-content: flex-end;
 }
 .d-modal.hide {
-  opacity: 0;
-  /* display: none; */
+  display: none;
 }
 .d-modal-container {
   position: relative;
