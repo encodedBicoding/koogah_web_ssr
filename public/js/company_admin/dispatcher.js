@@ -680,10 +680,11 @@ const vm = new Vue({
             this.is_adding_dispatcher = false;
             this.is_adding_dispatcher_data = false;
             showToast('success', response.message, null, null, true);
+            this.closeAddingDispatcher();
             await this.getNewDispatchersCount();
             this.fetchAllDispatchers(true);
           } else {
-            showToast('error', response.error, null, null, true);
+            showToast('error', Array.isArray(response.error) ? response.error[0].message.startsWith("\"password\"") ? 'Invalid password, try another: Length must be upto 8' : response.error[0].message : response.error, null, null, true);
           }
         }
       } catch (err) {
