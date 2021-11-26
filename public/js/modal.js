@@ -153,6 +153,8 @@ function buildNoticeModal(
   </div>
   `;
   modal.appendChild(modal_container);
-  document.querySelector('.modal_close').addEventListener('click', hideModal);
+  if (showCloseButton) {
+    document.querySelector('.modal_close').addEventListener('click', hideModal);
+  }
   document.querySelector('.btn_action').addEventListener('click', action);
 }
