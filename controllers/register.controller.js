@@ -39,7 +39,7 @@ class Register{
     }
     
     if(type === 'customer' || uploadOK) {
-      const ref = req.cookies && req.cookies.ref
+      const ref = req.cookies && req.cookies.ref;
 
       //override profile image value with upload result
       if (response) {
