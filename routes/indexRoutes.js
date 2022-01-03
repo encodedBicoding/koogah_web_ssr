@@ -71,7 +71,6 @@ indexRoutes.get(
 indexRoutes.get(
   '/register',
   function (req, res, next) {
-    console.log(req.query);
     if(req.query && req.query.ref)
     {
       res.cookie('ref', req.query.ref, {
