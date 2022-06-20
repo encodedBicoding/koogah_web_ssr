@@ -8,7 +8,7 @@ class CompanyController {
   static connect_ws(req, res) {
     return res.status(200).json({
       status: 200,
-      connection_url: `data_seeking?token=${req.cookies['koogah_session_token']}`
+      connection_url: `/data_seeking?token=${req.cookies['koogah_session_token']}`
     })
   }
 
