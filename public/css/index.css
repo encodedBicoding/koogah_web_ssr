@@ -1579,7 +1579,7 @@ select {
 }
 .est_response,
 .table_text_scrollable_no_wrap {
-  width: 50%;
+  width: 60%;
   overflow: scroll;
   text-align: left;
   white-space: nowrap;

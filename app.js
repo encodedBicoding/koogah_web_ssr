@@ -9,6 +9,7 @@ const session = require('express-session');
 require("dotenv").config();
 
 
+
 const app = express();
 const indexRoutes = require('./routes/indexRoutes');
 const registerRoute = require('./routes/registerRoute');

@@ -3,12 +3,10 @@ const estimate_vm = new Vue({
   el: '#get_estimate_page',
   data: {
     formattedData: {},
-    weight: '',
+    transportMode: '',
     value: '',
-    pickupState: '',
-    pickupCity: '',
-    dropOffState: '',
-    dropOffCity: '',
+    pickupAddress: '',
+    dropOffAddress: '',
     dispatchType: 'intra',
     formErrors: {},
     hasTyped: false,
@@ -19,33 +17,23 @@ const estimate_vm = new Vue({
     hideLoader();
   },
   watch: {
-    pickupState: function (value) {
+    pickupAddress: function (value) {
       this.hasTyped = true;
       if (value) {
-        if (this.formattedData['pickupState'] !== value) {
-          this.formErrors['pickupState'] = 'Please choose pickup state from dropdowm';
+        if (this.formattedData['pickupAddress'] !== value) {
+          this.formErrors['pickupAddress'] = 'Please choose pickup address from dropdown';
         } else {
-          this.formErrors['pickupState'] = '';
+          this.formErrors['pickupAddress'] = '';
         }
       }
     },
-    pickupCity: function (value) {
+    dropOffAddress: function (value) {
       this.hasTyped = true;
       if (value) {
-        if (this.formattedData['pickupCity'] !== value) {
-          this.formErrors['pickupCity'] = 'Please choose pickup city from dropdowm';
+        if (this.formattedData['dropOffAddress'] !== value) {
+          this.formErrors['dropOffAddress'] = 'Please choose dropoff address from dropdown';
         } else {
-          this.formErrors['pickupCity'] = '';
-        }
-      }
-    },
-    dropOffCity: function (value) {
-      this.hasTyped = true;
-      if (value) {
-        if (this.formattedData['dropOffCity'] !== value) {
-          this.formErrors['dropOffCity'] = 'Please choose dropoff city from dropdowm';
-        } else {
-          this.formErrors['dropOffCity'] = '';
+          this.formErrors['dropOffAddress'] = '';
         }
       }
     },
@@ -97,12 +85,10 @@ const estimate_vm = new Vue({
     handleParseForm() {
       let canProceed = false;
       const formData = {
-        weight:  this.weight,
+        transport_mode_category:  this.transportMode,
         value: this.value,
-        from_state: this.pickupState,
-        from_town: this.pickupCity,
-        to_state: this.dropOffState,
-        to_town: this.dropOffCity,
+        pickup_address: this.pickupAddress,
+        dropoff_address: this.dropOffAddress,
       }
       Object.values(formData).forEach((v) => {
         if (!v) {
@@ -117,12 +103,10 @@ const estimate_vm = new Vue({
       };
     },
     clearForm() {
-      this.weight = '';
+      this.transportMode = '';
       this.value = '';
-      this.pickupState = '';
-      this.pickupCity ='';
-      this.dropOffState ='';
-      this.dropOffCity = '';
+      this.pickupAddress ='';
+      this.dropOffAddress = '';
     },
     async getEstimate() {
       try {

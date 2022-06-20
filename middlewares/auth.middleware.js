@@ -18,7 +18,7 @@ class AuthMiddleware {
         }
         // get the user;
         // store the user on the request
-        const response = await fetch(`${base_url}/company/me`, {
+        const response = await fetch(`${base_url}/v1/company/me`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
@@ -27,7 +27,7 @@ class AuthMiddleware {
         }).then((resp) => resp.json()).then((res) => res);
         if (response.status !== 200) {
           // use refresh
-          const refresh_response = await fetch(`${base_url}/company/me/refresh?refresh_token=${refresh_token}`, {
+          const refresh_response = await fetch(`${base_url}/v1/company/me/refresh?refresh_token=${refresh_token}`, {
             method: 'GET',
             headers: {
               'Content-Type': 'application/json',
