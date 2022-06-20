@@ -25,7 +25,7 @@ class Register{
       fd.append('profile', fs.createReadStream(filePath))
 
       response = await fetch(
-        `${base_url}/profile/courier/upload/single`, 
+        `${base_url}/v1/profile/courier/upload/single`, 
         {
           method: 'PUT',
           body: fd,
@@ -49,7 +49,7 @@ class Register{
       }
 
       response = await fetch(
-        `${base_url}/user/${req.params.type}/signup?fromApp=web${ref ? `&&ref=${ref}` : ""}`, 
+        `${base_url}/v1/user/${req.params.type}/signup?fromApp=web${ref ? `&&ref=${ref}` : ""}`, 
         {
           method: 'POST',
           body: JSON.stringify(req.body),
@@ -71,7 +71,7 @@ class Register{
 
   static SignupCompany(req, res) {
     return Promise.try(async () => {
-      const response = await fetch(`${base_url}/company/signup`, {
+      const response = await fetch(`${base_url}/v1/company/signup`, {
         method: 'post',
         body: JSON.stringify(req.body),
         headers: { 'Content-Type': 'application/json' }
@@ -88,7 +88,7 @@ class Register{
     return Promise.try(async () => {
       let account = req.query.account;
       let token = req.query.token;
-      let request_string = account === 'courier' ? `${base_url}/user/verify/email` : account === 'customer' ? `${base_url}/user/${account}/verify/email` : `${base_url}/${account}/verify/email`;
+      let request_string = account === 'courier' ? `${base_url}/v1/user/verify/email` : account === 'customer' ? `${base_url}/v1/user/${account}/verify/email` : `${base_url}/v1/${account}/verify/email`;
       const response = await fetch(`${request_string}?key=${token}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' }
@@ -105,7 +105,7 @@ class Register{
   static mobileCodeVerification(req, res) {
     return Promise.try(async () => {
       let { code, token, account } = req.query;
-      let request_string = account === 'courier' ? `${base_url}/user/verify/mobile` : account === 'customer' ? `${base_url}/user/${account}/verify/mobile` : `${base_url}/${account}/verify/mobile`;
+      let request_string = account === 'courier' ? `${base_url}/v1/user/verify/mobile` : account === 'customer' ? `${base_url}/v1/user/${account}/verify/mobile` : `${base_url}/v1/${account}/verify/mobile`;
       const response = await fetch(`${request_string}?key=${token}`, {
         method: 'POST',
         body: JSON.stringify({ code }),
@@ -147,7 +147,7 @@ class Register{
       const { password, bank_name, account_number } = req.body;
       const token = req.query.key;
       const response = await fetch(
-        `${base_url}/company/approved/welcome?key=${token}`,
+        `${base_url}/v1/company/approved/welcome?key=${token}`,
         {
           method: 'POST',
           body: JSON.stringify({

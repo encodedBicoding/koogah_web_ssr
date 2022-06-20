@@ -41,30 +41,20 @@ function buildGetEstimateModal(data, action) {
             <p class="font-bold est_response font-bg">₦${Intl.NumberFormat('en-US').format(Number(data.delivery_price))}</p>
          </div>
          <div class="row-space-between mg_top_btm">
-            <p class="font-bold">Pickup State: </p>
-            <p class="est_response">${data.from_state}</p>
+            <p class="font-bold">Pickup Address: </p>
+            <div class="est_response">
+              <p class="est_response">${data.pickup_address}</p>
+            </div>
          </div>
          <div class="row-space-between mg_top_btm wd-100">
-            <p class="font-bold">DropOff State: </p>
+            <p class="font-bold">DropOff Address: </p>
             <div class="est_response">
-              <p class="wd-100">${data.to_state}</p>
+              <p class="wd-100">${data.dropoff_address}</p>
             </div>
          </div>
          <div class="row-space-between mg_top_btm">
-          <p class="font-bold">Pickup City: </p>
-          <p class="est_response">${data.from_town}</p>
-          </div>
-        <div class="row-space-between mg_top_btm">
-          <p class="font-bold">DropOff City: </p>
-          <p class="est_response">${data.to_town}</p>
-        </div>
-         <div class="row-space-between mg_top_btm">
             <p class="font-bold">Distance: </p>
             <p class="est_response">${data.distance}km</p>
-         </div>
-         <div class="row-space-between mg_top_btm">
-            <p class="font-bold">Package Weight: </p>
-            <p class="est_response">${data.weight}kg</p>
          </div>
          <div class="row-space-between mg_top_btm">
             <p class="font-bold">Estimated Value: </p>

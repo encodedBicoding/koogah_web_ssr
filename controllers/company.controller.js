@@ -8,7 +8,7 @@ class CompanyController {
   static connect_ws(req, res) {
     return res.status(200).json({
       status: 200,
-      connection_url: `/data_seeking?token=${req.cookies['koogah_session_token']}`
+      connection_url: `data_seeking?token=${req.cookies['koogah_session_token']}`
     })
   }
 
@@ -31,7 +31,7 @@ class CompanyController {
   static login(req, res) {
     return Promise.try(async () => {
       const { email, password } = req.body;
-      const response = await fetch(`${base_url}/company/signin`, {
+      const response = await fetch(`${base_url}/v1/company/signin`, {
         method: 'POST',
         body: JSON.stringify({
           email,
@@ -65,7 +65,7 @@ class CompanyController {
   static getMe(req, res) {
     return Promise.try(async () => {
       let token = req.cookies['koogah_session_token'];
-      const response = await fetch(`${base_url}/company/me`, {
+      const response = await fetch(`${base_url}/v1/company/me`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -84,7 +84,7 @@ class CompanyController {
     return Promise.try(async () => {
       let token = req.cookies['koogah_session_token'];
       const { time_frame } = req.query;
-      const response = await fetch(`${base_url}/company/total_earnings?time_frame=${time_frame}`, {
+      const response = await fetch(`${base_url}/v1/company/total_earnings?time_frame=${time_frame}`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -104,7 +104,7 @@ class CompanyController {
     return Promise.try(async () => {
       let token = req.cookies['koogah_session_token'];
       const { time_frame } = req.query;
-      const response = await fetch(`${base_url}/company/total_dispatchers/overview?time_frame=${time_frame}`, {
+      const response = await fetch(`${base_url}/v1/company/total_dispatchers/overview?time_frame=${time_frame}`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -124,7 +124,7 @@ class CompanyController {
     return Promise.try(async () => {
       let token = req.cookies['koogah_session_token'];
       const { time_frame } = req.query;
-      const response = await fetch(`${base_url}/company/total_deliveries/overview?time_frame=${time_frame}`, {
+      const response = await fetch(`${base_url}/v1/company/total_deliveries/overview?time_frame=${time_frame}`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -143,7 +143,7 @@ class CompanyController {
   static getWithdrawableBalance(req, res) {
     return Promise.try(async () => {
       let token = req.cookies['koogah_session_token'];
-      const response = await fetch(`${base_url}/company/accounts/wallet/withdrawable`, {
+      const response = await fetch(`${base_url}/v1/company/accounts/wallet/withdrawable`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -163,7 +163,7 @@ class CompanyController {
     return Promise.try(async () => {
       let token = req.cookies['koogah_session_token'];
       const { bank_code } = req.body;
-      const response = await fetch(`${base_url}/company/accounts/payout`, {
+      const response = await fetch(`${base_url}/v1/company/accounts/payout`, {
         method: 'POST',
         body: JSON.stringify({bank_code}),
         headers: {
@@ -183,7 +183,7 @@ class CompanyController {
   static getNewDispatchers(req, res) {
     return Promise.try(async () => {
       let token = req.cookies['koogah_session_token'];
-      const response = await fetch(`${base_url}/company/dispatchers/new`, {
+      const response = await fetch(`${base_url}/v1/company/dispatchers/new`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -203,7 +203,7 @@ class CompanyController {
     return Promise.try(async () => {
       let token = req.cookies['koogah_session_token'];
       const { field, fieldValue, page } = req.query;
-      const response = await fetch(`${base_url}/company/dispatcher/all?field=${field}&fieldValue=${fieldValue}&page=${page}`, {
+      const response = await fetch(`${base_url}/v1/company/dispatcher/all?field=${field}&fieldValue=${fieldValue}&page=${page}`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -223,7 +223,7 @@ class CompanyController {
     return Promise.try(async () => {
       let token = req.cookies['koogah_session_token'];
       let { id } = req.params;
-      const response = await fetch(`${base_url}/company/dispatcher/single/${id}`, {
+      const response = await fetch(`${base_url}/v1/company/dispatcher/single/${id}`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -244,7 +244,7 @@ class CompanyController {
       let token = req.cookies['koogah_session_token'];
       let { id } = req.params;
       const { page } = req.query;
-      const response = await fetch(`${base_url}/company/dispatcher/delivery/history/${id}?page=${page}`, {
+      const response = await fetch(`${base_url}/v1/company/dispatcher/delivery/history/${id}?page=${page}`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -264,7 +264,7 @@ class CompanyController {
     return Promise.try(async () => {
       let token = req.cookies['koogah_session_token'];
       let { id } = req.params;
-      const response = await fetch(`${base_url}/company/dispatcher/tracking/${id}`, {
+      const response = await fetch(`${base_url}/v1/company/dispatcher/tracking/${id}`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -285,7 +285,7 @@ class CompanyController {
       let token = req.cookies['koogah_session_token'];
       let { id } = req.params;
       const { ...data } = req.body;
-      const response = await fetch(`${base_url}/company/dispatcher/edit/${id}`, {
+      const response = await fetch(`${base_url}/v1/company/dispatcher/edit/${id}`, {
         method: 'PUT',
         body: JSON.stringify({...data}),
         headers: {
@@ -305,7 +305,7 @@ class CompanyController {
     return Promise.try(async () => {
       let token = req.cookies['koogah_session_token'];
       let { email } = req.params;
-      const response = await fetch(`${base_url}/company/dispatcher/signup/email`, {
+      const response = await fetch(`${base_url}/v1/company/dispatcher/signup/email`, {
         method: 'POST',
         body: JSON.stringify({email}),
         headers: {
@@ -324,7 +324,7 @@ class CompanyController {
   static sendDispatcherMobileVerificationCode(req, res) {
     return Promise.try(async () => {
       let token = req.cookies['koogah_session_token'];
-      const response = await fetch(`${base_url}/company/dispatcher/signup/mobile`, {
+      const response = await fetch(`${base_url}/v1/company/dispatcher/signup/mobile`, {
         method: 'POST',
         body: JSON.stringify({...req.body}),
         headers: {
@@ -343,7 +343,7 @@ class CompanyController {
   static verifyDispatcherEmailVerificationCode(req, res) {
     return Promise.try(async () => {
       let token = req.cookies['koogah_session_token'];
-      const response = await fetch(`${base_url}/company/dispatcher/verify/code/email`, {
+      const response = await fetch(`${base_url}/v1/company/dispatcher/verify/code/email`, {
         method: 'POST',
         body: JSON.stringify({...req.body}),
         headers: {
@@ -363,7 +363,7 @@ class CompanyController {
   static verifyDispatcherMobileVerificationCode(req, res) {
     return Promise.try(async () => {
       let token = req.cookies['koogah_session_token'];
-      const response = await fetch(`${base_url}/company/dispatcher/verify/code/mobile`, {
+      const response = await fetch(`${base_url}/v1/company/dispatcher/verify/code/mobile`, {
         method: 'POST',
         body: JSON.stringify({...req.body}),
         headers: {
@@ -382,7 +382,7 @@ class CompanyController {
   static completeDispatcherRegisteration(req, res) {
     return Promise.try(async () => {
       let token = req.cookies['koogah_session_token'];
-      const response = await fetch(`${base_url}/company/dispatcher/registration/complete`, {
+      const response = await fetch(`${base_url}/v1/company/dispatcher/registration/complete`, {
         method: 'POST',
         body: JSON.stringify({...req.body}),
         headers: {
@@ -402,7 +402,7 @@ class CompanyController {
   static companyUpdateProfile(req, res) {
     return Promise.try(async () => {
       let token = req.cookies['koogah_session_token'];
-      const response = await fetch(`${base_url}/company/profile/update`, {
+      const response = await fetch(`${base_url}/v1/company/profile/update`, {
         method: 'PUT',
         body: JSON.stringify({...req.body}),
         headers: {
@@ -422,7 +422,7 @@ class CompanyController {
   static companyGetSinglePackage(req, res) {
     return Promise.try(async () => {
       let token = req.cookies['koogah_session_token'];
-      const response = await fetch(`${base_url}/company/package/single?package_id=${req.params.pid}&dispatcher_id=${req.params.did}`, {
+      const response = await fetch(`${base_url}/v1/company/package/single?package_id=${req.params.pid}&dispatcher_id=${req.params.did}`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
