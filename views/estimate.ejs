@@ -96,24 +96,16 @@
               <div class="est_form_sub_hld">
                 <select
                   required
-                  name="est_form_weight"
+                  name="est_form_transport_mode"
                   class="form-control form_field"
-                  id="est_form_weight"
-                  v-model= "weight"
-                  v-on:change="(e) => handleInputChange(e.target.value, 'weight')"
+                  id="est_form_transport_mode"
+                  v-model= "transportMode"
+                  v-on:change="(e) => handleInputChange(e.target.value, 'transportMode')"
                 >
-                  <option selected disabled value="">Choose weight</option>
-                  <option value="0-5">0 - 5kg</option>
-                  <option value="6-10">6 - 10kg</option>
-                  <option value="11-15">11 - 15kg</option>
-                  <option value="16-25">16- 25kg</option>
-                  <option value="26-40">26 - 40kg</option>
-                  <option value="50-100">50 - 100kg</option>
-                  <option value="101-200">101 - 200kg</option>
-                  <option value="201-300">201 - 300kg</option>
-                  <option value="301-400">301 - 400kg</option>
-                  <option value="401-500">401 - 500kg</option>
-                  <option value="501>">501kg and above</option>
+                  <option selected disabled value="">Transport Mode</option>
+                  <option value="sm">Bicycle, Bike, Tricycle, Any</option>
+                  <option value="m">Car, Minivan, Bus</option>
+                  <option value="l">Truck, Heavy Duties</option>
                 </select>
                 <select
                   required
@@ -134,36 +126,21 @@
             </div>
             <div class="est_form_content_holder">
               <p>Pick Up Address</p>
-              <span class="error">{{formErrors.pickupState || formErrors.pickupCity}}</span>
+              <span class="error">{{formErrors.pickupAddress}}</span>
               <div class="est_form_sub_hld">
                 <div class="wd-100 est_form_drpdwn_cont">
                   <input 
-                    id="est_form_pickup_state"
-                    name="est_form_pickup_state"
+                    id="est_form_pickup_address"
+                    name="est_form_pickup_address"
                     type="text"
                     class="form-control form_field est_input"
-                    placeholder="State"
-                    aria-required="true"
-                    autocomplete="none"
-                    aria-id="1"
-                    aria-name="pickupState"
-                    v-on:keyup="(e) => handleKeyup(e)"
-                    v-model="pickupState"
-                  />
-                </div>
-                <div class="wd-100 est_form_drpdwn_cont">
-                  <input 
-                    id="est_form_pickup_city"
-                    name="est_form_pickup_city"
-                    type="text"
-                    class="form-control form_field est_input"
-                    placeholder="City"
+                    placeholder="Type full address"
                     aria-required="true"
                     autocomplete="none"
                     aria-id="2"
-                    aria-name="pickupCity"
+                    aria-name="pickupAddress"
                     v-on:keyup="(e) => handleKeyup(e)"
-                    v-model="pickupCity"
+                    v-model="pickupAddress"
                   />
                 </div>
               </div>
@@ -189,17 +166,17 @@
                 </div>
                 <div class="wd-100 est_form_drpdwn_cont">
                   <input 
-                    id="est_form_dropoff_city"
-                    name="est_form_dropoff_city"
+                    id="est_form_dropoff_address"
+                    name="est_form_dropoff_address"
                     type="text"
                     class="form-control form_field est_input"
-                    placeholder="City"
+                    placeholder="Type full address"
                     aria-required="true"
                     autocomplete="none"
                     aria-id="4"
-                    aria-name="dropOffCity"
+                    aria-name="dropOffAddress"
                     v-on:keyup="(e) => handleKeyup(e)"
-                    v-model="dropOffCity"
+                    v-model="dropOffAddress"
                   />
                 </div>
               </div>

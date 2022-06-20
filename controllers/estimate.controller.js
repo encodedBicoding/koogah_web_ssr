@@ -7,7 +7,7 @@ const base_url = isProduction ? process.env.BASE_URL_PRODUCTION : process.env.BA
 class Estimate {
   static getDeliveryEstimate(req, res) {
     return Promise.try(async () => {
-      const response = await fetch(`${base_url}/package/estimate/${req.query.dispatchType}`, {
+      const response = await fetch(`${base_url}/v2/package/estimate/${req.query.dispatchType}`, {
         method: 'post',
         body: JSON.stringify(req.body),
         headers: {
