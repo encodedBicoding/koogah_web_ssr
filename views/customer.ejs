@@ -125,6 +125,14 @@
                     minlength="10"
                   />
                 </div>
+                <select
+                  required
+                  name="state"
+                  class="form-control mb"
+                  id="state"
+                >
+                  <option selected value="" disabled>Select state</option>
+                </select>
                 <input
                   required
                   type="password"
@@ -231,13 +239,23 @@
     </section>
     <section name="footer"><%- include('components/footer.ejs') %></section>
     <script src="../../js/toast.js"></script>
+    <script src="../../js/cities_and_towns.js"></script>
     <script>
+      const selectState = document.getElementById("state");
+      const options = citiesAndTowns.map((state) => {
+        const option = document.createElement("option");
+        option.value = state.name;
+        option.innerHTML = state.name;
+        return option
+      })
+      selectState.append(...options)
+
       let hasCheckedTerms = false;
 
       function checkTerms() {
         hasCheckedTerms = !hasCheckedTerms;
       }
-
+      
       const terms = document.getElementById("chk_terms");
       terms.addEventListener("change", checkTerms);
 
@@ -261,7 +279,9 @@
           mobile_number_one: document.getElementById("phone").value,
           password: document.getElementById("password").value,
           country_code: "+234",
+          state: document.getElementById("state").value,
         };
+        console.log(data);
         btnRegister.innerHTML = "Loading..."
         btnRegister.disabled = true;
         fetch(
