@@ -211,7 +211,7 @@
             <div class="mb">
               <div class="mb">
                 <label for="automobile" class="form-label"
-                  >Do you own a functionong automobile?</label
+                  >Do you own a functioning automobile?</label
                 >
               </div>
               <select
@@ -350,7 +350,7 @@
       const selectState = document.getElementById("state");
       const options = citiesAndTowns.map((state) => {
         const option = document.createElement("option");
-        option.value = state.name.toLowerCase();
+        option.value = state.name;
         option.innerHTML = state.name;
         return option
       })
