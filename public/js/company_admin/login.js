@@ -14,6 +14,9 @@ const vm = new Vue({
     togglePasswordReveal: function () {
       this.showPassword = !this.showPassword;
     },
+    handleStartForgotPassword: function () { 
+      window.location.href = '/company/password_reset?screen=1';
+    },
     handleParsingForm: function () {
       let formErrors = this.formErrors;
       let passFirstCheck = Object.values(formErrors).length > 0 ? false : true;

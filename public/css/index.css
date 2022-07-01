@@ -74,6 +74,10 @@ body {
   align-items: flex-start;
   justify-content: flex-start;
 }
+.font-sm {
+  font-size: small;
+}
+
 
 .btn {
   display: block;
@@ -2595,7 +2599,8 @@ select {
     z-index: 0;
   }
   .mob_page_top{
-    padding: 4rem .4rem .3rem .4rem;
+    padding: 4rem .4rem 3rem .4rem;
+    margin-bottom: 5rem;
   }
   .btn_bg, .btn_bg_dark, .btn_bg_dark_norm_width, .btn_bg_white_norm_width {
     margin: 0;
@@ -2614,6 +2619,8 @@ select {
     box-shadow: 0 3px 33px 0 rgba(0, 0, 0, 0.089);
     border-radius: 4px;
     padding: 1.2rem;
+    margin-bottom: 4rem;
+    padding-bottom: 4rem;
   }
   .profile_main_avatar_holder{
     width: 80px;
