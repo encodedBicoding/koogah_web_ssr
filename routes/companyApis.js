@@ -83,6 +83,14 @@ companyApis.post(
   '/admin/dispatcher/registration/complete',
   CompanyController.completeDispatcherRegisteration,
 );
+companyApis.post(
+  '/password/forgot',
+  CompanyController.companyForgotPasword,
+)
+companyApis.post(
+  '/password/reset',
+  CompanyController.companyResetPassword,
+)
 
 companyApis.post('/admin/profile/update', CompanyController.companyUpdateProfile);
 

@@ -437,6 +437,46 @@ class CompanyController {
       });
     })
   }
+
+  static companyForgotPasword(req, res) { 
+    return Promise.try(async () => { 
+      let token = req.cookies['koogah_session_token'];
+      const response = await fetch(`${base_url}/v1/company/password-reset/request`, {
+        method: 'POST',
+        body: JSON.stringify({...req.body}),
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
+        }
+      }).then((resp) => resp.json());
+      return res.json(response);
+    }).catch(err => { 
+      return res.status(500).json({
+        status: 500,
+        error: err,
+      });
+    })
+  }
+
+  static companyResetPassword(req, res) { 
+    return Promise.try(async () => { 
+      let token = req.cookies['koogah_session_token'];
+      const response = await fetch(`${base_url}/v1/company/reset/password?token=${req.query.token}`, {
+        method: 'POST',
+        body: JSON.stringify({new_password: req.body.new_password}),
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
+        }
+      }).then((resp) => resp.json());
+      return res.json(response);
+    }).catch(err => { 
+      return res.status(500).json({
+        status: 500,
+        error: err,
+      });
+    })
+  }
 };
 
 module.exports = CompanyController;
