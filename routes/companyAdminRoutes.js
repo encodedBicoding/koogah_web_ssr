@@ -114,6 +114,18 @@ companyAdminRoutes.get(
     });
   }
 );
+companyAdminRoutes.get(
+  '/password_reset',
+  function (req, res, next) {
+    console.log('password_reset');
+    ejs.renderFile(`${view_path}/company_admin/password_reset.ejs`, {
+      page: 'company_admin_password_reset',
+    }, {}, function (err, template) {
+      if (err) throw err;
+      res.end(template);
+    });
+  }
+);
 
 
 module.exports = companyAdminRoutes;
