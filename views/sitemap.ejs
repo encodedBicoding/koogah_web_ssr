@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content=
+      "width=device-width, initial-scale=1.0"/>
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <meta http-equiv="Content-type" content="text/html; charset=UTF-8">
+  <meta content="Koogah" name="title" />
+  <meta content="Koogah is a platform which brings a mobile-first solution and a SCPPD(Single Customer Per Package Delivery) system to solving logistics/delivery issues, connecting customers and business owners with dispatchers, and giving them control over their deliveries" name="description" />
+
+  <meta name="keywords" content="
+  delivery,
+  logistics,
+  koogah,
+  koogah delivery,
+  deliveries,
+  koogah logistics,
+  dispatchers,
+  couriers,
+  courier services,
+  logistics in nigeria,
+  delivery in nigeria,
+  deliveries in nigeria,
+  "/>
+  <meta name="twitter:site" content="@thekoogahbrand">
+  <meta name="twitter:domain" content="koogah.com">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://twitter.com/thekoogahbrand">
+  <meta name="twitter:title" content="Koogah">
+  <meta name="twitter:description" content="The fastest way to get goods/packages delivered. With actual real-time tracking, and a trusted network of dispatchers">
+  <meta name="twitter:image" content="https://pbs.twimg.com/profile_images/1411243565460688896/076o7nTm_400x400.jpg">
+  <meta name='locale' content="en_EN"/>
+  <meta name='robots' content="index, follow"/>
+  <meta name='site_name' content="Koogah"/>
+  <meta content="English" name="language" />
+  <meta content="5 days" name="revisit-after" />
+  <meta content="Koogah" name="author" />
+  <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="css/index.css"/>
+  <link rel="stylesheet" href="css/nav.css"/>
+  <link rel="stylesheet" href="css/pointers.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <title>Koogah - Delivery done efficiently</title>
+</head>
+<body id="roots">
+  <%- include('components/navbar.ejs', 
+  {
+    opaque: false,
+  }
+) %>
+<%- include('components/customerModal.ejs') %>
+<%- include('components/dispatcherModal.ejs') %>
+<section class="hero">
+  <div class="hero_bg">
+    <div class="h_bg_two">
+      <div class="h_bg_two_sub">
+        <h1>An <span class="brand">Assured</span> Way To Deliver</h1>
+        <div class="copy_slogan">
+          <span class="brand">Swift.</span>
+          <span class="brand">Safe.</span>
+          <span class="brand">Secure.</span>
+        </div>
+      </div>
+    </div>
+    <div class="h-bg_one">
+      <div class="hero_bg_holder">
+        <img src="../images/hero_bg.png"/>
+      </div>
+      <div class="hero_download_now">
+        <p class="dn">Download App</p>
+        <div class="hero_download_btns">
+          <a class="store_btn apple_btn" href="https://apps.apple.com/ng/app/koogah-customer/id1562395555">
+            <img src="../images/appStore.png"/>
+          </a>
+          <a class="store_btn google_btn" href="https://play.google.com/store/apps/details?id=com.koogah.customer">
+            <img src="../images/playStore.png"/>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+  <section class="page-index container">
+    <div class="page-index-container">
+      <div class="page-index-content">
+        <div class="page-index-content-container">
+          <div class="page-index-content-title">
+            <h1>Koogah</h1>
+            <h2>The fastest way to get goods/packages delivered</h2>
+          </div>
+          <div class="page-index-content-subtitle">
+            <p>The fastest way to get goods/packages delivered. With actual real-time tracking, and a trusted network of dispatchers</p>
+          </div>
+          <div class="page-index-content-buttons">
+            <a href="https://www.koogah.com/customer" class="button-primary">Become a customer: Enjoy Free delivery and take control over your delivery and who delivers for you. </a>
+            <a href="https://www.koogah.com/dispatcher" class="button-secondary">Become a dispatcher: Get paid instantly after a delivery and get to work on your own time. </a>
+            <a href="https://www.koogah.com/company">Partner with Koogah as a logistics company, add as many riders as you want and track your earnings on your dashboard.</a>
+            <a href="https://www.koogah.com/register" class="button-primary">Get Started</a>
+            <a href="https://www.koogah.com/login" class="button-secondary">Login</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section name="download_now" class="container">
+    <%- include('components/download_now.ejs') %>
+  </section>
+  <section name="footer">
+    <%- include('components/footer.ejs') %>
+  </section>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
+  <script src='../js/mobile_nav.js'></script>
+  <script src='../js/subscribe.js'></script>
+</body>
+  
+</html>

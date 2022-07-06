@@ -18,7 +18,7 @@ window.onload = function () {
       ];
       if (country == 'nigeria') {
         if (redirect_host.includes(host)) {
-          window.location.href = `https://www.koogah.com.ng${path}${search}`;
+          window.location.href = `https://www.koogah.com/${path}${search}`;
         }
       }
     }, (err) => {

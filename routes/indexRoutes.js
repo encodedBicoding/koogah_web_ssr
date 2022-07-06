@@ -109,6 +109,17 @@ indexRoutes.get(
     });
   }
 );
+indexRoutes.get(
+  '/sitemap',
+  function (req, res, next) {
+    ejs.renderFile(`${view_path}/sitemap.ejs`, {
+      page: 'sitemap',
+    }, {}, function (err, template) {
+      if (err) throw err;
+      res.end(template);
+    });
+  }
+);
 indexRoutes.post(
   '/api/delivery/estimate',
   Estimate.getDeliveryEstimate,
