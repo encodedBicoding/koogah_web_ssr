@@ -11,6 +11,7 @@ companyAdminRoutes.get(
       page: 'company'
     }, {}, function (err, template) {
       if (err) throw err;
+      
       res.end(template);
     });
     }
