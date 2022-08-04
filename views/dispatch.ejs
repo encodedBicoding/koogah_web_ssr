@@ -387,7 +387,7 @@
         if (selectCity.children.length > 1) {
           Array.from(selectCity.children).forEach((child, index) => index > 0 && selectCity.removeChild(child));
         }
-        const optionsCity = citiesAndTowns.find((state) => state.name.toLowerCase() === selectedState)[
+        const optionsCity = citiesAndTowns.find((state) => state.name.toLowerCase() === selectedState.toLowerCase())[
           "lgas"
         ].map((city) => {
           let option = document.createElement("option");
