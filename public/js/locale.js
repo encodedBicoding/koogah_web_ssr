@@ -14,6 +14,7 @@ window.onload = function () {
         const host = window.location.host.trim()
         const path = window.location.pathname.trim()
         const search = window.location.search.trim()
+
         const redirect_host = [
           'koogah.com',
           'www.koogah.com',
@@ -24,7 +25,11 @@ window.onload = function () {
         ]
         if (country == 'nigeria') {
           if (redirect_host.includes(host)) {
-            window.location.href = `https://www.koogah.com/${path}${search}`
+            if (
+              window.location.href !== `https://www.koogah.com${path}${search}`
+            ) {
+              window.location.href = `https://www.koogah.com${path}${search}`
+            }
           }
         }
       },
