@@ -8,8 +8,13 @@ const estimate_vm = new Vue({
     pickupAddress: '',
     dropOffAddress: '',
     dispatchType: 'intra',
+    from_state: '',
     formErrors: {},
     hasTyped: false,
+    availableIn: [
+      'lagos',
+      'abuja',
+    ]
   },
   beforeMount() {
   },
@@ -54,6 +59,7 @@ const estimate_vm = new Vue({
       this[item] = value;
     },
     async handleKeyup(event) {
+      const self = this;
       const options = {
         strictBounds: false,
       };
@@ -72,23 +78,39 @@ const estimate_vm = new Vue({
             );
           }
           this.formattedData[event.target.getAttribute('aria-name')] = `${place.name}, ${place.formatted_address}`;
-          this.storePredictionValue(`${place.name}, ${place.formatted_address}`, event.target.getAttribute('aria-name'))
+          let state = ''
+          // find state
+          for(const component of place.address_components) {
+            if(self.availableIn.includes(component.long_name.toLowerCase())) {
+              state = component.long_name.toLowerCase();
+              break;
+            }
+          }
+          this.storePredictionValue(`${place.name}, ${place.formatted_address}`, event.target.getAttribute('aria-name'), state)
         });
       }
     },
-    storePredictionValue(value, item) {
-      if (item === 'pickupState') {
-        this['dropOffState'] = value;
+    storePredictionValue(value, item, state) {
+      if(item === 'pickupAddress') {
+        this.from_state = state;
       }
       this[item] = value;
     },
     handleParseForm() {
       let canProceed = false;
+      if(!this.from_state) {
+        showToast(
+          'error',
+          'The selected pickup address falls in a state we currently do not delivery to',
+        );
+        return;
+      }
       const formData = {
         transport_mode_category:  this.transportMode,
         value: this.value,
         pickup_address: this.pickupAddress,
         dropoff_address: this.dropOffAddress,
+        from_state: this.from_state,
       }
       Object.values(formData).forEach((v) => {
         if (!v) {
