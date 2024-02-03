@@ -8,8 +8,15 @@ const estimate_vm = new Vue({
     pickupAddress: '',
     dropOffAddress: '',
     dispatchType: 'intra',
+    from_state: '',
+    to_state: '',
     formErrors: {},
     hasTyped: false,
+    availableIn: [
+      'lagos',
+      'abuja',
+      'federal capital territory'
+    ]
   },
   beforeMount() {
   },
@@ -54,6 +61,7 @@ const estimate_vm = new Vue({
       this[item] = value;
     },
     async handleKeyup(event) {
+      const self = this;
       const options = {
         strictBounds: false,
       };
@@ -72,23 +80,58 @@ const estimate_vm = new Vue({
             );
           }
           this.formattedData[event.target.getAttribute('aria-name')] = `${place.name}, ${place.formatted_address}`;
-          this.storePredictionValue(`${place.name}, ${place.formatted_address}`, event.target.getAttribute('aria-name'))
+          let state = ''
+          // find state
+          console.log(place)
+          for(const component of place.address_components) {
+            if(self.availableIn.includes(component.long_name.toLowerCase())) {
+              state = component.long_name.toLowerCase();
+              break;
+            }
+          }
+          this.storePredictionValue(`${place.name}, ${place.formatted_address}`, event.target.getAttribute('aria-name'), state)
         });
       }
     },
-    storePredictionValue(value, item) {
-      if (item === 'pickupState') {
-        this['dropOffState'] = value;
+    storePredictionValue(value, item, state) {
+      const mapStateNameToState = {
+        'abuja': 'abuja',
+        'lagos': 'lagos',
+        'federal capital territory': 'abuja',
+        '': ''
+      };
+      if(item === 'pickupAddress') {
+        this.from_state = mapStateNameToState[state];
+      }
+      if(item === 'dropOffAddress') {
+        this.to_state = mapStateNameToState[state];
       }
       this[item] = value;
     },
     handleParseForm() {
       let canProceed = false;
+      if(!this.from_state || !this.to_state) {
+        showToast(
+          'error',
+          'One or more of the selected addresses do not fall in a state where we currently deliver to',
+        );
+        return;
+      }
+      if(this.dispatchType === 'intra') {
+        if(this.from_state !== this.to_state) {
+          showToast(
+            'error',
+            'Inter-state delivery not supported',
+          );
+          return;
+        }
+      }
       const formData = {
         transport_mode_category:  this.transportMode,
         value: this.value,
         pickup_address: this.pickupAddress,
         dropoff_address: this.dropOffAddress,
+        from_state: this.from_state,
       }
       Object.values(formData).forEach((v) => {
         if (!v) {
@@ -148,7 +191,6 @@ const estimate_vm = new Vue({
         }
       } catch {
         hideLoader();
-        console.log('ds');
       }
     },
   },
